@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "1935:1935"
+    env_file:
+      - ./env/nginx.env
