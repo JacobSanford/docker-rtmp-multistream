@@ -3,5 +3,4 @@
 
 # Allow files and folders with a pattern starting with !
 !Dockerfile
-!scripts
-!conf
+!build
