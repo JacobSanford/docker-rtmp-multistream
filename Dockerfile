@@ -13,6 +13,7 @@ ENV YOUTUBE_KEY keyhere
 COPY build /build
 
 RUN apk --no-cache add nginx-mod-rtmp ffmpeg && \
+  $RSYNC_COPY /build/scripts/ /scripts/ && \
   $RSYNC_COPY /build/conf/nginx/nginx.conf "$NGINX_CONF_FILE" && \
   $RSYNC_COPY /build/conf/nginx/app.conf "$NGINX_APP_CONF_FILE"
 
