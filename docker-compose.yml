@@ -1,7 +1,5 @@
-version: '2'
-
 services:
-  web:
+  relay:
     build:
       context: .
     ports:

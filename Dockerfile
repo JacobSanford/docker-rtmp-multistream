@@ -1,4 +1,4 @@
-FROM ghcr.io/unb-libraries/nginx:2.x
+FROM ghcr.io/unb-libraries/nginx:3.x
 MAINTAINER Jacob Sanford <jsanford@unb.ca>
 
 ENV TWITCH_AUDIO_BITRATE 160k
