@@ -1,5 +1,4 @@
 FROM ghcr.io/unb-libraries/nginx:3.x
-MAINTAINER Jacob Sanford <jsanford@unb.ca>
 
 ENV TWITCH_AUDIO_BITRATE 160k
 ENV TWITCH_CODEC libx264
@@ -18,3 +17,14 @@ RUN apk --no-cache add nginx-mod-rtmp ffmpeg && \
   $RSYNC_COPY /build/conf/nginx/app.conf "$NGINX_APP_CONF_FILE"
 
 EXPOSE 1935
+
+LABEL ca.unb.lib.generator="nginx" \
+  org.label-schema.build-date=$BUILD_DATE \
+  org.opencontainers.image.authors="jsanford@unb.ca" \
+  org.label-schema.description="A lightweight docker-based nginx based RTMP relay/encoder for streaming simultaneously to Youtube, Twitch, and other services." \
+  org.label-schema.name="rtmp-multistream" \
+  org.label-schema.url="https://github.com/jacobsanford/docker-rtmp-multistream" \
+  org.label-schema.vcs-ref=$VCS_REF \
+  org.label-schema.vcs-url="https://github.com/jacobsanford/docker-rtmp-multistream" \
+  org.label-schema.version=$VERSION \
+  org.opencontainers.image.source="https://github.com/jacobsanford/docker-rtmp-multistream"
