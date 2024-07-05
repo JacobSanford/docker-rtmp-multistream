@@ -1,0 +1,20 @@
+name: Build ghcr.io/JacobSanford/docker-rtmp-multistream
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-push-images:
+    uses: unb-libraries/dockworker/.github/workflows/build-push.yaml@6.x
+    with:
+      build-themes: false
+      image-name: 'ghcr.io/JacobSanford/docker-rtmp-multistream'
+      protected-tags: '1.x*'
+      push-branches: '[]'
+      push-all-branches: true
+      platforms: ${{ inputs.platforms }}
+    secrets:
+      GH_CONTAINER_REGISTRY_USER: ${{ github.actor }}
+      GH_CONTAINER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
