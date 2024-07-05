@@ -1,3 +1,5 @@
+<center><img src="thumbnail.png" alt="docker-rtmp-multistream" width="400"/></center>
+
 # JacobSanford/docker-rtmp-multistream
 A lightweight docker-based nginx based RTMP relay/encoder for streaming simultaneously to multiple services. YouTube and Twitch are configured by default.
 
