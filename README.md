@@ -3,31 +3,38 @@ A lightweight docker-based nginx based RTMP relay/encoder for streaming simultan
 
 ## Requirements
 ### Operating System
-Although this package can be likely deployed and developed on OSX, the only officially supported operating system is Linux.
+- **Supported OS**: Linux is the officially supported operating system. While it may be possible to deploy and develop on OSX, it is not officially supported.
 
 ### Networking
-* The process of building the docker image makes outbound HTTP, HTTPS requests.
-* Video is relayed via RTMP requests.
+
+- **HTTP/HTTPS Requests**: The docker image build process requires outbound HTTP and HTTPS requests.
+- **RTMP Requests**: Video is relayed through RTMP requests.
 
 Both types of requests must not be blocked by your OS, network, or ISP. If you use a proxy server to connect to the web, ensure it accommodates the above requirements.
 
 ### Prerequisites
-You must have the following packages installed and working for the current user:
+Ensure the following packages are installed and configured for the current user:
 
-* [docker](https://www.docker.com): Installation steps [are located here](https://docs.docker.com/install/).
-* [docker-compose](https://docs.docker.com/compose/): Installation steps [are located here](https://docs.docker.com/compose/install/).
+- **Docker**: Follow the [installation guide](https://docs.docker.com/install/).
+- **Docker Compose**: Follow the [installation guide](https://docs.docker.com/compose/install/).
 
-## Use
+## Setup and Use
 ### Configuration
-Add your Twitch and YouTube keys in the ```env/nginx.env``` file. A few stream quality values are also configurable there.
 
-### Startup
+1. Navigate to the `env/nginx.env` file.
+2. Add your Twitch and YouTube keys.
+3. Configure stream quality settings as needed.
+
+### Starting the Service
+Execute the following command in your terminal:
+
 ```
 ./start.sh
 ```
-That is it! Shut down the service with CTRL-C.
 
-## OBS Setup Example (Gaming PC)
+To shut down the service, use `CTRL-C`.
+
+## OBS Setup
 ### Settings
 #### Streaming
 * ```Service```: Custom
@@ -38,13 +45,15 @@ That is it! Shut down the service with CTRL-C.
 * ```Output Mode```: Advanced
 * ```Encoder```: If you have a modern NVidia card, use NVIDIA NVENC H.264. Otherwise, use CPU encoding with x264.
 * ```Rate Control```: CBR
-* ```Bitrate```: 20000. Set the bitrate to as large as a value as possible allowed by your network/bandwidth. YouTube re-encodes all video that it receives, even for live streams. Video that may look acceptable at lower bitrates will not look good when re-encoded by YouTube.
+* ```Bitrate```: 20000. Set the bitrate to as large as a value as possible allowed by your network/bandwidth. See below!
 * ```Keyframe Interval```: 2
 
 ## Further Considerations
 
-* As with any encoder, CPU requirements are very high. If this package is intended to re-stream gaming from a PC, it should be deployed on a separate 'encoder' PC.
-* If you get lost setting bitrates, resolutions, and framerates: NVidia produced an excellent [Broadcasting Guide](https://www.nvidia.com/en-us/geforce/guides/broadcasting-guide/) that prescribes optimal settings.
+- **Output Bitrate**: YouTube reprocesses every video it receives, including live streams. This means that streams which look fine at lower bitrates on platforms like Twitch might not look as good on YouTube after it re-encodes them. To ensure the best quality on YouTube, set the bitrate to the highest value your network bandwidth can support.
+- **CPU Requirements**: Encoding, especially for gaming streams, is CPU-intensive. Consider using a dedicated encoder PC.
+- **Optimal Settings Guide**: For detailed settings recommendations, refer to NVidia's [Broadcasting Guide](https://www.nvidia.com/en-us/geforce/guides/broadcasting-guide/).
+
 
 ## Author / Contributors
 This application was created by the following humans:
