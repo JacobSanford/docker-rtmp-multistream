@@ -10,11 +10,10 @@ jobs:
     uses: unb-libraries/dockworker/.github/workflows/build-push.yaml@6.x
     with:
       build-themes: false
+      cleanup-old-images: false
       image-name: 'ghcr.io/jacobsanford/rtmp-multistream'
-      protected-tags: '1.x*'
-      push-branches: '[]'
       push-all-branches: true
-      platforms: ${{ inputs.platforms }}
+      push-branches: '[]'
     secrets:
       GH_CONTAINER_REGISTRY_USER: ${{ github.actor }}
       GH_CONTAINER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
