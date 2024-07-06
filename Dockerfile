@@ -1,4 +1,4 @@
-FROM ghcr.io/unb-libraries/nginx:3.x
+FROM ghcr.io/unb-libraries/nginx:3.18.x
 
 ENV TWITCH_AUDIO_BITRATE 160k
 ENV TWITCH_CODEC libx264
