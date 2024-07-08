@@ -1,20 +1,28 @@
 FROM ghcr.io/unb-libraries/nginx:3.18.x
 
+ENV ARCHIVE_PATH=""
+ENV ARCHIVE_SUFFIX=mp4
+
 ENV TWITCH_AUDIO_BITRATE=160k
 ENV TWITCH_CODEC=libx264
+ENV TWITCH_ENDPOINT=jfk
 ENV TWITCH_FPS=60
 ENV TWITCH_HEIGHT=720
 ENV TWITCH_KBITS_PER_VIDEO_FRAME=67
-ENV TWITCH_KEY=keyhere
+ENV TWITCH_KEY=""
 ENV TWITCH_X264_PRESET=medium
-ENV YOUTUBE_KEY=keyhere
+
+ENV YOUTUBE_KEY=""
+
+ENV PUBLISH_IP_RANGE="192.168.0.0/16"
 
 COPY build /build
 
 RUN apk --no-cache add nginx-mod-rtmp ffmpeg && \
-  $RSYNC_COPY /build/scripts/ /scripts/ && \
-  $RSYNC_COPY /build/conf/nginx/nginx.conf "$NGINX_CONF_FILE" && \
-  $RSYNC_COPY /build/conf/nginx/app.conf "$NGINX_APP_CONF_FILE"
+  rm -rf "$NGINX_CONFD_DIR/daemon" "$NGINX_CONFD_DIR/server" && \
+  $RSYNC_MOVE /build/scripts/ /scripts/ && \
+  $RSYNC_MOVE /build/conf/nginx/nginx.conf "$NGINX_CONF_FILE" && \
+  $RSYNC_MOVE /build/conf/nginx/http.d/ "$NGINX_CONFD_DIR/"
 
 EXPOSE 1935
 

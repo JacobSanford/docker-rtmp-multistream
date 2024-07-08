@@ -5,11 +5,11 @@ A lightweight docker-based nginx based RTMP relay/encoder for streaming simultan
 
 ## Requirements
 ### Operating System
-- **Supported OS**: Linux is the officially supported operating system. While it may be possible to deploy and develop on OSX, it is not officially supported.
+- **Supported OS**: Linux is the officially supported operating system. While it may be possible to deploy on OSX or Windows, it is not officially supported.
 
 ### Networking
 
-- **HTTP/HTTPS Requests**: The docker image build process requires outbound HTTP and HTTPS requests.
+- **HTTP/HTTPS Requests**: Building the docker image requires outbound HTTP and HTTPS requests.
 - **RTMP Requests**: Video is relayed through RTMP requests.
 
 Both types of requests must not be blocked by your OS, network, or ISP. If you use a proxy server to connect to the web, ensure it accommodates the above requirements.
@@ -23,7 +23,7 @@ Ensure the following packages are installed and configured for the current user:
 ## Setup and Use
 ### Configuration
 
-1. Navigate to the `env/nginx.env` file.
+1. Navigate to the `env/relay.env` file.
 2. Add your Twitch and YouTube keys.
 3. Configure stream quality settings as needed.
 
@@ -40,8 +40,10 @@ To shut down the service, use `CTRL-C`.
 ### Settings
 #### Streaming
 * ```Service```: Custom
-* ```Server```: rtmp://192.168.2.22:1935/live
+* ```Server```: rtmp://192.168.2.22:1935/relay
   * Where 192.168.2.22 corresponds to the relay PC's actual IP address.
+* ```Stream Key```: Enter an identifer for your stream. This key is used to identify your stream uniquely on the relay server. For example, `myStream`. It does (should?) not need to match your Twitch or YouTube stream keys.
+* ```Use Authentication```: Unchecked.
 
 #### Output
 * ```Output Mode```: Advanced
@@ -50,17 +52,37 @@ To shut down the service, use `CTRL-C`.
 * ```Bitrate```: 20000. Set the bitrate to as large as a value as possible allowed by your network/bandwidth. See below!
 * ```Keyframe Interval```: 2
 
+## Archiving
+The relay can archive streams to disk. To enable this feature, set the `ARCHIVE_PATH` environment variable in the `env/relay.env` file. This is a path inside the docker container. For example: `/stream_archive`.
+
+### Writing to Local Disk
+As the archive path is inside the docker container, it will be deleted when the docker container is removed. To persist the files, a local path can be mounted as a volume in the docker container. In the `docker-compose.yml` file, add a volume to the relay service:
+
+```
+services:
+  relay:
+    build:
+      context: .
+    ports:
+      - "1935:1935"
+    env_file:
+      - ./env/relay.env
+    volumes:
+      - ./stream_archive:/archive
+```
+
+### Permissions
+The archive path must exist and be writable by the nginx user (id 100:101).
+
+```
+chown 100:101 ./stream_archive
+```
+
 ## Further Considerations
 
-- **Output Bitrate**: YouTube reprocesses every video it receives, including live streams. This means that streams which look fine at lower bitrates on platforms like Twitch might not look as good on YouTube after it re-encodes them. To ensure the best quality on YouTube, set the bitrate to the highest value your network bandwidth can support.
+- **Output Bitrate**: YouTube reprocesses every video it receives, including live streams. Result: streams that look fine at lower bitrates on platforms such as Twitch will appear distorted on YouTube after the stream is re-encoded. To ensure the best quality on YouTube, set the bitrate to the highest value your network's upload bandwidth can reasonably support.
 - **CPU Requirements**: Encoding, especially for gaming streams, is CPU-intensive. Consider using a dedicated encoder PC.
 - **Optimal Settings Guide**: For detailed settings recommendations, refer to NVidia's [Broadcasting Guide](https://www.nvidia.com/en-us/geforce/guides/broadcasting-guide/).
-
-
-## Author / Contributors
-This application was created by the following humans:
-
-<a href="https://github.com/JacobSanford"><img src="https://avatars.githubusercontent.com/u/244894?v=3" title="Jacob Sanford" width="128" height="128"></a>
 
 ## License
 MIT
