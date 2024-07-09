@@ -1,19 +1,20 @@
 <center><img src="thumbnail.png" alt="docker-rtmp-multistream" width="400"/></center>
 
 # JacobSanford/docker-rtmp-multistream
-A lightweight nginx-based based RTMP relay/encoder for streaming simultaneously to multiple services, while also archiving the stream locally to disk. YouTube and Twitch are configured by default.
+This is a lightweight nginx-based RTMP relay/encoder.
 
-This project is intended to be deployed on a dedicated PC, separate from the one hosting your streaming software.
+It is intended to complement traditional streaming software (OBS, etc.) by providing a single endpoint that relays the stream simultaneously to multiple services, and archives it to a local disk.
 
-## Currently Supported Streaming Services
-* Twitch: [Configure Twitch](docs/services/twitch.md)
-* YouTube: [Configure YouTube](docs/services/youtube.md)
-* Archive (local disk): [Configure Archive](docs/services/archive.md)
+This project is intended to be deployed on a dedicated PC, separate from the one running your streaming software.
+
+[Prerequisites](docs/prerequisites.md) | [Quick Start Guide](docs/quickstart.md) | [Documentation](docs/README.md)
+
+## Supported Streaming Services
+* Twitch: [Advanced Twitch Configuration](docs/services/twitch.md)
+* YouTube: [Advanced YouTube Configuration](docs/services/youtube.md)
+* Archive (local disk): [Advanced Local Archive Configuration](docs/services/archive.md)
 
 New/Additional services can easily be added. Please see the [Adding New Services](docs/services/new.md) documentation.
-
-## Documentation / Quick Start Guide
-For detailed instructions on setting up and deploying a basic relay, see the [Quick Start Guide](docs/quickstart.md). Complete documentation is available in the [docs](docs/README.md) directory.
 
 ## Issues
 Please report any issues or bugs you encounter by opening a new issue via the [Issues tab](https://github.com/JacobSanford/docker-rtmp-multistream/issues).
