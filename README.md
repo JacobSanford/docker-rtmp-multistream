@@ -7,7 +7,7 @@ It is intended to complement traditional streaming software (OBS, etc.) by provi
 
 This project is intended to be deployed on a dedicated PC, separate from the one running your streaming software.
 
-[Prerequisites](docs/prerequisites.md) | [Quick Start Guide](docs/quickstart.md) | [Documentation](docs/README.md)
+[Prerequisites](docs/requirements.md) | [Quick Start Guide](docs/quickstart.md) | [Documentation](docs/README.md)
 
 ## Supported Streaming Services
 * Twitch: [Advanced Twitch Configuration](docs/services/twitch.md)
