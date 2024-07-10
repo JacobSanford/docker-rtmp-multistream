@@ -5,7 +5,7 @@ This is a lightweight nginx-based RTMP relay/encoder.
 
 It is intended to complement traditional streaming software (OBS, etc.) by providing a single endpoint that relays the stream simultaneously to multiple services, and archives it to a local disk.
 
-This project is intended to be deployed on a dedicated PC, separate from the one running your streaming software.
+This project works best if deployed on a dedicated PC, separate from the one running your streaming software.
 
 [Prerequisites](docs/requirements.md) | [Quick Start Guide](docs/quickstart.md) | [Documentation](docs/README.md)
 
