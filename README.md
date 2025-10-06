@@ -1,6 +1,9 @@
 <center><img src="thumbnail.png" alt="docker-rtmp-multistream"/></center>
 
 # JacobSanford/docker-rtmp-multistream
+
+[![Tests](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/test.yml/badge.svg)](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/test.yml)
+
 This is a lightweight nginx-based RTMP relay/encoder.
 
 It is intended to complement traditional streaming software (OBS, etc.) by providing a single endpoint that relays the stream simultaneously to multiple services, and archives it to a local disk.
