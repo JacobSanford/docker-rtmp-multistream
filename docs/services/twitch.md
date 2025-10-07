@@ -4,6 +4,7 @@ The relay can stream to Twitch. To enable this feature, set the `TWITCH_KEY` env
 
 ## Configuration
 The Twitch service can be configured by setting the following environment variables:
+
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `TWITCH_KEY` | The stream key provided by Twitch. | `` |
@@ -38,13 +39,13 @@ This is a reasonable starting point for most streams. If your stream is pixelate
 
 Based on these values, the following table provides a starting point for determining the bandwidth required for different resolutions and frame rates:
 
-| Resoluion      | FPS     | Video Bitrate        |  TWITCH_KBITS_PER_VIDEO_FRAME |
-|----------------|---------|----------------------|-------------------------------|
-| 1920x1080      | 60      | 6000 Kbps            | `100`                           |
-| 1920x1080      | 50      | 5000 Kbps            | `100`                           |
-| 1920x1080      | 30      | 3000 Kbps            | `100`                           |
-| 1920x1080      | 25      | 2500 Kbps            | `100`                           |
-| 1280x720       | 60      | 4500 Kbps            | `75`                            |
-| 1280x720       | 50      | 3750 Kbps            | `75`                            |
-| 1280x720       | 30      | 2250 Kbps            | `75`                            |
-| 1280x720       | 25      | 1875 Kbps            | `75`                            |
+| Resolution | FPS | Video Bitrate | TWITCH_KBITS_PER_VIDEO_FRAME |
+|------------|-----|---------------|------------------------------|
+| 1920x1080 | 60 | 6000 Kbps | `100` |
+| 1920x1080 | 50 | 5000 Kbps | `100` |
+| 1920x1080 | 30 | 3000 Kbps | `100` |
+| 1920x1080 | 25 | 2500 Kbps | `100` |
+| 1280x720 | 60 | 4500 Kbps | `75` |
+| 1280x720 | 50 | 3750 Kbps | `75` |
+| 1280x720 | 30 | 2250 Kbps | `75` |
+| 1280x720 | 25 | 1875 Kbps | `75` |

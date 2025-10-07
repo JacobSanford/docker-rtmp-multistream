@@ -1,0 +1,63 @@
+site_name: docker-rtmp-multistream
+site_description: Lightweight nginx-based RTMP relay/encoder for simultaneous streaming to multiple services
+site_author: Jacob Sanford
+site_url: https://jacobsanford.github.io/docker-rtmp-multistream/
+
+repo_name: JacobSanford/docker-rtmp-multistream
+repo_url: https://github.com/JacobSanford/docker-rtmp-multistream
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Requirements: requirements.md
+    - Quick Start: quickstart.md
+  - Services:
+    - Twitch: services/twitch.md
+    - YouTube: services/youtube.md
+    - Archive: services/archive.md
+    - Adding New Services: services/new.md
+  - Advanced:
+    - Quality Considerations: quality.md
+  - Testing: testing.md
+
+plugins:
+  - search
