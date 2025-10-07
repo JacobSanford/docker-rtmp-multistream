@@ -65,6 +65,7 @@ nav:
   - User Guide:
     - Architecture: architecture.md
     - Quality & Performance: quality.md
+    - Security: security.md
     - Services:
       - Twitch: services/twitch.md
       - YouTube: services/youtube.md

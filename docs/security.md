@@ -2,6 +2,10 @@
 
 This document describes the security features and considerations for docker-rtmp-multistream.
 
+## Reporting Security Issues
+
+If you discover a security vulnerability, please email the maintainer directly rather than opening a public issue.
+
 ## Input Validation
 
 All environment variables are validated before being used in configuration files to prevent injection attacks and configuration tampering.
@@ -244,14 +248,3 @@ bash tests/00_validation_tests.sh
 ```
 
 See `tests/README.md` for detailed test documentation.
-
-## Reporting Security Issues
-
-If you discover a security vulnerability, please email the maintainer directly rather than opening a public issue.
-
-## Security Audit History
-
-- **2025-01**: Comprehensive input validation implemented
-- **2025-01**: 113 security validation tests added
-- **2025-01**: Log level made configurable (default: error)
-- **2025-01**: Fail-fast behavior (`set -e`) added to all scripts
