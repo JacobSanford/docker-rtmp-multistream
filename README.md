@@ -2,7 +2,7 @@
 
 # JacobSanford/docker-rtmp-multistream
 
-[![Tests](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/test.yml/badge.svg)](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/test.yml)
+[![CI](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml/badge.svg)](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml)
 
 This is a lightweight nginx-based RTMP relay/encoder.
 

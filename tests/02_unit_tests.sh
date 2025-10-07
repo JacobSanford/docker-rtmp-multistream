@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Configuration Tests - Verify services enable/disable correctly
+# Unit Tests - Verify service configuration and environment variable handling
 
-source tests/test_helpers.sh
+source test_helpers.sh
 
 test_no_services_enabled_by_default() {
   # Check that services are commented out by default

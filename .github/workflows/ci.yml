@@ -1,0 +1,43 @@
+name: Basic Test Suite
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke-tests:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run smoke tests
+      run: bash tests/01_smoke_tests.sh
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: smoke-tests
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run unit tests
+      run: bash tests/02_unit_tests.sh
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: smoke-tests
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run integration tests
+      run: bash tests/03_integration_tests.sh
+
+  functional-tests:
+    name: Functional Tests
+    runs-on: ubuntu-latest
+    needs: smoke-tests
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install ffmpeg
+      run: sudo apt-get update && sudo apt-get install -y ffmpeg
+    - name: Run functional tests
+      run: bash tests/04_functional_tests.sh

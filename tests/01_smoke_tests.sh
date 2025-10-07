@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Build Tests - Verify Docker image builds successfully
+# Smoke Tests - Verify Docker image builds and contains required components
 
-source tests/test_helpers.sh
+source test_helpers.sh
 
 test_docker_build() {
-  docker build -t rtmp-multistream:test . >/dev/null 2>&1
+  docker build -t rtmp-multistream:test .. >/dev/null 2>&1
   return $?
 }
 
 test_docker_build_with_buildkit() {
-  DOCKER_BUILDKIT=1 docker build -t rtmp-multistream:test . >/dev/null 2>&1
+  DOCKER_BUILDKIT=1 docker build -t rtmp-multistream:test .. >/dev/null 2>&1
   return $?
 }
 

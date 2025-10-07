@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# RTMP Functional Tests - Verify RTMP streaming works
+# Functional Tests - End-to-end RTMP streaming, archiving, and authorization
 
-source tests/test_helpers.sh
+source test_helpers.sh
 
 test_rtmp_accepts_connection() {
   # Start container - allow Docker bridge network IPs (172.17.0.0/16)
@@ -49,14 +49,14 @@ test_rtmp_stream_logged() {
 }
 
 test_archive_records_stream() {
-  mkdir -p tests/tmp/archive
-  chmod 777 tests/tmp/archive
+  mkdir -p tmp/archive
+  chmod 777 tmp/archive
 
   docker run -d --name test-rtmp-archive -p 11935:1935 \
     -e PUBLISH_IP_RANGE="172.16.0.0/12" \
     -e ARCHIVE_PATH=/tmp/archive \
     -e ARCHIVE_SUFFIX=flv \
-    -v "$(pwd)/tests/tmp/archive:/tmp/archive" \
+    -v "$(pwd)/tmp/archive:/tmp/archive" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3
 
@@ -69,12 +69,12 @@ test_archive_records_stream() {
   sleep 2
 
   # Check if archive file was created
-  ls tests/tmp/archive/*.flv >/dev/null 2>&1
+  ls tmp/archive/*.flv >/dev/null 2>&1
   local result=$?
 
   docker stop test-rtmp-archive >/dev/null 2>&1
   docker rm test-rtmp-archive >/dev/null 2>&1
-  rm -rf tests/tmp/archive
+  rm -rf tmp/archive
 
   return $result
 }

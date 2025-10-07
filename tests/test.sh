@@ -16,7 +16,7 @@ TESTS_FAILED=0
 cleanup() {
   echo -e "\n${YELLOW}Cleaning up test resources...${NC}"
   docker compose -f docker-compose.test.yml down -v 2>/dev/null || true
-  rm -rf tests/tmp 2>/dev/null || true
+  rm -rf tmp 2>/dev/null || true
 }
 
 # Register cleanup on exit
@@ -47,21 +47,24 @@ section() {
 main() {
   echo -e "${YELLOW}Starting docker-rtmp-multistream test suite...${NC}\n"
 
+  # Change to tests directory if not already there
+  cd "$(dirname "$0")"
+
   # Create temp directory for tests
-  mkdir -p tests/tmp
+  mkdir -p tmp
 
   # Run test suites
-  section "Docker Build Tests"
-  source tests/01_build_tests.sh
+  section "Smoke Tests"
+  source 01_smoke_tests.sh
 
-  section "Service Configuration Tests"
-  source tests/02_config_tests.sh
+  section "Unit Tests"
+  source 02_unit_tests.sh
 
-  section "Container Startup Tests"
-  source tests/03_startup_tests.sh
+  section "Integration Tests"
+  source 03_integration_tests.sh
 
-  section "RTMP Functional Tests"
-  source tests/04_rtmp_tests.sh
+  section "Functional Tests"
+  source 04_functional_tests.sh
 
   # Print summary
   echo -e "\n${YELLOW}=== Test Summary ===${NC}"
