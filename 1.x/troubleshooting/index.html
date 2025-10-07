@@ -1,0 +1,2185 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Lightweight nginx-based RTMP relay/encoder for simultaneous streaming to multiple services">
+      
+      
+        <meta name="author" content="Jacob Sanford">
+      
+      
+        <link rel="canonical" href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/">
+      
+      
+        <link rel="prev" href="../services/archive/">
+      
+      
+        <link rel="next" href="../developer/adding-services/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+    
+    
+      
+        <title>Troubleshooting - docker-rtmp-multistream</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="docker-rtmp-multistream" class="md-header__button md-logo" aria-label="docker-rtmp-multistream" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            docker-rtmp-multistream
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    JacobSanford/docker-rtmp-multistream
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="docker-rtmp-multistream" class="md-nav__button md-logo" aria-label="docker-rtmp-multistream" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    docker-rtmp-multistream
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    JacobSanford/docker-rtmp-multistream
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    User Guide
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quality & Performance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/twitch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Twitch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/youtube/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    YouTube
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/archive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Archive
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stream-not-appearing-on-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stream Not Appearing on Service
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stream Not Appearing on Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-service-not-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Service Not Enabled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-invalid-stream-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Invalid Stream Key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-network-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Network Connectivity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cannot-connect-from-obs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cannot Connect from OBS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cannot Connect from OBS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-port-not-accessible" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Port Not Accessible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ip-address-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. IP Address Mismatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-firewall-blocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Firewall Blocking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ip-range-restriction" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. IP Range Restriction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archive-not-recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive Not Recording
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archive Not Recording">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-archive-not-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Archive Not Enabled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-permission-denied" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Permission Denied
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-volume-not-mounted" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Volume Not Mounted
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-disk-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Disk Space
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-cpu-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      High CPU Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="High CPU Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multiple-transformers-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Multiple Transformers Active
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-x264-preset-too-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. x264 Preset Too Slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-thread-contention" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Thread Contention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-wont-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container Won't Start
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Container Won&#39;t Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configuration-syntax-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Configuration Syntax Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-port-already-in-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Port Already in Use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-missing-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Missing Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#poor-stream-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Poor Stream Quality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Poor Stream Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnosis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnosis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnosis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-source-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check Source Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-bandwidth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check Bandwidth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solutions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-twitch-transformer-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Twitch (Transformer Services)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-youtube-relay-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For YouTube (Relay Services)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-all-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For All Services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs and Debugging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs and Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-container-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      View Container Logs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#increase-log-verbosity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Increase Log Verbosity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-nginx-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check nginx Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Developer Guide
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Developer Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/adding-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Adding Services
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment Variables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#stream-not-appearing-on-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stream Not Appearing on Service
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stream Not Appearing on Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-service-not-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Service Not Enabled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-invalid-stream-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Invalid Stream Key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-network-connectivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Network Connectivity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cannot-connect-from-obs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cannot Connect from OBS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cannot Connect from OBS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-port-not-accessible" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Port Not Accessible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ip-address-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. IP Address Mismatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-firewall-blocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Firewall Blocking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ip-range-restriction" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. IP Range Restriction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archive-not-recording" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive Not Recording
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archive Not Recording">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-archive-not-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Archive Not Enabled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-permission-denied" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Permission Denied
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-volume-not-mounted" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Volume Not Mounted
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-disk-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Disk Space
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-cpu-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      High CPU Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="High CPU Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multiple-transformers-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Multiple Transformers Active
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-x264-preset-too-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. x264 Preset Too Slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-thread-contention" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Thread Contention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-wont-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container Won't Start
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Container Won&#39;t Start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#possible-causes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Possible Causes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Possible Causes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-configuration-syntax-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Configuration Syntax Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-port-already-in-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Port Already in Use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-missing-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Missing Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#poor-stream-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Poor Stream Quality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Poor Stream Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symptoms_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Symptoms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnosis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnosis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnosis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-source-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check Source Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-bandwidth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check Bandwidth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solutions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-twitch-transformer-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Twitch (Transformer Services)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-youtube-relay-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For YouTube (Relay Services)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-all-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      For All Services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs and Debugging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logs and Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view-container-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      View Container Logs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#increase-log-verbosity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Increase Log Verbosity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-nginx-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check nginx Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      See Also
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>Common issues and their solutions.</p>
+<h2 id="stream-not-appearing-on-service">Stream Not Appearing on Service</h2>
+<h3 id="symptoms">Symptoms</h3>
+<ul>
+<li>OBS shows "Streaming" but stream doesn't appear on Twitch/YouTube</li>
+<li>No errors in OBS</li>
+</ul>
+<h3 id="possible-causes">Possible Causes</h3>
+<h4 id="1-service-not-enabled">1. Service Not Enabled</h4>
+<p><strong>Check</strong>: Look at container logs during startup:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;configured and enabled&quot;</span>
+</span></code></pre></div>
+<p><strong>Expected output</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Twitch configured and enabled.
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>YouTube configured and enabled.
+</span></code></pre></div></p>
+<p><strong>Solution</strong>: If service is missing:
+- Verify environment variables are set in <code>env/relay.env</code>
+- For Twitch: Check <code>TWITCH_KEY</code> is set
+- For YouTube: Check <code>YOUTUBE_KEY</code> is set
+- For Archive: Check <code>ARCHIVE_PATH</code> is set and writable</p>
+<h4 id="2-invalid-stream-key">2. Invalid Stream Key</h4>
+<p><strong>Check</strong>: Look for authentication errors in logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;error\|auth\|publish&quot;</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Verify stream keys are correct in <code>env/relay.env</code>
+- Check for extra spaces or quotes around keys
+- Get fresh keys from Twitch/YouTube dashboards</p>
+<h4 id="3-network-connectivity">3. Network Connectivity</h4>
+<p><strong>Check</strong>: Test if relay can reach the service:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>live-jfk.twitch.tv
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>a.rtmp.youtube.com
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Check firewall settings
+- Verify outbound RTMP (port 1935) is allowed
+- Try different Twitch ingest endpoint (change <code>TWITCH_ENDPOINT</code>)</p>
+<h2 id="cannot-connect-from-obs">Cannot Connect from OBS</h2>
+<h3 id="symptoms_1">Symptoms</h3>
+<ul>
+<li>OBS shows "Failed to connect to server"</li>
+<li>Connection timeout</li>
+</ul>
+<h3 id="possible-causes_1">Possible Causes</h3>
+<h4 id="1-port-not-accessible">1. Port Not Accessible</h4>
+<p><strong>Check</strong>: Verify port 1935 is exposed:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</span></code></pre></div>
+<p>Look for <code>0.0.0.0:1935-&gt;1935/tcp</code></p>
+<p><strong>Solution</strong>: Ensure <code>docker-compose.yml</code> has correct port mapping:
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;1935:1935&quot;</span>
+</span></code></pre></div></p>
+<h4 id="2-ip-address-mismatch">2. IP Address Mismatch</h4>
+<p><strong>Check</strong>: Verify you're using the correct IP address:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>inet
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Use the relay PC's local network IP (e.g., <code>192.168.1.100</code>)
+- Don't use <code>127.0.0.1</code> or <code>localhost</code> from another machine</p>
+<h4 id="3-firewall-blocking">3. Firewall Blocking</h4>
+<p><strong>Check</strong>: Test if port is reachable:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># From gaming PC</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>telnet<span class="w"> </span>&lt;relay-ip&gt;<span class="w"> </span><span class="m">1935</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Open port 1935 in firewall
+- Ubuntu: <code>sudo ufw allow 1935/tcp</code>
+- Check if Docker networking is working</p>
+<h4 id="4-ip-range-restriction">4. IP Range Restriction</h4>
+<p><strong>Check</strong>: Look for "deny publish" in logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;deny\|publish&quot;</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>: Adjust <code>PUBLISH_IP_RANGE</code> in <code>env/relay.env</code>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Allow entire local network</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">192</span>.168.0.0/16
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Allow specific IP</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">192</span>.168.1.50/32
+</span></code></pre></div></p>
+<h2 id="archive-not-recording">Archive Not Recording</h2>
+<h3 id="symptoms_2">Symptoms</h3>
+<ul>
+<li>Stream works on Twitch/YouTube</li>
+<li>No files appearing in archive directory</li>
+</ul>
+<h3 id="possible-causes_2">Possible Causes</h3>
+<h4 id="1-archive-not-enabled">1. Archive Not Enabled</h4>
+<p><strong>Check</strong>: Look for archive configuration in logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>archive
+</span></code></pre></div>
+<p><strong>Solution</strong>: Set <code>ARCHIVE_PATH</code> in <code>env/relay.env</code>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span>/archive
+</span></code></pre></div></p>
+<h4 id="2-permission-denied">2. Permission Denied</h4>
+<p><strong>Check</strong>: Look for permission errors:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;permission\|denied&quot;</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>: Fix directory permissions on host:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>chown<span class="w"> </span><span class="m">100</span>:101<span class="w"> </span>./stream_archive
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>chmod<span class="w"> </span>o+w<span class="w"> </span>./stream_archive
+</span></code></pre></div></p>
+<h4 id="3-volume-not-mounted">3. Volume Not Mounted</h4>
+<p><strong>Check</strong>: Verify volume is mapped:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>ls<span class="w"> </span>-la<span class="w"> </span>/archive
+</span></code></pre></div>
+<p><strong>Solution</strong>: Add volume to <code>docker-compose.yml</code>:
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./stream_archive:/archive</span>
+</span></code></pre></div></p>
+<h4 id="4-disk-space">4. Disk Space</h4>
+<p><strong>Check</strong>: Verify available space:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>df<span class="w"> </span>-h<span class="w"> </span>./stream_archive
+</span></code></pre></div>
+<p><strong>Solution</strong>: Free up disk space or use a different directory with more space.</p>
+<h2 id="high-cpu-usage">High CPU Usage</h2>
+<h3 id="symptoms_3">Symptoms</h3>
+<ul>
+<li>System becomes slow during streaming</li>
+<li>Fans running at high speed</li>
+<li>Stream stuttering</li>
+</ul>
+<h3 id="possible-causes_3">Possible Causes</h3>
+<h4 id="1-multiple-transformers-active">1. Multiple Transformers Active</h4>
+<p><strong>Check</strong>: See which services are enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;configured and enabled&quot;</span>
+</span></code></pre></div>
+<p><strong>Explanation</strong>: Each transformer (Twitch, etc.) runs a separate FFmpeg process that re-encodes your entire stream.</p>
+<p><strong>Solution</strong>:
+- Use only services you need
+- For YouTube, disable Twitch if not needed (YouTube uses simple relay, no CPU overhead)</p>
+<h4 id="2-x264-preset-too-slow">2. x264 Preset Too Slow</h4>
+<p><strong>Check</strong>: Current preset in <code>env/relay.env</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>grep<span class="w"> </span>TWITCH_X264_PRESET<span class="w"> </span>env/relay.env
+</span></code></pre></div>
+<p><strong>Solution</strong>: Use faster preset (trades quality for speed):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">TWITCH_X264_PRESET</span><span class="o">=</span>veryfast<span class="w">  </span><span class="c1"># or: ultrafast, superfast, faster</span>
+</span></code></pre></div></p>
+<h4 id="3-thread-contention">3. Thread Contention</h4>
+<p><strong>Check</strong>: If running multiple transformers, threads may be competing</p>
+<p><strong>Solution</strong>: Limit threads per service:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">TWITCH_FFMPEG_THREADS</span><span class="o">=</span><span class="m">4</span><span class="w">  </span><span class="c1"># Limit Twitch to 4 threads</span>
+</span></code></pre></div></p>
+<h2 id="container-wont-start">Container Won't Start</h2>
+<h3 id="symptoms_4">Symptoms</h3>
+<ul>
+<li><code>docker compose up</code> exits immediately</li>
+<li>Container status shows "Exited (1)"</li>
+</ul>
+<h3 id="possible-causes_4">Possible Causes</h3>
+<h4 id="1-configuration-syntax-error">1. Configuration Syntax Error</h4>
+<p><strong>Check</strong>: Look for nginx errors:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;error\|failed\|emergency&quot;</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Check for typos in manually edited config files
+- Rebuild container: <code>docker compose build --no-cache</code></p>
+<h4 id="2-port-already-in-use">2. Port Already in Use</h4>
+<p><strong>Check</strong>: Error message about port binding:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up
+</span></code></pre></div>
+<p>Look for: <code>bind: address already in use</code></p>
+<p><strong>Solution</strong>:
+- Stop other processes using port 1935
+- Find process: <code>sudo lsof -i :1935</code>
+- Kill it: <code>sudo kill &lt;PID&gt;</code></p>
+<h4 id="3-missing-dependencies">3. Missing Dependencies</h4>
+<p><strong>Solution</strong>: Pull latest base image:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>build<span class="w"> </span>--no-cache
+</span></code></pre></div></p>
+<h2 id="poor-stream-quality">Poor Stream Quality</h2>
+<h3 id="symptoms_5">Symptoms</h3>
+<ul>
+<li>Pixelation or blurriness</li>
+<li>Viewers complaining about quality</li>
+</ul>
+<h3 id="diagnosis">Diagnosis</h3>
+<h4 id="check-source-quality">Check Source Quality</h4>
+<p>Ensure your streaming software (OBS) is sending high-quality stream:</p>
+<p><strong>OBS Settings</strong>:
+- Bitrate: 15000-20000 kbps minimum
+- Encoder: NVENC H.264 (if available) or x264
+- Rate Control: CBR</p>
+<h4 id="check-bandwidth">Check Bandwidth</h4>
+<p><strong>Test upload speed</strong>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Use https://www.speedtest.net/</span>
+</span></code></pre></div></p>
+<p><strong>Calculate required bandwidth</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Total Upload Needed = Source Bitrate + All Service Bitrates
+</span></code></pre></div></p>
+<p>Example:
+- OBS Source: 20 Mbps
+- Twitch (transcoded): 4.5 Mbps
+- YouTube (passthrough): 20 Mbps
+- Total: ~24.5 Mbps upload needed</p>
+<h3 id="solutions">Solutions</h3>
+<h4 id="for-twitch-transformer-services">For Twitch (Transformer Services)</h4>
+<p>Increase <code>TWITCH_KBITS_PER_VIDEO_FRAME</code>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># From default 75 to higher</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nv">TWITCH_KBITS_PER_VIDEO_FRAME</span><span class="o">=</span><span class="m">100</span><span class="w">  </span><span class="c1"># 720p60 = 6000 kbps</span>
+</span></code></pre></div></p>
+<h4 id="for-youtube-relay-services">For YouTube (Relay Services)</h4>
+<p>Increase OBS bitrate - the relay passes it through unchanged.</p>
+<h4 id="for-all-services">For All Services</h4>
+<p>See the <a href="../quality/">Quality &amp; Performance Guide</a> for detailed optimization.</p>
+<h2 id="logs-and-debugging">Logs and Debugging</h2>
+<h3 id="view-container-logs">View Container Logs</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># All logs</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># Follow logs in real-time</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>relay
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="c1"># Last 100 lines</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>--tail<span class="o">=</span><span class="m">100</span><span class="w"> </span>relay
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="c1"># Filter for errors</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>error
+</span></code></pre></div>
+<h3 id="increase-log-verbosity">Increase Log Verbosity</h3>
+<p>Edit <code>build/conf/nginx/nginx.conf</code> and change:
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">error_log</span><span class="w"> </span><span class="s">/var/log/nginx/error.log</span><span class="w"> </span><span class="s">warn</span><span class="p">;</span>
+</span></code></pre></div></p>
+<p>to:
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">error_log</span><span class="w"> </span><span class="s">/var/log/nginx/error.log</span><span class="w"> </span><span class="s">debug</span><span class="p">;</span>
+</span></code></pre></div></p>
+<p>Rebuild: <code>docker compose build</code></p>
+<h3 id="check-nginx-configuration">Check nginx Configuration</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Test nginx config syntax</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nginx<span class="w"> </span>-t
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="c1"># View active configuration</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>cat<span class="w"> </span>/etc/nginx/nginx.conf
+</span></code></pre></div>
+<h2 id="getting-help">Getting Help</h2>
+<p>If you're still experiencing issues:</p>
+<ol>
+<li><strong>Check existing issues</strong>: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/issues">GitHub Issues</a></li>
+<li><strong>Gather information</strong>:</li>
+<li>Container logs: <code>docker compose logs relay &gt; logs.txt</code></li>
+<li>Environment: <code>docker compose config &gt; config.txt</code></li>
+<li>System info: <code>uname -a; docker --version</code></li>
+<li><strong>Open a new issue</strong> with:</li>
+<li>Clear description of the problem</li>
+<li>Steps to reproduce</li>
+<li>Logs and configuration (redact stream keys!)</li>
+<li>System information</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../architecture/">Architecture</a> - Understand how the system works</li>
+<li><a href="../quality/">Quality &amp; Performance</a> - Optimization guidance</li>
+<li><a href="../configuration/">Configuration Overview</a> - Setup details</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
