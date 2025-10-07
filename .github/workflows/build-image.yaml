@@ -10,7 +10,6 @@ jobs:
     uses: unb-libraries/dockworker/.github/workflows/build-push.yaml@6.x
     with:
       build-themes: false
-      cleanup-old-images: false
       image-name: 'ghcr.io/jacobsanford/rtmp-multistream'
       push-all-branches: true
       push-branches: '[]'
