@@ -28,8 +28,10 @@ test_rtmp_accepts_connection() {
 }
 
 test_rtmp_stream_logged() {
+  # Use info log level to see RTMP connections in logs
   docker run -d --name test-rtmp-log -p 11935:1935 \
     -e PUBLISH_IP_RANGE="172.16.0.0/12" \
+    -e NGINX_ERROR_LOG_LEVEL="info" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3
 
@@ -41,7 +43,7 @@ test_rtmp_stream_logged() {
 
   sleep 1
 
-  # Check if nginx logged the connection
+  # Check if nginx logged the connection (requires info or debug log level)
   docker logs test-rtmp-log 2>&1 | grep -q "relay"
   local result=$?
 
@@ -106,8 +108,10 @@ test_rtmp_rejects_unauthorized_ip() {
 }
 
 test_multiple_streams_simultaneously() {
+  # Use info log level to see stream names in logs
   docker run -d --name test-rtmp-multi -p 11935:1935 \
     -e PUBLISH_IP_RANGE="172.16.0.0/12" \
+    -e NGINX_ERROR_LOG_LEVEL="info" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3
 
@@ -124,7 +128,7 @@ test_multiple_streams_simultaneously() {
 
   wait
 
-  # Check logs mention both streams
+  # Check logs mention both streams (requires info or debug log level)
   docker logs test-rtmp-multi 2>&1 | grep -q "stream1" && \
   docker logs test-rtmp-multi 2>&1 | grep -q "stream2"
   local result=$?
