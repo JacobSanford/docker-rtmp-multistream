@@ -31,7 +31,6 @@ theme:
   features:
     - navigation.instant
     - navigation.tracking
-    - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.top
@@ -78,3 +77,12 @@ nav:
 
 plugins:
   - search
+  - htmlproofer:
+      enabled: !ENV [CI, false]  # Only run in CI, not local builds
+      raise_error: true  # Fail build on broken links
+      raise_error_after_finish: true  # Check all links before failing
+      validate_external_urls: true  # Check external links too
+      validate_rendered_template: true
+      ignore_urls:
+        - 'https://help.twitch.tv/*'  # May rate-limit
+        - 'https://studio.youtube.com'  # Requires auth
