@@ -12,6 +12,14 @@ jobs:
     - uses: actions/checkout@v4
     - name: Run smoke tests
       run: bash tests/01_smoke_tests.sh
+    - name: Save Docker image
+      run: docker save rtmp-multistream:test | gzip > rtmp-multistream-test.tar.gz
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: rtmp-multistream-test.tar.gz
+        retention-days: 1
 
   unit-tests:
     name: Unit Tests
@@ -19,6 +27,12 @@ jobs:
     needs: smoke-tests
     steps:
     - uses: actions/checkout@v4
+    - name: Download Docker image
+      uses: actions/download-artifact@v4
+      with:
+        name: docker-image
+    - name: Load Docker image
+      run: gunzip -c rtmp-multistream-test.tar.gz | docker load
     - name: Run unit tests
       run: bash tests/02_unit_tests.sh
 
@@ -28,6 +42,12 @@ jobs:
     needs: smoke-tests
     steps:
     - uses: actions/checkout@v4
+    - name: Download Docker image
+      uses: actions/download-artifact@v4
+      with:
+        name: docker-image
+    - name: Load Docker image
+      run: gunzip -c rtmp-multistream-test.tar.gz | docker load
     - name: Run integration tests
       run: bash tests/03_integration_tests.sh
 
@@ -37,6 +57,12 @@ jobs:
     needs: smoke-tests
     steps:
     - uses: actions/checkout@v4
+    - name: Download Docker image
+      uses: actions/download-artifact@v4
+      with:
+        name: docker-image
+    - name: Load Docker image
+      run: gunzip -c rtmp-multistream-test.tar.gz | docker load
     - name: Install ffmpeg
       run: sudo apt-get update && sudo apt-get install -y ffmpeg
     - name: Run functional tests
