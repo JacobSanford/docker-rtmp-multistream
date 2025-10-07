@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/security/">
       
       
+        <link rel="prev" href="../quality/">
+      
+      
+        <link rel="next" href="../services/twitch/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -402,8 +406,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -414,13 +420,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -436,7 +440,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             User Guide
@@ -493,6 +497,311 @@
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Security
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-security-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting Security Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_stream_keykey-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_stream_key(key, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_pathpath-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_path(path, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_ip_rangerange-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_ip_range(range, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_numbervalue-name-min-max" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_number(value, name, min, max)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_identifiervalue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_identifier(value, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_bitratevalue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_bitrate(value, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_log_levellevel-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_log_level(level, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_suffixsuffix-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_suffix(suffix, name)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escape_for_sedvalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      escape_for_sed(value)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stream-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Stream Keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Network Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-log-level-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Log Level Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-archive-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Archive Paths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-container-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Container Security
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attack-vectors-mitigated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Vectors Mitigated
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attack Vectors Mitigated">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Injection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Injection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Path Traversal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buffer-overflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Buffer Overflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     
@@ -508,10 +817,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
             
   
   
@@ -524,8 +833,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
             Services
           </label>
@@ -786,6 +1095,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#reporting-security-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting Security Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#input-validation" class="md-nav__link">
     <span class="md-ellipsis">
       Input Validation
@@ -1016,24 +1334,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#reporting-security-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reporting Security Issues
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-audit-history" class="md-nav__link">
-    <span class="md-ellipsis">
-      Security Audit History
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1055,6 +1355,8 @@
 
 <h1 id="security">Security</h1>
 <p>This document describes the security features and considerations for docker-rtmp-multistream.</p>
+<h2 id="reporting-security-issues">Reporting Security Issues</h2>
+<p>If you discover a security vulnerability, please email the maintainer directly rather than opening a public issue.</p>
 <h2 id="input-validation">Input Validation</h2>
 <p>All environment variables are validated before being used in configuration files to prevent injection attacks and configuration tampering.</p>
 <h3 id="validation-functions">Validation Functions</h3>
@@ -1230,15 +1532,6 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
 </span></code></pre></div></p>
 <p>See <code>tests/README.md</code> for detailed test documentation.</p>
-<h2 id="reporting-security-issues">Reporting Security Issues</h2>
-<p>If you discover a security vulnerability, please email the maintainer directly rather than opening a public issue.</p>
-<h2 id="security-audit-history">Security Audit History</h2>
-<ul>
-<li><strong>2025-01</strong>: Comprehensive input validation implemented</li>
-<li><strong>2025-01</strong>: 113 security validation tests added</li>
-<li><strong>2025-01</strong>: Log level made configurable (default: error)</li>
-<li><strong>2025-01</strong>: Fail-fast behavior (<code>set -e</code>) added to all scripts</li>
-</ul>
 
 
 
