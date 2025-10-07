@@ -16,18 +16,14 @@ This project works best if deployed on a dedicated PC, separate from the one run
 - ✅ Multi-platform streaming (Twitch, YouTube)
 - ✅ Automatic transcoding and quality optimization
 - ✅ Local disk archiving
-- ✅ **Comprehensive input validation** - 113 security tests
-- ✅ **Command injection prevention** - All inputs validated
-- ✅ **Configurable log levels** - Prevent secret exposure
 - ✅ IP-based publish authorization
-- ✅ Fully tested (146 automated tests)
 
 ## Supported Streaming Services
 * **Twitch** - Automatic transcoding and quality optimization
 * **YouTube** - Direct pass-through relay
 * **Archive** - Local disk recording
 
-New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/developer/adding-services/) for details.
+New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/latest/developer/adding-services/) for details.
 
 ## Issues
 Please report any issues or bugs you encounter by opening a new issue via the [Issues tab](https://github.com/JacobSanford/docker-rtmp-multistream/issues).

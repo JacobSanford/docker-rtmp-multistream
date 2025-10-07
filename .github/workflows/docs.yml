@@ -45,6 +45,11 @@ jobs:
           pip install mike
           pip install mkdocs-htmlproofer-plugin
 
+      - name: Validate documentation (htmlproofer)
+        env:
+          CI: true
+        run: mkdocs build --strict
+
       - name: Deploy documentation with mike
         run: |
           mike deploy --push --update-aliases 1.x latest
