@@ -29,18 +29,6 @@ This project works best if deployed on a dedicated PC, separate from the one run
 
 New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/developer/adding-services/) for details.
 
-## Security
-
-This project implements comprehensive input validation to prevent injection attacks:
-- All environment variables validated before use
-- Command injection prevention (blocks shell metacharacters)
-- Path traversal protection
-- Configurable log levels (default: `error` - doesn't expose secrets)
-- Buffer overflow mitigation (length limits)
-- 113 security-focused validation tests
-
-See [docs/security.md](docs/security.md) for detailed security documentation.
-
 ## Issues
 Please report any issues or bugs you encounter by opening a new issue via the [Issues tab](https://github.com/JacobSanford/docker-rtmp-multistream/issues).
 
