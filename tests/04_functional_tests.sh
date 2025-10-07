@@ -2,6 +2,7 @@
 # Functional Tests - End-to-end RTMP streaming, archiving, and authorization
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEST_TMP="$SCRIPT_DIR/tmp"
 source "$SCRIPT_DIR/test_helpers.sh"
 
 test_rtmp_accepts_connection() {
@@ -50,14 +51,14 @@ test_rtmp_stream_logged() {
 }
 
 test_archive_records_stream() {
-  mkdir -p tmp/archive
-  chmod 777 tmp/archive
+  mkdir -p "$TEST_TMP/archive"
+  chmod 777 "$TEST_TMP/archive"
 
   docker run -d --name test-rtmp-archive -p 11935:1935 \
     -e PUBLISH_IP_RANGE="172.16.0.0/12" \
     -e ARCHIVE_PATH=/tmp/archive \
     -e ARCHIVE_SUFFIX=flv \
-    -v "$(pwd)/tmp/archive:/tmp/archive" \
+    -v "$TEST_TMP/archive:/tmp/archive" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3
 
@@ -70,12 +71,12 @@ test_archive_records_stream() {
   sleep 2
 
   # Check if archive file was created
-  ls tmp/archive/*.flv >/dev/null 2>&1
+  ls "$TEST_TMP/archive"/*.flv >/dev/null 2>&1
   local result=$?
 
   docker stop test-rtmp-archive >/dev/null 2>&1
   docker rm test-rtmp-archive >/dev/null 2>&1
-  rm -rf tmp/archive
+  rm -rf "$TEST_TMP/archive"
 
   return $result
 }

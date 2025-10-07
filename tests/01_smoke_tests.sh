@@ -2,15 +2,16 @@
 # Smoke Tests - Verify Docker image builds and contains required components
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/test_helpers.sh"
 
 test_docker_build() {
-  docker build -t rtmp-multistream:test .. >/dev/null 2>&1
+  docker build -t rtmp-multistream:test "$PROJECT_ROOT" >/dev/null 2>&1
   return $?
 }
 
 test_docker_build_with_buildkit() {
-  DOCKER_BUILDKIT=1 docker build -t rtmp-multistream:test .. >/dev/null 2>&1
+  DOCKER_BUILDKIT=1 docker build -t rtmp-multistream:test "$PROJECT_ROOT" >/dev/null 2>&1
   return $?
 }
 

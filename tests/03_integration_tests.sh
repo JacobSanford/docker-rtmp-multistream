@@ -2,6 +2,7 @@
 # Integration Tests - Verify container starts and runs correctly with various configurations
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEST_TMP="$SCRIPT_DIR/tmp"
 source "$SCRIPT_DIR/test_helpers.sh"
 
 test_container_starts_without_config() {
@@ -35,12 +36,12 @@ test_container_starts_with_youtube() {
 }
 
 test_container_starts_with_all_services() {
-  mkdir -p tmp/archive
+  mkdir -p "$TEST_TMP/archive"
   docker run -d --name test-rtmp-all \
     -e TWITCH_KEY=test_key \
     -e YOUTUBE_KEY=test_key \
     -e ARCHIVE_PATH=/tmp/archive \
-    -v "$(pwd)/tmp/archive:/tmp/archive" \
+    -v "$TEST_TMP/archive:/tmp/archive" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3
   docker ps | grep -q test-rtmp-all
