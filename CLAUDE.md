@@ -101,32 +101,40 @@ Follow the pattern in `docs/services/new.md`:
 ### Running Tests Locally
 
 ```bash
-./test.sh
+./tests/test.sh
 ```
 
 The test suite includes 28 tests across 4 categories:
-- **Build Tests**: Verify Docker image builds and contains required components
-- **Configuration Tests**: Validate service enabling/disabling and env var substitution
-- **Startup Tests**: Ensure container starts correctly in various configurations
-- **RTMP Functional Tests**: Test actual streaming, archiving, and authorization
+- **Smoke Tests**: Quick sanity checks (Docker build, required components)
+- **Unit Tests**: Configuration and environment variable handling
+- **Integration Tests**: Container startup with various service combinations
+- **Functional Tests**: End-to-end RTMP streaming, archiving, and authorization
 
 Individual test suites can be run separately:
 ```bash
-bash tests/01_build_tests.sh  # Build tests
-bash tests/02_config_tests.sh # Config tests
-bash tests/03_startup_tests.sh # Startup tests
-bash tests/04_rtmp_tests.sh   # RTMP tests (requires ffmpeg)
+bash tests/01_smoke_tests.sh      # Smoke tests
+bash tests/02_unit_tests.sh       # Unit tests
+bash tests/03_integration_tests.sh # Integration tests
+bash tests/04_functional_tests.sh  # Functional tests (requires ffmpeg)
 ```
 
 Tests automatically clean up containers and temporary files. Exit code 0 = all passed, 1 = failures.
 
 See `tests/README.md` for detailed testing documentation.
 
+### CI/CD
+
+GitHub Actions automatically runs all test suites on every push and PR via `.github/workflows/ci.yml`. Each test type runs as a separate job:
+- Smoke Tests (runs first)
+- Unit Tests (after smoke tests pass)
+- Integration Tests (after smoke tests pass)
+- Functional Tests (after smoke tests pass)
+
 ## Key Files
 
 - `Dockerfile`: Image definition, base: ghcr.io/unb-libraries/nginx:3.18.x
 - `docker-compose.yml`: Simple service definition exposing port 1935
 - `start.sh`: Development convenience script
-- `test.sh`: Main test runner
+- `tests/test.sh`: Main test runner
 - `build/scripts/enableService.sh`: Core script to uncomment service includes
 - `build/conf/nginx/http.d/app.conf`: Main RTMP config with service include placeholders
