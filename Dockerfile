@@ -17,6 +17,8 @@ ENV YOUTUBE_KEY=""
 
 ENV PUBLISH_IP_RANGE="192.168.0.0/16"
 
+ENV NGINX_ERROR_LOG_LEVEL="error"
+
 COPY build /build
 
 RUN apk --no-cache add nginx-mod-rtmp ffmpeg && \
