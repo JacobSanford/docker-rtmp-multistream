@@ -54,6 +54,9 @@ main() {
   mkdir -p tmp
 
   # Run test suites
+  section "Validation Tests"
+  source 00_validation_tests.sh
+
   section "Smoke Tests"
   source 01_smoke_tests.sh
 

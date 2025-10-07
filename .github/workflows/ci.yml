@@ -6,13 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  smoke-tests:
-    name: Smoke Tests
+  validation-tests:
+    name: Validation Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Run smoke tests
-      run: bash tests/01_smoke_tests.sh
+    - name: Build Docker image
+      run: docker build -t rtmp-multistream:test .
+    - name: Run validation tests
+      run: bash tests/00_validation_tests.sh
     - name: Save Docker image
       run: docker save rtmp-multistream:test | gzip > rtmp-multistream-test.tar.gz
     - name: Upload Docker image
@@ -22,10 +24,25 @@ jobs:
         path: rtmp-multistream-test.tar.gz
         retention-days: 1
 
+  smoke-tests:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    needs: validation-tests
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download Docker image
+      uses: actions/download-artifact@v4
+      with:
+        name: docker-image
+    - name: Load Docker image
+      run: gunzip -c rtmp-multistream-test.tar.gz | docker load
+    - name: Run smoke tests
+      run: bash tests/01_smoke_tests.sh
+
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
-    needs: smoke-tests
+    needs: validation-tests
     steps:
     - uses: actions/checkout@v4
     - name: Download Docker image
@@ -71,7 +88,7 @@ jobs:
 
   build-push-images:
     name: Build and Push Image
-    needs: [smoke-tests, unit-tests, integration-tests, functional-tests]
+    needs: [validation-tests, smoke-tests, unit-tests, integration-tests, functional-tests]
     uses: unb-libraries/dockworker/.github/workflows/build-push.yaml@6.x
     with:
       build-themes: false

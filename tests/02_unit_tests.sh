@@ -81,6 +81,49 @@ test_publish_ip_range_configured() {
   return $?
 }
 
+test_malicious_twitch_key_rejected() {
+  # Test that stream key with shell metacharacters is rejected
+  docker run --rm --entrypoint sh -e TWITCH_KEY='test;rm -rf /' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
+test_malicious_archive_path_rejected() {
+  # Test that path with shell metacharacters is rejected
+  docker run --rm --entrypoint sh -e ARCHIVE_PATH='/tmp/archive;rm -rf /' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_archive.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
+test_invalid_ip_range_rejected() {
+  # Test that invalid IP range format is rejected
+  docker run --rm --entrypoint sh -e PUBLISH_IP_RANGE='not-an-ip' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
+test_invalid_log_level_rejected() {
+  # Test that invalid log level is rejected
+  docker run --rm --entrypoint sh -e NGINX_ERROR_LOG_LEVEL='invalid' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
+test_invalid_numeric_values_rejected() {
+  # Test that non-numeric FPS value is rejected
+  docker run --rm --entrypoint sh -e TWITCH_KEY='test' -e TWITCH_FPS='not-a-number' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
 # Run tests
 run_test "No services enabled by default" test_no_services_enabled_by_default
 run_test "Twitch service enables with key" test_twitch_service_enables_with_key
@@ -90,3 +133,8 @@ run_test "Twitch config variables replaced" test_twitch_config_variables_replace
 run_test "YouTube config variables replaced" test_youtube_config_variables_replaced
 run_test "Twitch transformer configured" test_twitch_transformer_configured
 run_test "Publish IP range configured" test_publish_ip_range_configured
+run_test "Malicious Twitch key rejected" test_malicious_twitch_key_rejected
+run_test "Malicious archive path rejected" test_malicious_archive_path_rejected
+run_test "Invalid IP range rejected" test_invalid_ip_range_rejected
+run_test "Invalid log level rejected" test_invalid_log_level_rejected
+run_test "Invalid numeric values rejected" test_invalid_numeric_values_rejected

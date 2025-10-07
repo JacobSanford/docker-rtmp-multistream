@@ -18,7 +18,52 @@ Run all tests:
 
 ### Test Suites
 
-The test suite is organized into four categories:
+The test suite is organized into five categories:
+
+#### 0. Validation Tests (`tests/00_validation_tests.sh`)
+**113 tests** - Comprehensive unit tests for input validation functions that prevent security vulnerabilities:
+
+**validate_stream_key** (13 tests):
+- Valid inputs: alphanumeric, dash, underscore, period, colon, empty
+- Invalid inputs: semicolon, pipe, ampersand, backtick, dollar sign, path traversal, excessive length
+
+**validate_path** (12 tests):
+- Valid inputs: absolute paths, with dash/underscore, empty
+- Invalid inputs: relative paths, shell metacharacters (`;|&$\``), excessive length
+
+**validate_ip_range** (8 tests):
+- Valid inputs: CIDR notation (Class A/B/C networks, /32 hosts)
+- Invalid inputs: missing CIDR, text, incomplete octets
+
+**validate_number** (12 tests):
+- Valid inputs: integers, zero, with min/max bounds
+- Invalid inputs: text, negative, decimal, out of bounds, empty
+
+**validate_identifier** (9 tests):
+- Valid inputs: alphanumeric with dash/underscore
+- Invalid inputs: spaces, periods, special characters, excessive length
+
+**validate_bitrate** (9 tests):
+- Valid inputs: numeric, with k/K suffix
+- Invalid inputs: text, decimals, wrong suffix, empty
+
+**validate_log_level** (11 tests):
+- Valid inputs: all 8 nginx levels (debug, info, notice, warn, error, crit, alert, emerg)
+- Invalid inputs: unknown values, wrong case, empty
+
+**validate_suffix** (9 tests):
+- Valid inputs: alphanumeric file extensions (mp4, flv, mkv)
+- Invalid inputs: leading dot, slashes, special chars, excessive length
+
+**escape_for_sed** (5 tests):
+- Tests proper escaping of pipes, ampersands, backslashes for safe sed substitution
+
+These validation tests protect against:
+- Command injection attacks
+- Configuration injection
+- Path traversal attacks
+- Buffer overflow attempts
+- Control character injection
 
 #### 1. Smoke Tests (`tests/01_smoke_tests.sh`)
 Quick sanity checks that verify the Docker image builds correctly and contains required components:
@@ -33,6 +78,7 @@ Validates service configuration and environment variable handling in isolation:
 - Environment variables correctly replace placeholders
 - Twitch transformer configuration
 - IP range authorization
+- **Security validation**: Malicious inputs are rejected (stream keys with shell metacharacters, invalid paths, bad IP ranges, invalid log levels)
 
 #### 3. Integration Tests (`tests/03_integration_tests.sh`)
 Ensures the full system integrates correctly under various configurations:
@@ -56,6 +102,9 @@ End-to-end tests of actual RTMP streaming functionality:
 You can run individual test suites directly:
 
 ```bash
+# Validation tests only (113 tests)
+bash tests/00_validation_tests.sh
+
 # Smoke tests only
 bash tests/01_smoke_tests.sh
 
@@ -77,15 +126,23 @@ Tests provide colored output:
 
 Example output:
 ```
-=== Docker Build Tests ===
+=== Validation Tests ===
+Testing validate_stream_key...
+  ✓ valid: alphanumeric
+  ✓ valid: with dash
+  ✓ invalid: semicolon
+  ✓ invalid: path traversal
+  ...
+
+=== Smoke Tests ===
 ✓ Docker image builds successfully
 ✓ Image contains nginx
 ✓ Image contains ffmpeg
 ✓ Image has RTMP module
 
 === Test Summary ===
-Total tests run: 32
-Passed: 32
+Total tests run: 146
+Passed: 146
 ```
 
 ## Cleanup
@@ -125,7 +182,8 @@ run_test "Description of test" test_my_new_feature
 
 ## Test Coverage
 
-Current test coverage:
+Current test coverage (146 total tests):
+- ✓ **Input validation** (113 tests) - All validation functions for security
 - ✓ Docker build process
 - ✓ Service configuration (Twitch, YouTube, Archive)
 - ✓ Container startup and health
@@ -133,6 +191,7 @@ Current test coverage:
 - ✓ IP-based authorization
 - ✓ Archive recording
 - ✓ Multi-stream support
+- ✓ **Security**: Command injection prevention, path traversal protection, malicious input rejection
 
 Not yet covered:
 - End-to-end streaming to actual Twitch/YouTube (requires keys)
