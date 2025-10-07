@@ -1,10 +1,14 @@
-# Service : Archive
-## Description
-The relay can archive streams to disk. To enable this feature, set the `ARCHIVE_PATH` environment variable in the `env/relay.env` file. It should specify a path inside the docker container. For example: `/stream_archive`.
+# Archive
 
-The archive path must exist and be writable by the nginx user (id 100:101).
+## Overview
+
+The relay can archive streams to local disk in real-time. To enable this feature, set the `ARCHIVE_PATH` environment variable in the `env/relay.env` file to specify a directory path inside the Docker container (e.g., `/stream_archive`).
+
+!!! warning "Permissions Required"
+    The archive path must exist and be writable by the nginx user (UID:GID 100:101).
 
 ## Configuration
+
 The Archive service can be configured by setting the following environment variables:
 
 | Variable | Description | Default |
@@ -12,12 +16,19 @@ The Archive service can be configured by setting the following environment varia
 | `ARCHIVE_PATH` | Specifies the path within the container where the archive videos will be stored. Enabling this feature activates stream archiving. | `` |
 | `ARCHIVE_SUFFIX` | Defines the file extension or format of the videos saved in the archive. | `flv` |
 
-## Writing Persistently to Local Disk
-By default, stream videos are archived inside the Docker container. However, due to the ephemeral nature of Docker containers, these files will be deleted when the Docker container is removed. To avoid this, you can map a host directory as a Docker volume.
+## Persistent Storage Setup
 
-In Docker Compose, you can add a volume configuration for the relay service in `docker-compose.yml`. Example: to link the host machine's `./stream_archive` directory with the container's `/archive` directory, add a volume definition in your `docker-compose.yml` file:
+By default, archived videos are stored inside the Docker container. Since Docker containers are ephemeral, these files will be deleted when the container is removed.
 
-```
+To persist archives on your host machine, map a host directory as a Docker volume.
+
+### Step-by-Step Configuration
+
+#### 1. Update docker-compose.yml
+
+Add a volume mapping to your `docker-compose.yml` file to link a host directory with the container path:
+
+```yaml
 services:
   relay:
     build:
@@ -30,11 +41,40 @@ services:
       - ./stream_archive:/archive
 ```
 
-Then, execute the command below on the host machine to set the appropriate permissions on the `./stream_archive` directory:
+This maps the host directory `./stream_archive` to `/archive` inside the container.
 
-```
+#### 2. Set Directory Permissions
+
+The nginx process runs as user ID 100, group ID 101. Set appropriate permissions on the host directory:
+
+```bash
 chown 100:101 ./stream_archive
 chmod o+w ./stream_archive
 ```
 
-Finally, set the `ARCHIVE_PATH` environment variable in the `env/relay.env` file to `/archive`.
+#### 3. Configure Environment Variable
+
+Set the `ARCHIVE_PATH` environment variable in `env/relay.env` to match the container path:
+
+```bash
+ARCHIVE_PATH=/archive
+```
+
+#### 4. Restart the Service
+
+```bash
+docker compose down
+docker compose up
+```
+
+Your streams will now be archived to `./stream_archive` on your host machine.
+
+## File Naming
+
+Archived files are automatically named using a timestamp-based pattern. The file extension is determined by the `ARCHIVE_SUFFIX` setting (default: `flv`).
+
+## See Also
+
+- [Configuration Overview](../configuration.md) - Docker volumes and environment setup
+- [Requirements](../requirements.md) - System prerequisites
+- [Troubleshooting](../troubleshooting.md) - Common archive issues

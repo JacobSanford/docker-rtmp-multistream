@@ -1,8 +1,13 @@
-# Service: Twitch
-## Description
-The relay can stream to Twitch. To enable this feature, set the `TWITCH_KEY` environment variable in the `env/relay.env` file to the stream key provided by Twitch.
+# Twitch
+
+## Overview
+
+The relay can stream to Twitch with automatic transcoding/downscaling. To enable this feature, set the `TWITCH_KEY` environment variable in the `env/relay.env` file to the stream key provided by Twitch.
+
+The Twitch relay uses a **transformer pattern** - it re-encodes the incoming stream using FFmpeg before forwarding it to Twitch. This allows you to send a high-quality stream from your streaming software while the relay optimizes it for Twitch's requirements.
 
 ## Configuration
+
 The Twitch service can be configured by setting the following environment variables:
 
 | Variable | Description | Default |
@@ -17,27 +22,38 @@ The Twitch service can be configured by setting the following environment variab
 | `TWITCH_KBITS_PER_VIDEO_FRAME` | The number of kilobits per video frame. Change this to control the bitrate of the video stream. See `TWITCH_KBITS_PER_VIDEO_FRAME` below. | `75` |
 | `TWITCH_X264_PRESET` | The x264 preset to use for encoding. A list of options is available [in the x264 documentation](https://trac.ffmpeg.org/wiki/Encode/H.264). 'Slower' presets increase computational costs but typically provide higher quality output at the same bitrate. Slower than `medium` generally offers rapidly diminishing returns. | `medium` |
 
-## Stream Quality
-As with all services, the quality of the Twitch stream is determined by the bitrate of the video and audio streams. Please see the [Performance and Quality](../quality.md) document for a detailed discussion.
+## Quality Settings
 
-The Twitch relay re-encodes the stream from the original RTMP stream using `ffmpeg`. This is based on this software's original use case: a high stream quality from the streaming software which is then re-encoded multiple times to fit guidelines for multiple services.
+### How Re-encoding Works
 
-As a result: if your streaming software is configured to encode at a lower bitrate than the Twitch relay, the relay will re-encode the stream at a higher bitrate, which can negatively affect quality.
+The Twitch relay re-encodes your stream using FFmpeg. This is designed for scenarios where your streaming software outputs a high-quality stream that exceeds Twitch's guidelines or viewer capabilities.
 
-### Twitch's x264 Guidelines
-Twitch provides a [guide](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US) on encoding settings for streaming to its platform. In the guide, they recommend a maximum video bitrate of `6000 kbps`, even when streaming 1080p/60fps.
+!!! warning "Source Quality Matters"
+    If your streaming software is configured to encode at a lower bitrate than the Twitch relay settings, the relay will attempt to re-encode at a higher bitrate, which cannot improve quality and may actually degrade it.
 
-Another important fact to consider is that [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US). **This means that for non-partners, viewers may only be able to watch your stream at the quality you transmit**. If you transmit a high-bandwidth stream, viewers with slower internet connections may not be able to watch.
+### Twitch's Guidelines
 
-## General Recommendations
-See the [Performance and Quality](../quality.md) document for a detailed discussion on how to determine the quality of your stream.
+Twitch provides a [guide](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US) on encoding settings. Key points:
 
-### TWITCH_KBITS_PER_VIDEO_FRAME
-For 1080p streams, you should begin with a value of `100` for `TWITCH_KBITS_PER_VIDEO_FRAME`, and 720p streams should default to using `75`.
+- **Maximum video bitrate**: 6000 kbps (even for 1080p/60fps)
+- **Transcoding availability**: [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US)
 
-This is a reasonable starting point for most streams. If your stream is pixelated or blurry, you may need to increase this value. If you are dropping frames, you may need to decrease this value.
+!!! info "Non-Partner Transcoding"
+    For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections.
 
-Based on these values, the following table provides a starting point for determining the bandwidth required for different resolutions and frame rates:
+### Recommended Bitrates
+
+#### TWITCH_KBITS_PER_VIDEO_FRAME
+
+This setting controls the video bitrate using the formula: `bitrate = TWITCH_KBITS_PER_VIDEO_FRAME * FPS`
+
+Recommended starting values:
+- **1080p streams**: `100`
+- **720p streams**: `75`
+
+If your stream is pixelated or blurry, increase this value. If you are dropping frames, decrease it.
+
+#### Bitrate Reference Table
 
 | Resolution | FPS | Video Bitrate | TWITCH_KBITS_PER_VIDEO_FRAME |
 |------------|-----|---------------|------------------------------|
@@ -49,3 +65,9 @@ Based on these values, the following table provides a starting point for determi
 | 1280x720 | 50 | 3750 Kbps | `75` |
 | 1280x720 | 30 | 2250 Kbps | `75` |
 | 1280x720 | 25 | 1875 Kbps | `75` |
+
+## See Also
+
+- [Quality & Performance Guide](../quality.md) - Detailed discussion on stream quality and bandwidth considerations
+- [Architecture](../architecture.md) - Learn more about the transformer pattern
+- [Environment Variables Reference](../developer/environment.md) - Complete variable reference

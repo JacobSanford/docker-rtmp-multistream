@@ -10,14 +10,14 @@ It is intended to complement traditional streaming software (OBS, etc.) by provi
 
 This project works best if deployed on a dedicated PC, separate from the one running your streaming software.
 
-[Prerequisites](docs/requirements.md) | [Quick Start Guide](docs/quickstart.md) | [Documentation](https://jacobsanford.github.io/docker-rtmp-multistream/)
+**[📚 Read the Documentation](https://jacobsanford.github.io/docker-rtmp-multistream/)**
 
 ## Supported Streaming Services
-* Twitch: [Advanced Twitch Configuration](docs/services/twitch.md)
-* YouTube: [Advanced YouTube Configuration](docs/services/youtube.md)
-* Archive (local disk): [Advanced Local Archive Configuration](docs/services/archive.md)
+* **Twitch** - Automatic transcoding and quality optimization
+* **YouTube** - Direct pass-through relay
+* **Archive** - Local disk recording
 
-New/Additional services can easily be added. Please see the [Adding New Services](docs/services/new.md) documentation.
+New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/developer/adding-services/) for details.
 
 ## Issues
 Please report any issues or bugs you encounter by opening a new issue via the [Issues tab](https://github.com/JacobSanford/docker-rtmp-multistream/issues).

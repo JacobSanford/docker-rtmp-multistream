@@ -6,6 +6,11 @@ site_url: https://jacobsanford.github.io/docker-rtmp-multistream/
 repo_name: JacobSanford/docker-rtmp-multistream
 repo_url: https://github.com/JacobSanford/docker-rtmp-multistream
 
+extra:
+  version:
+    provider: mike
+    default: latest
+
 theme:
   name: material
   palette:
@@ -28,10 +33,12 @@ theme:
     - navigation.tracking
     - navigation.tabs
     - navigation.sections
+    - navigation.expand
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
+    - toc.follow
 
 markdown_extensions:
   - admonition
@@ -39,25 +46,35 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - tables
   - attr_list
   - md_in_html
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 nav:
   - Home: index.md
   - Getting Started:
     - Requirements: requirements.md
     - Quick Start: quickstart.md
-  - Services:
-    - Twitch: services/twitch.md
-    - YouTube: services/youtube.md
-    - Archive: services/archive.md
-    - Adding New Services: services/new.md
-  - Advanced:
-    - Quality Considerations: quality.md
-  - Testing: testing.md
+    - Configuration: configuration.md
+  - User Guide:
+    - Architecture: architecture.md
+    - Quality & Performance: quality.md
+    - Services:
+      - Twitch: services/twitch.md
+      - YouTube: services/youtube.md
+      - Archive: services/archive.md
+    - Troubleshooting: troubleshooting.md
+  - Developer Guide:
+    - Adding Services: developer/adding-services.md
+    - Environment Variables: developer/environment.md
+    - Testing: developer/testing.md
 
 plugins:
   - search

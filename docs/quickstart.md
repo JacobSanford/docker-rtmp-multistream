@@ -1,5 +1,5 @@
 # Quick Start Guide
-This guide serves as a quick start for setting up the relay and streaming to Twitch and YouTube. For more detailed information, visit the [full documentation](README.md) page.
+This guide serves as a quick start for setting up the relay and streaming to Twitch and YouTube. For more detailed information, visit the [full documentation](index.md) page.
 
 ## 1. Configure Streams
 ### Twitch

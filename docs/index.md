@@ -14,7 +14,7 @@ This project works best if deployed on a dedicated PC, separate from the one run
 * **YouTube**: [Advanced YouTube Configuration](services/youtube.md)
 * **Archive** (local disk): [Advanced Local Archive Configuration](services/archive.md)
 
-New/Additional services can easily be added. Please see the [Adding New Services](services/new.md) documentation.
+New/Additional services can easily be added. Please see the [Adding New Services](developer/adding-services.md) documentation.
 
 ## Getting Started
 
