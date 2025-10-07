@@ -2,7 +2,17 @@
 
 To add a new, unsupported streaming service:
 
-1. Create new configuration file(s) in the `services`/`transformers` directories.
+## Service Patterns
+
+**Simple Relay** (e.g., YouTube): The incoming stream is forwarded directly to the destination without modification. Only requires an `apps/{service}.conf` file.
+
+**Transcode Pattern** (e.g., Twitch): A two-stage pipeline where the stream is first transcoded/downscaled via FFmpeg, then pushed to the destination. Requires both a `transformers/{service}.conf` (FFmpeg pipeline) and `apps/{service}.conf` (destination application).
+
+## Steps
+
+1. Create new configuration file(s) in the `apps`/`transformers` directories.
+   * Simple relay: Only `apps/{service}.conf` needed
+   * Transcode pattern: Both `transformers/{service}.conf` and `apps/{service}.conf` needed
    * Examples: [Twitch App](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/twitch.conf) and [Twitch Transformer](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/transformers/twitch.conf)
 2. Add any necessary new environment variables to the `Dockerfile` and `env/relay.env` files. Ensure secrets such as stream keys and usernames are initialized as empty strings.
    * Examples: [Dockerfile](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/Dockerfile#L6-L14) and [env/relay.env](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/env/relay.env#L4-L12)
