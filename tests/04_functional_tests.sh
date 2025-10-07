@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Functional Tests - End-to-end RTMP streaming, archiving, and authorization
 
-source test_helpers.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/test_helpers.sh"
 
 test_rtmp_accepts_connection() {
   # Start container - allow Docker bridge network IPs (172.17.0.0/16)

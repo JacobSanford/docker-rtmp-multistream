@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Integration Tests - Verify container starts and runs correctly with various configurations
 
-source test_helpers.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/test_helpers.sh"
 
 test_container_starts_without_config() {
   docker run -d --name test-rtmp-no-config rtmp-multistream:test >/dev/null 2>&1

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Smoke Tests - Verify Docker image builds and contains required components
 
-source test_helpers.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/test_helpers.sh"
 
 test_docker_build() {
   docker build -t rtmp-multistream:test .. >/dev/null 2>&1

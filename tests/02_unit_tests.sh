@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Unit Tests - Verify service configuration and environment variable handling
 
-source test_helpers.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/test_helpers.sh"
 
 test_no_services_enabled_by_default() {
   # Check that services are commented out by default
