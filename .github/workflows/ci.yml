@@ -57,7 +57,7 @@ jobs:
   integration-tests:
     name: Integration Tests
     runs-on: ubuntu-latest
-    needs: smoke-tests
+    needs: [smoke-tests, unit-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Download Docker image
@@ -72,7 +72,7 @@ jobs:
   functional-tests:
     name: Functional Tests
     runs-on: ubuntu-latest
-    needs: smoke-tests
+    needs: [smoke-tests, unit-tests]
     steps:
     - uses: actions/checkout@v4
     - name: Download Docker image
