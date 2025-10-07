@@ -1,8 +1,9 @@
-name: Basic Test Suite
+name: Test and Build
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   smoke-tests:
@@ -67,3 +68,16 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y ffmpeg
     - name: Run functional tests
       run: bash tests/04_functional_tests.sh
+
+  build-push-images:
+    name: Build and Push Image
+    needs: [smoke-tests, unit-tests, integration-tests, functional-tests]
+    uses: unb-libraries/dockworker/.github/workflows/build-push.yaml@6.x
+    with:
+      build-themes: false
+      image-name: 'ghcr.io/jacobsanford/rtmp-multistream'
+      push-all-branches: true
+      push-branches: '[]'
+    secrets:
+      GH_CONTAINER_REGISTRY_USER: ${{ github.actor }}
+      GH_CONTAINER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
