@@ -168,6 +168,34 @@ test_ip_range_invalid_incomplete() {
 }
 
 # ============================================================================
+# validate_ip_ranges tests (multi-range support)
+# ============================================================================
+
+test_ip_ranges_valid_multiple() {
+  run_validation_test "validate_ip_ranges" "192.168.1.0/24,10.0.0.0/8" "multiple ranges" 0
+}
+
+test_ip_ranges_valid_three() {
+  run_validation_test "validate_ip_ranges" "192.168.0.0/16,172.17.0.0/16,10.0.0.0/8" "three ranges" 0
+}
+
+test_ip_ranges_valid_single() {
+  run_validation_test "validate_ip_ranges" "192.168.1.0/24" "single range (backward compat)" 0
+}
+
+test_ip_ranges_invalid_one_bad() {
+  run_validation_test "validate_ip_ranges" "192.168.1.0/24,not-an-ip" "one bad range in list" 1
+}
+
+test_ip_ranges_invalid_empty() {
+  run_validation_test "validate_ip_ranges" "" "empty string" 1
+}
+
+test_ip_ranges_valid_with_spaces() {
+  run_validation_test "validate_ip_ranges" "192.168.1.0/24, 10.0.0.0/8" "ranges with spaces" 0
+}
+
+# ============================================================================
 # validate_number tests
 # ============================================================================
 
@@ -443,6 +471,46 @@ test_suffix_invalid_too_long() {
 }
 
 # ============================================================================
+# validate_boolean tests
+# ============================================================================
+
+test_boolean_valid_TRUE() {
+  run_validation_test "validate_boolean" "TRUE" "uppercase TRUE" 0
+}
+
+test_boolean_valid_FALSE() {
+  run_validation_test "validate_boolean" "FALSE" "uppercase FALSE" 0
+}
+
+test_boolean_valid_true() {
+  run_validation_test "validate_boolean" "true" "lowercase true" 0
+}
+
+test_boolean_valid_false() {
+  run_validation_test "validate_boolean" "false" "lowercase false" 0
+}
+
+test_boolean_invalid_yes() {
+  run_validation_test "validate_boolean" "yes" "invalid: yes" 1
+}
+
+test_boolean_invalid_no() {
+  run_validation_test "validate_boolean" "no" "invalid: no" 1
+}
+
+test_boolean_invalid_1() {
+  run_validation_test "validate_boolean" "1" "invalid: 1" 1
+}
+
+test_boolean_invalid_0() {
+  run_validation_test "validate_boolean" "0" "invalid: 0" 1
+}
+
+test_boolean_invalid_empty() {
+  run_validation_test "validate_boolean" "" "invalid: empty" 1
+}
+
+# ============================================================================
 # escape_for_sed tests
 # ============================================================================
 
@@ -532,6 +600,15 @@ run_test "  invalid: empty" test_ip_range_invalid_empty
 run_test "  invalid: incomplete" test_ip_range_invalid_incomplete
 
 echo ""
+echo "Testing validate_ip_ranges..."
+run_test "  valid: multiple ranges" test_ip_ranges_valid_multiple
+run_test "  valid: three ranges" test_ip_ranges_valid_three
+run_test "  valid: single range (backward compat)" test_ip_ranges_valid_single
+run_test "  valid: with spaces" test_ip_ranges_valid_with_spaces
+run_test "  invalid: one bad range" test_ip_ranges_invalid_one_bad
+run_test "  invalid: empty" test_ip_ranges_invalid_empty
+
+echo ""
 echo "Testing validate_number..."
 run_test "  valid: simple number" test_number_valid_simple
 run_test "  valid: zero" test_number_valid_zero
@@ -595,6 +672,18 @@ run_test "  invalid: with slash" test_suffix_invalid_with_slash
 run_test "  invalid: special chars" test_suffix_invalid_special_chars
 run_test "  invalid: empty" test_suffix_invalid_empty
 run_test "  invalid: too long" test_suffix_invalid_too_long
+
+echo ""
+echo "Testing validate_boolean..."
+run_test "  valid: TRUE" test_boolean_valid_TRUE
+run_test "  valid: FALSE" test_boolean_valid_FALSE
+run_test "  valid: true" test_boolean_valid_true
+run_test "  valid: false" test_boolean_valid_false
+run_test "  invalid: yes" test_boolean_invalid_yes
+run_test "  invalid: no" test_boolean_invalid_no
+run_test "  invalid: 1" test_boolean_invalid_1
+run_test "  invalid: 0" test_boolean_invalid_0
+run_test "  invalid: empty" test_boolean_invalid_empty
 
 echo ""
 echo "Testing escape_for_sed..."

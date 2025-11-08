@@ -119,6 +119,31 @@ validate_ip_range() {
   return 0
 }
 
+# Validate one or more IP ranges (comma-separated CIDR notation)
+validate_ip_ranges() {
+  local ranges="$1"
+  local name="$2"
+
+  if [ -z "$ranges" ]; then
+    echo "ERROR: $name cannot be empty."
+    return 1
+  fi
+
+  # Split by comma and validate each range
+  local IFS=','
+  for range in $ranges; do
+    # Trim whitespace
+    range=$(echo "$range" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+    # Validate each as single CIDR range
+    if ! validate_ip_range "$range" "$name"; then
+      return 1
+    fi
+  done
+
+  return 0
+}
+
 # Validate numeric value with range
 validate_number() {
   local value="$1"
@@ -238,6 +263,28 @@ validate_suffix() {
   fi
 
   return 0
+}
+
+# Validate boolean (TRUE/FALSE, case insensitive)
+validate_boolean() {
+  local value="$1"
+  local name="$2"
+
+  if [ -z "$value" ]; then
+    echo "ERROR: $name cannot be empty."
+    return 1
+  fi
+
+  # Valid boolean values (case insensitive)
+  case "$value" in
+    TRUE|FALSE|true|false)
+      return 0
+      ;;
+    *)
+      echo "ERROR: $name must be TRUE or FALSE (case insensitive)."
+      return 1
+      ;;
+  esac
 }
 
 # Escape value for safe sed substitution

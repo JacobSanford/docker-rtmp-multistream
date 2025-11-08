@@ -53,6 +53,15 @@ main() {
   # Create temp directory for tests
   mkdir -p tmp
 
+  # Build Docker image for testing
+  section "Building Docker Image"
+  echo "Building rtmp-multistream:test..."
+  docker build -t rtmp-multistream:test .. || {
+    echo -e "${RED}Failed to build Docker image${NC}"
+    exit 1
+  }
+  echo -e "${GREEN}✓${NC} Docker image built successfully"
+
   # Run test suites
   section "Validation Tests"
   source 00_validation_tests.sh

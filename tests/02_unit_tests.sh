@@ -23,7 +23,7 @@ test_twitch_service_enables_with_key() {
   docker run --rm --entrypoint sh -e TWITCH_KEY=test_key rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
     /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
-    grep -v '^#' /etc/nginx/http.d/app.conf | grep -q 'apps/twitch.conf'
+    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'apps/twitch.conf'
   "
   return $?
 }
@@ -32,7 +32,7 @@ test_youtube_service_enables_with_key() {
   docker run --rm --entrypoint sh -e YOUTUBE_KEY=test_key rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
     /scripts/pre-init.d/90_configure_youtube.sh >/dev/null 2>&1
-    grep -v '^#' /etc/nginx/http.d/app.conf | grep -q 'apps/youtube.conf'
+    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'apps/youtube.conf'
   "
   return $?
 }
@@ -77,6 +77,26 @@ test_publish_ip_range_configured() {
   docker run --rm --entrypoint sh -e PUBLISH_IP_RANGE="10.0.0.0/8" rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
     grep -q '10.0.0.0/8' /etc/nginx/http.d/auth.conf
+  "
+  return $?
+}
+
+test_publish_ip_range_multiple_ranges() {
+  # Test that multiple IP ranges are configured correctly
+  docker run --rm --entrypoint sh -e PUBLISH_IP_RANGE="192.168.1.0/24,10.0.0.0/8" rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    grep -q '192.168.1.0/24' /etc/nginx/http.d/auth.conf && \
+    grep -q '10.0.0.0/8' /etc/nginx/http.d/auth.conf
+  "
+  return $?
+}
+
+test_publish_ip_range_multiple_lines_generated() {
+  # Test that multiple ranges generate multiple allow lines (including localhost)
+  docker run --rm --entrypoint sh -e PUBLISH_IP_RANGE="192.168.0.0/16,172.17.0.0/16,10.0.0.0/8" rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    count=\$(grep -c 'allow publish' /etc/nginx/http.d/auth.conf)
+    test \"\$count\" -eq 4
   "
   return $?
 }
@@ -183,6 +203,8 @@ run_test "Twitch config variables replaced" test_twitch_config_variables_replace
 run_test "YouTube config variables replaced" test_youtube_config_variables_replaced
 run_test "Twitch transformer configured" test_twitch_transformer_configured
 run_test "Publish IP range configured" test_publish_ip_range_configured
+run_test "Publish IP range multiple ranges" test_publish_ip_range_multiple_ranges
+run_test "Publish IP range multiple lines generated" test_publish_ip_range_multiple_lines_generated
 run_test "Malicious Twitch key rejected" test_malicious_twitch_key_rejected
 run_test "Malicious archive path rejected" test_malicious_archive_path_rejected
 run_test "Invalid IP range rejected" test_invalid_ip_range_rejected
