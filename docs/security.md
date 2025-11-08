@@ -1,3 +1,13 @@
+---
+title: Security
+description: Security features, input validation, and access control for docker-rtmp-multistream
+audience: users
+doc_type: explanation
+tags: [security, validation, authentication, safety]
+lastReviewed: 2025-10-21
+version: 1.x
+---
+
 # Security
 
 This document describes the security features and considerations for docker-rtmp-multistream.
@@ -237,7 +247,7 @@ TWITCH_KEY=$(printf 'a%.0s' {1..201})  # Rejected (too long)
 
 ## Testing
 
-All validation functions are tested with 113 comprehensive test cases covering:
+All validation functions are tested with test cases covering:
 - Valid inputs (alphanumeric, special chars where allowed)
 - Invalid inputs (injection attempts, traversal, length limits)
 - Edge cases (empty, boundaries, special formats)
@@ -248,3 +258,9 @@ bash tests/00_validation_tests.sh
 ```
 
 See `tests/README.md` for detailed test documentation.
+
+## See Also
+
+- [Configuration Guide](configuration.md) - Environment variable configuration
+- [Architecture](techref/architecture.md) - How configuration is processed
+- [IP Authentication Troubleshooting](troubleshooting/ip_authentication.md) - Connection authorization issues

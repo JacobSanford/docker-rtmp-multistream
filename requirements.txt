@@ -1,3 +1,5 @@
 mkdocs-material
 mike
 mkdocs-htmlproofer-plugin
+mkdocs-to-pdf
+mkdocs-enumerate-headings-plugin

@@ -1,11 +1,21 @@
+---
+title: Archive Service
+description: Configure local stream archiving to disk
+audience: users
+doc_type: howto
+tags: [archive, recording, vod, backup]
+lastReviewed: 2025-10-21
+version: 1.x
+---
+
 # Archive
 
 ## Overview
 
 The relay can archive streams to local disk in real-time. To enable this feature, set the `ARCHIVE_PATH` environment variable in the `env/relay.env` file to specify a directory path inside the Docker container (e.g., `/stream_archive`).
 
-!!! warning "Permissions Required"
-    The archive path must exist and be writable by the nginx user (UID:GID 100:101).
+!!! warning "Further Setup Required"
+    See [Persistent Storage Setup](#persistent-storage-setup) for details on how to configure host directory mapping.
 
 ## Configuration
 
@@ -20,13 +30,7 @@ The Archive service can be configured by setting the following environment varia
 
 By default, archived videos are stored inside the Docker container. Since Docker containers are ephemeral, these files will be deleted when the container is removed.
 
-To persist archives on your host machine, map a host directory as a Docker volume.
-
-### Step-by-Step Configuration
-
-#### 1. Update docker-compose.yml
-
-Add a volume mapping to your `docker-compose.yml` file to link a host directory with the container path:
+To persist archives on your host machine, map a host directory as a Docker volume. You can do this in your `docker-compose.yml`:
 
 ```yaml
 services:
@@ -38,36 +42,16 @@ services:
     env_file:
       - ./env/relay.env
     volumes:
-      - ./stream_archive:/archive
+      - ./stream_archive:/archive  # Format: Host directory : Container path (ARCHIVE_PATH)
 ```
 
-This maps the host directory `./stream_archive` to `/archive` inside the container.
-
-#### 2. Set Directory Permissions
-
-The nginx process runs as user ID 100, group ID 101. Set appropriate permissions on the host directory:
+Also, ensure you set permissions on the host directory so that the container can write to it:
 
 ```bash
-chown 100:101 ./stream_archive
-chmod o+w ./stream_archive
+mkdir -p stream_archive
+chown 100:101 stream_archive
+chmod o+w stream_archive
 ```
-
-#### 3. Configure Environment Variable
-
-Set the `ARCHIVE_PATH` environment variable in `env/relay.env` to match the container path:
-
-```bash
-ARCHIVE_PATH=/archive
-```
-
-#### 4. Restart the Service
-
-```bash
-docker compose down
-docker compose up
-```
-
-Your streams will now be archived to `./stream_archive` on your host machine.
 
 ## File Naming
 
@@ -77,4 +61,4 @@ Archived files are automatically named using a timestamp-based pattern. The file
 
 - [Configuration Overview](../configuration.md) - Docker volumes and environment setup
 - [Requirements](../requirements.md) - System prerequisites
-- [Troubleshooting](../troubleshooting.md) - Common archive issues
+- [Troubleshooting](../troubleshooting/index.md) - Common archive issues

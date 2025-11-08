@@ -39,6 +39,9 @@ theme:
     - content.code.copy
     - toc.follow
 
+extra_css:
+  - stylesheets/extra.css
+
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -55,26 +58,43 @@ markdown_extensions:
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.caret
 
 nav:
   - Home: index.md
-  - Getting Started:
-    - Requirements: requirements.md
-    - Quick Start: quickstart.md
-    - Configuration: configuration.md
   - User Guide:
-    - Architecture: architecture.md
-    - Quality & Performance: quality.md
-    - Security: security.md
-    - Services:
+    - Requirements: requirements.md
+    - QuickStart: quickstart.md
+    - Configuration: configuration.md
+    - Streaming Services:
+      - Overview: services/overview.md
       - Twitch: services/twitch.md
       - YouTube: services/youtube.md
       - Archive: services/archive.md
-    - Troubleshooting: troubleshooting.md
+    - Performance:
+      - Hardware: performance/hardware.md
+      - Bandwidth: performance/bandwidth.md
+      - Quality: performance/quality.md
+    - Technical Reference:
+      - Architecture: techref/architecture.md
+      - Service Patterns: techref/service-patterns.md
+      - Environment Variables: techref/environment.md
+    - Troubleshooting:
+      - Overview: troubleshooting/index.md
+      - IP Authentication: troubleshooting/ip_authentication.md
+      - Connection Issues: troubleshooting/connection-issues.md
+      - Services:
+        - Twitch: troubleshooting/services/twitch.md
+        - YouTube: troubleshooting/services/youtube.md
+        - Archive: troubleshooting/services/archive.md
   - Developer Guide:
-    - Adding Services: developer/adding-services.md
-    - Environment Variables: developer/environment.md
+    - Adding Services:
+      - Overview: developer/adding-services/overview.md
+      - Configuration: developer/adding-services/configuration.md
+      - Testing: developer/adding-services/testing.md
+    - Security: security.md
     - Testing: developer/testing.md
+  - Contributing Documentation: contributing.md
 
 plugins:
   - search
@@ -87,3 +107,11 @@ plugins:
       ignore_urls:
         - 'https://help.twitch.tv/*'  # May rate-limit
         - 'https://studio.youtube.com'  # Requires auth
+#  - to-pdf:
+#      cover_title: docker-rtmp-multistream
+#      cover_subtitle: Documentation and User Guide
+#      cover_logo: https://raw.githubusercontent.com/JacobSanford/docker-rtmp-multistream/refs/heads/1.x/thumbnail.png
+#      download_link: header
+  - enumerate-headings:
+      exclude:
+        - index.md

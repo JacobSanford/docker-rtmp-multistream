@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(while read f)",
+      "Bash(done)",
+      "Bash(tree:*)",
+      "Bash(git log:*)",
+      "Bash(find:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

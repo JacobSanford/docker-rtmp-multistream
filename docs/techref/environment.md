@@ -1,6 +1,19 @@
+---
+title: Environment Variables Reference
+description: Complete reference for all configuration environment variables
+audience: developers
+doc_type: reference
+tags: [reference, configuration, environment-variables, settings]
+lastReviewed: 2025-10-21
+version: 1.x
+---
+
 # Environment Variables Reference
 
 Complete reference for all environment variables used in docker-rtmp-multistream.
+
+!!! tip "Quick Configuration"
+    For a practical guide on using these variables, see the [Configuration Guide](../configuration.md).
 
 ## System Variables
 
@@ -10,7 +23,7 @@ Complete reference for all environment variables used in docker-rtmp-multistream
 
 **Type**: String (CIDR notation)
 
-**Default**: `192.168.0.0/16`
+**Default**: `172.17.0.0/16,192.168.0.0/16`
 
 **Used by**: Authentication system (`auth.conf`)
 
@@ -21,7 +34,7 @@ PUBLISH_IP_RANGE=192.168.1.0/24   # Specific subnet
 PUBLISH_IP_RANGE=192.168.1.50/32  # Single IP address
 ```
 
-**See also**: [Configuration Overview](../configuration.md#ip-based-access-control)
+**See also**: [Security](../security.md)
 
 ---
 
@@ -45,6 +58,41 @@ TWITCH_KEY=live_123456789_abcdefghijklmnopqrstuvwxyz
 ```
 
 **See also**: [Twitch Configuration](../services/twitch.md)
+
+### TWITCH_PARTNER
+
+**Description**: Boolean flag indicating whether the user is a Twitch Partner with transcoding services. When `TRUE`, uses simple relay pattern (passthrough) like YouTube. When `FALSE`, uses transformer pattern (FFmpeg re-encoding).
+
+**Type**: Boolean (`TRUE` / `FALSE`, case insensitive)
+
+**Default**: `FALSE`
+
+**Required**: No
+
+**Used by**: Twitch service configuration script (`90_configure_twitch.sh`)
+
+**Values**:
+
+- `TRUE` (or `true`): **Partner mode** - Simple relay with no transcoding. Stream is forwarded directly to Twitch, preserving full source quality for Twitch's multi-bitrate transcoding services. All transformer-related variables (`TWITCH_HEIGHT`, `TWITCH_FPS`, etc.) are ignored in this mode.
+
+- `FALSE` (or `false`): **Non-partner mode** (default) - Transformer pattern with FFmpeg re-encoding. Allows full control over output quality, resolution, bitrate, and codec. Useful for bandwidth optimization or streaming to Twitch without partner transcoding.
+
+**Example**:
+```bash
+# Partner mode (simple relay, no encoding)
+TWITCH_PARTNER=TRUE
+
+# Non-partner mode (default, with encoding)
+TWITCH_PARTNER=FALSE
+```
+
+**See also**: [Twitch Configuration - Partner vs Non-Partner](../services/twitch.md#partner-vs-non-partner-streaming)
+
+!!! note "Service Pattern Selection"
+    The `TWITCH_PARTNER` setting determines which nginx configuration files are enabled:
+
+    - **Partner mode**: Enables `apps/twitch-partner.conf` (simple relay)
+    - **Non-partner mode**: Enables `transformers/twitch.conf` + `apps/twitch.conf` (transformer pattern)
 
 ### TWITCH_AUDIO_BITRATE
 
@@ -103,7 +151,7 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 - `sin` - Singapore
 - `gru` - São Paulo, Brazil
 
-**See also**: [Twitch Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US)
+**See also**: [Twitch Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"}
 
 ### TWITCH_FFMPEG_THREADS
 
@@ -140,7 +188,7 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 
 **Common values**: `60`, `50`, `30`, `25`, `24`
 
-**See also**: [Twitch Quality Settings](../services/twitch.md#quality-settings)
+**See also**: [Twitch Quality Settings](../services/twitch.md#optimizing-twitch-quality)
 
 ### TWITCH_HEIGHT
 
@@ -210,7 +258,7 @@ TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
 
 **Recommendation**: Presets slower than `medium` offer diminishing returns. Use `fast` or `veryfast` if CPU is constrained.
 
-**See also**: [x264 Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264)
+**See also**: [x264 Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264){target="_blank"}
 
 ---
 
@@ -286,87 +334,7 @@ ARCHIVE_SUFFIX=mp4
 
 ---
 
-## Variable Quick Reference
-
-| Variable | Default | Required | Service |
-|----------|---------|----------|---------|
-| `PUBLISH_IP_RANGE` | `192.168.0.0/16` | No | System |
-| `TWITCH_KEY` | `""` | For Twitch | Twitch |
-| `TWITCH_AUDIO_BITRATE` | `160k` | No | Twitch |
-| `TWITCH_CODEC` | `libx264` | No | Twitch |
-| `TWITCH_ENDPOINT` | `jfk` | No | Twitch |
-| `TWITCH_FFMPEG_THREADS` | `0` | No | Twitch |
-| `TWITCH_FPS` | `60` | No | Twitch |
-| `TWITCH_HEIGHT` | `720` | No | Twitch |
-| `TWITCH_KBITS_PER_VIDEO_FRAME` | `75` | No | Twitch |
-| `TWITCH_X264_PRESET` | `medium` | No | Twitch |
-| `YOUTUBE_KEY` | `""` | For YouTube | YouTube |
-| `ARCHIVE_PATH` | `""` | For Archive | Archive |
-| `ARCHIVE_SUFFIX` | `flv` | No | Archive |
-
----
-
-## Configuration Examples
-
-### Minimal Twitch Setup
-```bash
-TWITCH_KEY=live_123456789_abc
-# All other Twitch variables use defaults
-```
-
-### Optimized 720p60 Twitch
-```bash
-TWITCH_KEY=live_123456789_abc
-TWITCH_HEIGHT=720
-TWITCH_FPS=60
-TWITCH_KBITS_PER_VIDEO_FRAME=75
-TWITCH_X264_PRESET=medium
-TWITCH_ENDPOINT=jfk
-```
-
-### High-Quality 1080p60 Twitch
-```bash
-TWITCH_KEY=live_123456789_abc
-TWITCH_HEIGHT=1080
-TWITCH_FPS=60
-TWITCH_KBITS_PER_VIDEO_FRAME=100
-TWITCH_X264_PRESET=medium
-```
-
-### CPU-Constrained Twitch
-```bash
-TWITCH_KEY=live_123456789_abc
-TWITCH_HEIGHT=720
-TWITCH_FPS=30
-TWITCH_KBITS_PER_VIDEO_FRAME=75
-TWITCH_X264_PRESET=veryfast
-TWITCH_FFMPEG_THREADS=4
-```
-
-### Multi-Service with Archive
-```bash
-# System
-PUBLISH_IP_RANGE=192.168.1.0/24
-
-# Twitch
-TWITCH_KEY=live_123456789_abc
-TWITCH_HEIGHT=720
-TWITCH_FPS=60
-
-# YouTube
-YOUTUBE_KEY=abcd-efgh-ijkl-mnop
-
-# Archive
-ARCHIVE_PATH=/archive
-ARCHIVE_SUFFIX=flv
-```
-
----
-
 ## See Also
 
 - [Configuration Overview](../configuration.md) - How configuration works
-- [Twitch Service](../services/twitch.md) - Twitch-specific configuration
-- [YouTube Service](../services/youtube.md) - YouTube configuration
-- [Archive Service](../services/archive.md) - Archive configuration
-- [Adding Services](adding-services.md) - Define custom environment variables
+- [Adding Services](../developer/adding-services/overview.md) - Define custom environment variables

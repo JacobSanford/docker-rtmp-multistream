@@ -1,10 +1,20 @@
-# Architecture
+---
+title: Architecture
+description: Internal architecture and stream processing flow of docker-rtmp-multistream
+audience: developers
+doc_type: explanation
+tags: [architecture, nginx, rtmp, technical]
+lastReviewed: 2025-10-21
+version: 1.x
+---
+
+# Architecture Details
 
 This document explains the internal architecture of docker-rtmp-multistream and how it processes and distributes streams.
 
 ## Overview
 
-docker-rtmp-multistream is built on nginx with the RTMP module. It receives a single RTMP stream from your streaming software and simultaneously distributes it to multiple destinations (Twitch, YouTube, local archive) with optional per-service transformations.
+docker-rtmp-multistream is built on nginx with the RTMP module. It receives a single RTMP stream from your streaming software and simultaneously distributes it to multiple destinations with optional per-service transformations.
 
 ## Core Components
 
@@ -25,7 +35,7 @@ Each streaming destination (service) consists of modular components:
 1. **RTMP Application Config** - `build/conf/nginx/http.d/apps/{service}.conf`
 2. **Optional Transformer** - `build/conf/nginx/http.d/transformers/{service}.conf`
 3. **Pre-init Script** - `build/scripts/pre-init.d/90_configure_{service}.sh`
-4. **Environment Variables** - Defined in `Dockerfile` and `env/relay.env`
+4. **Environment Variables** - Configures the service and its behavior. Defined in `Dockerfile` and can be overridden in `env/relay.env`
 
 Services are enabled/disabled dynamically at container startup based on configuration.
 
@@ -48,88 +58,28 @@ Streaming Software (OBS)
 
 ### Detailed Request Flow
 
-1. **Stream Reception**: Your streaming software connects to `rtmp://hostname:1935/relay/{stream-key}`
+1. **Stream Reception**: Your streaming software connects to `rtmp://localhostname:1935/relay/{stream-key}`
 2. **Application Routing**: The `relay` application receives the stream
-3. **Service Processing**:
-   - **Simple Relay Services** (YouTube): Stream pushed directly to destination
-   - **Transformer Services** (Twitch): Stream passed through FFmpeg, then pushed to destination
+3. **Authorization**: IP-based authentication checks `PUBLISH_IP_RANGE`
+4. **Service Processing**:
+   - **Simple Relay Services** (YouTube, Twitch partner mode): Stream pushed directly to destination
+   - **Transformer Services** (Twitch non-partner mode): Stream passed through FFmpeg, then pushed to destination
    - **Archive Service**: Stream recorded to local disk
-4. **Authorization**: IP-based authentication checks `PUBLISH_IP_RANGE`
 
 ## Service Patterns
 
-### Simple Relay Pattern
+docker-rtmp-multistream supports two architectural patterns for handling streams: **Simple Relay** and **Transformer**.
 
-**Used by**: YouTube, and most simple streaming services
+For a complete comparison of these patterns (use cases, pros/cons, and examples), see **[Service Patterns Reference](service-patterns.md)**.
 
-The stream is forwarded directly without modification:
+### Technical Implementation
 
-```
-relay application
-      ↓
-YouTube RTMP App
-      ↓
-rtmp://youtube-ingest/...
-```
+**Simple Relay** (e.g., YouTube): Single `apps/{service}.conf` file that pushes the stream directly to the destination without modification.
 
-**Configuration**: Single `apps/{service}.conf` file containing:
-```nginx
-application youtube {
-    live on;
-    push rtmp://a.rtmp.youtube.com/live2/{YOUTUBE_KEY};
-}
-```
+**Transformer** (e.g., Twitch non-partner mode): Two-stage pipeline using `transformers/{service}.conf` (FFmpeg) and `apps/{service}.conf` (destination push).
 
-**Benefits**:
-- Minimal CPU usage
-- Preserves original quality
-- Low latency
-
-**Use when**: The destination accepts your stream format as-is
-
-### Transformer Pattern
-
-**Used by**: Twitch, services requiring specific encoding
-
-A two-stage pipeline with FFmpeg transformation:
-
-```
-relay application
-      ↓
-FFmpeg Transformer (transcoding)
-      ↓
-Internal RTMP App (twitch)
-      ↓
-rtmp://twitch-ingest/...
-```
-
-**Configuration**: Two files:
-
-1. **Transformer** (`transformers/twitch.conf`):
-```nginx
-exec ffmpeg -i rtmp://localhost/relay/$name
-    -c:v libx264 -preset medium
-    -b:v 4500k -c:a aac -b:a 160k
-    -f flv rtmp://localhost/twitch/$name;
-```
-
-2. **Application** (`apps/twitch.conf`):
-```nginx
-application twitch {
-    live on;
-    push rtmp://live-jfk.twitch.tv/app/{TWITCH_KEY};
-}
-```
-
-**Benefits**:
-- Per-service quality optimization
-- Downscale high-quality source for bandwidth limits
-- Platform-specific codec/bitrate requirements
-
-**Trade-offs**:
-- CPU-intensive (re-encoding)
-- Slight latency increase
-- Quality cannot exceed source
+!!! note "Conditional Patterns"
+    Some services support both patterns based on configuration. Twitch uses simple relay for partners (`TWITCH_PARTNER=TRUE`) and transformer for non-partners. See [Twitch Configuration](../services/twitch.md#partner-vs-non-partner-streaming).
 
 ## Configuration System
 
@@ -249,36 +199,8 @@ application relay {
 
 This ensures all incoming streams are archived regardless of destination.
 
-## Performance Considerations
-
-### CPU Usage
-
-- **Simple Relay**: Minimal CPU (nginx forwarding only)
-- **One Transformer**: Moderate (one FFmpeg process)
-- **Multiple Transformers**: High (FFmpeg per transformer)
-
-### Bandwidth Requirements
-
-Total upload bandwidth = Sum of all enabled services:
-
-```
-Total = Source Stream + (Twitch transcoded) + (YouTube passthrough) + (Archive disk I/O)
-```
-
-Example:
-- Source: 20 Mbps from OBS
-- Twitch: 4.5 Mbps (transcoded to 720p60)
-- YouTube: 20 Mbps (passthrough)
-- Total upload needed: ~24.5 Mbps
-
-### Encoding Performance
-
-The `TWITCH_FFMPEG_THREADS` variable controls CPU thread usage:
-- `0` (default): FFmpeg auto-optimizes
-- `N`: Limit to N threads (useful when running multiple services)
-
 ## See Also
 
-- [Adding New Services](developer/adding-services.md) - Implement new streaming services
-- [Quality & Performance](quality.md) - Optimization guidance
-- [Configuration Overview](configuration.md) - Setup and environment variables
+- [Service Patterns Reference](service-patterns.md) - Detailed comparison of architectural patterns
+- [Configuration Overview](../configuration.md) - Setup and environment variables
+- [Adding New Streaming Services](../developer/adding-services/overview.md) - Implement new streaming services
