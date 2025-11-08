@@ -39,11 +39,8 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - name: Install MkDocs Material and mike
-        run: |
-          pip install mkdocs-material
-          pip install mike
-          pip install mkdocs-htmlproofer-plugin
+      - name: Install MkDocs dependencies
+        run: pip install -r requirements.txt
 
       - name: Validate documentation (htmlproofer)
         env:
