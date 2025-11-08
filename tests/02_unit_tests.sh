@@ -124,6 +124,56 @@ test_invalid_numeric_values_rejected() {
   return $?
 }
 
+test_twitch_partner_mode_enables() {
+  # Test that partner mode enables twitch-partner service
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test_key -e TWITCH_PARTNER=TRUE rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'apps/twitch-partner.conf'
+  "
+  return $?
+}
+
+test_twitch_partner_mode_skips_transformer() {
+  # Test that partner mode does NOT enable transformer
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test_key -e TWITCH_PARTNER=TRUE rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'transformers/twitch.conf' && exit 1 || exit 0
+  "
+  return $?
+}
+
+test_twitch_nonpartner_mode_includes_transformer() {
+  # Test that non-partner mode (default) includes transformer
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test_key -e TWITCH_PARTNER=FALSE rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'transformers/twitch.conf'
+  "
+  return $?
+}
+
+test_twitch_partner_mode_variables_replaced() {
+  # Test that partner mode replaces KEY and ENDPOINT in twitch-partner.conf
+  docker run --rm --entrypoint sh -e TWITCH_KEY=partner_key -e TWITCH_PARTNER=TRUE -e TWITCH_ENDPOINT=lax rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -q 'partner_key' /etc/nginx/http.d/apps/twitch-partner.conf && \
+    grep -q 'lax' /etc/nginx/http.d/apps/twitch-partner.conf
+  "
+  return $?
+}
+
+test_invalid_twitch_partner_value_rejected() {
+  # Test that invalid TWITCH_PARTNER value is rejected
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test -e TWITCH_PARTNER='yes' rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
 # Run tests
 run_test "No services enabled by default" test_no_services_enabled_by_default
 run_test "Twitch service enables with key" test_twitch_service_enables_with_key
@@ -138,3 +188,8 @@ run_test "Malicious archive path rejected" test_malicious_archive_path_rejected
 run_test "Invalid IP range rejected" test_invalid_ip_range_rejected
 run_test "Invalid log level rejected" test_invalid_log_level_rejected
 run_test "Invalid numeric values rejected" test_invalid_numeric_values_rejected
+run_test "Twitch partner mode enables" test_twitch_partner_mode_enables
+run_test "Twitch partner mode skips transformer" test_twitch_partner_mode_skips_transformer
+run_test "Twitch non-partner mode includes transformer" test_twitch_nonpartner_mode_includes_transformer
+run_test "Twitch partner mode variables replaced" test_twitch_partner_mode_variables_replaced
+run_test "Invalid TWITCH_PARTNER value rejected" test_invalid_twitch_partner_value_rejected

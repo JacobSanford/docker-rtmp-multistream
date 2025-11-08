@@ -92,6 +92,26 @@ test_container_logs_no_errors() {
   return $?
 }
 
+test_container_starts_with_twitch_partner_mode() {
+  docker run -d --name test-rtmp-twitch-partner -e TWITCH_KEY=test_key -e TWITCH_PARTNER=TRUE rtmp-multistream:test >/dev/null 2>&1
+  sleep 3
+  docker ps | grep -q test-rtmp-twitch-partner
+  local result=$?
+  docker stop test-rtmp-twitch-partner >/dev/null 2>&1
+  docker rm test-rtmp-twitch-partner >/dev/null 2>&1
+  return $result
+}
+
+test_container_starts_with_twitch_nonpartner_mode() {
+  docker run -d --name test-rtmp-twitch-nonpartner -e TWITCH_KEY=test_key -e TWITCH_PARTNER=FALSE rtmp-multistream:test >/dev/null 2>&1
+  sleep 3
+  docker ps | grep -q test-rtmp-twitch-nonpartner
+  local result=$?
+  docker stop test-rtmp-twitch-nonpartner >/dev/null 2>&1
+  docker rm test-rtmp-twitch-nonpartner >/dev/null 2>&1
+  return $result
+}
+
 # Run tests
 run_test "Container starts without configuration" test_container_starts_without_config
 run_test "Container starts with Twitch enabled" test_container_starts_with_twitch
@@ -101,3 +121,5 @@ run_test "nginx process is running" test_nginx_process_running
 run_test "Port 1935 is listening" test_port_1935_listening
 run_test "nginx config valid after startup" test_nginx_config_valid_after_startup
 run_test "Container logs show no errors" test_container_logs_no_errors
+run_test "Container starts with Twitch partner mode" test_container_starts_with_twitch_partner_mode
+run_test "Container starts with Twitch non-partner mode" test_container_starts_with_twitch_nonpartner_mode
