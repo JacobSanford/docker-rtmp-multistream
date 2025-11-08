@@ -1,1367 +1,922 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="Lightweight nginx-based RTMP relay/encoder for simultaneous streaming to multiple services">
-      
-      
-        <meta name="author" content="Jacob Sanford">
-      
-      
-        <link rel="canonical" href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/security/">
-      
-      
-        <link rel="prev" href="../quality/">
-      
-      
-        <link rel="next" href="../services/twitch/">
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
-    
-    
-      
-        <title>Security - docker-rtmp-multistream</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
-      
-      
+<!DOCTYPE html>
 
-
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
-
-    
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#security" class="md-skip">
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Security features, input validation, and access control for docker-rtmp-multistream" name="description"/>
+<meta content="Jacob Sanford" name="author"/>
+<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/security/" rel="canonical"/>
+<link href="../developer/adding-services/testing/" rel="prev"/>
+<link href="../developer/testing/" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
+<title>Security - docker-rtmp-multistream</title>
+<link href="../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#security">
           Skip to content
         </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
-        
-      </div>
-    
-    
-      
-
-  
-
+</div>
+<div data-md-component="announce">
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
 <header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="docker-rtmp-multistream" class="md-header__button md-logo" aria-label="docker-rtmp-multistream" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="docker-rtmp-multistream" class="md-header__button md-logo" data-md-component="logo" href=".." title="docker-rtmp-multistream">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
             docker-rtmp-multistream
           </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
             
               Security
             
           </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+</label>
 </form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+<div class="md-search__suggest" data-md-component="search-suggest"></div>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+<ol class="md-search-result__list" role="presentation"></ol>
 </div>
-      
-    
-    
-      <div class="md-header__source">
-        <a href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
     JacobSanford/docker-rtmp-multistream
   </div>
 </a>
-      </div>
-    
-  </nav>
-  
+</div>
+</nav>
 </header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="docker-rtmp-multistream" class="md-nav__button md-logo" aria-label="docker-rtmp-multistream" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="docker-rtmp-multistream" class="md-nav__button md-logo" data-md-component="logo" href=".." title="docker-rtmp-multistream">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
     docker-rtmp-multistream
   </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-  </div>
-  <div class="md-source__repository">
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/JacobSanford/docker-rtmp-multistream" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
     JacobSanford/docker-rtmp-multistream
   </div>
 </a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+<span class="md-ellipsis">
     Home
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Getting Started
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Getting Started
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../requirements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Requirements
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickstart/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Quick Start
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Configuration
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-ellipsis">
     User Guide
     
   </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
             User Guide
           </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Architecture
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../requirements/">
+<span class="md-ellipsis">
+    Requirements
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quality/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Quality & Performance
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../quickstart/">
+<span class="md-ellipsis">
+    QuickStart
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Security
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../configuration/">
+<span class="md-ellipsis">
+    Configuration
     
   </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Security
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Streaming Services
     
   </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#reporting-security-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reporting Security Issues
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#input-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Input Validation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validation-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Validation Functions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validate_stream_keykey-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_stream_key(key, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_pathpath-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_path(path, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_ip_rangerange-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_ip_range(range, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_numbervalue-name-min-max" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_number(value, name, min, max)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_identifiervalue-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_identifier(value, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_bitratevalue-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_bitrate(value, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_log_levellevel-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_log_level(level, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_suffixsuffix-name" class="md-nav__link">
-    <span class="md-ellipsis">
-      validate_suffix(suffix, name)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#escape_for_sedvalue" class="md-nav__link">
-    <span class="md-ellipsis">
-      escape_for_sed(value)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Security Best Practices
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Security Best Practices">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-stream-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Stream Keys
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-network-security" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Network Security
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-log-level-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Log Level Configuration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-archive-paths" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Archive Paths
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-container-security" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Container Security
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#attack-vectors-mitigated" class="md-nav__link">
-    <span class="md-ellipsis">
-      Attack Vectors Mitigated
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Attack Vectors Mitigated">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#command-injection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Command Injection
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-injection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration Injection
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#path-traversal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Path Traversal
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buffer-overflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Buffer Overflow
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Testing
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Services
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span>
+            Streaming Services
           </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_4">
-            <span class="md-nav__icon md-icon"></span>
-            Services
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../services/twitch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../services/overview/">
+<span class="md-ellipsis">
+    Overview
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../services/twitch/">
+<span class="md-ellipsis">
     Twitch
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../services/youtube/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../services/youtube/">
+<span class="md-ellipsis">
     YouTube
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../services/archive/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../services/archive/">
+<span class="md-ellipsis">
     Archive
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../troubleshooting/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Troubleshooting
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Performance
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Developer Guide
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span>
+            Performance
           </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Developer Guide
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../developer/adding-services/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Adding Services
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../performance/hardware/">
+<span class="md-ellipsis">
+    Hardware
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../developer/environment/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../performance/bandwidth/">
+<span class="md-ellipsis">
+    Bandwidth
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../performance/quality/">
+<span class="md-ellipsis">
+    Quality
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Technical Reference
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span>
+            Technical Reference
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../techref/architecture/">
+<span class="md-ellipsis">
+    Architecture
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../techref/service-patterns/">
+<span class="md-ellipsis">
+    Service Patterns
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../techref/environment/">
+<span class="md-ellipsis">
     Environment Variables
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../developer/testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/">
+<span class="md-ellipsis">
+    Overview
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/ip_authentication/">
+<span class="md-ellipsis">
+    IP Authentication
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/connection-issues/">
+<span class="md-ellipsis">
+    Connection Issues
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Services
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_7_4">
+<span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/services/twitch/">
+<span class="md-ellipsis">
+    Twitch
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/services/youtube/">
+<span class="md-ellipsis">
+    YouTube
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../troubleshooting/services/archive/">
+<span class="md-ellipsis">
+    Archive
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+<span class="md-ellipsis">
+    Developer Guide
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Developer Guide
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis">
+    Adding Services
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span>
+            Adding Services
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../developer/adding-services/overview/">
+<span class="md-ellipsis">
+    Overview
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../developer/adding-services/configuration/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../developer/adding-services/testing/">
+<span class="md-ellipsis">
     Testing
     
   </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-  </ul>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Security
     
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Security
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#reporting-security-issues" class="md-nav__link">
-    <span class="md-ellipsis">
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reporting-security-issues">
+<span class="md-ellipsis">
       Reporting Security Issues
     </span>
-  </a>
-  
+</a>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#input-validation" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#input-validation">
+<span class="md-ellipsis">
       Input Validation
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Input Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validation-functions" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Input Validation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validation-functions">
+<span class="md-ellipsis">
       Validation Functions
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#validate_stream_keykey-name" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Validation Functions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_stream_keykey-name">
+<span class="md-ellipsis">
       validate_stream_key(key, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_pathpath-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_pathpath-name">
+<span class="md-ellipsis">
       validate_path(path, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_ip_rangerange-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_ip_rangerange-name">
+<span class="md-ellipsis">
       validate_ip_range(range, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_numbervalue-name-min-max" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_numbervalue-name-min-max">
+<span class="md-ellipsis">
       validate_number(value, name, min, max)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_identifiervalue-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_identifiervalue-name">
+<span class="md-ellipsis">
       validate_identifier(value, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_bitratevalue-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_bitratevalue-name">
+<span class="md-ellipsis">
       validate_bitrate(value, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_log_levellevel-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_log_levellevel-name">
+<span class="md-ellipsis">
       validate_log_level(level, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#validate_suffixsuffix-name" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_suffixsuffix-name">
+<span class="md-ellipsis">
       validate_suffix(suffix, name)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#escape_for_sedvalue" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#escape_for_sedvalue">
+<span class="md-ellipsis">
       escape_for_sed(value)
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#security-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-best-practices">
+<span class="md-ellipsis">
       Security Best Practices
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Security Best Practices">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-stream-keys" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Security Best Practices" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-stream-keys">
+<span class="md-ellipsis">
       1. Stream Keys
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-network-security" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-network-security">
+<span class="md-ellipsis">
       2. Network Security
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-log-level-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-log-level-configuration">
+<span class="md-ellipsis">
       3. Log Level Configuration
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#4-archive-paths" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-archive-paths">
+<span class="md-ellipsis">
       4. Archive Paths
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#5-container-security" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-container-security">
+<span class="md-ellipsis">
       5. Container Security
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#attack-vectors-mitigated" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#attack-vectors-mitigated">
+<span class="md-ellipsis">
       Attack Vectors Mitigated
     </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Attack Vectors Mitigated">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#command-injection" class="md-nav__link">
-    <span class="md-ellipsis">
+</a>
+<nav aria-label="Attack Vectors Mitigated" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#command-injection">
+<span class="md-ellipsis">
       Command Injection
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-injection" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration-injection">
+<span class="md-ellipsis">
       Configuration Injection
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#path-traversal" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#path-traversal">
+<span class="md-ellipsis">
       Path Traversal
     </span>
-  </a>
-  
+</a>
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#buffer-overflow" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#buffer-overflow">
+<span class="md-ellipsis">
       Buffer Overflow
     </span>
-  </a>
-  
+</a>
 </li>
-        
-      </ul>
-    </nav>
-  
+</ul>
+</nav>
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
-    <span class="md-ellipsis">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing">
+<span class="md-ellipsis">
       Testing
     </span>
-  </a>
-  
+</a>
 </li>
-      
-    </ul>
-  
+<li class="md-nav__item">
+<a class="md-nav__link" href="#see-also">
+<span class="md-ellipsis">
+      See Also
+    </span>
+</a>
+</li>
+</ul>
 </nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-  
-  
-
-
-<h1 id="security">Security</h1>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../developer/testing/">
+<span class="md-ellipsis">
+    Testing
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../contributing/">
+<span class="md-ellipsis">
+    Contributing Documentation
+    
+  </span>
+<span class="md-status md-status--ready"></span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reporting-security-issues">
+<span class="md-ellipsis">
+      Reporting Security Issues
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#input-validation">
+<span class="md-ellipsis">
+      Input Validation
+    </span>
+</a>
+<nav aria-label="Input Validation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validation-functions">
+<span class="md-ellipsis">
+      Validation Functions
+    </span>
+</a>
+<nav aria-label="Validation Functions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_stream_keykey-name">
+<span class="md-ellipsis">
+      validate_stream_key(key, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_pathpath-name">
+<span class="md-ellipsis">
+      validate_path(path, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_ip_rangerange-name">
+<span class="md-ellipsis">
+      validate_ip_range(range, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_numbervalue-name-min-max">
+<span class="md-ellipsis">
+      validate_number(value, name, min, max)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_identifiervalue-name">
+<span class="md-ellipsis">
+      validate_identifier(value, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_bitratevalue-name">
+<span class="md-ellipsis">
+      validate_bitrate(value, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_log_levellevel-name">
+<span class="md-ellipsis">
+      validate_log_level(level, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#validate_suffixsuffix-name">
+<span class="md-ellipsis">
+      validate_suffix(suffix, name)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#escape_for_sedvalue">
+<span class="md-ellipsis">
+      escape_for_sed(value)
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#security-best-practices">
+<span class="md-ellipsis">
+      Security Best Practices
+    </span>
+</a>
+<nav aria-label="Security Best Practices" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-stream-keys">
+<span class="md-ellipsis">
+      1. Stream Keys
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-network-security">
+<span class="md-ellipsis">
+      2. Network Security
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-log-level-configuration">
+<span class="md-ellipsis">
+      3. Log Level Configuration
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4-archive-paths">
+<span class="md-ellipsis">
+      4. Archive Paths
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-container-security">
+<span class="md-ellipsis">
+      5. Container Security
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#attack-vectors-mitigated">
+<span class="md-ellipsis">
+      Attack Vectors Mitigated
+    </span>
+</a>
+<nav aria-label="Attack Vectors Mitigated" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#command-injection">
+<span class="md-ellipsis">
+      Command Injection
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration-injection">
+<span class="md-ellipsis">
+      Configuration Injection
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#path-traversal">
+<span class="md-ellipsis">
+      Path Traversal
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#buffer-overflow">
+<span class="md-ellipsis">
+      Buffer Overflow
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#testing">
+<span class="md-ellipsis">
+      Testing
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#see-also">
+<span class="md-ellipsis">
+      See Also
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="security"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.</span> Security</h1>
 <p>This document describes the security features and considerations for docker-rtmp-multistream.</p>
-<h2 id="reporting-security-issues">Reporting Security Issues</h2>
+<h2 id="reporting-security-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.1</span> Reporting Security Issues</h2>
 <p>If you discover a security vulnerability, please email the maintainer directly rather than opening a public issue.</p>
-<h2 id="input-validation">Input Validation</h2>
+<h2 id="input-validation"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2</span> Input Validation</h2>
 <p>All environment variables are validated before being used in configuration files to prevent injection attacks and configuration tampering.</p>
-<h3 id="validation-functions">Validation Functions</h3>
+<h3 id="validation-functions"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1</span> Validation Functions</h3>
 <p>The validation framework is implemented in <code>build/scripts/validate_input.sh</code> and includes:</p>
-<h4 id="validate_stream_keykey-name"><code>validate_stream_key(key, name)</code></h4>
+<h4 id="validate_stream_keykey-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.1</span> <code>validate_stream_key(key, name)</code></h4>
 <p>Validates stream keys (Twitch, YouTube) to prevent command injection.</p>
 <p><strong>Allowed characters:</strong> <code>a-z A-Z 0-9 . _ : -</code></p>
 <p><strong>Blocks:</strong>
@@ -1369,9 +924,9 @@
 - Control characters: newlines, null bytes
 - Excessive length: &gt;200 characters</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>validate_stream_key<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_KEY</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_KEY&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>validate_stream_key<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_KEY</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_KEY"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_pathpath-name"><code>validate_path(path, name)</code></h4>
+<h4 id="validate_pathpath-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.2</span> <code>validate_path(path, name)</code></h4>
 <p>Validates file system paths (archive paths) to prevent path traversal and command injection.</p>
 <p><strong>Requirements:</strong>
 - Must be absolute path (start with <code>/</code>)</p>
@@ -1381,35 +936,35 @@
 - Control characters: newlines, null bytes
 - Excessive length: &gt;500 characters</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>validate_path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ARCHIVE_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;ARCHIVE_PATH&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>validate_path<span class="w"> </span><span class="s2">"</span><span class="nv">$ARCHIVE_PATH</span><span class="s2">"</span><span class="w"> </span><span class="s2">"ARCHIVE_PATH"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_ip_rangerange-name"><code>validate_ip_range(range, name)</code></h4>
+<h4 id="validate_ip_rangerange-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.3</span> <code>validate_ip_range(range, name)</code></h4>
 <p>Validates IP ranges in CIDR notation for publish authorization.</p>
 <p><strong>Format:</strong> <code>x.x.x.x/y</code> where x is 0-255 and y is 0-32</p>
 <p><strong>Examples:</strong>
 - Valid: <code>192.168.1.0/24</code>, <code>10.0.0.0/8</code>, <code>172.16.0.0/16</code>
 - Invalid: <code>192.168.1</code>, <code>not-an-ip</code>, <code>192.168/16</code></p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>validate_ip_range<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PUBLISH_IP_RANGE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;PUBLISH_IP_RANGE&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>validate_ip_range<span class="w"> </span><span class="s2">"</span><span class="nv">$PUBLISH_IP_RANGE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"PUBLISH_IP_RANGE"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_numbervalue-name-min-max"><code>validate_number(value, name, min, max)</code></h4>
+<h4 id="validate_numbervalue-name-min-max"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.4</span> <code>validate_number(value, name, min, max)</code></h4>
 <p>Validates numeric values with optional range constraints.</p>
 <p><strong>Allowed:</strong> Positive integers only (no decimals, no negatives)</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>validate_number<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_FPS</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_FPS&quot;</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>validate_number<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_HEIGHT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_HEIGHT&quot;</span><span class="w"> </span><span class="m">144</span><span class="w"> </span><span class="m">4320</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_FPS</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_FPS"</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_HEIGHT</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_HEIGHT"</span><span class="w"> </span><span class="m">144</span><span class="w"> </span><span class="m">4320</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_identifiervalue-name"><code>validate_identifier(value, name)</code></h4>
+<h4 id="validate_identifiervalue-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.5</span> <code>validate_identifier(value, name)</code></h4>
 <p>Validates alphanumeric identifiers (codecs, presets, endpoints).</p>
 <p><strong>Allowed characters:</strong> <code>a-z A-Z 0-9 _ -</code></p>
 <p><strong>Blocks:</strong>
 - Spaces, periods, special characters
 - Excessive length: &gt;100 characters</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>validate_identifier<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_CODEC</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_CODEC&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>validate_identifier<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_X264_PRESET</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_X264_PRESET&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>validate_identifier<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_CODEC</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_CODEC"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>validate_identifier<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_X264_PRESET</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_X264_PRESET"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_bitratevalue-name"><code>validate_bitrate(value, name)</code></h4>
+<h4 id="validate_bitratevalue-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.6</span> <code>validate_bitrate(value, name)</code></h4>
 <p>Validates audio/video bitrate specifications.</p>
 <p><strong>Allowed formats:</strong>
 - Numeric only: <code>160000</code>
@@ -1419,16 +974,16 @@
 - Wrong suffix: <code>160m</code>
 - Spaces: <code>160 k</code></p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>validate_bitrate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_AUDIO_BITRATE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;TWITCH_AUDIO_BITRATE&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>validate_bitrate<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_AUDIO_BITRATE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_AUDIO_BITRATE"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_log_levellevel-name"><code>validate_log_level(level, name)</code></h4>
+<h4 id="validate_log_levellevel-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.7</span> <code>validate_log_level(level, name)</code></h4>
 <p>Validates nginx log level using whitelist approach.</p>
 <p><strong>Allowed values:</strong> <code>debug</code>, <code>info</code>, <code>notice</code>, <code>warn</code>, <code>error</code>, <code>crit</code>, <code>alert</code>, <code>emerg</code></p>
 <p><strong>Blocks:</strong> Any other value (case-sensitive)</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>validate_log_level<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NGINX_ERROR_LOG_LEVEL</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;NGINX_ERROR_LOG_LEVEL&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>validate_log_level<span class="w"> </span><span class="s2">"</span><span class="nv">$NGINX_ERROR_LOG_LEVEL</span><span class="s2">"</span><span class="w"> </span><span class="s2">"NGINX_ERROR_LOG_LEVEL"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="validate_suffixsuffix-name"><code>validate_suffix(suffix, name)</code></h4>
+<h4 id="validate_suffixsuffix-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.8</span> <code>validate_suffix(suffix, name)</code></h4>
 <p>Validates file extensions for archive recordings.</p>
 <p><strong>Allowed characters:</strong> <code>a-z A-Z 0-9</code></p>
 <p><strong>Blocks:</strong>
@@ -1437,71 +992,71 @@
 - Special characters: <code>mp4-flv</code>
 - Excessive length: &gt;10 characters</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>validate_suffix<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ARCHIVE_SUFFIX</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;ARCHIVE_SUFFIX&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>validate_suffix<span class="w"> </span><span class="s2">"</span><span class="nv">$ARCHIVE_SUFFIX</span><span class="s2">"</span><span class="w"> </span><span class="s2">"ARCHIVE_SUFFIX"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h4 id="escape_for_sedvalue"><code>escape_for_sed(value)</code></h4>
+<h4 id="escape_for_sedvalue"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.2.1.9</span> <code>escape_for_sed(value)</code></h4>
 <p>Escapes special characters for safe sed substitution.</p>
 <p><strong>Escapes:</strong> <code>\ | &amp;</code></p>
 <p><strong>Returns:</strong> Escaped string safe for use in sed commands</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">SAFE_KEY</span><span class="o">=</span><span class="k">$(</span>escape_for_sed<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$TWITCH_KEY</span><span class="s2">&quot;</span><span class="k">)</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;s|TWITCH_KEY|</span><span class="nv">$SAFE_KEY</span><span class="s2">|g&quot;</span><span class="w"> </span>config.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nv">SAFE_KEY</span><span class="o">=</span><span class="k">$(</span>escape_for_sed<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_KEY</span><span class="s2">"</span><span class="k">)</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|TWITCH_KEY|</span><span class="nv">$SAFE_KEY</span><span class="s2">|g"</span><span class="w"> </span>config.conf
 </span></code></pre></div></p>
-<h2 id="security-best-practices">Security Best Practices</h2>
-<h3 id="1-stream-keys">1. Stream Keys</h3>
+<h2 id="security-best-practices"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3</span> Security Best Practices</h2>
+<h3 id="1-stream-keys"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3.1</span> 1. Stream Keys</h3>
 <ul>
 <li><strong>Never commit</strong> stream keys to version control</li>
 <li>Store keys in <code>env/relay.env</code> (gitignored)</li>
 <li>Use Docker secrets for production deployments</li>
 <li>Rotate keys regularly</li>
 </ul>
-<h3 id="2-network-security">2. Network Security</h3>
+<h3 id="2-network-security"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3.2</span> 2. Network Security</h3>
 <ul>
 <li>Restrict <code>PUBLISH_IP_RANGE</code> to trusted networks only</li>
 <li>Default <code>192.168.0.0/16</code> is suitable for home networks</li>
 <li>Use <code>/32</code> for single-host authorization</li>
 <li>Consider VPN/firewall rules for additional protection</li>
 </ul>
-<h3 id="3-log-level-configuration">3. Log Level Configuration</h3>
+<h3 id="3-log-level-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3.3</span> 3. Log Level Configuration</h3>
 <ul>
 <li>Production: Use <code>error</code> or <code>warn</code> (default: <code>error</code>)</li>
 <li>Development: Use <code>debug</code> for troubleshooting</li>
 <li><strong>Never</strong> use <code>debug</code> in production (may expose stream keys)</li>
 </ul>
-<h3 id="4-archive-paths">4. Archive Paths</h3>
+<h3 id="4-archive-paths"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3.4</span> 4. Archive Paths</h3>
 <ul>
 <li>Ensure archive paths are writable by nginx user</li>
 <li>Use dedicated directory with appropriate permissions</li>
 <li>Monitor disk space to prevent exhaustion</li>
 <li>Implement log rotation if storing long-term</li>
 </ul>
-<h3 id="5-container-security">5. Container Security</h3>
+<h3 id="5-container-security"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3.5</span> 5. Container Security</h3>
 <ul>
 <li>Run with minimal privileges when possible</li>
 <li>Use read-only filesystem where applicable</li>
 <li>Implement resource limits (CPU/memory)</li>
 <li>Keep base image updated</li>
 </ul>
-<h2 id="attack-vectors-mitigated">Attack Vectors Mitigated</h2>
-<h3 id="command-injection">Command Injection</h3>
+<h2 id="attack-vectors-mitigated"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4</span> Attack Vectors Mitigated</h2>
+<h3 id="command-injection"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4.1</span> Command Injection</h3>
 <p><strong>Risk:</strong> Malicious environment variables containing shell commands</p>
 <p><strong>Mitigation:</strong>
 - All inputs validated before use
 - Shell metacharacters blocked: <code>;|&amp;$\</code>()&lt;&gt;{}[]<code>- Values escaped before sed substitution
 - Scripts use</code>set -e` for fail-fast behavior</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">&quot;key123;rm -rf /&quot;</span><span class="w">  </span><span class="c1"># Rejected by validate_stream_key()</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">"key123;rm -rf /"</span><span class="w">  </span><span class="c1"># Rejected by validate_stream_key()</span>
 </span></code></pre></div></p>
-<h3 id="configuration-injection">Configuration Injection</h3>
+<h3 id="configuration-injection"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4.2</span> Configuration Injection</h3>
 <p><strong>Risk:</strong> Newlines or control characters injecting malicious config directives</p>
 <p><strong>Mitigation:</strong>
 - Newlines and null bytes detected and rejected
 - Single-line validation for all inputs
 - No multi-line environment variables accepted</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">&quot;key\ninclude malicious.conf&quot;</span><span class="w">  </span><span class="c1"># Rejected</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">"key\ninclude malicious.conf"</span><span class="w">  </span><span class="c1"># Rejected</span>
 </span></code></pre></div></p>
-<h3 id="path-traversal">Path Traversal</h3>
+<h3 id="path-traversal"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4.3</span> Path Traversal</h3>
 <p><strong>Risk:</strong> Archive paths escaping intended directory structure</p>
 <p><strong>Mitigation:</strong>
 - Only absolute paths accepted
@@ -1509,10 +1064,10 @@
 - <code>../</code> sequences blocked
 - Path validation before writability check</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">&quot;../../etc/passwd&quot;</span><span class="w">  </span><span class="c1"># Rejected (relative)</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">&quot;/tmp/../../../etc&quot;</span><span class="w">  </span><span class="c1"># Rejected (traversal)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"../../etc/passwd"</span><span class="w">  </span><span class="c1"># Rejected (relative)</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"/tmp/../../../etc"</span><span class="w">  </span><span class="c1"># Rejected (traversal)</span>
 </span></code></pre></div></p>
-<h3 id="buffer-overflow">Buffer Overflow</h3>
+<h3 id="buffer-overflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4.4</span> Buffer Overflow</h3>
 <p><strong>Risk:</strong> Excessively long inputs causing buffer overflows</p>
 <p><strong>Mitigation:</strong>
 - Length limits on all inputs
@@ -1521,76 +1076,51 @@
 - Identifiers: 100 chars max
 - File extensions: 10 chars max</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;a%.0s&#39;</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..201<span class="o">}</span><span class="k">)</span><span class="w">  </span><span class="c1"># Rejected (too long)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'a%.0s'</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..201<span class="o">}</span><span class="k">)</span><span class="w">  </span><span class="c1"># Rejected (too long)</span>
 </span></code></pre></div></p>
-<h2 id="testing">Testing</h2>
-<p>All validation functions are tested with 113 comprehensive test cases covering:
+<h2 id="testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.5</span> Testing</h2>
+<p>All validation functions are tested with test cases covering:
 - Valid inputs (alphanumeric, special chars where allowed)
 - Invalid inputs (injection attempts, traversal, length limits)
 - Edge cases (empty, boundaries, special formats)</p>
 <p>Run validation tests:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
 </span></code></pre></div></p>
 <p>See <code>tests/README.md</code> for detailed test documentation.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
-            </div>
-          
-          
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.6</span> See Also</h2>
+<ul>
+<li><a href="../configuration/">Configuration Guide</a> - Environment variable configuration</li>
+<li><a href="../techref/architecture/">Architecture</a> - How configuration is processed</li>
+<li><a href="../troubleshooting/ip_authentication/">IP Authentication Troubleshooting</a> - Connection authorization issues</li>
+</ul>
+</article>
+</div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
-        </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
   Back to top
 </button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
   
   
     Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
       Material for MkDocs
     </a>
-  
 </div>
-      
-    </div>
-  </div>
+</div>
+</div>
 </footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-    
-    
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
-      
-    
-  </body>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+</body>
 </html>

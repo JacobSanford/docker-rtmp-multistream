@@ -5,14 +5,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Configure YouTube streaming with direct pass-through" name="description"/>
+<meta content="Comparison of supported streaming services and their characteristics" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
-<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/youtube/" rel="canonical"/>
-<link href="../twitch/" rel="prev"/>
-<link href="../archive/" rel="next"/>
+<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/overview/" rel="canonical"/>
+<link href="../../configuration/" rel="prev"/>
+<link href="../twitch/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>YouTube Service - docker-rtmp-multistream</title>
+<title>Streaming Services Overview - docker-rtmp-multistream</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#youtube">
+<a class="md-skip" href="#streaming-services-overview">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              YouTube Service
+              Streaming Services Overview
             
           </span>
 </div>
@@ -198,34 +198,18 @@
             Streaming Services
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../overview/">
-<span class="md-ellipsis">
-    Overview
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../twitch/">
-<span class="md-ellipsis">
-    Twitch
-    
-  </span>
-</a>
-</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    YouTube
+    Overview
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    YouTube
+    Overview
     
   </span>
 </a>
@@ -236,23 +220,23 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#supported-services">
 <span class="md-ellipsis">
-      Overview
+      Supported Services
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#service-patterns">
 <span class="md-ellipsis">
-      Configuration
+      Service Patterns
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
+<a class="md-nav__link" href="#adding-custom-services">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      Adding Custom Services
     </span>
 </a>
 </li>
@@ -262,20 +246,25 @@
       See Also
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
+</li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
+<a class="md-nav__link" href="../twitch/">
 <span class="md-ellipsis">
-      Related Documentation
-    </span>
+    Twitch
+    
+  </span>
 </a>
 </li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../youtube/">
+<span class="md-ellipsis">
+    YouTube
+    
+  </span>
+</a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../archive/">
@@ -559,23 +548,23 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#supported-services">
 <span class="md-ellipsis">
-      Overview
+      Supported Services
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#service-patterns">
 <span class="md-ellipsis">
-      Configuration
+      Service Patterns
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
+<a class="md-nav__link" href="#adding-custom-services">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      Adding Custom Services
     </span>
 </a>
 </li>
@@ -585,17 +574,6 @@
       See Also
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
-<span class="md-ellipsis">
-      Related Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -604,44 +582,57 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> YouTube</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Overview</h2>
-<p>The relay streams to YouTube using direct pass-through. To enable this feature, set the <code>YOUTUBE_KEY</code> environment variable in the <code>env/relay.env</code> file to the stream key provided by YouTube.</p>
-<p>The YouTube relay uses a <strong>simple relay pattern</strong> - it forwards your stream directly to YouTube without any re-encoding or modification. This preserves your original stream quality for YouTube's reprocessing.</p>
-<h2 id="configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Configuration</h2>
-<p>The YouTube service can be configured by setting the following environment variables:</p>
+<h1 id="streaming-services-overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Streaming Services Overview</h1>
+<p>docker-rtmp-multistream supports multiple streaming destinations with different performance characteristics.</p>
+<h2 id="supported-services"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Supported Services</h2>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
+<th>Service</th>
+<th>Pattern</th>
+<th>CPU Usage</th>
+<th>Bandwidth</th>
+<th>Quality Control</th>
+<th>Best For</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>YOUTUBE_KEY</code></td>
-<td>The stream key provided by YouTube.</td>
-<td>``</td>
+<td><a href="../twitch/">Twitch</a></td>
+<td>Conditional¹</td>
+<td>Minimal/High</td>
+<td>High/Moderate</td>
+<td>Passthrough/Full control</td>
+<td>Partners: max quality. Non-partners: optimization</td>
+</tr>
+<tr>
+<td><a href="../youtube/">YouTube</a></td>
+<td>Simple Relay</td>
+<td>Minimal</td>
+<td>High</td>
+<td>Source passthrough</td>
+<td>Maximum quality, leveraging YouTube's re-encoding</td>
+</tr>
+<tr>
+<td><a href="../archive/">Archive</a></td>
+<td>Simple Relay</td>
+<td>Minimal</td>
+<td>None (disk I/O)</td>
+<td>Source passthrough</td>
+<td>Local backup, VOD creation</td>
 </tr>
 </tbody>
 </table>
-<h2 id="a-note-on-youtubes-re-encoding"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> A Note on YouTube's Re-encoding</h2>
-<p>YouTube reprocesses every video it receives, including live streams. This means YouTube applies its own encoding to your stream after receiving it.</p>
-<p>Streams that appear acceptable at lower bitrates on platforms like Twitch will often appear distorted on YouTube after YouTube's re-encoding process. Ensure you send YouTube as high-quality/bitrate of a stream as possible to obtain the best results.</p>
-<p>Refer to the <a href="../../performance/quality/">Quality Optimization Guide</a> and <a href="../../performance/bandwidth/">Bandwidth Requirements</a> for:</p>
+<p>¹ Twitch pattern depends on <code>TWITCH_PARTNER</code> setting - see <a href="../twitch/#partner-vs-non-partner-streaming">Twitch Configuration</a></p>
+<h2 id="service-patterns"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Service Patterns</h2>
+<p>Services use one of two architectural patterns: <strong>Simple Relay</strong> (direct forwarding) or <strong>Transformer</strong> (FFmpeg re-encoding).</p>
+<p>For a detailed comparison of these patterns, see <strong><a href="../../techref/service-patterns/">Service Patterns Reference</a></strong>.</p>
+<h2 id="adding-custom-services"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3</span> Adding Custom Services</h2>
+<p>Want to add support for another streaming platform? See the <a href="../../developer/adding-services/overview/">Adding Services Guide</a>.</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> See Also</h2>
 <ul>
-<li>Bitrate recommendations</li>
-<li>Resolution and framerate considerations</li>
-<li>Bandwidth requirements</li>
-</ul>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> See Also</h2>
-<h3 id="related-documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4.1</span> Related Documentation</h3>
-<ul>
-<li><strong><a href="../../performance/quality/">Quality Optimization</a></strong> - Stream quality optimization</li>
-<li><strong><a href="../../performance/bandwidth/">Bandwidth Requirements</a></strong> - Network bandwidth guidance</li>
-<li><strong><a href="../../techref/architecture/">Architecture</a></strong> - Learn about relay patterns</li>
-<li><strong><a href="../../quickstart/">Quick Start Guide</a></strong> - Initial setup instructions</li>
+<li><a href="../../techref/service-patterns/">Service Patterns Reference</a> - Detailed comparison of architectural patterns</li>
+<li><a href="../../techref/architecture/">Architecture</a> - Technical system overview</li>
 </ul>
 </article>
 </div>

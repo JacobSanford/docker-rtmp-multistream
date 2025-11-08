@@ -5,28 +5,28 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Diagnostic guide for common docker-rtmp-multistream issues" name="description"/>
+<meta content="Troubleshooting Twitch-specific streaming issues" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
-<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/" rel="canonical"/>
-<link href="../techref/environment/" rel="prev"/>
-<link href="ip_authentication/" rel="next"/>
-<link href="../assets/images/favicon.png" rel="icon"/>
+<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/services/twitch/" rel="canonical"/>
+<link href="../../connection-issues/" rel="prev"/>
+<link href="../youtube/" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Troubleshooting Guide - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<title>Twitch Troubleshooting - docker-rtmp-multistream</title>
+<link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-<link href="../stylesheets/extra.css" rel="stylesheet"/>
-<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
 </head>
 <body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
 <input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#troubleshooting-guide">
+<a class="md-skip" href="#twitch-troubleshooting">
           Skip to content
         </a>
 </div>
@@ -36,7 +36,7 @@
 </div>
 <header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="Header" class="md-header__inner md-grid">
-<a aria-label="docker-rtmp-multistream" class="md-header__button md-logo" data-md-component="logo" href=".." title="docker-rtmp-multistream">
+<a aria-label="docker-rtmp-multistream" class="md-header__button md-logo" data-md-component="logo" href="../../.." title="docker-rtmp-multistream">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Troubleshooting Guide
+              Twitch Troubleshooting
             
           </span>
 </div>
@@ -120,7 +120,7 @@
 <div class="md-sidebar__inner">
 <nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
-<a aria-label="docker-rtmp-multistream" class="md-nav__button md-logo" data-md-component="logo" href=".." title="docker-rtmp-multistream">
+<a aria-label="docker-rtmp-multistream" class="md-nav__button md-logo" data-md-component="logo" href="../../.." title="docker-rtmp-multistream">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 </a>
     docker-rtmp-multistream
@@ -137,7 +137,7 @@
 </div>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="..">
+<a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
     Home
     
@@ -160,7 +160,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../requirements/">
+<a class="md-nav__link" href="../../../requirements/">
 <span class="md-ellipsis">
     Requirements
     
@@ -168,7 +168,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../quickstart/">
+<a class="md-nav__link" href="../../../quickstart/">
 <span class="md-ellipsis">
     QuickStart
     
@@ -176,7 +176,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../configuration/">
+<a class="md-nav__link" href="../../../configuration/">
 <span class="md-ellipsis">
     Configuration
     
@@ -199,7 +199,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../services/overview/">
+<a class="md-nav__link" href="../../../services/overview/">
 <span class="md-ellipsis">
     Overview
     
@@ -207,7 +207,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../services/twitch/">
+<a class="md-nav__link" href="../../../services/twitch/">
 <span class="md-ellipsis">
     Twitch
     
@@ -215,7 +215,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../services/youtube/">
+<a class="md-nav__link" href="../../../services/youtube/">
 <span class="md-ellipsis">
     YouTube
     
@@ -223,7 +223,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../services/archive/">
+<a class="md-nav__link" href="../../../services/archive/">
 <span class="md-ellipsis">
     Archive
     
@@ -249,7 +249,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../performance/hardware/">
+<a class="md-nav__link" href="../../../performance/hardware/">
 <span class="md-ellipsis">
     Hardware
     
@@ -257,7 +257,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../performance/bandwidth/">
+<a class="md-nav__link" href="../../../performance/bandwidth/">
 <span class="md-ellipsis">
     Bandwidth
     
@@ -265,7 +265,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../performance/quality/">
+<a class="md-nav__link" href="../../../performance/quality/">
 <span class="md-ellipsis">
     Quality
     
@@ -291,7 +291,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../techref/architecture/">
+<a class="md-nav__link" href="../../../techref/architecture/">
 <span class="md-ellipsis">
     Architecture
     
@@ -299,7 +299,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../techref/service-patterns/">
+<a class="md-nav__link" href="../../../techref/service-patterns/">
 <span class="md-ellipsis">
     Service Patterns
     
@@ -307,7 +307,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../techref/environment/">
+<a class="md-nav__link" href="../../../techref/environment/">
 <span class="md-ellipsis">
     Environment Variables
     
@@ -332,18 +332,57 @@
             Troubleshooting
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    Overview
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../ip_authentication/">
+<span class="md-ellipsis">
+    IP Authentication
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../connection-issues/">
+<span class="md-ellipsis">
+    Connection Issues
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Services
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_7_4">
+<span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    Overview
+    Twitch
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    Overview
+    Twitch
     
   </span>
 </a>
@@ -354,82 +393,100 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#quick-diagnostics">
+<a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Quick Diagnostics
+      Common Issues
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#common-issues-by-category">
+<a class="md-nav__link" href="#transcoding-quality">
 <span class="md-ellipsis">
-      Common Issues by Category
+      Transcoding Quality
     </span>
 </a>
-<nav aria-label="Common Issues by Category" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ingest-server-issues">
+<span class="md-ellipsis">
+      Ingest Server Issues
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#stream-not-appearing">
+<span class="md-ellipsis">
+      Stream Not Appearing
+    </span>
+</a>
+<nav aria-label="Stream Not Appearing" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connection-problems">
+<a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Connection Problems
+      Symptoms
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#service-specific-problems">
+<a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Service-Specific Problems
+      Possible Causes
+    </span>
+</a>
+<nav aria-label="Possible Causes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-service-not-enabled">
+<span class="md-ellipsis">
+      1. Service Not Enabled
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-invalid-stream-key">
+<span class="md-ellipsis">
+      2. Invalid Stream Key
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-platform-specific-issues">
+<span class="md-ellipsis">
+      3. Platform-Specific Issues
     </span>
 </a>
 </li>
 </ul>
 </nav>
 </li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#general-debugging">
+<a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      General Debugging
+      Debug Logs
     </span>
 </a>
-<nav aria-label="General Debugging" class="md-nav">
+<nav aria-label="Debug Logs" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#view-container-logs">
+<a class="md-nav__link" href="#enable-detailed-logging">
 <span class="md-ellipsis">
-      View Container Logs
+      Enable Detailed Logging
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#check-service-status">
+<a class="md-nav__link" href="#common-log-messages">
 <span class="md-ellipsis">
-      Check Service Status
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-configuration-syntax">
-<span class="md-ellipsis">
-      Test Configuration Syntax
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#check-active-configuration">
-<span class="md-ellipsis">
-      Check Active Configuration
+      Common Log Messages
     </span>
 </a>
 </li>
 </ul>
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#getting-help">
-<span class="md-ellipsis">
-      Getting Help
-    </span>
-</a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
@@ -442,46 +499,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="ip_authentication/">
-<span class="md-ellipsis">
-    IP Authentication
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="connection-issues/">
-<span class="md-ellipsis">
-    Connection Issues
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
-<span class="md-nav__icon md-icon"></span>
-            Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="services/twitch/">
-<span class="md-ellipsis">
-    Twitch
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="services/youtube/">
+<a class="md-nav__link" href="../youtube/">
 <span class="md-ellipsis">
     YouTube
     
@@ -489,7 +507,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="services/archive/">
+<a class="md-nav__link" href="../archive/">
 <span class="md-ellipsis">
     Archive
     
@@ -536,7 +554,7 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../developer/adding-services/overview/">
+<a class="md-nav__link" href="../../../developer/adding-services/overview/">
 <span class="md-ellipsis">
     Overview
     
@@ -544,7 +562,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../developer/adding-services/configuration/">
+<a class="md-nav__link" href="../../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
     Configuration
     
@@ -552,7 +570,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../developer/adding-services/testing/">
+<a class="md-nav__link" href="../../../developer/adding-services/testing/">
 <span class="md-ellipsis">
     Testing
     
@@ -563,7 +581,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../security/">
+<a class="md-nav__link" href="../../../security/">
 <span class="md-ellipsis">
     Security
     
@@ -571,7 +589,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../developer/testing/">
+<a class="md-nav__link" href="../../../developer/testing/">
 <span class="md-ellipsis">
     Testing
     
@@ -582,7 +600,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../contributing/">
+<a class="md-nav__link" href="../../../contributing/">
 <span class="md-ellipsis">
     Contributing Documentation
     
@@ -605,82 +623,100 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#quick-diagnostics">
+<a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Quick Diagnostics
+      Common Issues
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#common-issues-by-category">
+<a class="md-nav__link" href="#transcoding-quality">
 <span class="md-ellipsis">
-      Common Issues by Category
+      Transcoding Quality
     </span>
 </a>
-<nav aria-label="Common Issues by Category" class="md-nav">
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ingest-server-issues">
+<span class="md-ellipsis">
+      Ingest Server Issues
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#stream-not-appearing">
+<span class="md-ellipsis">
+      Stream Not Appearing
+    </span>
+</a>
+<nav aria-label="Stream Not Appearing" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connection-problems">
+<a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Connection Problems
+      Symptoms
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#service-specific-problems">
+<a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Service-Specific Problems
+      Possible Causes
+    </span>
+</a>
+<nav aria-label="Possible Causes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-service-not-enabled">
+<span class="md-ellipsis">
+      1. Service Not Enabled
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-invalid-stream-key">
+<span class="md-ellipsis">
+      2. Invalid Stream Key
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-platform-specific-issues">
+<span class="md-ellipsis">
+      3. Platform-Specific Issues
     </span>
 </a>
 </li>
 </ul>
 </nav>
 </li>
+</ul>
+</nav>
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#general-debugging">
+<a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      General Debugging
+      Debug Logs
     </span>
 </a>
-<nav aria-label="General Debugging" class="md-nav">
+<nav aria-label="Debug Logs" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#view-container-logs">
+<a class="md-nav__link" href="#enable-detailed-logging">
 <span class="md-ellipsis">
-      View Container Logs
+      Enable Detailed Logging
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#check-service-status">
+<a class="md-nav__link" href="#common-log-messages">
 <span class="md-ellipsis">
-      Check Service Status
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-configuration-syntax">
-<span class="md-ellipsis">
-      Test Configuration Syntax
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#check-active-configuration">
-<span class="md-ellipsis">
-      Check Active Configuration
+      Common Log Messages
     </span>
 </a>
 </li>
 </ul>
 </nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#getting-help">
-<span class="md-ellipsis">
-      Getting Help
-    </span>
-</a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
@@ -696,87 +732,111 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="troubleshooting-guide"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Troubleshooting Guide</h1>
-<p>Quick diagnostic guide to identify and resolve common issues with docker-rtmp-multistream.</p>
-<h2 id="quick-diagnostics"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> Quick Diagnostics</h2>
-<p>Follow this flowchart to identify your issue:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>Is the container running?
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>├─ NO → See [Connection Issues](connection-issues.md#container-wont-start)
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>└─ YES
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>   │
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>   Can you connect from OBS?
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>   ├─ NO → See [Connection Issues](connection-issues.md#cannot-connect-from-obs)
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>   └─ YES
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>      │
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>      Is the stream appearing on platforms?
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>      ├─ NO → See Service Issues: [Twitch](services/twitch.md#stream-not-appearing) | [YouTube](services/youtube.md#stream-not-appearing)
-</span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>      └─ YES → Working correctly!
+<h1 id="twitch-troubleshooting"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.</span> Twitch Troubleshooting</h1>
+<p>Troubleshooting issues specific to streaming to Twitch.</p>
+<h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.1</span> Common Issues</h2>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><a href="#transcoding-quality">Transcoding Quality</a></strong></td>
+<td>Stream looks worse on Twitch than expected, poor video quality</td>
+</tr>
+<tr>
+<td><strong><a href="#ingest-server-issues">Ingest Server Issues</a></strong></td>
+<td>Stream works intermittently, connection failures</td>
+</tr>
+<tr>
+<td><strong><a href="#stream-not-appearing">Stream Not Appearing</a></strong></td>
+<td>OBS shows streaming but nothing appears on Twitch</td>
+</tr>
+<tr>
+<td><strong><a href="#debug-logs">Debug Logs</a></strong></td>
+<td>How to check Twitch-specific logs and error messages</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="transcoding-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.2</span> Transcoding Quality</h2>
+<p><strong>Issue</strong>: Stream looks worse on Twitch than expected</p>
+<p><strong>Check</strong>: Verify transcoding settings:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>grep<span class="w"> </span>TWITCH<span class="w"> </span>env/relay.env
 </span></code></pre></div>
-<h2 id="common-issues-by-category"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> Common Issues by Category</h2>
-<h3 id="connection-problems"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2.1</span> Connection Problems</h3>
-<p>Can't connect to the relay or container won't start.</p>
-<p><strong>Symptoms:</strong>
-- Container exits immediately
-- OBS shows "Failed to connect to server"
-- Port not accessible</p>
-<p><strong>→ <a href="connection-issues/">Connection Issues Guide</a></strong></p>
-<h3 id="service-specific-problems"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2.2</span> Service-Specific Problems</h3>
-<p>Stream works but doesn't appear on specific platforms, or archive not recording.</p>
-<p><strong>Symptoms:</strong>
-- OBS shows streaming but nothing on Twitch/YouTube
-- Archive directory empty
-- Service configuration errors</p>
-<p><strong>→ Service Troubleshooting:</strong> <a href="services/twitch/">Twitch</a> | <a href="services/youtube/">YouTube</a> | <a href="services/archive/">Archive</a></p>
-<h2 id="general-debugging"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3</span> General Debugging</h2>
-<h3 id="view-container-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3.1</span> View Container Logs</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># All logs</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay
+<p><strong>Solution</strong>: Adjust quality settings:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Increase bitrate</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nv">TWITCH_KBITS_PER_VIDEO_FRAME</span><span class="o">=</span><span class="m">100</span><span class="w">  </span><span class="c1"># From 75</span>
 </span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># Follow logs in real-time</span>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>relay
-</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="c1"># Last 100 lines</span>
-</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>--tail<span class="o">=</span><span class="m">100</span><span class="w"> </span>relay
-</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="c1"># Filter for errors</span>
-</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>error
-</span></code></pre></div>
-<h3 id="check-service-status"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3.2</span> Check Service Status</h3>
-<p>Verify which services are enabled:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"configured and enabled"</span>
-</span></code></pre></div>
-<p>Expected output:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>Twitch configured and enabled.
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>YouTube configured and enabled.
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># Better encoding quality (more CPU)</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="nv">TWITCH_X264_PRESET</span><span class="o">=</span>slow<span class="w">  </span><span class="c1"># From medium</span>
 </span></code></pre></div></p>
-<h3 id="test-configuration-syntax"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3.3</span> Test Configuration Syntax</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nginx<span class="w"> </span>-t
+<p>See <a href="../../../services/twitch/">Twitch Configuration</a> for detailed settings.</p>
+<h2 id="ingest-server-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.3</span> Ingest Server Issues</h2>
+<p><strong>Issue</strong>: Stream works sometimes, fails other times</p>
+<p><strong>Check</strong>: Test different ingest servers:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># Try different endpoints</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>lax<span class="w">  </span><span class="c1"># Los Angeles</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>ord<span class="w">  </span><span class="c1"># Chicago</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>iad<span class="w">  </span><span class="c1"># Ashburn</span>
 </span></code></pre></div>
-<p>Should show: <code>nginx: configuration file /etc/nginx/nginx.conf test is successful</code></p>
-<h3 id="check-active-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3.4</span> Check Active Configuration</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>cat<span class="w"> </span>/etc/nginx/http.d/app.conf
-</span></code></pre></div>
-<p>Look for uncommented <code>include</code> directives for enabled services.</p>
-<h2 id="getting-help"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.4</span> Getting Help</h2>
-<p>If you're still experiencing issues:</p>
-<ol>
-<li><strong>Check existing issues</strong>: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/issues" target="_blank">GitHub Issues</a></li>
-<li><strong>Gather information</strong>:</li>
-<li>Container logs: <code>docker compose logs relay &gt; logs.txt</code></li>
-<li>Environment: <code>docker compose config &gt; config.txt</code></li>
-<li>System info: <code>uname -a; docker --version</code></li>
-<li><strong>Open a new issue</strong> with:</li>
-<li>Clear description of the problem</li>
-<li>Steps to reproduce</li>
-<li>Logs and configuration (redact stream keys!)</li>
-<li>System information</li>
-</ol>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5</span> See Also</h2>
+<p><strong>Verify connectivity</strong>:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span><span class="w"> </span>live-&lt;endpoint&gt;.twitch.tv
+</span></code></pre></div></p>
+<p>Replace <code>&lt;endpoint&gt;</code> with your chosen endpoint (e.g., <code>jfk</code>, <code>lax</code>, <code>ord</code>).</p>
+<h2 id="stream-not-appearing"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4</span> Stream Not Appearing</h2>
+<h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.1</span> Symptoms</h3>
 <ul>
-<li><strong><a href="../techref/architecture/">Architecture</a></strong> - Understand how the system works</li>
-<li><strong><a href="../performance/quality/">Quality Optimization</a></strong> - Optimization guidance</li>
-<li><strong><a href="../configuration/">Configuration</a></strong> - Setup details</li>
-<li><strong><a href="../security/">Security</a></strong> - Access control and validation</li>
+<li>OBS shows "Streaming" but stream doesn't appear on Twitch</li>
+<li>No errors in OBS</li>
+</ul>
+<h3 id="possible-causes"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2</span> Possible Causes</h3>
+<h4 id="1-service-not-enabled"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.1</span> 1. Service Not Enabled</h4>
+<p><strong>Check</strong>: Look at container logs during startup:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"configured and enabled"</span>
+</span></code></pre></div>
+<p><strong>Expected output</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>Twitch configured and enabled.
+</span></code></pre></div></p>
+<p><strong>Solution</strong>: If Twitch is missing:
+- Verify <code>TWITCH_KEY</code> is set in <code>env/relay.env</code>
+- Restart container after setting the key</p>
+<h4 id="2-invalid-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.2</span> 2. Invalid Stream Key</h4>
+<p><strong>Check</strong>: Look for authentication errors in logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"error\|auth\|publish"</span>
+</span></code></pre></div>
+<p><strong>Solution</strong>:
+- Verify stream key is correct in <code>env/relay.env</code>
+- Check for extra spaces or quotes around key
+- Get fresh key from Twitch dashboard</p>
+<h4 id="3-platform-specific-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.3</span> 3. Platform-Specific Issues</h4>
+<ul>
+<li>Verify stream key hasn't expired</li>
+<li>Check Twitch dashboard for account status</li>
+<li>Ensure you're not already streaming from another source</li>
+</ul>
+<h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5</span> Debug Logs</h2>
+<h3 id="enable-detailed-logging"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5.1</span> Enable Detailed Logging</h3>
+<p>For Twitch-specific issues, check logs:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Twitch-specific logs</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>twitch
+</span></code></pre></div>
+<h3 id="common-log-messages"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5.2</span> Common Log Messages</h3>
+<p><strong>Success messages</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>Twitch configured and enabled.
+</span></code></pre></div></p>
+<p><strong>Error messages</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>ERROR: TWITCH_KEY is not set
+</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>ERROR: Failed to validate TWITCH_KEY
+</span></code></pre></div></p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.6</span> See Also</h2>
+<ul>
+<li><strong><a href="../../">Troubleshooting Overview</a></strong> - Main troubleshooting guide</li>
+<li><strong><a href="../../connection-issues/">Connection Issues</a></strong> - Network and connectivity problems</li>
+<li><strong><a href="../../../services/twitch/">Twitch Service</a></strong> - Twitch configuration details</li>
 </ul>
 </article>
 </div>
@@ -805,7 +865,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
 </body>
 </html>

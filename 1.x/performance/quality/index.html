@@ -5,14 +5,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Configure YouTube streaming with direct pass-through" name="description"/>
+<meta content="Optimizing stream quality for different content types and constraints" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
-<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/youtube/" rel="canonical"/>
-<link href="../twitch/" rel="prev"/>
-<link href="../archive/" rel="next"/>
+<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/performance/quality/" rel="canonical"/>
+<link href="../bandwidth/" rel="prev"/>
+<link href="../../techref/architecture/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>YouTube Service - docker-rtmp-multistream</title>
+<title>Quality Optimization - docker-rtmp-multistream</title>
 <link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#youtube">
+<a class="md-skip" href="#quality-optimization">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              YouTube Service
+              Quality Optimization
             
           </span>
 </div>
@@ -183,8 +183,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
 <span class="md-ellipsis">
     Streaming Services
@@ -192,14 +192,14 @@
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_4">
 <span class="md-nav__icon md-icon"></span>
             Streaming Services
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../overview/">
+<a class="md-nav__link" href="../../services/overview/">
 <span class="md-ellipsis">
     Overview
     
@@ -207,9 +207,59 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../twitch/">
+<a class="md-nav__link" href="../../services/twitch/">
 <span class="md-ellipsis">
     Twitch
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/youtube/">
+<span class="md-ellipsis">
+    YouTube
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/archive/">
+<span class="md-ellipsis">
+    Archive
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Performance
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../hardware/">
+<span class="md-ellipsis">
+    Hardware
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../bandwidth/">
+<span class="md-ellipsis">
+    Bandwidth
     
   </span>
 </a>
@@ -218,14 +268,14 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    YouTube
+    Quality
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    YouTube
+    Quality
     
   </span>
 </a>
@@ -236,23 +286,41 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#quality-fundamentals">
 <span class="md-ellipsis">
-      Overview
+      Quality Fundamentals
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#content-specific-optimization">
 <span class="md-ellipsis">
-      Configuration
+      Content-Specific Optimization
+    </span>
+</a>
+<nav aria-label="Content-Specific Optimization" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#high-motion-content">
+<span class="md-ellipsis">
+      High Motion Content
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
+<a class="md-nav__link" href="#high-detail-content">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      High Detail Content
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#balancing-quality-and-resources">
+<span class="md-ellipsis">
+      Balancing Quality and Resources
     </span>
 </a>
 </li>
@@ -262,70 +330,9 @@
       See Also
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
-<span class="md-ellipsis">
-      Related Documentation
-    </span>
-</a>
 </li>
 </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
 </li>
 </ul>
 </nav>
@@ -559,23 +566,41 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#quality-fundamentals">
 <span class="md-ellipsis">
-      Overview
+      Quality Fundamentals
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#content-specific-optimization">
 <span class="md-ellipsis">
-      Configuration
+      Content-Specific Optimization
+    </span>
+</a>
+<nav aria-label="Content-Specific Optimization" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#high-motion-content">
+<span class="md-ellipsis">
+      High Motion Content
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
+<a class="md-nav__link" href="#high-detail-content">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      High Detail Content
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#balancing-quality-and-resources">
+<span class="md-ellipsis">
+      Balancing Quality and Resources
     </span>
 </a>
 </li>
@@ -585,17 +610,6 @@
       See Also
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
-<span class="md-ellipsis">
-      Related Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -604,44 +618,52 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> YouTube</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Overview</h2>
-<p>The relay streams to YouTube using direct pass-through. To enable this feature, set the <code>YOUTUBE_KEY</code> environment variable in the <code>env/relay.env</code> file to the stream key provided by YouTube.</p>
-<p>The YouTube relay uses a <strong>simple relay pattern</strong> - it forwards your stream directly to YouTube without any re-encoding or modification. This preserves your original stream quality for YouTube's reprocessing.</p>
-<h2 id="configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Configuration</h2>
-<p>The YouTube service can be configured by setting the following environment variables:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>YOUTUBE_KEY</code></td>
-<td>The stream key provided by YouTube.</td>
-<td>``</td>
-</tr>
-</tbody>
-</table>
-<h2 id="a-note-on-youtubes-re-encoding"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> A Note on YouTube's Re-encoding</h2>
-<p>YouTube reprocesses every video it receives, including live streams. This means YouTube applies its own encoding to your stream after receiving it.</p>
-<p>Streams that appear acceptable at lower bitrates on platforms like Twitch will often appear distorted on YouTube after YouTube's re-encoding process. Ensure you send YouTube as high-quality/bitrate of a stream as possible to obtain the best results.</p>
-<p>Refer to the <a href="../../performance/quality/">Quality Optimization Guide</a> and <a href="../../performance/bandwidth/">Bandwidth Requirements</a> for:</p>
+<h1 id="quality-optimization"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> Quality Optimization</h1>
+<p>This page covers strategies for optimizing stream quality based on your content type and resource constraints.</p>
+<h2 id="quality-fundamentals"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Quality Fundamentals</h2>
+<p>Stream quality is determined by three primary factors:</p>
+<ol>
+<li><strong>Resolution</strong>: Image dimensions (e.g., 1920x1080, 1280x720)</li>
+<li><strong>Frame Rate</strong>: Frames per second (e.g., 60fps, 30fps)</li>
+<li><strong>Bitrate</strong>: Data transmitted per second (e.g., 6000 kbps)</li>
+</ol>
+<p>Higher values for each = better quality, but also:</p>
 <ul>
-<li>Bitrate recommendations</li>
-<li>Resolution and framerate considerations</li>
-<li>Bandwidth requirements</li>
+<li>Increased bandwidth usage (see <a href="../bandwidth/">Bandwidth Requirements</a>)</li>
+<li>Increased CPU usage for encoding (see <a href="../hardware/">Hardware Requirements</a>)</li>
 </ul>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> See Also</h2>
-<h3 id="related-documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4.1</span> Related Documentation</h3>
+<h2 id="content-specific-optimization"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Content-Specific Optimization</h2>
+<p>Different stream content benefits from different quality priorities.</p>
+<h3 id="high-motion-content"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.1</span> High Motion Content</h3>
+<p><strong>Examples</strong>: FPS games, racing games, fast-paced action, IRL streaming</p>
+<p><strong>Optimization strategy</strong>:</p>
 <ul>
-<li><strong><a href="../../performance/quality/">Quality Optimization</a></strong> - Stream quality optimization</li>
-<li><strong><a href="../../performance/bandwidth/">Bandwidth Requirements</a></strong> - Network bandwidth guidance</li>
-<li><strong><a href="../../techref/architecture/">Architecture</a></strong> - Learn about relay patterns</li>
-<li><strong><a href="../../quickstart/">Quick Start Guide</a></strong> - Initial setup instructions</li>
+<li><strong>Prioritize frame rate</strong> (60fps) for smooth motion</li>
+<li><strong>Accept lower resolution</strong> (720p) to maintain frame rate</li>
+<li>Viewers perceive smooth motion as higher quality than static detail</li>
+</ul>
+<p><strong>Recommended settings</strong>: 720p @ 60fps</p>
+<h3 id="high-detail-content"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.2</span> High Detail Content</h3>
+<p><strong>Examples</strong>: Strategy games, puzzle games, art streams, slow-paced content</p>
+<p><strong>Optimization strategy</strong>:</p>
+<ul>
+<li><strong>Prioritize resolution</strong> (1080p) for crisp detail</li>
+<li><strong>Accept lower frame rate</strong> (30fps) since motion is minimal</li>
+<li>Static scenes benefit more from resolution than frame rate</li>
+</ul>
+<p><strong>Recommended settings</strong>: 1080p @ 30fps</p>
+<h2 id="balancing-quality-and-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3</span> Balancing Quality and Resources</h2>
+<p>When optimizing, consider the relationship between quality, bandwidth, and CPU:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>Higher Quality → More Bandwidth + More CPU
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>Lower Quality → Less Bandwidth + Less CPU
+</span></code></pre></div>
+<p><strong>If bandwidth-constrained</strong>: Reduce resolution or frame rate (see <a href="../bandwidth/">Bandwidth Requirements</a>)</p>
+<p><strong>If CPU-constrained</strong>: Use faster encoder presets or disable encoding services (see <a href="../hardware/">Hardware Requirements</a>)</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4</span> See Also</h2>
+<ul>
+<li><a href="../bandwidth/">Bandwidth Requirements</a> - Network bandwidth considerations</li>
+<li><a href="../hardware/">Hardware Requirements</a> - CPU and encoding performance</li>
+<li><a href="../../services/overview/">Services Overview</a> - Service pattern comparison</li>
 </ul>
 </article>
 </div>

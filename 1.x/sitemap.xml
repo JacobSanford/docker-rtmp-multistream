@@ -2,58 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/</loc>
-         <lastmod>2025-10-07</lastmod>
-    </url>
-    <url>
-         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/architecture/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/configuration/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
-         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/quality/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/contributing/</loc>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/quickstart/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/requirements/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/security/</loc>
-         <lastmod>2025-10-07</lastmod>
-    </url>
-    <url>
-         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/</loc>
-         <lastmod>2025-10-07</lastmod>
-    </url>
-    <url>
-         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/</loc>
-         <lastmod>2025-10-07</lastmod>
-    </url>
-    <url>
-         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/environment/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/testing/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/configuration/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/overview/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/testing/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/performance/bandwidth/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/performance/hardware/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/performance/quality/</loc>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/archive/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/overview/</loc>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/twitch/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
     </url>
     <url>
          <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/youtube/</loc>
-         <lastmod>2025-10-07</lastmod>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/techref/architecture/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/techref/environment/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/techref/service-patterns/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/connection-issues/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/ip_authentication/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/services/archive/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/services/twitch/</loc>
+         <lastmod>2025-11-08</lastmod>
+    </url>
+    <url>
+         <loc>https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/services/youtube/</loc>
+         <lastmod>2025-11-08</lastmod>
     </url>
 </urlset>

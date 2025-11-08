@@ -1,0 +1,13 @@
+/* Increase contrast for left sidebar navigation section headers */
+
+/* Light mode - make section headers much darker and bolder */
+[data-md-color-scheme="default"] .md-nav__item--section > .md-nav__link {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Dark mode - make section headers much lighter and bolder */
+[data-md-color-scheme="slate"] .md-nav__item--section > .md-nav__link {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
