@@ -55,14 +55,12 @@ docker build -t rtmp-multistream .
 
 ### Service Patterns
 
-**YouTube** (Simple Relay): Direct RTMP push without transcoding - just forwards the stream as-is to YouTube's ingest server.
+The system supports two patterns (see `docs/techref/service-patterns.md` for detailed comparison):
 
-**Twitch** (Transformer Pattern): Two-stage process:
-1. `relay` application receives stream and uses FFmpeg transformer to transcode/downscale
-2. Transcoded stream pushes to internal `twitch` application
-3. `twitch` application pushes to Twitch ingest
+- **Simple Relay**: Direct RTMP push without transcoding (YouTube, Archive, Twitch partner mode)
+- **Transformer**: Two-stage FFmpeg transcoding pipeline (Twitch non-partner mode)
 
-**Archive**: Modifies the main `relay` application to enable recording, saves to local disk with configurable path and format.
+**Twitch** uses a conditional dual-mode pattern based on `TWITCH_PARTNER` setting - partners use simple relay, non-partners use transformer for downscaling/optimization.
 
 ## Adding New Services
 
@@ -104,16 +102,18 @@ Follow the pattern in `docs/services/new.md`:
 ./tests/test.sh
 ```
 
-The test suite includes 28 tests across 4 categories:
+The test suite includes **146 tests** across 5 categories:
+- **Validation Tests** (113 tests): Comprehensive input validation and security testing
 - **Smoke Tests**: Quick sanity checks (Docker build, required components)
-- **Unit Tests**: Configuration and environment variable handling
+- **Unit Tests**: Configuration and environment variable handling (including security validation)
 - **Integration Tests**: Container startup with various service combinations
 - **Functional Tests**: End-to-end RTMP streaming, archiving, and authorization
 
 Individual test suites can be run separately:
 ```bash
-bash tests/01_smoke_tests.sh      # Smoke tests
-bash tests/02_unit_tests.sh       # Unit tests
+bash tests/00_validation_tests.sh  # Validation tests (113 tests)
+bash tests/01_smoke_tests.sh       # Smoke tests
+bash tests/02_unit_tests.sh        # Unit tests
 bash tests/03_integration_tests.sh # Integration tests
 bash tests/04_functional_tests.sh  # Functional tests (requires ffmpeg)
 ```
@@ -122,13 +122,39 @@ Tests automatically clean up containers and temporary files. Exit code 0 = all p
 
 See `tests/README.md` for detailed testing documentation.
 
+### Input Validation & Security
+
+All environment variables are validated before being used in configurations via `build/scripts/validate_input.sh`:
+
+**Validation Functions:**
+- `validate_stream_key()` - Prevents command injection in stream keys
+- `validate_path()` - Ensures safe file paths, blocks shell metacharacters
+- `validate_ip_range()` - Validates CIDR notation
+- `validate_number()` - Enforces numeric types with optional min/max bounds
+- `validate_identifier()` - Validates alphanumeric identifiers (codecs, presets)
+- `validate_bitrate()` - Validates bitrate format (numeric or with k/K suffix)
+- `validate_log_level()` - Whitelist validation for nginx log levels
+- `validate_suffix()` - Validates file extensions
+- `escape_for_sed()` - Safely escapes values for sed substitution
+
+**Security Protections:**
+- Command injection prevention (blocks `;|&$\`{}[]<>`)
+- Path traversal protection (blocks `../` sequences)
+- Configuration injection prevention (blocks newlines, null bytes)
+- Buffer overflow mitigation (length limits on all inputs)
+- Fail-fast behavior (`set -e` in all scripts)
+
+All configuration scripts validate inputs before use, preventing malicious values from reaching nginx configs or shell commands.
+
 ### CI/CD
 
 GitHub Actions automatically runs all test suites on every push and PR via `.github/workflows/ci.yml`. Each test type runs as a separate job:
-- Smoke Tests (runs first)
-- Unit Tests (after smoke tests pass)
-- Integration Tests (after smoke tests pass)
-- Functional Tests (after smoke tests pass)
+- Validation Tests (runs first, builds image)
+- Smoke Tests (after validation tests pass)
+- Unit Tests (parallel with smoke tests)
+- Integration Tests (parallel with smoke tests)
+- Functional Tests (parallel with smoke tests)
+- Build and Push (after all tests pass)
 
 ## Key Files
 
