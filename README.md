@@ -23,7 +23,7 @@ This project works best if deployed on a dedicated PC, separate from the one run
 * **YouTube** - Direct pass-through relay
 * **Archive** - Local disk recording
 
-New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/latest/developer/adding-services/) for details.
+New/Additional services can easily be added. See the [Developer Guide](https://jacobsanford.github.io/docker-rtmp-multistream/latest/developer/adding-services/overview/) for details.
 
 ## Issues
 Please report any issues or bugs you encounter by opening a new issue via the [Issues tab](https://github.com/JacobSanford/docker-rtmp-multistream/issues).
