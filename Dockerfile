@@ -30,6 +30,9 @@ RUN apk --no-cache add nginx-mod-rtmp ffmpeg && \
 
 EXPOSE 1935
 
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
 LABEL ca.unb.lib.generator="nginx" \
   org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.description="A lightweight docker-based nginx based RTMP relay/encoder for streaming simultaneously to Youtube, Twitch, and other services." \
