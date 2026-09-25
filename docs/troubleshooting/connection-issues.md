@@ -103,17 +103,22 @@ docker compose exec relay ping -c 3 a.rtmp.youtube.com
 
 ### Possible Causes
 
-#### 1. Configuration Syntax Error
+#### 1. Invalid Environment Value
 
-**Check**: Look for nginx errors:
+**Check**: Read the last lines of the log:
 
 ```bash
-docker compose logs relay | grep -i "error\|failed\|emergency"
+docker compose logs relay | grep -E "ERROR|\[!\]"
 ```
 
-**Solution**:
-- Check for typos in manually edited config files
-- Rebuild container: `docker compose build --no-cache`
+An invalid value prints the variable name and the script that stopped:
+
+```text
+ERROR: TWITCH_FPS must be a number.
+[!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
+```
+
+**Solution**: Correct the named variable in `env/relay.env`, then run `docker compose up -d --force-recreate`.
 
 #### 2. Port Already in Use
 
@@ -130,12 +135,12 @@ Look for: `bind: address already in use`
 - Find process: `sudo lsof -i :1935`
 - Kill it: `sudo kill <PID>`
 
-#### 3. Missing Dependencies
+#### 3. Outdated Image
 
-**Solution**: Pull latest base image:
+**Solution**: Rebuild the image against the latest base image, then recreate the container:
 ```bash
-docker compose pull
-docker compose build --no-cache
+docker compose build --pull
+docker compose up -d --force-recreate
 ```
 
 ## Advanced Diagnostics
