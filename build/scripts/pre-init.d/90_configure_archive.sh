@@ -14,8 +14,8 @@ validate_path "$ARCHIVE_PATH" "ARCHIVE_PATH" || exit 1
 validate_suffix "$ARCHIVE_SUFFIX" "ARCHIVE_SUFFIX" || exit 1
 
 if ! sudo -u $NGINX_RUN_USER test -w "$ARCHIVE_PATH"; then
-  echo "The archive path is not writable by the nginx user. Skipping Archive configuration."
-  exit 0
+  echo "ERROR: ARCHIVE_PATH is not writable by the nginx user."
+  exit 1
 fi
 
 # Escape values for safe sed substitution

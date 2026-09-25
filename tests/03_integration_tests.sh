@@ -37,6 +37,7 @@ test_container_starts_with_youtube() {
 
 test_container_starts_with_all_services() {
   mkdir -p "$TEST_TMP/archive"
+  chmod 777 "$TEST_TMP/archive"
   docker run -d --name test-rtmp-all \
     -e TWITCH_KEY=test_key \
     -e YOUTUBE_KEY=test_key \
@@ -121,6 +122,15 @@ test_container_stops_on_invalid_value() {
   [ "$running" = "false" ]
 }
 
+test_container_stops_on_unwritable_archive_path() {
+  docker run -d --name test-rtmp-unwritable -e ARCHIVE_PATH=/nonexistent rtmp-multistream:test >/dev/null 2>&1
+  sleep 3
+  local running
+  running=$(docker inspect -f '{{.State.Running}}' test-rtmp-unwritable 2>/dev/null)
+  docker rm -f test-rtmp-unwritable >/dev/null 2>&1
+  [ "$running" = "false" ]
+}
+
 # Run tests
 run_test "Container starts without configuration" test_container_starts_without_config
 run_test "Container starts with Twitch enabled" test_container_starts_with_twitch
@@ -133,3 +143,4 @@ run_test "Container logs show no errors" test_container_logs_no_errors
 run_test "Container starts with Twitch partner mode" test_container_starts_with_twitch_partner_mode
 run_test "Container starts with Twitch non-partner mode" test_container_starts_with_twitch_nonpartner_mode
 run_test "Container stops on invalid value" test_container_stops_on_invalid_value
+run_test "Container stops on unwritable archive path" test_container_stops_on_unwritable_archive_path
