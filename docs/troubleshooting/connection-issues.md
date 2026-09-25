@@ -155,7 +155,7 @@ docker compose up -d --force-recreate
 ### Increase Log Verbosity
 
 !!! warning
-    At `info`, the log includes your full stream URLs, **including stream keys**. Do not paste these logs into an issue or chat without removing the keys, and set the level back to `error` when you're done.
+    The log can contain your full stream URLs, **including stream keys**, at any level. At `info`, it does whenever you stream. Do not paste these logs into an issue or chat without removing the keys, and set the level back to `error` when you're done.
 
 Set the log level in `env/relay.env`:
 
