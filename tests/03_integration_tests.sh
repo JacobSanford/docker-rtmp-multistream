@@ -112,6 +112,15 @@ test_container_starts_with_twitch_nonpartner_mode() {
   return $result
 }
 
+test_container_stops_on_invalid_value() {
+  docker run -d --name test-rtmp-invalid -e YOUTUBE_KEY='bad key!' rtmp-multistream:test >/dev/null 2>&1
+  sleep 3
+  local running
+  running=$(docker inspect -f '{{.State.Running}}' test-rtmp-invalid 2>/dev/null)
+  docker rm -f test-rtmp-invalid >/dev/null 2>&1
+  [ "$running" = "false" ]
+}
+
 # Run tests
 run_test "Container starts without configuration" test_container_starts_without_config
 run_test "Container starts with Twitch enabled" test_container_starts_with_twitch
@@ -123,3 +132,4 @@ run_test "nginx config valid after startup" test_nginx_config_valid_after_startu
 run_test "Container logs show no errors" test_container_logs_no_errors
 run_test "Container starts with Twitch partner mode" test_container_starts_with_twitch_partner_mode
 run_test "Container starts with Twitch non-partner mode" test_container_starts_with_twitch_nonpartner_mode
+run_test "Container stops on invalid value" test_container_stops_on_invalid_value
