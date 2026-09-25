@@ -77,7 +77,7 @@ Replace `<endpoint>` with your chosen endpoint (e.g., `jfk`, `lax`, `ord`).
 **Check**: Look at container logs during startup:
 
 ```bash
-docker compose logs relay | grep -E "service enabled|Skipping"
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
 When Twitch is enabled, one of these lines appears, depending on `TWITCH_PARTNER`:
@@ -131,10 +131,16 @@ Twitch Partner configuration complete, and service enabled.
 Twitch Non-Partner configuration complete, and service enabled.
 ```
 
-**Error messages**:
+**Service skipped** — the relay keeps running without this service:
+```text
+TWITCH_KEY is not set. Skipping Twitch configuration.
 ```
-ERROR: TWITCH_KEY is not set
-ERROR: Failed to validate TWITCH_KEY
+
+**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
+```text
+ERROR: TWITCH_KEY contains invalid characters. Only alphanumeric, dash, underscore, period, and colon are allowed.
+ERROR: TWITCH_PARTNER must be TRUE or FALSE (case insensitive).
+[!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
 ```
 
 ## See Also

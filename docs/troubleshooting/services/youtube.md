@@ -77,7 +77,7 @@ Troubleshooting issues specific to streaming to YouTube.
 **Check**: Look at container logs during startup:
 
 ```bash
-docker compose logs relay | grep -E "service enabled|Skipping"
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
 When YouTube is enabled, this line appears:
@@ -129,10 +129,15 @@ docker compose logs relay | grep -i youtube
 YouTube configuration complete, and service enabled.
 ```
 
-**Error messages**:
+**Service skipped** — the relay keeps running without this service:
+```text
+YOUTUBE_KEY is not set. Skipping YouTube configuration.
 ```
-ERROR: YOUTUBE_KEY is not set
-ERROR: Failed to validate YOUTUBE_KEY
+
+**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
+```text
+ERROR: YOUTUBE_KEY contains invalid characters. Only alphanumeric, dash, underscore, period, and colon are allowed.
+[!] pre-init.d - 90_configure_youtube.sh failed. Stopping container.
 ```
 
 ## See Also

@@ -75,7 +75,7 @@ docker compose logs relay | grep -i error
 Verify which services are enabled:
 
 ```bash
-docker compose logs relay | grep -E "service enabled|Skipping"
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
 Each enabled service prints one line, for example:

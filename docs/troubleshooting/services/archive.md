@@ -159,10 +159,16 @@ docker compose logs relay | grep -i archive
 Archive configuration complete, and service enabled.
 ```
 
-**Error messages**:
+**Service skipped** — the relay keeps running without this service:
+```text
+ARCHIVE_PATH is not set. Skipping Archive configuration.
 ```
-ERROR: ARCHIVE_PATH is not set
-WARNING: /archive is not writable
+
+**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
+```text
+ERROR: ARCHIVE_PATH must be an absolute path starting with /.
+ERROR: ARCHIVE_PATH is not writable by the nginx user.
+[!] pre-init.d - 90_configure_archive.sh failed. Stopping container.
 ```
 
 ## See Also
