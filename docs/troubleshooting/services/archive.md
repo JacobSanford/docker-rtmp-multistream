@@ -135,16 +135,26 @@ ARCHIVE_SUFFIX=mp4   # Better compatibility with players
 
 ## Files Not Named as Expected
 
-**Issue**: Archive filenames are unclear
+Archive files are named:
 
-**Current behavior**: Files use timestamp-based naming.
+```text
+<STREAM_NAME>-<UNIX_TIME>_<DDMMYYYY>_<HHMMSS>.<ARCHIVE_SUFFIX>
+```
 
-**Solution**: Files are named automatically based on:
-- Stream name from OBS
-- Timestamp
-- Suffix from `ARCHIVE_SUFFIX`
+| Part | Meaning |
+|---|---|
+| `<STREAM_NAME>` | The stream key set in OBS, the part after `rtmp://<RELAY_IP>/relay/` |
+| `<UNIX_TIME>` | When recording started, in seconds since 1970 |
+| `<DDMMYYYY>_<HHMMSS>` | When recording started, day first, in **UTC** |
+| `<ARCHIVE_SUFFIX>` | The `ARCHIVE_SUFFIX` value |
 
-Example: `mystream_2025-10-21_143022.flv`
+Example, a stream named `mystream` recorded at 13:16:49 UTC on 25 September 2026:
+
+```text
+mystream-1790342209_25092026_131649.mp4
+```
+
+Because the Unix time comes first, sorting files by name sorts each stream's recordings in the order they were recorded.
 
 ## Archive Grows Too Large
 
