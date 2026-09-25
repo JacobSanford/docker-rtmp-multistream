@@ -89,7 +89,7 @@ Follow the pattern in `docs/services/new.md`:
 - `TWITCH_AUDIO_BITRATE`: Audio bitrate (default: 160k)
 - `TWITCH_CODEC`: Video codec (default: libx264)
 - `TWITCH_X264_PRESET`: Encoding preset (default: medium)
-- `TWITCH_ENDPOINT`: Twitch ingest endpoint (default: jfk)
+- `TWITCH_ENDPOINT`: Twitch ingest endpoint (default: use10)
 
 ### System
 - `PUBLISH_IP_RANGE`: IP range allowed to publish streams (default: 192.168.0.0/16)

@@ -25,7 +25,7 @@ For Twitch Partners, the Twitch relay uses a **simple relay pattern** - it forwa
 |----------|-------------|---------|
 | `TWITCH_KEY` | The stream key provided by Twitch. | `` |
 | `TWITCH_PARTNER` | Boolean flag to indicate if the user is a Twitch Partner. | `FALSE` |
-| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `jfk` |
+| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `use10` |
 
 All other Twitch-related environment variables are ignored when using the partner configuration.
 
@@ -41,7 +41,7 @@ The Twitch service can be configured by setting the following environment variab
 | `TWITCH_KEY` | The stream key provided by Twitch. | `` |
 | `TWITCH_AUDIO_BITRATE` | The audio bitrate for the stream. 160k is the Maximum audio bit rate supported by Twitch. | `160k` |
 | `TWITCH_CODEC` | The codec to use for the stream. This is unlikely to change. | `libx264` |
-| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `jfk` |
+| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `use10` |
 | `TWITCH_FFMPEG_THREADS` | The number of CPU threads to use for encoding. The default `0` instructs FFmpeg to auto-optimize. | `0` |
 | `TWITCH_FPS` | The frames per second for the stream. | `60` |
 | `TWITCH_HEIGHT` | The height of the video stream in pixels. | `720` |

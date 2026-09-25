@@ -48,13 +48,20 @@ See [Twitch Configuration](../../services/twitch.md) for detailed settings.
 
 **Issue**: Stream works sometimes, fails other times
 
-**Check**: Test different ingest servers:
+**Check**: Try a different ingest server. Set `TWITCH_ENDPOINT` in `env/relay.env` to a region code from [Twitch's ingest list](https://ingest.twitch.tv/ingests){target="_blank"}. The code is the first part of each `url_template` host, for example `use20` from `rtmp://use20.contribute.live-video.net/app/{stream_key}`:
 
 ```bash
-# Try different endpoints
-TWITCH_ENDPOINT=lax  # Los Angeles
-TWITCH_ENDPOINT=ord  # Chicago
-TWITCH_ENDPOINT=iad  # Ashburn
+TWITCH_ENDPOINT=use20  # US East (Ohio)
+TWITCH_ENDPOINT=usw20  # US West (Oregon)
+TWITCH_ENDPOINT=euc10  # Europe (Frankfurt)
+```
+
+The default is `use10` (US East, N. Virginia). Older names such as `jfk` still work as aliases for current servers.
+
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
 ```
 
 **Verify connectivity**: Test that the relay can open an RTMP connection (TCP port 1935) to Twitch:
@@ -63,10 +70,10 @@ TWITCH_ENDPOINT=iad  # Ashburn
 docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935
 ```
 
-Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `jfk`). A working connection prints `open` (the IP address will differ):
+Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `use10`). A working connection prints `open` (the IP address will differ):
 
 ```text
-jfk.contribute.live-video.net (35.55.32.14:1935) open
+use10.contribute.live-video.net (35.55.30.14:1935) open
 ```
 
 If the command does not print `open`, outbound port 1935 is blocked between the relay and Twitch.

@@ -132,7 +132,7 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 
 **Type**: String (server code)
 
-**Default**: `jfk` (New York)
+**Default**: `use10` (US East, N. Virginia)
 
 **Required**: No
 

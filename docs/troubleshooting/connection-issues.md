@@ -100,10 +100,10 @@ docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 193
 docker compose exec relay nc -zv a.rtmp.youtube.com 1935
 ```
 
-Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `jfk`). A working connection prints `open` (the IP address will differ):
+Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `use10`). A working connection prints `open` (the IP address will differ):
 
 ```text
-jfk.contribute.live-video.net (35.55.32.14:1935) open
+use10.contribute.live-video.net (35.55.30.14:1935) open
 ```
 
 If the command does not print `open`, outbound port 1935 is blocked between the relay and the service.

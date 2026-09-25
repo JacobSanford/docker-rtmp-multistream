@@ -44,12 +44,7 @@ Troubleshooting issues specific to streaming to YouTube.
 
 **Check**: YouTube Studio → Stream settings → Latency
 
-**Options**:
-- **Normal latency**: 8-12 seconds (default)
-- **Low latency**: 4-8 seconds
-- **Ultra-low latency**: 2-4 seconds
-
-**Note**: Lower latency may affect stream quality for viewers with slow connections.
+**Options**: Normal latency (default), Low latency, Ultra-low latency. The relay does not affect this setting.
 
 ## Encoding Warnings
 
@@ -62,7 +57,7 @@ Troubleshooting issues specific to streaming to YouTube.
 - "Resolution mismatch" - Ensure OBS output matches expected resolution
 - "Bitrate too low" - Increase OBS bitrate
 
-**Solution**: YouTube prefers high bitrate for best quality (15-20 Mbps recommended).
+**Solution**: The relay passes the YouTube stream through unchanged, so set bitrate and resolution in OBS. For YouTube's recommended values, see [Choose live encoder settings, bitrates, and resolutions](https://support.google.com/youtube/answer/2853702){target="_blank"}.
 
 ## Stream Not Appearing
 
