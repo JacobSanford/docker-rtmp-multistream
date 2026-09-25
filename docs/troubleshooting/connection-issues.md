@@ -76,22 +76,7 @@ A denied connection logs the address the relay saw:
 [error] 89#89: *1 access forbidden by rule, client: 172.17.0.1, server: 0.0.0.0:1935
 ```
 
-If this line appears, follow [IP Authentication](ip_authentication.md). The `client:` address is the one to allow.
-
-**Solution**: Adjust `PUBLISH_IP_RANGE` in `env/relay.env`:
-```bash
-# Allow entire local network
-PUBLISH_IP_RANGE=192.168.0.0/16
-
-# Allow specific IP
-PUBLISH_IP_RANGE=192.168.1.50/32
-```
-
-Recreate the container so it reads the new value:
-
-```bash
-docker compose up -d --force-recreate
-```
+**Solution**: Follow the steps in [IP Authentication](ip_authentication.md#solution) to add the refused `client:` address to `PUBLISH_IP_RANGE`.
 
 ### Network Connectivity Test
 
