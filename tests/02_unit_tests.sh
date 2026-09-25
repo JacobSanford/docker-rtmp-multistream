@@ -67,7 +67,7 @@ test_twitch_transformer_configured() {
   docker run --rm --entrypoint sh -e TWITCH_KEY=test -e TWITCH_HEIGHT=1080 -e TWITCH_FPS=30 rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
     /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
-    grep -q 'scale=-1:1080' /etc/nginx/http.d/transformers/twitch.conf && \
+    grep -q 'scale=-2:1080' /etc/nginx/http.d/transformers/twitch.conf && \
     grep -q '\-r 30' /etc/nginx/http.d/transformers/twitch.conf
   "
   return $?
