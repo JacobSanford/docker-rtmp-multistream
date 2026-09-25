@@ -27,22 +27,33 @@ Troubleshooting issues specific to streaming to Twitch.
 
 **Issue**: Stream looks worse on Twitch than expected
 
-**Check**: Verify transcoding settings:
+These settings apply only when `TWITCH_PARTNER=FALSE` (the default). In partner mode the relay passes the stream through unchanged, so set quality in OBS instead.
+
+**Solution**: In `env/relay.env`, raise the bitrate or use a slower encoder preset:
 
 ```bash
-grep TWITCH env/relay.env
+# Video bitrate is TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS: 100 × 60 = 6000 kbps (default 75 × 60 = 4500)
+TWITCH_KBITS_PER_VIDEO_FRAME=100
+
+# Better quality per bit, but uses more CPU (default: medium)
+TWITCH_X264_PRESET=slow
 ```
 
-**Solution**: Adjust quality settings:
+Recreate the container so it reads the new values:
+
 ```bash
-# Increase bitrate
-TWITCH_KBITS_PER_VIDEO_FRAME=100  # From 75
-
-# Better encoding quality (more CPU)
-TWITCH_X264_PRESET=slow  # From medium
+docker compose up -d --force-recreate
 ```
 
-See [Twitch Configuration](../../services/twitch.md) for detailed settings.
+While streaming, check the relay's CPU use:
+
+```bash
+docker stats --no-stream
+```
+
+If `CPU %` stays near the machine's limit, set `TWITCH_X264_PRESET` back to `medium`.
+
+See [Twitch Configuration](../../services/twitch.md) for all settings.
 
 ## Ingest Server Issues
 
