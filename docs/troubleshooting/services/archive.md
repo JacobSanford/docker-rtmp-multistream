@@ -45,6 +45,18 @@ docker compose logs relay | grep -i archive
 ARCHIVE_PATH=/archive
 ```
 
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+Confirm the service is enabled:
+
+```bash
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+```
+
 #### 2. Permission Denied
 
 **Check**: Look for permission errors:
@@ -75,10 +87,16 @@ volumes:
   - ./stream_archive:/archive
 ```
 
-Then restart:
+Recreate the container so it uses the new volume:
+
 ```bash
-docker compose down
-docker compose up
+docker compose up -d --force-recreate
+```
+
+Confirm the service is enabled:
+
+```bash
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
 #### 4. Disk Space

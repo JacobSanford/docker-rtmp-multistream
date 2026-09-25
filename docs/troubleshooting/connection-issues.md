@@ -79,6 +79,12 @@ PUBLISH_IP_RANGE=192.168.0.0/16
 PUBLISH_IP_RANGE=192.168.1.50/32
 ```
 
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
+```
+
 ### Network Connectivity Test
 
 If relay can't reach streaming services:

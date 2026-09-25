@@ -98,7 +98,18 @@ If Twitch is not enabled, this line appears instead: `TWITCH_KEY is not set. Ski
 
 **Solution**: If Twitch is missing:
 - Verify `TWITCH_KEY` is set in `env/relay.env`
-- Restart container after setting the key
+
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+Confirm the service is enabled:
+
+```bash
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+```
 
 #### 2. Invalid Stream Key
 

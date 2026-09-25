@@ -15,6 +15,12 @@ relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, clie
 ## Solution
 This error will provide you with the correct client IP address that was denied access. In the example above, the client's apparent IP is `172.22.0.1`. Setting the `PUBLISH_IP_RANGE` to a mask that include this IP address (e.g., `172.22.0.0/16`) will resolve the issue.
 
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
+```
+
 ## Choosing an Appropriate PUBLISH_IP_RANGE
 The streaming software's IP address detected by the _docker-rtmp-multistream_ container may differ from what you expect based on how you are connecting to it.
 
