@@ -181,7 +181,10 @@ Default: `192.168.0.0/16` (local network only)
 Service stream keys are:
 - Stored in `env/relay.env` (not committed to git)
 - Injected into config at runtime
-- Never logged or exposed
+- Present in plain text in the generated nginx config inside the container
+- Written to the container log when `NGINX_ERROR_LOG_LEVEL` is `info` or more verbose: nginx logs the full push URL, including the key, when it starts relaying a stream
+
+Remove keys before sharing logs or config. See [Increase Log Verbosity](../troubleshooting/connection-issues.md#increase-log-verbosity).
 
 ## Archive Service
 
