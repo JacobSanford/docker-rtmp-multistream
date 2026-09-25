@@ -57,6 +57,20 @@ validate_path() {
     return 1
   fi
 
+  # nginx splits directive arguments on whitespace
+  if echo "$path" | grep -qE '[[:space:]]'; then
+    echo "ERROR: $name must not contain spaces or tabs."
+    return 1
+  fi
+
+  # Block path traversal
+  case "$path/" in
+    */../*)
+      echo "ERROR: $name must not contain '..' path segments."
+      return 1
+      ;;
+  esac
+
   # Check for dangerous characters (check each separately for reliability)
   if echo "$path" | grep -qF ';'; then
     echo "ERROR: $name contains invalid shell metacharacters."

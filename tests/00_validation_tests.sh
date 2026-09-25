@@ -126,6 +126,22 @@ test_path_invalid_backtick() {
   run_validation_test "validate_path" '/tmp/archive`cmd`' "with backtick" 1
 }
 
+test_path_valid_dots_in_name() {
+  run_validation_test "validate_path" "/tmp/archive..old" "dots inside a name" 0
+}
+
+test_path_invalid_space() {
+  run_validation_test "validate_path" "/tmp/my archive" "with space" 1
+}
+
+test_path_invalid_traversal() {
+  run_validation_test "validate_path" "/tmp/../../../etc" "with ../ traversal" 1
+}
+
+test_path_invalid_trailing_dotdot() {
+  run_validation_test "validate_path" "/tmp/archive/.." "ending in /.." 1
+}
+
 test_path_invalid_too_long() {
   local long_path="/$(printf 'a%.0s' {1..501})"
   run_validation_test "validate_path" "$long_path" "too long (501 chars)" 1
@@ -606,6 +622,10 @@ run_test "  invalid: pipe" test_path_invalid_pipe
 run_test "  invalid: ampersand" test_path_invalid_ampersand
 run_test "  invalid: dollar sign" test_path_invalid_dollar
 run_test "  invalid: backtick" test_path_invalid_backtick
+run_test "  valid: dots inside a name" test_path_valid_dots_in_name
+run_test "  invalid: space" test_path_invalid_space
+run_test "  invalid: ../ traversal" test_path_invalid_traversal
+run_test "  invalid: ending in /.." test_path_invalid_trailing_dotdot
 run_test "  invalid: too long" test_path_invalid_too_long
 
 echo ""
