@@ -1,6 +1,7 @@
 services:
   relay:
     image: ghcr.io/jacobsanford/rtmp-multistream:1.x
+    build: .
     ports:
       - "1935:1935"
     env_file:
