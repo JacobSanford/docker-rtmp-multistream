@@ -1,61 +1,69 @@
 ---
-title: Twitch Service
-description: Configure Twitch streaming with automatic transcoding and optimization
+title: Stream to Twitch
+description: Enable the Twitch service in partner or non-partner mode and tune its output
 audience: users
 doc_type: howto
 tags: [twitch, streaming, transformer, transcoding, quality, partner, relay]
-lastReviewed: 2025-11-06
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Twitch
+# Stream to Twitch
 
 ## Overview
-The relay streams to Twitch. To enable this feature, set the `TWITCH_KEY` environment variable in the `env/relay.env` file to the stream key provided by Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.
+The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.
+
+## Enable Twitch
+
+1. In `env/relay.env`, set `TWITCH_KEY` to the stream key provided by Twitch.
+2. Partners only: set `TWITCH_PARTNER=TRUE`.
+3. Recreate the container so it reads the new values:
+
+    ```bash
+    docker compose up -d --force-recreate
+    ```
+
+4. Confirm the service is enabled:
+
+    ```bash
+    docker compose logs relay | grep Twitch
+    ```
+
+    Non-partner output: `Twitch Non-Partner configuration complete, and service enabled.`
+
+    Partner output: `Twitch Partner configuration complete, and service enabled.`
+
+    If you see `TWITCH_KEY is not set. Skipping Twitch configuration.`, check step 1.
 
 ## Partner vs. Non-Partner Streaming
+
 Twitch partners with transcoding services should send higher-bitrate streams to take advantage of Twitch's multi-bitrate transcoding. Non-partners should use the relay's built-in transcoding to optimize their streams for Twitch.
 
-## Partner Streaming
-For Twitch Partners, the Twitch relay uses a **simple relay pattern** - it forwards your stream directly to Twitch without any re-encoding or modification. This preserves your original stream quality for Twitch's transcoding services.
+- **Partner mode** (`TWITCH_PARTNER=TRUE`) uses the **simple relay pattern**: the relay forwards your stream to Twitch without re-encoding it. Only `TWITCH_KEY` and `TWITCH_ENDPOINT` apply; all other Twitch variables are ignored.
+- **Non-partner mode** (the default) uses the **transformer pattern**: the relay re-encodes the stream with FFmpeg before forwarding it, so you can send a high-quality stream from your streaming software while the relay produces one suited to Twitch.
 
-### Configuration (Partners)
+## Settings
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `TWITCH_KEY` | The stream key provided by Twitch. | `` |
-| `TWITCH_PARTNER` | Boolean flag to indicate if the user is a Twitch Partner. | `FALSE` |
-| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `use10` |
+Choose `TWITCH_ENDPOINT` from the [current endpoint list](../techref/environment.md#twitch_endpoint). In non-partner mode, the encoder settings (`TWITCH_HEIGHT`, `TWITCH_FPS`, `TWITCH_KBITS_PER_VIDEO_FRAME`, `TWITCH_X264_PRESET`, `TWITCH_AUDIO_BITRATE`, `TWITCH_AUDIO_CHANNELS`, `TWITCH_FFMPEG_THREADS`) control the output.
 
-All other Twitch-related environment variables are ignored when using the partner configuration.
+For every Twitch variable's default and valid values, see [Twitch Variables](../techref/environment.md#twitch-variables).
 
-## Non-Partner Streaming
-For non-partners, the Twitch relay uses a **transformer pattern** - it re-encodes the incoming stream using FFmpeg before forwarding it to Twitch. This allows you to send a high-quality stream from your streaming software while the relay optimizes it for Twitch's requirements.
+### Fixed Output Settings
 
-### Configuration (Non-Partners)
+The transformer always applies these settings. No variable changes them.
 
-The Twitch service can be configured by setting the following environment variables:
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `TWITCH_KEY` | The stream key provided by Twitch. | `` |
-| `TWITCH_AUDIO_BITRATE` | The audio bitrate for the stream. 160k is the Maximum audio bit rate supported by Twitch. | `160k` |
-| `TWITCH_CODEC` | The codec to use for the stream. This is unlikely to change. | `libx264` |
-| `TWITCH_ENDPOINT` | The Twitch ingest server slug to use. See the [Recommended Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"} or the [complete endpoint list](../techref/environment.md#twitch_endpoint). | `use10` |
-| `TWITCH_FFMPEG_THREADS` | The number of CPU threads to use for encoding. The default `0` instructs FFmpeg to auto-optimize. | `0` |
-| `TWITCH_FPS` | The frames per second for the stream. | `60` |
-| `TWITCH_HEIGHT` | The height of the video stream in pixels. | `720` |
-| `TWITCH_KBITS_PER_VIDEO_FRAME` | The number of kilobits per video frame. Change this to control the bitrate of the video stream. See `TWITCH_KBITS_PER_VIDEO_FRAME` below. | `75` |
-| `TWITCH_X264_PRESET` | The x264 preset to use for encoding. A list of options is available [in the x264 documentation](https://trac.ffmpeg.org/wiki/Encode/H.264){target="_blank"}. 'Slower' presets increase computational costs but typically provide higher quality output at the same bitrate. Slower than `medium` generally offers rapidly diminishing returns. | `medium` |
+| Property | Value |
+|----------|-------|
+| Audio codec | AAC, 44.1 kHz |
+| Video codec | H.264, Main profile, 4:2:0 (`yuv420p`) |
+| Rate control | Constant bitrate (CBR) |
+| Keyframe interval | 2 seconds (`2 × TWITCH_FPS` frames), no scene-cut keyframes |
 
 ### Optimizing Twitch Quality
 
-For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections.
+For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections, and [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US){target="_blank"}.
 
-Twitch provides a [guide](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"} on encoding settings. Key points:
-
-- **Maximum video bitrate**: 6000 kbps (even for 1080p/60fps)
-- **Transcoding availability**: [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US){target="_blank"}
+Twitch publishes its bitrate and encoder limits in its [Broadcasting Guidelines](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"}. Check them before raising `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_AUDIO_BITRATE` above the defaults.
 
 ### Recommended Bitrates
 

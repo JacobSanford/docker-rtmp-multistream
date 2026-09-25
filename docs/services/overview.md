@@ -18,13 +18,15 @@ docker-rtmp-multistream supports multiple streaming destinations with different 
 |---------|---------|-----------|-----------|-----------------|----------|
 | [Twitch](twitch.md) | Conditional¹ | Minimal/High | High/Moderate | Passthrough/Full control | Partners: max quality. Non-partners: optimization |
 | [YouTube](youtube.md) | Simple Relay | Minimal | High | Source passthrough | Maximum quality, leveraging YouTube's re-encoding |
-| [Archive](archive.md) | Simple Relay | Minimal | None (disk I/O) | Source passthrough | Local backup, VOD creation |
+| [Archive](archive.md) | Recorder² | Minimal | None (disk I/O) | Source passthrough | Local backup, video on demand (VOD) creation |
 
 ¹ Twitch pattern depends on `TWITCH_PARTNER` setting - see [Twitch Configuration](twitch.md#partner-vs-non-partner-streaming)
 
+² Archive is not a relay. It records every stream the `relay` application receives to disk, with no re-encoding. See [Archive Service](../techref/architecture.md#archive-service).
+
 ## Service Patterns
 
-Services use one of two architectural patterns: **Simple Relay** (direct forwarding) or **Transformer** (FFmpeg re-encoding).
+Destination services use one of two architectural patterns: **Simple Relay** (direct forwarding) or **Transformer** (FFmpeg re-encoding). Archive is a recorder and uses neither.
 
 For a detailed comparison of these patterns, see **[Service Patterns Reference](../techref/service-patterns.md)**.
 

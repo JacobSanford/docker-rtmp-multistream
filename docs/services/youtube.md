@@ -1,28 +1,43 @@
 ---
-title: YouTube Service
-description: Configure YouTube streaming with direct pass-through
+title: Stream to YouTube
+description: Enable the YouTube service, which forwards your stream without re-encoding
 audience: users
 doc_type: howto
 tags: [youtube, streaming, relay, passthrough]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# YouTube
+# Stream to YouTube
 
 ## Overview
 
-The relay streams to YouTube using direct pass-through. To enable this feature, set the `YOUTUBE_KEY` environment variable in the `env/relay.env` file to the stream key provided by YouTube.
+The relay streams to YouTube using direct pass-through.
 
 The YouTube relay uses a **simple relay pattern** - it forwards your stream directly to YouTube without any re-encoding or modification. This preserves your original stream quality for YouTube's reprocessing.
 
-## Configuration
+## Enable YouTube
 
-The YouTube service can be configured by setting the following environment variables:
+1. In `env/relay.env`, set `YOUTUBE_KEY` to the stream key provided by YouTube.
+2. Recreate the container so it reads the new values:
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `YOUTUBE_KEY` | The stream key provided by YouTube. | `` |
+    ```bash
+    docker compose up -d --force-recreate
+    ```
+
+3. Confirm the service is enabled:
+
+    ```bash
+    docker compose logs relay | grep YouTube
+    ```
+
+    Expected output: `YouTube configuration complete, and service enabled.`
+
+    If you see `YOUTUBE_KEY is not set. Skipping YouTube configuration.`, check step 1.
+
+## Settings
+
+`YOUTUBE_KEY` is the only YouTube variable. For its valid values, see [YouTube Variables](../techref/environment.md#youtube-variables).
 
 ## A Note on YouTube's Re-encoding
 
@@ -37,8 +52,6 @@ Refer to the [Quality Optimization Guide](../performance/quality.md) and [Bandwi
 - Bandwidth requirements
 
 ## See Also
-
-### Related Documentation
 
 - **[Quality Optimization](../performance/quality.md)** - Stream quality optimization
 - **[Bandwidth Requirements](../performance/bandwidth.md)** - Network bandwidth guidance
