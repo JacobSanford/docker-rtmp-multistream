@@ -127,6 +127,8 @@ ERROR: TWITCH_FPS must be a number.
 
 **Solution**: Correct the named variable in `env/relay.env`, then run `docker compose up -d --force-recreate`.
 
+If you can't tell what's wrong and need the relay back quickly, undo your last change to `env/relay.env` and recreate the container the same way.
+
 #### 2. Port Already in Use
 
 **Check**: `docker compose up -d` prints one of these:
