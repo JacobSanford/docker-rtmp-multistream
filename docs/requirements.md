@@ -1,43 +1,47 @@
 ---
 title: Requirements
-description: System requirements and prerequisites for docker-rtmp-multistream
+description: What the relay host needs before you start, and how to check each item
 audience: users
 doc_type: reference
 tags: [requirements, prerequisites, docker, setup]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
 # Requirements
 
-## Operating Systems
+Check each item on the relay host before following the [Quick Start](quickstart.md).
 
-**Supported OS**: Linux is the only supported operating system. While it may be possible to deploy on OSX or Windows, it is not officially supported.
+## Operating System
 
+Linux is the only supported operating system. The relay may run on macOS or Windows, but that is not tested.
 
-## Software Prerequisites
+## Software
 
-Ensure the following packages are installed and configured for the current user:
+| Requirement | Check | Expected |
+|---|---|---|
+| Docker Engine ([install](https://docs.docker.com/engine/install/){target="_blank"}) | `docker --version` | Prints a version |
+| Docker Compose v2 plugin ([install](https://docs.docker.com/compose/install/){target="_blank"}) | `docker compose version` | Prints a version. `start.sh` uses `docker compose`; the older standalone `docker-compose` command does not work with it. |
+| Docker without `sudo` ([steps](https://docs.docker.com/engine/install/linux-postinstall/){target="_blank"}) | `docker ps` | Prints a table, not `permission denied` |
+| git | `git --version` | Prints a version |
 
-- **Docker**: Follow the [installation guide](https://docs.docker.com/install/){target="_blank"}.
-- **Docker Compose**: Follow the [installation guide](https://docs.docker.com/compose/install/){target="_blank"}.
+## Network
 
+| Requirement | Why | Check |
+|---|---|---|
+| Inbound TCP port 1935 on the relay host, from the streaming PC | OBS sends its stream to the relay on this port | After the relay starts, from the streaming PC: `nc -zv <RELAY_IP> 1935` (Linux, macOS) or `Test-NetConnection <RELAY_IP> -Port 1935` (Windows PowerShell) succeeds |
+| Outbound TCP port 1935 from the relay host | The relay forwards the stream to Twitch and YouTube over the Real-Time Messaging Protocol (RTMP) | `nc -zv use10.contribute.live-video.net 1935` and `nc -zv a.rtmp.youtube.com 1935` each print a line containing `succeeded` or `open` |
+| Outbound HTTPS from the relay host | Building the image downloads the base image and packages | `docker compose build --pull` completes |
+| Streaming PC address inside `PUBLISH_IP_RANGE` | The relay refuses streams from any other address. The default allows `172.16.0.0/12` and `192.168.0.0/16`. | See [OBS Is Refused](troubleshooting/ip_authentication.md) |
 
-## Networking
+`<RELAY_IP>` is the relay host's LAN address. If a proxy server sits between the relay host and the internet, it must allow both outbound HTTPS and outbound RTMP.
 
-### Network Access
-The following network requirements must be met:
+## Bandwidth and Hardware
 
-- **HTTP/HTTPS Requests**: Building the docker image requires outbound HTTP and HTTPS requests.
-- **RTMP Requests**: Video is relayed through RTMP requests.
-
-Your OS, network, or ISP must not block either type of request. If you use a proxy server to connect to the web, ensure it accommodates the above requirements.
-
-### Bandwidth
-Sufficient upload bandwidth is required to stream to multiple services simultaneously. See the [Bandwidth Requirements](performance/bandwidth.md) for details on bandwidth usage per service.
+The relay host's upload must carry every service at once. See [Bandwidth Requirements](performance/bandwidth.md) and [Hardware Requirements](performance/hardware.md).
 
 ## See Also
 
-- [Bandwidth Requirements](performance/bandwidth.md) - Network bandwidth considerations
+- [Quick Start](quickstart.md) - First-time setup
+- [Bandwidth Requirements](performance/bandwidth.md) - Upload needed per service
 - [Hardware Requirements](performance/hardware.md) - CPU and system resources
-- [Quick Start Guide](quickstart.md) - Get up and running in 5 minutes
