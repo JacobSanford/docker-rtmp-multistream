@@ -111,18 +111,31 @@ Confirm the service is enabled:
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
-#### 2. Invalid Stream Key
+#### 2. Wrong Stream Key
 
-**Check**: Look for authentication errors in logs:
+A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.
+
+**Check**: Confirm the relay can reach Twitch:
 
 ```bash
-docker compose logs relay | grep -i "error\|auth\|publish"
+docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935
 ```
 
-**Solution**:
-- Verify stream key is correct in `env/relay.env`
-- Check for extra spaces or quotes around key
-- Get fresh key from Twitch dashboard
+Then start streaming and open Stream Manager. If the command above prints `open` and Stream Manager shows no incoming stream, the key is the likely cause.
+
+**Solution**: Copy the key again from Twitch dashboard into `env/relay.env`.
+
+Recreate the container so it reads the new value:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+Confirm the service is enabled:
+
+```bash
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+```
 
 #### 3. Platform-Specific Issues
 
