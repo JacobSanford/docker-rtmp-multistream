@@ -77,13 +77,16 @@ Troubleshooting issues specific to streaming to YouTube.
 **Check**: Look at container logs during startup:
 
 ```bash
-docker compose logs relay | grep -i "configured and enabled"
+docker compose logs relay | grep -E "service enabled|Skipping"
 ```
 
-**Expected output**:
+When YouTube is enabled, this line appears:
+
+```text
+YouTube configuration complete, and service enabled.
 ```
-YouTube configured and enabled.
-```
+
+If YouTube is not enabled, this line appears instead: `YOUTUBE_KEY is not set. Skipping YouTube configuration.`
 
 **Solution**: If YouTube is missing:
 - Verify `YOUTUBE_KEY` is set in `env/relay.env`
@@ -122,8 +125,8 @@ docker compose logs relay | grep -i youtube
 ### Common Log Messages
 
 **Success messages**:
-```
-YouTube configured and enabled.
+```text
+YouTube configuration complete, and service enabled.
 ```
 
 **Error messages**:

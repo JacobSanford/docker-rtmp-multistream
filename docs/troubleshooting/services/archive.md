@@ -155,8 +155,8 @@ docker compose logs relay | grep -i archive
 ### Common Log Messages
 
 **Success messages**:
-```
-Archive configured and enabled.
+```text
+Archive configuration complete, and service enabled.
 ```
 
 **Error messages**:

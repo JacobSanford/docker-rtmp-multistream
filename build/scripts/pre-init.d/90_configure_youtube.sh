@@ -19,4 +19,4 @@ sed -i "s|YOUTUBE_KEY|$YOUTUBE_KEY_ESC|g" "${NGINX_CONFD_DIR}/apps/youtube.conf"
 
 /scripts/enableService.sh youtube
 
-echo "Youtube configuration complete, and service enabled."
+echo "YouTube configuration complete, and service enabled."

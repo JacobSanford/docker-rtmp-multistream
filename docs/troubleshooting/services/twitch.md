@@ -77,13 +77,17 @@ Replace `<endpoint>` with your chosen endpoint (e.g., `jfk`, `lax`, `ord`).
 **Check**: Look at container logs during startup:
 
 ```bash
-docker compose logs relay | grep -i "configured and enabled"
+docker compose logs relay | grep -E "service enabled|Skipping"
 ```
 
-**Expected output**:
+When Twitch is enabled, one of these lines appears, depending on `TWITCH_PARTNER`:
+
+```text
+Twitch Partner configuration complete, and service enabled.
+Twitch Non-Partner configuration complete, and service enabled.
 ```
-Twitch configured and enabled.
-```
+
+If Twitch is not enabled, this line appears instead: `TWITCH_KEY is not set. Skipping Twitch configuration.`
 
 **Solution**: If Twitch is missing:
 - Verify `TWITCH_KEY` is set in `env/relay.env`
@@ -122,8 +126,9 @@ docker compose logs relay | grep -i twitch
 ### Common Log Messages
 
 **Success messages**:
-```
-Twitch configured and enabled.
+```text
+Twitch Partner configuration complete, and service enabled.
+Twitch Non-Partner configuration complete, and service enabled.
 ```
 
 **Error messages**:

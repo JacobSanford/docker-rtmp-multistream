@@ -75,14 +75,18 @@ docker compose logs relay | grep -i error
 Verify which services are enabled:
 
 ```bash
-docker compose logs relay | grep "configured and enabled"
+docker compose logs relay | grep -E "service enabled|Skipping"
 ```
 
-Expected output:
+Each enabled service prints one line, for example:
+
+```text
+Twitch Non-Partner configuration complete, and service enabled.
+YouTube configuration complete, and service enabled.
+Archive configuration complete, and service enabled.
 ```
-Twitch configured and enabled.
-YouTube configured and enabled.
-```
+
+A service that is not enabled prints a skip line instead, such as `YOUTUBE_KEY is not set. Skipping YouTube configuration.`
 
 ### Test Configuration Syntax
 
