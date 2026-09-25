@@ -64,11 +64,19 @@ telnet <relay-ip> 1935
 
 #### 4. IP Range Restriction
 
-**Check**: Look for "deny publish" in logs:
+**Check**: Look for a denied connection in the logs:
 
 ```bash
-docker compose logs relay | grep "deny\|publish"
+docker compose logs relay | grep "access forbidden"
 ```
+
+A denied connection logs the address the relay saw:
+
+```text
+[error] 89#89: *1 access forbidden by rule, client: 172.17.0.1, server: 0.0.0.0:1935
+```
+
+If this line appears, follow [IP Authentication](ip_authentication.md). The `client:` address is the one to allow.
 
 **Solution**: Adjust `PUBLISH_IP_RANGE` in `env/relay.env`:
 ```bash

@@ -59,10 +59,14 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 #### 2. Permission Denied
 
-**Check**: Look for permission errors:
+**Check**: Look for the writability error:
 
 ```bash
-docker compose logs relay | grep -i "permission\|denied"
+docker compose logs relay | grep "not writable"
+```
+
+```text
+ERROR: ARCHIVE_PATH is not writable by the nginx user.
 ```
 
 **Solution**: Fix directory permissions on host:
