@@ -282,7 +282,7 @@ validate_suffix() {
 
   # Allow: alphanumeric only (no dots, no paths)
   if ! echo "$suffix" | grep -qE '^[a-zA-Z0-9]+$'; then
-    echo "ERROR: $name must be alphanumeric only (e.g., mp4, flv, mkv)."
+    echo "ERROR: $name must be alphanumeric only (e.g., flv)."
     return 1
   fi
 
