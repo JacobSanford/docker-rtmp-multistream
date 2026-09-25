@@ -37,16 +37,12 @@ Services that re-encode video are CPU-intensive. Re-encoding processes your enti
 
 ## FFmpeg Thread Management
 
-The `TWITCH_FFMPEG_THREADS` environment variable controls how many CPU threads FFmpeg uses:
+The `TWITCH_FFMPEG_THREADS` environment variable controls how many threads the libx264 encoder uses in Twitch non-partner mode:
 
-- `0` (default): FFmpeg automatically optimizes thread usage based on available CPU
-- `N` (specific number): Limits FFmpeg to N threads
+- `0` (default): x264 chooses based on the CPU count
+- `N` (1 to 64): x264 uses N threads
 
-**When to limit threads**:
-
-- Running multiple encoding services simultaneously
-- Sharing CPU with other applications
-- Preventing one service from monopolizing CPU resources
+Limit threads when the relay shares a host with other CPU-heavy work. Only Twitch non-partner mode encodes; YouTube, Archive and Twitch partner mode use almost no CPU, so there is nothing to balance between services.
 
 ## Encoder Presets
 

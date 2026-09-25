@@ -185,17 +185,19 @@ Service stream keys are:
 
 ## Archive Service
 
-The Archive service modifies the main `relay` application rather than creating a separate app:
+The Archive service modifies the main `relay` application rather than creating a separate app. `90_configure_archive.sh` deletes `record off;` from `app.conf` and enables this include inside `application relay`:
 
 ```nginx
-application relay {
-    live on;
+recorder all {
     record all;
-    record_path {ARCHIVE_PATH};
-    record_suffix _{ARCHIVE_SUFFIX};
-    # ... transformer and push directives
+    record_path ARCHIVE_PATH;
+    record_unique on;
+    record_suffix _%d%m%Y_%H%M%S.ARCHIVE_SUFFIX;
+    record_notify on;
 }
 ```
+
+`ARCHIVE_PATH` and `ARCHIVE_SUFFIX` are replaced with their values at container start. For the resulting file names, see [File Naming](../services/archive.md#file-naming).
 
 This ensures all incoming streams are archived regardless of destination.
 

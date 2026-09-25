@@ -1,14 +1,14 @@
 ---
-title: Streaming Services Overview
+title: Choose a Streaming Service
 description: Comparison of supported streaming services and their characteristics
 audience: users
 doc_type: reference
 tags: [services, twitch, youtube, archive, comparison]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Streaming Services Overview
+# Choose a Streaming Service
 
 docker-rtmp-multistream supports multiple streaming destinations with different performance characteristics.
 
