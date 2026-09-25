@@ -147,17 +147,28 @@ docker compose up -d --force-recreate
 
 ### Increase Log Verbosity
 
-Edit `build/conf/nginx/nginx.conf` and change:
-```nginx
-error_log /var/log/nginx/error.log warn;
+!!! warning
+    At `info`, the log includes your full stream URLs, **including stream keys**. Do not paste these logs into an issue or chat without removing the keys, and set the level back to `error` when you're done.
+
+Set the log level in `env/relay.env`:
+
+```bash
+NGINX_ERROR_LOG_LEVEL=info
 ```
 
-to:
-```nginx
-error_log /var/log/nginx/error.log debug;
+Recreate the container:
+
+```bash
+docker compose up -d --force-recreate
 ```
 
-Rebuild: `docker compose build`
+When you start streaming, a line like this appears for each destination:
+
+```text
+relay: create push name='<STREAM_NAME>' ... url='a.rtmp.youtube.com/live2/<YOUTUBE_KEY>' ...
+```
+
+Valid values, least to most verbose: `emerg`, `alert`, `crit`, `error` (default), `warn`, `notice`, `info`. `debug` is also accepted, but this image's nginx gives no more output at `debug` than at `info`.
 
 ### Check nginx Configuration
 
