@@ -12,27 +12,58 @@ version: 1.x
 
 Complete reference for all environment variables used in docker-rtmp-multistream.
 
+Every value is validated when the container starts. An invalid value logs an `ERROR:` line naming the variable and stops the container. `TWITCH_CODEC` and `TWITCH_X264_PRESET` are the exceptions: they are checked for allowed characters only, so a wrong value lets the container start and fails when a stream arrives.
+
 !!! tip "Quick Configuration"
     For a practical guide on using these variables, see the [Configuration Guide](../configuration.md).
 
 ## System Variables
 
+### NGINX_ERROR_LOG_LEVEL
+
+**Description**: Minimum severity of messages nginx writes to the container log (`docker compose logs relay`).
+
+**Type**: String
+
+**Default**: `error`
+
+**Required**: No
+
+**Used by**: App configuration script (`89_configure_app.sh`)
+
+**Valid values** (most to least verbose): `debug`, `info`, `notice`, `warn`, `error`, `crit`, `alert`, `emerg`. Any other value, or an empty value, stops the container at start.
+
+**Example**:
+```bash
+NGINX_ERROR_LOG_LEVEL=info  # Log each connection and push while troubleshooting
+```
+
+!!! warning
+    The log can contain full stream URLs, including stream keys. At `info` and more verbose levels this happens every time you stream. Set the level back to `error` when you have finished troubleshooting.
+
+**See also**: [Increase Log Verbosity](../troubleshooting/connection-issues.md#increase-log-verbosity)
+
 ### PUBLISH_IP_RANGE
 
-**Description**: IP address range allowed to publish streams to the relay. Uses CIDR notation.
+**Description**: IPv4 address ranges allowed to publish streams to the relay, in Classless Inter-Domain Routing (CIDR) notation. Connections from any other address are refused with `access forbidden by rule` in the log. Connections from inside the container (`127.0.0.1`) are always allowed; the Twitch transformer uses this to republish its encoded stream.
 
-**Type**: String (CIDR notation)
+**Type**: String (comma-separated list of IPv4 CIDR ranges)
 
-**Default**: `172.17.0.0/16,192.168.0.0/16`
+**Default**: `172.16.0.0/12,192.168.0.0/16`: all Docker networks from Docker's default address pool, including the one `docker compose` creates, plus typical home networks.
+
+**Required**: No
 
 **Used by**: Authentication system (`auth.conf`)
 
+**Valid values**: One or more `a.b.c.d/n` ranges separated by commas, with each octet 0–255 and `n` 0–32. An empty or invalid value stops the container at start.
+
 **Examples**:
 ```bash
-PUBLISH_IP_RANGE=192.168.0.0/16   # Entire local network
-PUBLISH_IP_RANGE=192.168.1.0/24   # Specific subnet
-PUBLISH_IP_RANGE=192.168.1.50/32  # Single IP address
+PUBLISH_IP_RANGE=172.16.0.0/12,192.168.1.0/24  # Docker networks + one subnet
+PUBLISH_IP_RANGE=172.16.0.0/12,192.168.1.50/32 # Docker networks + one address
 ```
+
+**Note**: Setting this variable replaces the default. When OBS runs on the same machine as the relay, its connection arrives from the Docker network's gateway (for example `172.25.0.1`), so keep `172.16.0.0/12` in the list.
 
 **See also**: [Security](../security.md)
 
@@ -52,6 +83,8 @@ PUBLISH_IP_RANGE=192.168.1.50/32  # Single IP address
 
 **Used by**: Twitch application config
 
+**Valid values**: Letters, digits, `.`, `_`, `:` and `-`, up to 200 characters. Any other value stops the container at start.
+
 **Example**:
 ```bash
 TWITCH_KEY=live_123456789_abcdefghijklmnopqrstuvwxyz
@@ -63,7 +96,7 @@ TWITCH_KEY=live_123456789_abcdefghijklmnopqrstuvwxyz
 
 **Description**: Boolean flag indicating whether the user is a Twitch Partner with transcoding services. When `TRUE`, uses simple relay pattern (passthrough) like YouTube. When `FALSE`, uses transformer pattern (FFmpeg re-encoding).
 
-**Type**: Boolean (`TRUE` / `FALSE`, case insensitive)
+**Type**: Boolean (`TRUE` / `FALSE`, case insensitive). Any other value, such as `yes` or `1`, stops the container at start.
 
 **Default**: `FALSE`
 
@@ -96,9 +129,9 @@ TWITCH_PARTNER=FALSE
 
 ### TWITCH_AUDIO_BITRATE
 
-**Description**: Audio bitrate for the Twitch stream. 160k is the maximum supported by Twitch.
+**Description**: Audio bitrate for the Twitch stream. See Twitch's [Broadcasting Guidelines](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"} for the current maximum.
 
-**Type**: String (with 'k' suffix)
+**Type**: String
 
 **Default**: `160k`
 
@@ -106,10 +139,31 @@ TWITCH_PARTNER=FALSE
 
 **Used by**: Twitch transformer
 
+**Valid values**: Digits, optionally followed by `k` or `K` (`160k`, `160000`). The value is not checked against Twitch's maximum. Any other value stops the container at start.
+
 **Examples**:
 ```bash
-TWITCH_AUDIO_BITRATE=160k  # Maximum quality
+TWITCH_AUDIO_BITRATE=160k  # Default
 TWITCH_AUDIO_BITRATE=128k  # Good quality
+```
+
+### TWITCH_AUDIO_CHANNELS
+
+**Description**: Number of audio channels in the Twitch stream. `2` sends stereo; `1` downmixes to mono.
+
+**Type**: Integer
+
+**Default**: `2`
+
+**Required**: No
+
+**Used by**: Twitch transformer
+
+**Valid values**: `1` or `2`. Any other value stops the container at start.
+
+**Example**:
+```bash
+TWITCH_AUDIO_CHANNELS=2  # Stereo
 ```
 
 ### TWITCH_CODEC
@@ -124,7 +178,14 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 
 **Used by**: Twitch transformer
 
-**Possible values**: `libx264`, `libx264rgb`, other FFmpeg-supported codecs
+**Valid values**: `libx264`. The transformer sets H.264-specific options (`-x264opts`, `-profile:v main`) and sends FLV over RTMP, which in this image's FFmpeg carries H.264 only. Other encoders, including `libx264rgb` and `libx265`, fail.
+
+**Example**:
+```bash
+TWITCH_CODEC=libx264
+```
+
+**Note**: This value is not checked against a list at startup. An unsupported codec lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.
 
 ### TWITCH_ENDPOINT
 
@@ -138,24 +199,35 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 
 **Used by**: Twitch application config
 
-**Common values**:
-- `jfk` - New York, NY
-- `lax` - Los Angeles, CA
-- `dfw` - Dallas, TX
-- `ord` - Chicago, IL
-- `sea` - Seattle, WA
-- `iad` - Ashburn, VA
-- `fra` - Frankfurt, Germany
-- `lhr` - London, UK
-- `syd` - Sydney, Australia
-- `sin` - Singapore
-- `gru` - São Paulo, Brazil
+**Valid values**: Letters, digits, `_` and `-`, 1 to 100 characters. The relay connects to `rtmp://<TWITCH_ENDPOINT>.contribute.live-video.net/app/`, so the value must be a Twitch ingest slug.
+
+**Current endpoints** (from `https://ingest.twitch.tv/ingests`, checked 2026-09-25):
+
+| Slug | Location |
+|---|---|
+| `use10` | US East (N. Virginia) |
+| `use20` | US East (Ohio) |
+| `usw20` | US West (Oregon) |
+| `euw10` | Europe (Ireland) |
+| `euw30` | Europe (Paris) |
+| `euc10` | Europe (Frankfurt) |
+| `eun10` | Europe (Stockholm) |
+| `sae10` | South America (São Paulo) |
+| `apn10` | Asia Pacific (Tokyo) |
+| `apn20` | Asia Pacific (Seoul) |
+| `aps10` | Asia Pacific (Singapore) |
+| `aps20` | Asia Pacific (Sydney) |
+| `aps30` | Asia Pacific (Mumbai) |
+
+Twitch changes this list. For the current one, open `https://ingest.twitch.tv/ingests` and use the label before `.contribute.live-video.net` in each `url_template`.
+
+**Note**: Legacy slugs such as `jfk`, `syd` and `lhr` still resolve, but several route to US servers regardless of their name. Use a slug from the list above.
 
 **See also**: [Twitch Ingest Endpoints](https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US){target="_blank"}
 
 ### TWITCH_FFMPEG_THREADS
 
-**Description**: Number of CPU threads for FFmpeg encoding. `0` means auto-optimize.
+**Description**: Number of threads the libx264 encoder uses. `0` lets x264 choose based on the CPU count.
 
 **Type**: Integer
 
@@ -165,14 +237,16 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 
 **Used by**: Twitch transformer
 
+**Valid values**: Integer, 0 to 64. Any other value stops the container at start.
+
 **Examples**:
 ```bash
-TWITCH_FFMPEG_THREADS=0   # Auto-optimize (recommended)
+TWITCH_FFMPEG_THREADS=0   # Let x264 choose (recommended)
 TWITCH_FFMPEG_THREADS=4   # Limit to 4 threads
 TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 ```
 
-**When to override**: When streaming to multiple services to ensure fair CPU distribution.
+**When to override**: To cap the relay's CPU use on a shared host.
 
 ### TWITCH_FPS
 
@@ -186,13 +260,15 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 
 **Used by**: Twitch transformer (for bitrate calculation)
 
+**Valid values**: Integer, 1 to 120. Any other value stops the container at start.
+
 **Common values**: `60`, `50`, `30`, `25`, `24`
 
 **See also**: [Twitch Quality Settings](../services/twitch.md#optimizing-twitch-quality)
 
 ### TWITCH_HEIGHT
 
-**Description**: Video height in pixels. Width is calculated automatically to maintain aspect ratio.
+**Description**: Video height in pixels. Width follows the source aspect ratio, rounded to an even number. A source shorter than `TWITCH_HEIGHT` is upscaled, which uses bitrate without adding detail; set `TWITCH_HEIGHT` to your source height or lower.
 
 **Type**: Integer
 
@@ -202,9 +278,9 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 
 **Used by**: Twitch transformer
 
-**Common values**: `1080`, `900`, `720`, `540`, `480`
+**Valid values**: Integer, 144 to 4320. Any other value stops the container at start.
 
-**Note**: Twitch recommends 720p for most non-partner streams due to lack of guaranteed transcoding.
+**Common values**: `1080`, `900`, `720`, `540`, `480`
 
 ### TWITCH_KBITS_PER_VIDEO_FRAME
 
@@ -217,6 +293,8 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 **Required**: No
 
 **Used by**: Twitch transformer
+
+**Valid values**: Integer, 1 to 1000. Any other value stops the container at start.
 
 **Recommended values**:
 - `100` for 1080p (results in 6000 kbps @ 60fps)
@@ -255,6 +333,9 @@ TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
 - `slow` - Slower, better quality
 - `slower` - Much slower, high quality
 - `veryslow` - Extremely slow, highest quality
+- `placebo` - Slowest; negligible gain over `veryslow`
+
+**Note**: The value is checked for allowed characters (letters, digits, `_`, `-`, up to 100) but not against this list. A misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.
 
 **Recommendation**: Presets slower than `medium` offer diminishing returns. Use `fast` or `veryfast` if CPU is constrained.
 
@@ -275,6 +356,8 @@ TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
 **Required**: Yes (to enable YouTube)
 
 **Used by**: YouTube application config
+
+**Valid values**: Letters, digits, `.`, `_`, `:` and `-`, up to 200 characters. Any other value stops the container at start.
 
 **Example**:
 ```bash
@@ -299,21 +382,20 @@ YOUTUBE_KEY=abcd-efgh-ijkl-mnop-qrst
 
 **Used by**: Archive service configuration
 
+**Valid values**: An absolute path, up to 500 characters, with no spaces, no `..` segments, no newlines and none of `` ; | & $ ` ( ) { } < > ``. The directory must exist inside the container and be writable by the nginx user (UID:GID 100:101). Any other value stops the container at start.
+
 **Example**:
 ```bash
 ARCHIVE_PATH=/archive
 ```
 
-**Important**:
-- Path must exist inside container
-- Must be writable by nginx user (UID:GID 100:101)
-- Map to host directory via Docker volume for persistence
+**Important**: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See [Enable Archive](../services/archive.md#enable-archive).
 
 **See also**: [Archive Configuration](../services/archive.md)
 
 ### ARCHIVE_SUFFIX
 
-**Description**: File extension for archived stream files.
+**Description**: Filename extension for archived stream files. The recorder always writes an FLV container; this value changes only the extension.
 
 **Type**: String
 
@@ -323,14 +405,14 @@ ARCHIVE_PATH=/archive
 
 **Used by**: Archive service configuration
 
-**Common values**: `flv`, `mp4`, `mkv`
+**Valid values**: Letters and digits only, 1 to 10 characters.
 
 **Example**:
 ```bash
-ARCHIVE_SUFFIX=mp4
+ARCHIVE_SUFFIX=flv
 ```
 
-**Note**: File format depends on stream encoding. `flv` is the most compatible with RTMP streams.
+**Note**: Keep `flv`. Other values such as `mp4` produce FLV files with a misleading extension. To get an MP4, remux after recording: `ffmpeg -i input.flv -c copy output.mp4`
 
 ---
 

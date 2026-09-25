@@ -2,9 +2,9 @@
 title: Service Patterns
 description: Understanding Simple Relay and Transformer patterns for RTMP streaming
 audience: developers
-doc_type: reference
+doc_type: explanation
 tags: [architecture, patterns, relay, transformer]
-lastReviewed: 2025-11-07
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
@@ -20,8 +20,8 @@ Choose the appropriate pattern for your service:
 |----------------------|-----------------------------|--------------------------------------------------|
 | **Use for**          | Services that accept streams as-is (e.g., YouTube) | Services requiring specific encoding (e.g., Twitch non-partner mode) |
 | **How it works**     | Stream forwarded directly without modification | Two-stage pipeline with FFmpeg transformation     |
-| **Pros**             | Minimal CPU usage, preserves original quality, low latency | Per-service quality optimization, downscaling for bandwidth limits |
-| **Cons**             | No per-service quality optimization | CPU-intensive, slight latency increase           |
+| **Pros**             | No decoding or encoding, so little CPU use and the original quality is preserved | Per-service quality control, downscaling for bandwidth limits |
+| **Cons**             | No per-service quality control | Decodes and re-encodes every frame: CPU use scales with `TWITCH_HEIGHT`, `TWITCH_FPS` and `TWITCH_X264_PRESET`. Encoding adds delay before the stream reaches the service. |
 | **Example**          | YouTube service              | Twitch service in non-partner mode (720p60 downscaling) |
 
 !!! tip "Advanced: Conditional Patterns"
