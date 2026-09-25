@@ -118,20 +118,19 @@ df -h ./stream_archive
 
 **Issue**: Archive files won't play or are corrupted
 
-**Check**: Verify archive format:
+Archives are always recorded as FLV (Flash Video), whatever `ARCHIVE_SUFFIX` says. `ARCHIVE_SUFFIX` only sets the file extension. A file named `.mp4` is still FLV inside, and some players refuse it.
+
+**Solution**: Set the extension to match the content in `env/relay.env`:
 
 ```bash
-grep ARCHIVE_SUFFIX env/relay.env
+ARCHIVE_SUFFIX=flv
 ```
 
-**Solution**: Use compatible format:
+To convert an existing archive to a real MP4 file without re-encoding:
+
 ```bash
-ARCHIVE_SUFFIX=flv   # Most compatible with RTMP
-# or
-ARCHIVE_SUFFIX=mp4   # Better compatibility with players
+ffmpeg -i <ARCHIVE_FILE> -c copy <OUTPUT_FILE>.mp4
 ```
-
-**Note**: `flv` is most reliable for RTMP streams. `mp4` requires stream to complete cleanly.
 
 ## Files Not Named as Expected
 
