@@ -50,12 +50,23 @@ ip addr show | grep inet
 
 #### 3. Firewall Blocking
 
-**Check**: Test if port is reachable:
+**Check**: From the machine running OBS, test whether the relay's port is reachable. Replace `<RELAY_IP>` with the relay machine's LAN address (see the previous check).
+
+Windows (PowerShell):
+
+```powershell
+Test-NetConnection <RELAY_IP> -Port 1935
+```
+
+A reachable port shows `TcpTestSucceeded : True`. TODO(verify: Test-NetConnection output on Windows)
+
+Linux or macOS:
 
 ```bash
-# From gaming PC
-telnet <relay-ip> 1935
+nc -zv <RELAY_IP> 1935
 ```
+
+A reachable port prints a line containing `succeeded` or `open`.
 
 **Solution**:
 - Open port 1935 in firewall
