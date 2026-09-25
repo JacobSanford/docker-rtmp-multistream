@@ -2,5 +2,5 @@
 docker compose rm -v --stop --force
 
 set -e
-docker compose build
+docker compose build --pull
 docker compose up
