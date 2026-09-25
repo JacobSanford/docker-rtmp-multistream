@@ -48,3 +48,5 @@ run_test "Image contains ffmpeg" test_image_has_ffmpeg
 run_test "Image has RTMP module" test_image_has_rtmp_module
 run_test "Image has enableService.sh script" test_image_has_required_scripts
 run_test "Image has nginx config files" test_image_has_config_files
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi

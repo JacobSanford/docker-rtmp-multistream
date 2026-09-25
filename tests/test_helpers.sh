@@ -32,3 +32,11 @@ run_test() {
 
 # Export for use by test.sh
 export -f run_test
+
+# Print a summary and exit non-zero on failure. Suites call this only when
+# run directly; test.sh sources them and prints its own summary.
+finish_suite() {
+  echo -e "\nTests run: $TESTS_RUN, passed: $TESTS_PASSED, failed: $TESTS_FAILED"
+  [ "$TESTS_FAILED" -eq 0 ]
+  exit $?
+}

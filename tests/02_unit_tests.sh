@@ -254,3 +254,5 @@ run_test "Twitch partner mode skips transformer" test_twitch_partner_mode_skips_
 run_test "Twitch non-partner mode includes transformer" test_twitch_nonpartner_mode_includes_transformer
 run_test "Twitch partner mode variables replaced" test_twitch_partner_mode_variables_replaced
 run_test "Invalid TWITCH_PARTNER value rejected" test_invalid_twitch_partner_value_rejected
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi

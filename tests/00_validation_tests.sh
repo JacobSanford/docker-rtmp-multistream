@@ -747,3 +747,5 @@ run_test "  with pipes" test_escape_for_sed_with_pipe
 run_test "  with ampersand" test_escape_for_sed_with_ampersand
 run_test "  with backslash" test_escape_for_sed_with_backslash
 run_test "  mixed special chars" test_escape_for_sed_mixed
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi

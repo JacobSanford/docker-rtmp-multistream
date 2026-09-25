@@ -167,3 +167,5 @@ run_test "Archive records stream to file" test_archive_records_stream
 run_test "RTMP accepts host on user network by default" test_rtmp_accepts_host_on_user_network_by_default
 run_test "RTMP rejects unauthorized IP" test_rtmp_rejects_unauthorized_ip
 run_test "Multiple streams simultaneously" test_multiple_streams_simultaneously
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi

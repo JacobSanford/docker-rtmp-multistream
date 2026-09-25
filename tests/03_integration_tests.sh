@@ -144,3 +144,5 @@ run_test "Container starts with Twitch partner mode" test_container_starts_with_
 run_test "Container starts with Twitch non-partner mode" test_container_starts_with_twitch_nonpartner_mode
 run_test "Container stops on invalid value" test_container_stops_on_invalid_value
 run_test "Container stops on unwritable archive path" test_container_stops_on_unwritable_archive_path
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi
