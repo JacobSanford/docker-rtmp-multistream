@@ -526,6 +526,14 @@ test_boolean_valid_false() {
   run_validation_test "validate_boolean" "false" "lowercase false" 0
 }
 
+test_boolean_valid_True() {
+  run_validation_test "validate_boolean" "True" "mixed case True" 0
+}
+
+test_boolean_valid_False() {
+  run_validation_test "validate_boolean" "False" "mixed case False" 0
+}
+
 test_boolean_invalid_yes() {
   run_validation_test "validate_boolean" "yes" "invalid: yes" 1
 }
@@ -724,6 +732,8 @@ run_test "  valid: TRUE" test_boolean_valid_TRUE
 run_test "  valid: FALSE" test_boolean_valid_FALSE
 run_test "  valid: true" test_boolean_valid_true
 run_test "  valid: false" test_boolean_valid_false
+run_test "  valid: True" test_boolean_valid_True
+run_test "  valid: False" test_boolean_valid_False
 run_test "  invalid: yes" test_boolean_invalid_yes
 run_test "  invalid: no" test_boolean_invalid_no
 run_test "  invalid: 1" test_boolean_invalid_1

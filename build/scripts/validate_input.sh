@@ -305,8 +305,8 @@ validate_boolean() {
   fi
 
   # Valid boolean values (case insensitive)
-  case "$value" in
-    TRUE|FALSE|true|false)
+  case "$(echo "$value" | tr '[:lower:]' '[:upper:]')" in
+    TRUE|FALSE)
       return 0
       ;;
     *)
