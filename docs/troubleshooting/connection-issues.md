@@ -1,5 +1,5 @@
 ---
-title: Connection Issues
+title: OBS Can't Connect or the Relay Won't Start
 description: Troubleshooting connection problems and container startup issues
 audience: users
 doc_type: howto
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Connection Issues
+# OBS Can't Connect or the Relay Won't Start
 
 Troubleshooting connection problems between OBS and the relay, and container startup issues.
 
@@ -113,6 +113,14 @@ If the command does not print `open`, outbound port 1935 is blocked between the 
 - Verify outbound RTMP (port 1935) is allowed
 - Try different Twitch ingest endpoint (change `TWITCH_ENDPOINT`)
 
+### Confirm the Fix
+
+Start streaming in OBS. OBS shows the stream as live, and this prints nothing new:
+
+```bash
+docker compose logs relay | grep "access forbidden"
+```
+
 ## Container Won't Start
 
 ### Symptoms
@@ -167,6 +175,15 @@ failed to bind host port 0.0.0.0:1935/tcp: address already in use
     Close that program normally (for example, another streaming server). Only kill it if you know what it is.
 
 Then start the relay: `docker compose up -d`.
+
+### Confirm the Fix
+
+The container shows `Up`, and each service you configured is listed as enabled:
+
+```bash
+docker compose ps relay
+docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+```
 
 #### 3. Outdated Image
 

@@ -1,5 +1,5 @@
 ---
-title: YouTube Troubleshooting
+title: Stream Not Reaching YouTube
 description: Troubleshooting YouTube-specific streaming issues
 audience: users
 doc_type: howto
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# YouTube Troubleshooting
+# Stream Not Reaching YouTube
 
 Troubleshooting issues specific to streaming to YouTube.
 
@@ -100,34 +100,13 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 - Check the stream's visibility (Public/Unlisted/Private) in YouTube Studio
 - Confirm account is verified for live streaming
 
+### Confirm the Fix
+
+Start streaming in OBS and open YouTube Studio → Go Live. The stream shows as receiving.
+
 ## Debug Logs
 
-### View YouTube Log Lines
-
-For more detail, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
-
-```bash
-# YouTube-specific logs
-docker compose logs relay | grep -i youtube
-```
-
-### Common Log Messages
-
-**Success messages**:
-```text
-YouTube configuration complete, and service enabled.
-```
-
-**Service skipped** — the relay keeps running without this service:
-```text
-YOUTUBE_KEY is not set. Skipping YouTube configuration.
-```
-
-**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
-```text
-ERROR: YOUTUBE_KEY contains invalid characters. Only alphanumeric, dash, underscore, period, and colon are allowed.
-[!] pre-init.d - 90_configure_youtube.sh failed. Stopping container.
-```
+For the startup lines every service prints, and which ones mean the container stopped, see [Check Service Status](../index.md#check-service-status). For more detail while streaming, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
 
 ## See Also
 

@@ -1,5 +1,5 @@
 ---
-title: Twitch Troubleshooting
+title: Stream Not Reaching Twitch
 description: Troubleshooting Twitch-specific streaming issues
 audience: users
 doc_type: howto
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Twitch Troubleshooting
+# Stream Not Reaching Twitch
 
 Troubleshooting issues specific to streaming to Twitch.
 
@@ -53,6 +53,8 @@ docker stats --no-stream
 
 If `CPU %` stays near the machine's limit, set `TWITCH_X264_PRESET` back to `medium`.
 
+Watch the stream on Twitch to confirm the quality changed.
+
 See [Twitch Configuration](../../services/twitch.md) for all settings.
 
 ## Ingest Server Issues
@@ -87,7 +89,7 @@ Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `use10`).
 use10.contribute.live-video.net (35.55.30.14:1935) open
 ```
 
-If the command does not print `open`, outbound port 1935 is blocked between the relay and Twitch.
+If the command does not print `open`, outbound port 1935 is blocked between the relay and Twitch. If it prints `open`, stream for a while on the new endpoint to confirm the drops have stopped.
 
 ## Stream Not Appearing
 
@@ -161,36 +163,13 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 - Check Twitch dashboard for account status
 - Ensure you're not already streaming from another source
 
+### Confirm the Fix
+
+Start streaming in OBS and open Twitch Stream Manager. The stream shows as live.
+
 ## Debug Logs
 
-### View Twitch Log Lines
-
-For more detail, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
-
-```bash
-# Twitch-specific logs
-docker compose logs relay | grep -i twitch
-```
-
-### Common Log Messages
-
-**Success messages**:
-```text
-Twitch Partner configuration complete, and service enabled.
-Twitch Non-Partner configuration complete, and service enabled.
-```
-
-**Service skipped** — the relay keeps running without this service:
-```text
-TWITCH_KEY is not set. Skipping Twitch configuration.
-```
-
-**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
-```text
-ERROR: TWITCH_KEY contains invalid characters. Only alphanumeric, dash, underscore, period, and colon are allowed.
-ERROR: TWITCH_PARTNER must be TRUE or FALSE (case insensitive).
-[!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
-```
+For the startup lines every service prints, and which ones mean the container stopped, see [Check Service Status](../index.md#check-service-status). For more detail while streaming, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
 
 ## See Also
 

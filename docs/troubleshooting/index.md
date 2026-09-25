@@ -100,7 +100,22 @@ YouTube configuration complete, and service enabled.
 Archive configuration complete, and service enabled.
 ```
 
-A service that is not enabled prints a skip line instead, such as `YOUTUBE_KEY is not set. Skipping YouTube configuration.`
+A service that is not configured prints a skip line instead, and the relay keeps running without it:
+
+```text
+TWITCH_KEY is not set. Skipping Twitch configuration.
+YOUTUBE_KEY is not set. Skipping YouTube configuration.
+ARCHIVE_PATH is not set. Skipping Archive configuration.
+```
+
+An invalid value stops the container. An `ERROR:` line names the variable, followed by the script that stopped, for example:
+
+```text
+ERROR: TWITCH_PARTNER must be TRUE or FALSE (case insensitive).
+[!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
+```
+
+To fix it, see [Invalid Environment Value](connection-issues.md#1-invalid-environment-value).
 
 ### Test Configuration Syntax
 

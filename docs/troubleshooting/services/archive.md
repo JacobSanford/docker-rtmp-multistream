@@ -1,5 +1,5 @@
 ---
-title: Archive Troubleshooting
+title: Archive Not Recording, Won't Play, or Filling the Disk
 description: Troubleshooting Archive-specific recording issues
 audience: users
 doc_type: howto
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Archive Troubleshooting
+# Archive Not Recording, Won't Play, or Filling the Disk
 
 Troubleshooting issues specific to local stream archiving.
 
@@ -126,6 +126,14 @@ df -h ./stream_archive
 - 720p60 @ 6 Mbps: ~2.7 GB per hour
 - 720p30 @ 3 Mbps: ~1.35 GB per hour
 
+### Confirm the Fix
+
+Stream for a minute, then list the archive folder. A new file is there and grows while you stream:
+
+```bash
+ls -l stream_archive
+```
+
 ## File Format Issues
 
 **Issue**: Archive files won't play or are corrupted
@@ -146,26 +154,7 @@ ffmpeg -i <ARCHIVE_FILE> -c copy <OUTPUT_FILE>.mp4
 
 ## Files Not Named as Expected
 
-Archive files are named:
-
-```text
-<STREAM_NAME>-<UNIX_TIME>_<DDMMYYYY>_<HHMMSS>.<ARCHIVE_SUFFIX>
-```
-
-| Part | Meaning |
-|---|---|
-| `<STREAM_NAME>` | The stream key set in OBS, the part after `rtmp://<RELAY_IP>/relay/` |
-| `<UNIX_TIME>` | When recording started, in seconds since 1970 |
-| `<DDMMYYYY>_<HHMMSS>` | When recording started, day first, in **UTC** |
-| `<ARCHIVE_SUFFIX>` | The `ARCHIVE_SUFFIX` value |
-
-Example, a stream named `mystream` recorded at 13:16:49 UTC on 25 September 2026:
-
-```text
-mystream-1790342209_25092026_131649.mp4
-```
-
-Because the Unix time comes first, sorting files by name sorts each stream's recordings in the order they were recorded.
+The name is `<stream-name>-<unix-time>_<DDMMYYYY>_<HHMMSS>.<ARCHIVE_SUFFIX>`, with the date and time in UTC. See [File Naming](../../services/archive.md#file-naming) for an example and how to sort the files.
 
 ## Archive Grows Too Large
 
@@ -185,33 +174,7 @@ sudo find ./stream_archive -name "*.flv" -mtime +30 -delete
 
 ## Debug Logs
 
-### View Archive Log Lines
-
-For more detail, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
-
-```bash
-# Archive-specific logs
-docker compose logs relay | grep -i archive
-```
-
-### Common Log Messages
-
-**Success messages**:
-```text
-Archive configuration complete, and service enabled.
-```
-
-**Service skipped** — the relay keeps running without this service:
-```text
-ARCHIVE_PATH is not set. Skipping Archive configuration.
-```
-
-**Invalid value** — the container stops. The last lines of `docker compose logs relay` name the variable to correct:
-```text
-ERROR: ARCHIVE_PATH must be an absolute path starting with /.
-ERROR: ARCHIVE_PATH is not writable by the nginx user.
-[!] pre-init.d - 90_configure_archive.sh failed. Stopping container.
-```
+For the startup lines every service prints, and which ones mean the container stopped, see [Check Service Status](../index.md#check-service-status). For more detail while streaming, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
 
 ## See Also
 
