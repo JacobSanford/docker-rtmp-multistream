@@ -57,9 +57,9 @@ Confirm the service is enabled:
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
-#### 2. Permission Denied
+#### 2. Archive Folder Not Mounted or Not Writable
 
-**Check**: Look for the writability error:
+**Check**:
 
 ```bash
 docker compose logs relay | grep "not writable"
@@ -69,41 +69,49 @@ docker compose logs relay | grep "not writable"
 ERROR: ARCHIVE_PATH is not writable by the nginx user.
 ```
 
-**Solution**: Fix directory permissions on host:
-```bash
-chown 100:101 ./stream_archive
-chmod o+w ./stream_archive
-```
+This error appears both when no host folder is mounted and when the mounted folder is not writable by the container's nginx user (UID 100, GID 101).
 
-**Why these IDs?** The nginx process runs as UID:GID 100:101 inside the container.
+**Solution**:
 
-#### 3. Volume Not Mounted
+1. In `docker-compose.yml`, mount a host folder at the path set in `ARCHIVE_PATH`. The `volumes:` block goes under the `relay` service:
 
-**Check**: Verify volume is mapped:
+    ```yaml
+    services:
+      relay:
+        image: ghcr.io/jacobsanford/rtmp-multistream:1.x
+        build: .
+        ports:
+          - "1935:1935"
+        env_file:
+          - ./env/relay.env
+        volumes:
+          - ./stream_archive:/archive
+    ```
 
-```bash
-docker compose exec relay ls -la /archive
-```
+2. Create the folder and give it to the container's nginx user:
 
-**Solution**: Add volume to `docker-compose.yml`:
-```yaml
-volumes:
-  - ./stream_archive:/archive
-```
+    ```bash
+    mkdir -p stream_archive
+    sudo chown 100:101 stream_archive
+    ```
 
-Recreate the container so it uses the new volume:
+    Recordings in this folder are then owned by UID 100, so deleting them from the host requires `sudo`.
 
-```bash
-docker compose up -d --force-recreate
-```
+3. Recreate the container:
 
-Confirm the service is enabled:
+    ```bash
+    docker compose up -d --force-recreate
+    ```
 
-```bash
-docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
-```
+4. Confirm the service is enabled:
 
-#### 4. Disk Space
+    ```bash
+    docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+    ```
+
+    The output includes `Archive configuration complete, and service enabled.`
+
+#### 3. Disk Space
 
 **Check**: Verify available space:
 
