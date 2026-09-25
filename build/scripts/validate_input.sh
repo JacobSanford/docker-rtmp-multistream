@@ -116,6 +116,21 @@ validate_ip_range() {
     return 1
   fi
 
+  local prefix="${range#*/}"
+  if [ "$prefix" -gt 32 ]; then
+    echo "ERROR: $name prefix length must be 0-32 in $range."
+    return 1
+  fi
+
+  local octet
+  local IFS='.'
+  for octet in ${range%/*}; do
+    if [ "$octet" -gt 255 ]; then
+      echo "ERROR: $name octets must be 0-255 in $range."
+      return 1
+    fi
+  done
+
   return 0
 }
 

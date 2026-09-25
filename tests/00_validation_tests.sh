@@ -167,6 +167,22 @@ test_ip_range_invalid_incomplete() {
   run_validation_test "validate_ip_range" "192.168/16" "incomplete octets" 1
 }
 
+test_ip_range_valid_boundaries() {
+  run_validation_test "validate_ip_range" "255.255.255.255/32" "max octet and prefix" 0
+}
+
+test_ip_range_valid_zero_prefix() {
+  run_validation_test "validate_ip_range" "0.0.0.0/0" "zero prefix" 0
+}
+
+test_ip_range_invalid_octet() {
+  run_validation_test "validate_ip_range" "256.0.0.0/8" "octet above 255" 1
+}
+
+test_ip_range_invalid_prefix() {
+  run_validation_test "validate_ip_range" "10.0.0.0/33" "prefix above 32" 1
+}
+
 # ============================================================================
 # validate_ip_ranges tests (multi-range support)
 # ============================================================================
@@ -193,6 +209,10 @@ test_ip_ranges_invalid_empty() {
 
 test_ip_ranges_valid_with_spaces() {
   run_validation_test "validate_ip_ranges" "192.168.1.0/24, 10.0.0.0/8" "ranges with spaces" 0
+}
+
+test_ip_ranges_invalid_octet_in_list() {
+  run_validation_test "validate_ip_ranges" "192.168.1.0/24,10.0.0.300/32" "bad octet in list" 1
 }
 
 # ============================================================================
@@ -598,6 +618,10 @@ run_test "  invalid: no CIDR" test_ip_range_invalid_no_cidr
 run_test "  invalid: text" test_ip_range_invalid_text
 run_test "  invalid: empty" test_ip_range_invalid_empty
 run_test "  invalid: incomplete" test_ip_range_invalid_incomplete
+run_test "  valid: max octet and prefix" test_ip_range_valid_boundaries
+run_test "  valid: zero prefix" test_ip_range_valid_zero_prefix
+run_test "  invalid: octet above 255" test_ip_range_invalid_octet
+run_test "  invalid: prefix above 32" test_ip_range_invalid_prefix
 
 echo ""
 echo "Testing validate_ip_ranges..."
@@ -607,6 +631,7 @@ run_test "  valid: single range (backward compat)" test_ip_ranges_valid_single
 run_test "  valid: with spaces" test_ip_ranges_valid_with_spaces
 run_test "  invalid: one bad range" test_ip_ranges_invalid_one_bad
 run_test "  invalid: empty" test_ip_ranges_invalid_empty
+run_test "  invalid: bad octet in list" test_ip_ranges_invalid_octet_in_list
 
 echo ""
 echo "Testing validate_number..."
