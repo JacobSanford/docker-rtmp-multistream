@@ -21,41 +21,41 @@ Run all tests:
 The test suite is organized into five categories:
 
 #### 0. Validation Tests (`tests/00_validation_tests.sh`)
-**113 tests** - Comprehensive unit tests for input validation functions that prevent security vulnerabilities:
+Comprehensive unit tests for input validation functions that prevent security vulnerabilities:
 
-**validate_stream_key** (13 tests):
+**validate_stream_key**:
 - Valid inputs: alphanumeric, dash, underscore, period, colon, empty
 - Invalid inputs: semicolon, pipe, ampersand, backtick, dollar sign, path traversal, excessive length
 
-**validate_path** (12 tests):
+**validate_path**:
 - Valid inputs: absolute paths, with dash/underscore, empty
 - Invalid inputs: relative paths, shell metacharacters (`;|&$\``), excessive length
 
-**validate_ip_range** (8 tests):
+**validate_ip_range**:
 - Valid inputs: CIDR notation (Class A/B/C networks, /32 hosts)
 - Invalid inputs: missing CIDR, text, incomplete octets
 
-**validate_number** (12 tests):
+**validate_number**:
 - Valid inputs: integers, zero, with min/max bounds
 - Invalid inputs: text, negative, decimal, out of bounds, empty
 
-**validate_identifier** (9 tests):
+**validate_identifier**:
 - Valid inputs: alphanumeric with dash/underscore
 - Invalid inputs: spaces, periods, special characters, excessive length
 
-**validate_bitrate** (9 tests):
+**validate_bitrate**:
 - Valid inputs: numeric, with k/K suffix
 - Invalid inputs: text, decimals, wrong suffix, empty
 
-**validate_log_level** (11 tests):
+**validate_log_level**:
 - Valid inputs: all 8 nginx levels (debug, info, notice, warn, error, crit, alert, emerg)
 - Invalid inputs: unknown values, wrong case, empty
 
-**validate_suffix** (9 tests):
+**validate_suffix**:
 - Valid inputs: alphanumeric file extensions (mp4, flv, mkv)
 - Invalid inputs: leading dot, slashes, special chars, excessive length
 
-**escape_for_sed** (5 tests):
+**escape_for_sed**:
 - Tests proper escaping of pipes, ampersands, backslashes for safe sed substitution
 
 These validation tests protect against:
@@ -99,10 +99,10 @@ End-to-end tests of actual RTMP streaming functionality:
 
 ## Running Individual Test Suites
 
-You can run individual test suites directly:
+You can run individual test suites directly. Each prints a summary and exits non-zero if any of its tests fail:
 
 ```bash
-# Validation tests only (113 tests)
+# Validation tests only
 bash tests/00_validation_tests.sh
 
 # Smoke tests only
@@ -141,8 +141,8 @@ Testing validate_stream_key...
 ✓ Image has RTMP module
 
 === Test Summary ===
-Total tests run: 146
-Passed: 146
+Total tests run: <N>
+Passed: <N>
 ```
 
 ## Cleanup
@@ -182,8 +182,8 @@ run_test "Description of test" test_my_new_feature
 
 ## Test Coverage
 
-Current test coverage (146 total tests):
-- ✓ **Input validation** (113 tests) - All validation functions for security
+Current test coverage:
+- ✓ **Input validation** - All validation functions for security
 - ✓ Docker build process
 - ✓ Service configuration (Twitch, YouTube, Archive)
 - ✓ Container startup and health

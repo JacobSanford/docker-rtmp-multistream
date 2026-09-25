@@ -57,8 +57,10 @@ docker build -t rtmp-multistream .
 
 The system supports two patterns (see `docs/techref/service-patterns.md` for detailed comparison):
 
-- **Simple Relay**: Direct RTMP push without transcoding (YouTube, Archive, Twitch partner mode)
+- **Simple Relay**: Direct RTMP push without transcoding (YouTube, Twitch partner mode)
 - **Transformer**: Two-stage FFmpeg transcoding pipeline (Twitch non-partner mode)
+
+Archive is neither: it is a `recorder` block inside the `relay` application that writes every incoming stream to disk.
 
 **Twitch** uses a conditional dual-mode pattern based on `TWITCH_PARTNER` setting - partners use simple relay, non-partners use transformer for downscaling/optimization.
 
@@ -103,8 +105,8 @@ Follow the pattern in `docs/services/new.md`:
 ./tests/test.sh
 ```
 
-The test suite includes **146 tests** across 5 categories:
-- **Validation Tests** (113 tests): Comprehensive input validation and security testing
+The test suite has 5 categories:
+- **Validation Tests**: Comprehensive input validation and security testing
 - **Smoke Tests**: Quick sanity checks (Docker build, required components)
 - **Unit Tests**: Configuration and environment variable handling (including security validation)
 - **Integration Tests**: Container startup with various service combinations
@@ -112,14 +114,14 @@ The test suite includes **146 tests** across 5 categories:
 
 Individual test suites can be run separately:
 ```bash
-bash tests/00_validation_tests.sh  # Validation tests (113 tests)
+bash tests/00_validation_tests.sh  # Validation tests
 bash tests/01_smoke_tests.sh       # Smoke tests
 bash tests/02_unit_tests.sh        # Unit tests
 bash tests/03_integration_tests.sh # Integration tests
 bash tests/04_functional_tests.sh  # Functional tests (requires ffmpeg)
 ```
 
-Tests automatically clean up containers and temporary files. Exit code 0 = all passed, 1 = failures.
+Tests automatically clean up containers and temporary files. `tests/test.sh` and each suite run on its own exit 0 when all tests pass and 1 on any failure.
 
 See `tests/README.md` for detailed testing documentation.
 
