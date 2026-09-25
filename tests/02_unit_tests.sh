@@ -73,6 +73,15 @@ test_twitch_transformer_configured() {
   return $?
 }
 
+test_publish_ip_range_default() {
+  docker run --rm --entrypoint sh rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    grep -q 'allow publish 172.16.0.0/12;' /etc/nginx/http.d/auth.conf && \
+    grep -q 'allow publish 192.168.0.0/16;' /etc/nginx/http.d/auth.conf
+  "
+  return $?
+}
+
 test_publish_ip_range_configured() {
   docker run --rm --entrypoint sh -e PUBLISH_IP_RANGE="10.0.0.0/8" rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
@@ -202,6 +211,7 @@ run_test "Archive service skips without path" test_archive_service_skips_without
 run_test "Twitch config variables replaced" test_twitch_config_variables_replaced
 run_test "YouTube config variables replaced" test_youtube_config_variables_replaced
 run_test "Twitch transformer configured" test_twitch_transformer_configured
+run_test "Publish IP range default" test_publish_ip_range_default
 run_test "Publish IP range configured" test_publish_ip_range_configured
 run_test "Publish IP range multiple ranges" test_publish_ip_range_multiple_ranges
 run_test "Publish IP range multiple lines generated" test_publish_ip_range_multiple_lines_generated

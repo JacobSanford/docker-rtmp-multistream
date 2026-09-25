@@ -83,6 +83,28 @@ test_archive_records_stream() {
   return $result
 }
 
+test_rtmp_accepts_host_on_user_network_by_default() {
+  # docker compose puts the relay on its own network; a publish from the host
+  # arrives from that network's gateway. The default range must allow it.
+  docker network create test-rtmp-net >/dev/null 2>&1
+  docker run -d --name test-rtmp-usernet --network test-rtmp-net -p 11935:1935 \
+    rtmp-multistream:test >/dev/null 2>&1
+  sleep 3
+
+  timeout 10 ffmpeg -re -f lavfi -i testsrc=duration=2:size=320x240:rate=30 \
+    -f lavfi -i sine=frequency=1000:duration=2 \
+    -c:v libx264 -preset ultrafast -tune zerolatency -c:a aac \
+    -f flv rtmp://127.0.0.1:11935/relay/test >/dev/null 2>&1
+
+  local result=$?
+  docker stop test-rtmp-usernet >/dev/null 2>&1
+  docker rm test-rtmp-usernet >/dev/null 2>&1
+  docker network rm test-rtmp-net >/dev/null 2>&1
+
+  [ $result -eq 0 ] || [ $result -eq 124 ]
+  return $?
+}
+
 test_rtmp_rejects_unauthorized_ip() {
   docker run -d --name test-rtmp-auth -p 11935:1935 \
     -e PUBLISH_IP_RANGE="10.0.0.0/8" \
@@ -142,5 +164,6 @@ test_multiple_streams_simultaneously() {
 run_test "RTMP accepts connection" test_rtmp_accepts_connection
 run_test "RTMP stream is logged" test_rtmp_stream_logged
 run_test "Archive records stream to file" test_archive_records_stream
+run_test "RTMP accepts host on user network by default" test_rtmp_accepts_host_on_user_network_by_default
 run_test "RTMP rejects unauthorized IP" test_rtmp_rejects_unauthorized_ip
 run_test "Multiple streams simultaneously" test_multiple_streams_simultaneously
