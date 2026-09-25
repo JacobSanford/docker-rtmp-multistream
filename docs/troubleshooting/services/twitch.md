@@ -4,7 +4,7 @@ description: Troubleshooting Twitch-specific streaming issues
 audience: users
 doc_type: howto
 tags: [troubleshooting, twitch, streaming, quality]
-lastReviewed: 2025-11-07
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
@@ -75,7 +75,7 @@ Recreate the container so it reads the new value:
 docker compose up -d --force-recreate
 ```
 
-**Verify connectivity**: Test that the relay can open an RTMP connection (TCP port 1935) to Twitch:
+**Verify connectivity**: Test that the relay can open a Real-Time Messaging Protocol (RTMP) connection (TCP port 1935) to Twitch:
 
 ```bash
 docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935
@@ -163,9 +163,9 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 ## Debug Logs
 
-### Enable Detailed Logging
+### View Twitch Log Lines
 
-For Twitch-specific issues, check logs:
+For more detail, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
 
 ```bash
 # Twitch-specific logs

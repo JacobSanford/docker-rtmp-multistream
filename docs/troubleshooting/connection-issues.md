@@ -4,7 +4,7 @@ description: Troubleshooting connection problems and container startup issues
 audience: users
 doc_type: howto
 tags: [troubleshooting, connection, network, docker]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
@@ -93,7 +93,7 @@ A denied connection logs the address the relay saw:
 
 If relay can't reach streaming services:
 
-**Check**: Test that the relay can open an RTMP connection (TCP port 1935) to each service:
+**Check**: Test that the relay can open a Real-Time Messaging Protocol (RTMP) connection (TCP port 1935) to each service:
 
 ```bash
 docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935

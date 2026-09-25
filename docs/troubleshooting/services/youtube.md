@@ -4,7 +4,7 @@ description: Troubleshooting YouTube-specific streaming issues
 audience: users
 doc_type: howto
 tags: [troubleshooting, youtube, streaming, latency]
-lastReviewed: 2025-11-07
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
@@ -102,9 +102,9 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 ## Debug Logs
 
-### Enable Detailed Logging
+### View YouTube Log Lines
 
-For YouTube-specific issues, check logs:
+For more detail, see [Increase Log Verbosity](../connection-issues.md#increase-log-verbosity).
 
 ```bash
 # YouTube-specific logs

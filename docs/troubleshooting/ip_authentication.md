@@ -1,14 +1,24 @@
+---
+title: IP Authentication
+description: Fixing "access forbidden by rule" when OBS cannot publish
+audience: users
+doc_type: howto
+tags: [troubleshooting, authentication, network, publish]
+lastReviewed: 2026-09-25
+version: 1.x
+---
+
 # Troubleshooting: IP Authentication
 
 ## Overview
-The default configuration relays RTMP from all typical local and docker IPs (172.17.0.0/16,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
+The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.17.0.0/16,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
 
 If this mask does not include the IP address of the machine you are streaming from, you will see access forbidden errors in the logs and publishing the stream from OBS to your relay will not be accepted.
 
 ## Symptoms
 "access forbidden by rule" errors in the relay logs, e.g.:
 
-```
+```text
 relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, client: 172.22.0.1, server: 0.0.0.0:1935
 ```
 
