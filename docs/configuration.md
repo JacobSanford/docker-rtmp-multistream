@@ -1,55 +1,76 @@
 ---
-title: Configuration
-description: How to configure docker-rtmp-multistream services and environment variables
+title: Change Relay Settings
+description: Edit a relay setting in env/relay.env, apply it, and confirm it took effect
 audience: users
 doc_type: howto
-tags: [configuration, setup, environment-variables, services]
-lastReviewed: 2025-10-21
+tags: [configuration, environment-variables, setup]
+lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Configuration
+# Change Relay Settings
 
-This page explains how docker-rtmp-multistream is configured and how services are enabled.
+Every relay setting is an environment variable in `env/relay.env`. The container reads the file only when it is created, so a change takes effect after you recreate the container.
 
-## Environment Variables
+For every variable, its default and its valid values, see the [Environment Variables Reference](techref/environment.md).
 
-Configuration is performed by passing environment variables to the docker container. This can be done by editing **`env/relay.env`**. This file defines environment variables that are passed to the container at runtime.
+!!! warning "`env/relay.env` is tracked by git"
+    The file ships with the repository, and `.gitignore` does not exclude it. After you add stream keys, run this once so git stops tracking your edits and a later `git commit -a` cannot publish them:
 
-!!! warning "Security"
-    Never commit `env/relay.env` to git/version control if it contains stream keys or secrets. The included `.gitignore` prevents this by default.
+    ```bash
+    git update-index --skip-worktree env/relay.env
+    ```
 
-### General
+    If a later `git pull` stops with `Your local changes to the following files would be overwritten by merge: env/relay.env`, the file changed upstream. Save your copy, take the new version, then put your keys back:
 
-| Environment Variable | Description | Required |
-|---------------------|-------------|----------|
-| `PUBLISH_IP_RANGE` | Allowed IP ranges for publishing (comma-separated CIDR) | N |
+    ```bash
+    cp env/relay.env ~/relay.env.mine
+    git update-index --no-skip-worktree env/relay.env
+    git checkout -- env/relay.env
+    git pull
+    ```
 
-For complete system-wide configuration options, see [Environment Variables Reference](techref/environment.md).
+    Copy your keys from `~/relay.env.mine` into the new `env/relay.env`, run the `--skip-worktree` command again, then delete `~/relay.env.mine`.
 
-### Twitch
+## Change a Setting
 
-!!! note "Service Activation"
-    Setting `TWITCH_KEY` enables the Twitch streaming service. If `TWITCH_KEY` is empty or unset, Twitch streaming is disabled.
+1. In `env/relay.env`, set the variable and save the file. For example, to lower the Twitch resolution:
 
-For detailed Twitch configuration options including quality settings, encoding parameters, and ingest endpoints, see [Twitch Configuration](services/twitch.md).
+    ```bash
+    TWITCH_HEIGHT=540
+    ```
 
-### YouTube
+    Write one `NAME=value` per line, with no spaces around `=` and no quotes. A variable that is commented out, or missing from the file, uses its default.
 
-!!! note "Service Activation"
-    Setting `YOUTUBE_KEY` enables the YouTube streaming service. If `YOUTUBE_KEY` is empty or unset, YouTube streaming is disabled.
+2. Recreate the container so it reads the new values:
 
-For YouTube configuration details, see [YouTube Configuration](services/youtube.md).
+    ```bash
+    docker compose up -d --force-recreate
+    ```
 
-### Archive
+3. Confirm the container is running and each service is enabled:
 
-!!! note "Service Activation"
-    Setting `ARCHIVE_PATH` to a writable directory enables the archive service. If `ARCHIVE_PATH` is empty, unset, or not writable, archiving is disabled.
+    ```bash
+    docker compose ps relay
+    docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+    ```
 
-For archive configuration including volume setup and format options, see [Archive Configuration](services/archive.md).
+    The status is `Up`, and each service you configured prints `… configuration complete, and service enabled.`
+
+    If you see an `ERROR:` line, the value was rejected and the container stopped. The line names the variable. Correct it and repeat from step 2, or undo your edit to get the relay back. See [Invalid Environment Value](troubleshooting/connection-issues.md#1-invalid-environment-value).
+
+## What Turns Each Service On
+
+| Service | Enabled when | Setup guide |
+|---|---|---|
+| Twitch | `TWITCH_KEY` is set | [Stream to Twitch](services/twitch.md) |
+| YouTube | `YOUTUBE_KEY` is set | [Stream to YouTube](services/youtube.md) |
+| Archive | `ARCHIVE_PATH` is set to an absolute path inside the container that the nginx user can write to. An unwritable or invalid path stops the container. | [Archive Streams to Disk](services/archive.md) |
+
+`PUBLISH_IP_RANGE` controls which addresses may send a stream to the relay; see [OBS Is Refused](troubleshooting/ip_authentication.md). `NGINX_ERROR_LOG_LEVEL` controls how much the relay logs; see [Increase Log Verbosity](troubleshooting/connection-issues.md#increase-log-verbosity).
 
 ## See Also
 
-- [Environment Variables Reference](techref/environment.md) - Complete variable listing
+- [Environment Variables Reference](techref/environment.md) - Every variable, its default and valid values
 - [Architecture](techref/architecture.md) - How configuration is processed internally
-- [Quick Start Guide](quickstart.md) - Step-by-step setup
+- [Quick Start](quickstart.md) - First-time setup
