@@ -16,48 +16,17 @@ Troubleshooting issues specific to streaming to YouTube.
 
 | Issue | Description |
 |-------|-------------|
-| **[Stream Not Visible](#stream-not-visible)** | Stream connects but is not visible on your YouTube channel |
-| **[Stream Latency](#stream-latency)** | Excessive delay between OBS and YouTube viewers |
 | **[Encoding Warnings](#encoding-warnings)** | YouTube Studio shows encoding or quality warnings |
 | **[Stream Not Appearing](#stream-not-appearing)** | OBS shows streaming but nothing appears on YouTube |
 | **[Debug Logs](#debug-logs)** | How to check YouTube-specific logs and error messages |
 
 ---
 
-## Stream Not Visible
-
-**Issue**: Stream connects but not visible on channel
-
-**Check**:
-1. YouTube Studio → Live dashboard
-2. Verify "Stream status" shows "Live"
-3. Check stream visibility settings (Public/Unlisted/Private)
-
-**Solution**:
-- Set visibility to "Public" in YouTube Studio
-- Wait 30-60 seconds for stream to appear
-- Refresh browser page
-
-## Stream Latency
-
-**Issue**: Excessive delay between OBS and YouTube
-
-**Check**: YouTube Studio → Stream settings → Latency
-
-**Options**: Normal latency (default), Low latency, Ultra-low latency. The relay does not affect this setting.
-
 ## Encoding Warnings
 
-**Issue**: YouTube shows encoding warnings
+**Issue**: YouTube Studio shows stream health warnings
 
-**Check**: YouTube Studio → Live dashboard → Stream health
-
-**Common warnings**:
-- "Audio not synced with video" - Check OBS audio settings
-- "Resolution mismatch" - Ensure OBS output matches expected resolution
-- "Bitrate too low" - Increase OBS bitrate
-
-**Solution**: The relay passes the YouTube stream through unchanged, so set bitrate and resolution in OBS. For YouTube's recommended values, see [Choose live encoder settings, bitrates, and resolutions](https://support.google.com/youtube/answer/2853702){target="_blank"}.
+The relay passes the YouTube stream through unchanged, so the warnings describe what OBS sends. Fix them in OBS. For YouTube's recommended settings, see [Choose live encoder settings, bitrates, and resolutions](https://support.google.com/youtube/answer/2853702){target="_blank"}.
 
 ## Stream Not Appearing
 
@@ -128,6 +97,7 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 - Verify you've scheduled a live stream or enabled "Stream now"
 - Check YouTube Studio for stream health warnings
+- Check the stream's visibility (Public/Unlisted/Private) in YouTube Studio
 - Confirm account is verified for live streaming
 
 ## Debug Logs

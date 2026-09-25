@@ -41,7 +41,6 @@ relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, clie
     No output means the connection was allowed.
 
 ## Choosing an Appropriate PUBLISH_IP_RANGE
-The streaming software's IP address detected by the _docker-rtmp-multistream_ container may differ from what you expect based on how you are connecting to it.
 
 ### Connections From: WAN, Other Machines on LAN
 The container typically detects the actual IP (e.g., 192.168.1.100). Choose a mask based on your actual network range.
