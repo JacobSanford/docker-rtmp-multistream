@@ -84,7 +84,7 @@ docker compose logs relay | grep "access forbidden"
 A denied connection logs the address the relay saw:
 
 ```text
-[error] 89#89: *1 access forbidden by rule, client: 172.17.0.1, server: 0.0.0.0:1935
+[error] 89#89: *1 access forbidden by rule, client: 10.0.0.25, server: 0.0.0.0:1935
 ```
 
 **Solution**: Follow the steps in [IP Authentication](ip_authentication.md#solution) to add the refused `client:` address to `PUBLISH_IP_RANGE`.

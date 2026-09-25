@@ -221,7 +221,8 @@ TWITCH_KEY="key\ninclude malicious.conf"  # Rejected
 **Mitigation:**
 - Only absolute paths accepted
 - Relative paths rejected
-- `../` sequences blocked
+- `..` path segments blocked
+- Spaces and tabs rejected (nginx would split the path into several arguments)
 - Path validation before writability check
 
 **Example blocked:**

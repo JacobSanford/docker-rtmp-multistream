@@ -11,7 +11,7 @@ version: 1.x
 # Troubleshooting: IP Authentication
 
 ## Overview
-The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.17.0.0/16,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
+The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
 
 If this mask does not include the IP address of the machine you are streaming from, you will see access forbidden errors in the logs and publishing the stream from OBS to your relay will not be accepted.
 
@@ -33,7 +33,7 @@ relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, clie
 2. In `env/relay.env`, uncomment `PUBLISH_IP_RANGE` and add a range that includes that address. Keep the ranges you still need, because this value replaces the default. For a refused address of `10.0.0.25`:
 
     ```bash
-    PUBLISH_IP_RANGE=10.0.0.0/24,192.168.0.0/16
+    PUBLISH_IP_RANGE=10.0.0.0/24,172.16.0.0/12,192.168.0.0/16
     ```
 
 3. Recreate the container so it reads the new value:

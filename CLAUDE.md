@@ -87,12 +87,13 @@ Follow the pattern in `docs/services/new.md`:
 - `TWITCH_FPS`: Frame rate (default: 60)
 - `TWITCH_KBITS_PER_VIDEO_FRAME`: Video bitrate calculation factor (default: 75)
 - `TWITCH_AUDIO_BITRATE`: Audio bitrate (default: 160k)
+- `TWITCH_AUDIO_CHANNELS`: Audio channels, 1 (mono) or 2 (stereo) (default: 2)
 - `TWITCH_CODEC`: Video codec (default: libx264)
 - `TWITCH_X264_PRESET`: Encoding preset (default: medium)
 - `TWITCH_ENDPOINT`: Twitch ingest endpoint (default: use10)
 
 ### System
-- `PUBLISH_IP_RANGE`: IP range allowed to publish streams (default: 192.168.0.0/16)
+- `PUBLISH_IP_RANGE`: IP ranges allowed to publish streams, comma-separated (default: 172.16.0.0/12,192.168.0.0/16)
 
 ## Testing
 

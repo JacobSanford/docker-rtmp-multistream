@@ -23,7 +23,7 @@ Configuration is performed by passing environment variables to the docker contai
 
 | Environment Variable | Description | Required |
 |---------------------|-------------|----------|
-| `PUBLISH_IP_RANGE` | Allowed IP range for publishing (CIDR notation) | N |
+| `PUBLISH_IP_RANGE` | Allowed IP ranges for publishing (comma-separated CIDR) | N |
 
 For complete system-wide configuration options, see [Environment Variables Reference](techref/environment.md).
 

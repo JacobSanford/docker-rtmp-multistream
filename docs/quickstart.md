@@ -39,7 +39,7 @@ cd docker-rtmp-multistream
 !!! warning "Security Alert"
     This is a simple relay with no authentication!
     
-    The default configuration relays RTMP from all typical local and docker IPs (172.17.0.0/16,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](techref/environment.md#system-variables) environment variable. Consider tightening the mask to only include trusted IPs on your network. Be extremely cautious if changing this setting to allow wider access.
+    The default configuration relays RTMP from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](techref/environment.md#system-variables) environment variable. Consider tightening the mask to only include trusted IPs on your network. Be extremely cautious if changing this setting to allow wider access.
     
     Never expose the relay directly to the public internet.
 
