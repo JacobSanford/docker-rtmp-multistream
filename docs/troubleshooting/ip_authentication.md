@@ -1,5 +1,5 @@
 ---
-title: IP Authentication
+title: OBS Is Refused: access forbidden by rule
 description: Fixing "access forbidden by rule" when OBS cannot publish
 audience: users
 doc_type: howto
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-25
 version: 1.x
 ---
 
-# Troubleshooting: IP Authentication
+# OBS Is Refused: access forbidden by rule
 
 ## Overview
 The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
@@ -57,18 +57,20 @@ The container typically detects the actual IP (e.g., 192.168.1.100). Choose a ma
 
 ### Connections From: The Same Machine
 
-If OBS runs on the same machine as the relay, point it at the machine's LAN address (for example `rtmp://192.168.2.29/relay`), not `127.0.0.1` or `localhost`. A localhost connection reaches the relay from a Docker network address that the default range does not allow.
+If OBS runs on the same machine as the relay, its connection reaches the relay from the Docker network's gateway address (for example `172.25.0.1`), not from `127.0.0.1`. The default range `172.16.0.0/12` allows it. If you set your own `PUBLISH_IP_RANGE`, keep `172.16.0.0/12` in the list.
 
 ## Example Ranges
 
-| Description                         | PUBLISH_IP_RANGE Value               |
-|-------------------------------------|--------------------------------------|
-| Single specific machine only        | `192.168.1.100/32`                   |
-| Specific subnet (e.g., 192.168.1.x) | `192.168.1.0/24`                     |
-| Entire typical home network         | `192.168.0.0/16`                     |
+Each value keeps `172.16.0.0/12` so OBS on the relay's own machine can still publish. Drop it only if nothing streams from that machine.
+
+| Description                                  | PUBLISH_IP_RANGE Value             |
+|----------------------------------------------|------------------------------------|
+| Relay machine plus one other machine         | `172.16.0.0/12,192.168.1.100/32`   |
+| Relay machine plus one subnet (192.168.1.x)  | `172.16.0.0/12,192.168.1.0/24`     |
+| Relay machine plus a typical home network    | `172.16.0.0/12,192.168.0.0/16` (the default) |
 
 !!! warning "Security Recommendation"
-    Use the most restrictive mask that meets your needs. If you only stream from one machine, use /32 for that single IP.
+    Use the most restrictive mask that meets your needs. If you stream from one other machine, use `/32` for that machine's address.
 
 ## See Also
 
