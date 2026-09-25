@@ -22,7 +22,7 @@ Work through these checks in order. Stop at the first one that fails.
     docker compose ps -a relay
     ```
 
-    If the status is `Exited`, see [Container Won't Start](connection-issues.md#container-wont-start).
+    If the status is not `Up`, see [Container Won't Start](connection-issues.md#container-wont-start).
 
 2. **Can OBS connect?** If OBS reports that it cannot connect, check whether the relay refused it:
 

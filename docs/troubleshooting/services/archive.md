@@ -171,13 +171,16 @@ Because the Unix time comes first, sorting files by name sorts each stream's rec
 
 **Issue**: Disk filling up with old archives
 
-**Solution**: Implement cleanup strategy:
+List the recordings older than 30 days first:
 
 ```bash
-# Manual cleanup of files older than 30 days
-find ./stream_archive -name "*.flv" -mtime +30 -delete
+find ./stream_archive -name "*.flv" -mtime +30 -print
+```
 
-# Or use logrotate/cron for automatic cleanup
+If the list is what you expect to lose, delete them. This cannot be undone:
+
+```bash
+sudo find ./stream_archive -name "*.flv" -mtime +30 -delete
 ```
 
 ## Debug Logs

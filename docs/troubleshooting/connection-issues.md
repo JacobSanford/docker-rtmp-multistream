@@ -129,18 +129,31 @@ ERROR: TWITCH_FPS must be a number.
 
 #### 2. Port Already in Use
 
-**Check**: Error message about port binding:
+**Check**: `docker compose up -d` prints one of these:
 
-```bash
-docker compose up
+```text
+Bind for 0.0.0.0:1935 failed: port is already allocated
+failed to bind host port 0.0.0.0:1935/tcp: address already in use
 ```
 
-Look for: `bind: address already in use`
-
 **Solution**:
-- Stop other processes using port 1935
-- Find process: `sudo lsof -i :1935`
-- Kill it: `sudo kill <PID>`
+
+- **`port is already allocated`**: another container holds the port, often an older copy of the relay. Find it and stop it:
+
+    ```bash
+    docker ps --filter publish=1935
+    docker stop <CONTAINER_NAME>
+    ```
+
+- **`address already in use`**: another program holds the port. Find it:
+
+    ```bash
+    sudo ss -ltnp 'sport = :1935'
+    ```
+
+    Close that program normally (for example, another streaming server). Only kill it if you know what it is.
+
+Then start the relay: `docker compose up -d`.
 
 #### 3. Outdated Image
 
