@@ -14,21 +14,35 @@ Quick diagnostic guide to identify and resolve common issues with docker-rtmp-mu
 
 ## Quick Diagnostics
 
-Follow this flowchart to identify your issue:
+Work through these checks in order. Stop at the first one that fails.
 
-```
-Is the container running?
-├─ NO → See [Connection Issues](connection-issues.md#container-wont-start)
-└─ YES
-   │
-   Can you connect from OBS?
-   ├─ NO → See [Connection Issues](connection-issues.md#cannot-connect-from-obs)
-   └─ YES
-      │
-      Is the stream appearing on platforms?
-      ├─ NO → See Service Issues: [Twitch](services/twitch.md#stream-not-appearing) | [YouTube](services/youtube.md#stream-not-appearing)
-      └─ YES → Working correctly!
-```
+1. **Is the container running?**
+
+    ```bash
+    docker compose ps -a relay
+    ```
+
+    If the status is `Exited`, see [Container Won't Start](connection-issues.md#container-wont-start).
+
+2. **Can OBS connect?** If OBS reports that it cannot connect, check whether the relay refused it:
+
+    ```bash
+    docker compose logs relay | grep "access forbidden"
+    ```
+
+    If there is output, see [IP Authentication](ip_authentication.md). If not, see [Cannot Connect from OBS](connection-issues.md#cannot-connect-from-obs).
+
+3. **Is each service enabled?**
+
+    ```bash
+    docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
+    ```
+
+    If a service shows `Skipping` or `ERROR`, see Service Not Enabled for [Twitch](services/twitch.md#1-service-not-enabled) or [YouTube](services/youtube.md#1-service-not-enabled).
+
+4. **Does the stream appear on each platform?** If not, see Stream Not Appearing for [Twitch](services/twitch.md#stream-not-appearing) or [YouTube](services/youtube.md#stream-not-appearing).
+
+5. **Are archive files being written?** If not, see [Archive Not Recording](services/archive.md#archive-not-recording).
 
 ## Common Issues by Category
 
