@@ -12,7 +12,8 @@ export TESTS_RUN=${TESTS_RUN:-0}
 export TESTS_PASSED=${TESTS_PASSED:-0}
 export TESTS_FAILED=${TESTS_FAILED:-0}
 
-# Run a single test
+# Run a single test. Always returns 0 so test.sh (set -e) keeps going after a
+# failure; TESTS_FAILED decides the exit code.
 run_test() {
   local test_name="$1"
   local test_function="$2"
@@ -26,8 +27,8 @@ run_test() {
   else
     echo -e "${RED}✗${NC} $test_name"
     TESTS_FAILED=$((TESTS_FAILED + 1))
-    return 1
   fi
+  return 0
 }
 
 # Export for use by test.sh
