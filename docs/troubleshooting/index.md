@@ -123,14 +123,18 @@ Look for uncommented `include` directives for enabled services.
 If you're still experiencing issues:
 
 1. **Check existing issues**: [GitHub Issues](https://github.com/JacobSanford/docker-rtmp-multistream/issues){target="_blank"}
-2. **Gather information**:
-   - Container logs: `docker compose logs relay > logs.txt`
-   - Environment: `docker compose config > config.txt`
-   - System info: `uname -a; docker --version`
+2. **Gather information**. These commands replace your stream keys with `REDACTED`, but read both files before you share them:
+
+    ```bash
+    docker compose logs relay | sed -E 's#(live2|/app)/[A-Za-z0-9._:-]+#\1/REDACTED#g' > logs.txt
+    docker compose config | sed -E 's/(_KEY: ).*/\1REDACTED/' > config.txt
+    uname -a; docker --version
+    ```
+
 3. **Open a new issue** with:
    - Clear description of the problem
    - Steps to reproduce
-   - Logs and configuration (redact stream keys!)
+   - `logs.txt` and `config.txt`
    - System information
 
 ## See Also
