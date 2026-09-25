@@ -104,7 +104,7 @@ TWITCH_KEY=live_123456789_abcdefghijklmnopqrstuvwxyz
 
 **Used by**: Twitch service configuration script (`90_configure_twitch.sh`)
 
-**Values**:
+**Valid values**:
 
 - `TRUE` (or `true`): **Partner mode** - Simple relay with no transcoding. Stream is forwarded directly to Twitch, preserving full source quality for Twitch's multi-bitrate transcoding services. All transformer-related variables (`TWITCH_HEIGHT`, `TWITCH_FPS`, etc.) are ignored in this mode.
 
@@ -201,7 +201,7 @@ TWITCH_CODEC=libx264
 
 **Valid values**: Letters, digits, `_` and `-`, 1 to 100 characters. The relay connects to `rtmp://<TWITCH_ENDPOINT>.contribute.live-video.net/app/`, so the value must be a Twitch ingest slug.
 
-**Current endpoints** (from `https://ingest.twitch.tv/ingests`, checked 2026-09-25):
+**Common values** (from `https://ingest.twitch.tv/ingests`, checked 2026-09-25):
 
 | Slug | Location |
 |---|---|
@@ -220,6 +220,11 @@ TWITCH_CODEC=libx264
 | `aps30` | Asia Pacific (Mumbai) |
 
 Twitch changes this list. For the current one, open `https://ingest.twitch.tv/ingests` and use the label before `.contribute.live-video.net` in each `url_template`.
+
+**Example**:
+```bash
+TWITCH_ENDPOINT=euc10  # Europe (Frankfurt)
+```
 
 **Note**: Legacy slugs such as `jfk`, `syd` and `lhr` still resolve, but several route to US servers regardless of their name. Use a slug from the list above.
 
@@ -264,6 +269,11 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 
 **Common values**: `60`, `50`, `30`, `25`, `24`
 
+**Example**:
+```bash
+TWITCH_FPS=30
+```
+
 **See also**: [Twitch Quality Settings](../services/twitch.md#optimizing-twitch-quality)
 
 ### TWITCH_HEIGHT
@@ -282,6 +292,11 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 
 **Common values**: `1080`, `900`, `720`, `540`, `480`
 
+**Example**:
+```bash
+TWITCH_HEIGHT=1080
+```
+
 ### TWITCH_KBITS_PER_VIDEO_FRAME
 
 **Description**: Bitrate multiplier for video encoding. Actual bitrate = `TWITCH_KBITS_PER_VIDEO_FRAME * TWITCH_FPS`.
@@ -295,12 +310,6 @@ TWITCH_FFMPEG_THREADS=8   # Use 8 threads
 **Used by**: Twitch transformer
 
 **Valid values**: Integer, 1 to 1000. Any other value stops the container at start.
-
-**Recommended values**:
-- `100` for 1080p (results in 6000 kbps @ 60fps)
-- `75` for 720p (results in 4500 kbps @ 60fps)
-
-**Formula**: `bitrate = TWITCH_KBITS_PER_VIDEO_FRAME * TWITCH_FPS`
 
 **Examples**:
 ```bash
@@ -323,7 +332,9 @@ TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
 
 **Used by**: Twitch transformer
 
-**Possible values** (fastest to slowest):
+**Valid values**: Letters, digits, `_` and `-`, up to 100 characters. The value is not checked against the preset list below: a misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives, and Twitch receives nothing.
+
+**Common values** (fastest to slowest):
 - `ultrafast` - Extremely fast, lowest quality
 - `superfast` - Very fast, low quality
 - `veryfast` - Fast, moderate quality
@@ -335,9 +346,12 @@ TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
 - `veryslow` - Extremely slow, highest quality
 - `placebo` - Slowest; negligible gain over `veryslow`
 
-**Note**: The value is checked for allowed characters (letters, digits, `_`, `-`, up to 100) but not against this list. A misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.
+**Example**:
+```bash
+TWITCH_X264_PRESET=veryfast
+```
 
-**Recommendation**: Presets slower than `medium` offer diminishing returns. Use `fast` or `veryfast` if CPU is constrained.
+**When to override**: Presets slower than `medium` offer diminishing returns. Use `fast` or `veryfast` if CPU is constrained.
 
 **See also**: [x264 Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264){target="_blank"}
 
@@ -389,7 +403,7 @@ YOUTUBE_KEY=abcd-efgh-ijkl-mnop-qrst
 ARCHIVE_PATH=/archive
 ```
 
-**Important**: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See [Enable Archive](../services/archive.md#enable-archive).
+**Note**: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See [Enable Archive](../services/archive.md#enable-archive).
 
 **See also**: [Archive Configuration](../services/archive.md)
 
