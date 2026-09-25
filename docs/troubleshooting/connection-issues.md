@@ -83,12 +83,20 @@ PUBLISH_IP_RANGE=192.168.1.50/32
 
 If relay can't reach streaming services:
 
-**Check**: Test if relay can reach the service:
+**Check**: Test that the relay can open an RTMP connection (TCP port 1935) to each service:
 
 ```bash
-docker compose exec relay ping -c 3 live-jfk.twitch.tv
-docker compose exec relay ping -c 3 a.rtmp.youtube.com
+docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935
+docker compose exec relay nc -zv a.rtmp.youtube.com 1935
 ```
+
+Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `jfk`). A working connection prints `open` (the IP address will differ):
+
+```text
+jfk.contribute.live-video.net (35.55.32.14:1935) open
+```
+
+If the command does not print `open`, outbound port 1935 is blocked between the relay and the service.
 
 **Solution**:
 - Check firewall settings

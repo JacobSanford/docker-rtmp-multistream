@@ -57,12 +57,19 @@ TWITCH_ENDPOINT=ord  # Chicago
 TWITCH_ENDPOINT=iad  # Ashburn
 ```
 
-**Verify connectivity**:
+**Verify connectivity**: Test that the relay can open an RTMP connection (TCP port 1935) to Twitch:
+
 ```bash
-docker compose exec relay ping -c 5 live-<endpoint>.twitch.tv
+docker compose exec relay nc -zv <TWITCH_ENDPOINT>.contribute.live-video.net 1935
 ```
 
-Replace `<endpoint>` with your chosen endpoint (e.g., `jfk`, `lax`, `ord`).
+Replace `<TWITCH_ENDPOINT>` with your `TWITCH_ENDPOINT` value (default `jfk`). A working connection prints `open` (the IP address will differ):
+
+```text
+jfk.contribute.live-video.net (35.55.32.14:1935) open
+```
+
+If the command does not print `open`, outbound port 1935 is blocked between the relay and Twitch.
 
 ## Stream Not Appearing
 
