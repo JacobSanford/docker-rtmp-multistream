@@ -47,6 +47,7 @@ else
   validate_number "$TWITCH_KBITS_PER_VIDEO_FRAME" "TWITCH_KBITS_PER_VIDEO_FRAME" 1 1000 || exit 1
   validate_number "$TWITCH_FFMPEG_THREADS" "TWITCH_FFMPEG_THREADS" 0 64 || exit 1
   validate_bitrate "$TWITCH_AUDIO_BITRATE" "TWITCH_AUDIO_BITRATE" || exit 1
+  validate_number "$TWITCH_AUDIO_CHANNELS" "TWITCH_AUDIO_CHANNELS" 1 2 || exit 1
   validate_identifier "$TWITCH_CODEC" "TWITCH_CODEC" || exit 1
   validate_identifier "$TWITCH_X264_PRESET" "TWITCH_X264_PRESET" || exit 1
 
@@ -56,6 +57,7 @@ else
 
   # Configure transformer (FFmpeg encoder settings)
   sed -i "s|TWITCH_AUDIO_BITRATE|$TWITCH_AUDIO_BITRATE|g" "${NGINX_CONFD_DIR}/transformers/twitch.conf"
+  sed -i "s|TWITCH_AUDIO_CHANNELS|$TWITCH_AUDIO_CHANNELS|g" "${NGINX_CONFD_DIR}/transformers/twitch.conf"
   sed -i "s|TWITCH_CODEC|$TWITCH_CODEC|g" "${NGINX_CONFD_DIR}/transformers/twitch.conf"
   sed -i "s|TWITCH_DOUBLE_FPS|$TWITCH_DOUBLE_FPS|g" "${NGINX_CONFD_DIR}/transformers/twitch.conf"
   sed -i "s|TWITCH_FFMPEG_THREADS|$TWITCH_FFMPEG_THREADS|g" "${NGINX_CONFD_DIR}/transformers/twitch.conf"

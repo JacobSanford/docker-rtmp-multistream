@@ -73,6 +73,32 @@ test_twitch_transformer_configured() {
   return $?
 }
 
+test_twitch_audio_channels_default_stereo() {
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -q '\-ac 2 ' /etc/nginx/http.d/transformers/twitch.conf
+  "
+  return $?
+}
+
+test_twitch_audio_channels_mono() {
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test -e TWITCH_AUDIO_CHANNELS=1 rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh >/dev/null 2>&1
+    grep -q '\-ac 1 ' /etc/nginx/http.d/transformers/twitch.conf
+  "
+  return $?
+}
+
+test_invalid_twitch_audio_channels_rejected() {
+  docker run --rm --entrypoint sh -e TWITCH_KEY=test -e TWITCH_AUDIO_CHANNELS=6 rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_twitch.sh 2>&1 | grep -q 'ERROR'
+  "
+  return $?
+}
+
 test_publish_ip_range_default() {
   docker run --rm --entrypoint sh rtmp-multistream:test -c "
     /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
@@ -211,6 +237,9 @@ run_test "Archive service skips without path" test_archive_service_skips_without
 run_test "Twitch config variables replaced" test_twitch_config_variables_replaced
 run_test "YouTube config variables replaced" test_youtube_config_variables_replaced
 run_test "Twitch transformer configured" test_twitch_transformer_configured
+run_test "Twitch audio channels default to stereo" test_twitch_audio_channels_default_stereo
+run_test "Twitch audio channels set to mono" test_twitch_audio_channels_mono
+run_test "Invalid TWITCH_AUDIO_CHANNELS rejected" test_invalid_twitch_audio_channels_rejected
 run_test "Publish IP range default" test_publish_ip_range_default
 run_test "Publish IP range configured" test_publish_ip_range_configured
 run_test "Publish IP range multiple ranges" test_publish_ip_range_multiple_ranges
