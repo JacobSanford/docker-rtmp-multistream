@@ -40,7 +40,7 @@ Use consistent terminology and capitalization throughout documentation:
 
 ### Headings
 
-- Use sentence case: "Quick start guide" not "Quick Start Guide"
+- Use Title Case: "Change Relay Settings" not "Change relay settings"
 - Keep headings short and descriptive
 - Don't skip heading levels (h2 → h4)
 
