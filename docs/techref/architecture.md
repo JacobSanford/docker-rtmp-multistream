@@ -207,5 +207,5 @@ This ensures all incoming streams are archived regardless of destination.
 ## See Also
 
 - [Service Patterns Reference](service-patterns.md) - Detailed comparison of architectural patterns
-- [Configuration Overview](../configuration.md) - Setup and environment variables
+- [Change Relay Settings](../configuration.md) - Setup and environment variables
 - [Adding New Streaming Services](../developer/adding-services/overview.md) - Implement new streaming services

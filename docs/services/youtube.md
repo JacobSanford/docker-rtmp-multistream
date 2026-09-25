@@ -56,4 +56,4 @@ Refer to the [Quality Optimization Guide](../performance/quality.md) and [Bandwi
 - **[Quality Optimization](../performance/quality.md)** - Stream quality optimization
 - **[Bandwidth Requirements](../performance/bandwidth.md)** - Network bandwidth guidance
 - **[Architecture](../techref/architecture.md)** - Learn about relay patterns
-- **[Quick Start Guide](../quickstart.md)** - Initial setup instructions
+- **[Quick Start](../quickstart.md)** - Initial setup instructions

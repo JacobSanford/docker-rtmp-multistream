@@ -64,7 +64,7 @@ nav:
   - Home: index.md
   - User Guide:
     - Requirements: requirements.md
-    - QuickStart: quickstart.md
+    - Quick Start: quickstart.md
     - Configuration: configuration.md
     - Streaming Services:
       - Overview: services/overview.md

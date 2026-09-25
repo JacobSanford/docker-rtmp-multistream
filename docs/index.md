@@ -30,7 +30,7 @@ Additional streaming services can be added. Please see the [Adding New Streaming
 New to docker-rtmp-multistream? Start here:
 
 1. [Requirements](requirements.md) - Check prerequisites and system requirements
-2. [Quick Start Guide](quickstart.md) - Get up and running quickly
+2. [Quick Start](quickstart.md) - Get up and running quickly
 
 ## Issues
 
@@ -47,5 +47,5 @@ This project is dual-licensed under the GNU Affero General Public License v3 (AG
 ## See Also
 
 - [Requirements](requirements.md) - Check prerequisites and system requirements
-- [Quick Start Guide](quickstart.md) - Get up and running quickly
+- [Quick Start](quickstart.md) - Get up and running quickly
 - [Services Overview](services/overview.md) - Supported streaming services

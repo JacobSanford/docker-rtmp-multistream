@@ -262,6 +262,6 @@ See `tests/README.md` for detailed test documentation.
 
 ## See Also
 
-- [Configuration Guide](configuration.md) - Environment variable configuration
+- [Change Relay Settings](configuration.md) - Environment variable configuration
 - [Architecture](techref/architecture.md) - How configuration is processed
 - [IP Authentication Troubleshooting](troubleshooting/ip_authentication.md) - Connection authorization issues

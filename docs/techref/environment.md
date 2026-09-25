@@ -15,7 +15,7 @@ Complete reference for all environment variables used in docker-rtmp-multistream
 Every value is validated when the container starts. An invalid value logs an `ERROR:` line naming the variable and stops the container. `TWITCH_CODEC` and `TWITCH_X264_PRESET` are the exceptions: they are checked for allowed characters only, so a wrong value lets the container start and fails when a stream arrives.
 
 !!! tip "Quick Configuration"
-    For a practical guide on using these variables, see the [Configuration Guide](../configuration.md).
+    For a practical guide on using these variables, see [Change Relay Settings](../configuration.md).
 
 ## System Variables
 
@@ -432,5 +432,5 @@ ARCHIVE_SUFFIX=flv
 
 ## See Also
 
-- [Configuration Overview](../configuration.md) - How configuration works
+- [Change Relay Settings](../configuration.md) - How configuration works
 - [Adding Services](../developer/adding-services/overview.md) - Define custom environment variables

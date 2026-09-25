@@ -76,6 +76,6 @@ The date and time are in UTC, not your local time zone. Because the date is day-
 
 ## See Also
 
-- [Configuration Overview](../configuration.md) - Docker volumes and environment setup
+- [Change Relay Settings](../configuration.md) - Edit, apply and confirm a setting
 - [Requirements](../requirements.md) - System prerequisites
 - [Troubleshooting](../troubleshooting/index.md) - Common archive issues
