@@ -13,13 +13,32 @@ relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, clie
 ```
 
 ## Solution
-This error will provide you with the correct client IP address that was denied access. In the example above, the client's apparent IP is `172.22.0.1`. Setting the `PUBLISH_IP_RANGE` to a mask that include this IP address (e.g., `172.22.0.0/16`) will resolve the issue.
 
-Recreate the container so it reads the new value:
+1. Find the address the relay refused. It's the `client:` value in the log line:
 
-```bash
-docker compose up -d --force-recreate
-```
+    ```bash
+    docker compose logs relay | grep "access forbidden"
+    ```
+
+2. In `env/relay.env`, uncomment `PUBLISH_IP_RANGE` and add a range that includes that address. Keep the ranges you still need, because this value replaces the default. For a refused address of `10.0.0.25`:
+
+    ```bash
+    PUBLISH_IP_RANGE=10.0.0.0/24,192.168.0.0/16
+    ```
+
+3. Recreate the container so it reads the new value:
+
+    ```bash
+    docker compose up -d --force-recreate
+    ```
+
+4. Start streaming from OBS, then confirm that nothing was refused:
+
+    ```bash
+    docker compose logs relay | grep "access forbidden"
+    ```
+
+    No output means the connection was allowed.
 
 ## Choosing an Appropriate PUBLISH_IP_RANGE
 The streaming software's IP address detected by the _docker-rtmp-multistream_ container may differ from what you expect based on how you are connecting to it.
@@ -27,10 +46,9 @@ The streaming software's IP address detected by the _docker-rtmp-multistream_ co
 ### Connections From: WAN, Other Machines on LAN
 The container typically detects the actual IP (e.g., 192.168.1.100). Choose a mask based on your actual network range.
 
-### Connections From: The Same Machine (Docker host, localhost)
-When Docker creates containers, it generally uses a bridge network (usually named `docker0` or a custom bridge). This creates a virtual network interface that acts as a gateway between your host and containers.
+### Connections From: The Same Machine
 
-In this case, the container typically detects the Gateway IP of the Docker bridge network. Choose a mask that includes the entire Docker bridge subnet (e.g., `172.22.0.0/16`).
+If OBS runs on the same machine as the relay, point it at the machine's LAN address (for example `rtmp://192.168.2.29/relay`), not `127.0.0.1` or `localhost`. A localhost connection reaches the relay from a Docker network address that the default range does not allow.
 
 ## Example Ranges
 
@@ -39,7 +57,6 @@ In this case, the container typically detects the Gateway IP of the Docker bridg
 | Single specific machine only        | `192.168.1.100/32`                   |
 | Specific subnet (e.g., 192.168.1.x) | `192.168.1.0/24`                     |
 | Entire typical home network         | `192.168.0.0/16`                     |
-| Allow Docker host + local network   | `172.17.0.0/16,192.168.0.0/16`       |
 
 !!! warning "Security Recommendation"
     Use the most restrictive mask that meets your needs. If you only stream from one machine, use /32 for that single IP.
