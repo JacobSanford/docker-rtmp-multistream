@@ -32,4 +32,4 @@ Please report any issues or bugs you encounter by opening a new issue via the [I
 Contributions / Pull requests are welcome!
 
 ## License
-This project is dual-licensed under the GNU Affero General Public License v3 (AGPLv3) and a commercial license. See [LICENSE](LICENSE) for the AGPLv3 terms. For use under different terms, for example in proprietary or commercial products, a commercial license is available.
+This project is dual-licensed under the GNU Affero General Public License v3 (AGPLv3) and a commercial license. See [LICENSE](LICENSE) for the AGPLv3 terms. For use under different terms, for example in proprietary or commercial products, a commercial license is available: contact [jacob.josh.sanford@gmail.com](mailto:jacob.josh.sanford@gmail.com).
