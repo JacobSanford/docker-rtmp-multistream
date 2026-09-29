@@ -165,7 +165,7 @@ sed -i "s|TWITCH_KEY|$SAFE_KEY|g" config.conf
 
 ### 2. Network Security
 - Restrict `PUBLISH_IP_RANGE` to trusted networks only
-- Default `192.168.0.0/16` is suitable for home networks
+- The default, `172.16.0.0/12,192.168.0.0/16`, admits the Docker networks and typical home networks
 - Use `/32` for single-host authorization
 - Consider VPN/firewall rules for additional protection
 

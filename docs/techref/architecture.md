@@ -166,15 +166,17 @@ push rtmp://live-jfk.twitch.tv/app/live_123456789_abc;
 
 ### IP-Based Authentication
 
-The `PUBLISH_IP_RANGE` variable restricts who can publish streams:
+The `PUBLISH_IP_RANGE` variable restricts who can publish streams. `build/conf/nginx/http.d/auth.conf` ships as:
 
 ```nginx
-# In auth.conf
-allow publish {PUBLISH_IP_RANGE};
+allow publish 127.0.0.1;
+allow publish PUBLISH_IP_RANGE;
 deny publish all;
 ```
 
-Default: `192.168.0.0/16` (local network only)
+At startup, `89_configure_app.sh` replaces the placeholder line with one `allow publish` line per comma-separated range. `127.0.0.1` is always allowed.
+
+Default: `172.16.0.0/12,192.168.0.0/16` (`Dockerfile`). The first range covers the Docker networks from Docker's default address pool, including the one `docker compose` creates. The second covers typical home networks. See [`PUBLISH_IP_RANGE`](environment.md#system-variables).
 
 ### Stream Keys
 
