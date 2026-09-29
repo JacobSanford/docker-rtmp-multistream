@@ -138,15 +138,9 @@ ls -l stream_archive
 
 **Issue**: Archive files won't play or are corrupted
 
-Archives are always recorded as FLV (Flash Video), whatever `ARCHIVE_SUFFIX` says. `ARCHIVE_SUFFIX` only sets the file extension. A file named `.mp4` is still FLV inside, and some players refuse it.
+Archives are always recorded as FLV (Flash Video). Some players and editors refuse FLV files.
 
-**Solution**: Set the extension to match the content in `env/relay.env`:
-
-```bash
-ARCHIVE_SUFFIX=flv
-```
-
-To convert an existing archive to a real MP4 file without re-encoding:
+**Solution**: Convert the archive to MP4 without re-encoding:
 
 ```bash
 ffmpeg -i <ARCHIVE_FILE> -c copy <OUTPUT_FILE>.mp4
@@ -156,7 +150,7 @@ Replace `<ARCHIVE_FILE>` with the archive's file name and `<OUTPUT_FILE>` with a
 
 ## Files Not Named as Expected
 
-The name is `<stream-name>-<unix-time>_<DDMMYYYY>_<HHMMSS>.<ARCHIVE_SUFFIX>`, with the date and time in UTC. See [File Naming](../../services/archive.md#file-naming) for an example and how to sort the files.
+The name is `<stream-name>-<unix-time>_<DDMMYYYY>_<HHMMSS>.flv`, with the date and time in UTC. See [File Naming](../../services/archive.md#file-naming) for an example and how to sort the files.
 
 ## Archive Grows Too Large
 

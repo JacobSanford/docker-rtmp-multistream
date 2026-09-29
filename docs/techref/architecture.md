@@ -191,12 +191,12 @@ recorder all {
     record all;
     record_path ARCHIVE_PATH;
     record_unique on;
-    record_suffix _%d%m%Y_%H%M%S.ARCHIVE_SUFFIX;
+    record_suffix _%d%m%Y_%H%M%S.flv;
     record_notify on;
 }
 ```
 
-`ARCHIVE_PATH` and `ARCHIVE_SUFFIX` are replaced with their values at container start. For the resulting file names, see [File Naming](../services/archive.md#file-naming).
+`ARCHIVE_PATH` is replaced with its value at container start. For the resulting file names, see [File Naming](../services/archive.md#file-naming).
 
 Every stream published to the `relay` application is archived, whichever services are enabled. Streams published directly to the `twitch` application are not.
 

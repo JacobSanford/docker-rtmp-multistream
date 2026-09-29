@@ -97,9 +97,6 @@ Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/deve
 - `TWITCH_PARTNER`: TRUE relays unchanged, FALSE transcodes (default: FALSE)
 - `TWITCH_FFMPEG_THREADS`: x264 encoder threads, 0 = auto (default: 0)
 
-### Archive Settings
-- `ARCHIVE_SUFFIX`: File extension; files are always FLV (default: flv)
-
 ### System
 - `PUBLISH_IP_RANGE`: IP ranges allowed to publish streams, comma-separated (default: 172.16.0.0/12,192.168.0.0/16)
 - `NGINX_ERROR_LOG_LEVEL`: nginx error log level (default: error)
@@ -144,7 +141,6 @@ All environment variables are validated before being used in configurations via 
 - `validate_identifier()` - Validates alphanumeric identifiers (codecs, presets)
 - `validate_bitrate()` - Validates bitrate format (numeric or with k/K suffix)
 - `validate_log_level()` - Whitelist validation for nginx log levels
-- `validate_suffix()` - Validates file extensions
 - `validate_boolean()` - Validates TRUE/FALSE, case insensitive
 - `escape_for_sed()` - Safely escapes values for sed substitution
 
@@ -152,7 +148,7 @@ All environment variables are validated before being used in configurations via 
 - Command injection prevention (stream keys and identifiers are whitelisted; `validate_path` blocks `` ;|&$`(){}<>#'" ``)
 - Path traversal protection (`validate_path` rejects `..` path segments)
 - Configuration injection prevention (blocks newlines, null bytes)
-- Length limits on stream keys, paths, identifiers, suffixes and numbers
+- Length limits on stream keys, paths, identifiers and numbers
 - Fail-fast behavior (`set -e` in the pre-init scripts; `build/scripts/run.sh` stops the container when one fails)
 
 All configuration scripts validate inputs before use, preventing malicious values from reaching nginx configs or shell commands.

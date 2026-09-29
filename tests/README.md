@@ -55,10 +55,6 @@ Comprehensive unit tests for input validation functions that prevent security vu
 - Valid inputs: all 8 nginx levels (debug, info, notice, warn, error, crit, alert, emerg)
 - Invalid inputs: unknown values, wrong case, empty
 
-**validate_suffix**:
-- Valid inputs: alphanumeric file extensions (mp4, flv, mkv)
-- Invalid inputs: leading dot, slashes, special chars, excessive length
-
 **validate_boolean**:
 - Valid inputs: `TRUE` and `FALSE` in any case
 - Invalid inputs: `yes`, `no`, `1`, `0`, empty

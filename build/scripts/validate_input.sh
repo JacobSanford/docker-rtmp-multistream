@@ -282,30 +282,6 @@ validate_log_level() {
   esac
 }
 
-# Validate file suffix (extension)
-validate_suffix() {
-  local suffix="$1"
-  local name="$2"
-
-  if [ -z "$suffix" ]; then
-    echo "ERROR: $name cannot be empty."
-    return 1
-  fi
-
-  # Allow: alphanumeric only (no dots, no paths)
-  if ! echo "$suffix" | grep -qE '^[a-zA-Z0-9]+$'; then
-    echo "ERROR: $name must be alphanumeric only (e.g., flv)."
-    return 1
-  fi
-
-  if [ ${#suffix} -gt 10 ]; then
-    echo "ERROR: $name is too long (max 10 characters)."
-    return 1
-  fi
-
-  return 0
-}
-
 # Validate boolean (TRUE/FALSE, case insensitive)
 validate_boolean() {
   local value="$1"

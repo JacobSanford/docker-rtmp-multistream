@@ -415,27 +415,6 @@ ARCHIVE_PATH=/archive
 
 **See also**: [Archive Configuration](../services/archive.md)
 
-### ARCHIVE_SUFFIX
-
-**Description**: Filename extension for archived stream files. The recorder always writes an FLV container; this value changes only the extension.
-
-**Type**: String
-
-**Default**: `flv`
-
-**Required**: No
-
-**Used by**: Archive service configuration
-
-**Valid values**: Letters and digits only, 1 to 10 characters. Checked only when `ARCHIVE_PATH` is set; any other value stops the container at start.
-
-**Example**:
-```bash
-ARCHIVE_SUFFIX=flv
-```
-
-**Note**: Keep `flv`. Other values such as `mp4` produce FLV files with a misleading extension. To get an MP4, remux after recording: `ffmpeg -i input.flv -c copy output.mp4`
-
 ---
 
 ## See Also

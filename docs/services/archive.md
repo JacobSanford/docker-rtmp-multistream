@@ -56,14 +56,14 @@ The relay can archive streams to disk in real time. Archives are written inside 
 
 ## Settings
 
-`ARCHIVE_PATH` turns archiving on. `ARCHIVE_SUFFIX` sets the filename extension only; files are always FLV. For both variables' defaults and valid values, see [Archive Variables](../techref/environment.md#archive-variables).
+`ARCHIVE_PATH` turns archiving on. For its default and valid values, see [`ARCHIVE_PATH`](../techref/environment.md#archive_path). Archives are always FLV files.
 
 ## File Naming
 
 Each stream is written to a new file named:
 
 ```text
-<stream-name>-<unix-time>_<DDMMYYYY>_<HHMMSS>.<ARCHIVE_SUFFIX>
+<stream-name>-<unix-time>_<DDMMYYYY>_<HHMMSS>.flv
 ```
 
 For example, a stream published as `rtmp://<relay>/relay/live` on 25 September 2026 at 14:53:40 UTC produces:

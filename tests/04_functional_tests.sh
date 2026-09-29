@@ -59,7 +59,6 @@ test_archive_records_stream() {
   docker run -d --name test-rtmp-archive -p 11935:1935 \
     -e PUBLISH_IP_RANGE="172.16.0.0/12" \
     -e ARCHIVE_PATH=/tmp/archive \
-    -e ARCHIVE_SUFFIX=flv \
     -v "$TEST_TMP/archive:/tmp/archive" \
     rtmp-multistream:test >/dev/null 2>&1
   sleep 3

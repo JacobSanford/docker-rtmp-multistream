@@ -25,7 +25,6 @@ If a value fails validation, its startup script exits with status 1, and `build/
 | `PUBLISH_IP_RANGE` | `validate_ip_ranges` | `89_configure_app.sh` |
 | `NGINX_ERROR_LOG_LEVEL` | `validate_log_level` | `89_configure_app.sh` |
 | `ARCHIVE_PATH` | `validate_path` | `90_configure_archive.sh` |
-| `ARCHIVE_SUFFIX` | `validate_suffix` | `90_configure_archive.sh` |
 | `TWITCH_KEY`, `YOUTUBE_KEY` | `validate_stream_key` | `90_configure_twitch.sh`, `90_configure_youtube.sh` |
 | `TWITCH_PARTNER` | `validate_boolean` | `90_configure_twitch.sh` |
 | `TWITCH_ENDPOINT`, `TWITCH_CODEC`, `TWITCH_X264_PRESET` | `validate_identifier` | `90_configure_twitch.sh` |
@@ -154,22 +153,6 @@ Validates nginx log level using whitelist approach.
 validate_log_level "$NGINX_ERROR_LOG_LEVEL" "NGINX_ERROR_LOG_LEVEL" || exit 1
 ```
 
-### `validate_suffix(suffix, name)`
-Validates file extensions for archive recordings.
-
-**Allowed characters:** `a-z A-Z 0-9`
-
-**Blocks:**
-- Leading dots: `.mp4`
-- Paths: `mp4/flv`
-- Special characters: `mp4-flv`
-- More than 10 characters
-
-**Usage:**
-```bash
-validate_suffix "$ARCHIVE_SUFFIX" "ARCHIVE_SUFFIX" || exit 1
-```
-
 ### `validate_boolean(value, name)`
 Validates on/off settings such as `TWITCH_PARTNER`.
 
@@ -202,7 +185,7 @@ sed -i "s|TWITCH_KEY|$SAFE_KEY|g" config.conf
 
 **Mitigation:**
 - Every user-set variable validated before use
-- Stream keys, identifiers, suffixes and booleans are whitelisted, so shell metacharacters such as `` ;|&$`()<>{}[] `` cannot appear in them
+- Stream keys, identifiers and booleans are whitelisted, so shell metacharacters such as `` ;|&$`()<>{}[] `` cannot appear in them
 - Stream keys, `TWITCH_ENDPOINT` and `ARCHIVE_PATH` escaped before `sed` substitution
 - A failing startup script stops the container before nginx starts (`build/scripts/run.sh`)
 

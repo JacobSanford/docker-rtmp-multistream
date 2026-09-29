@@ -11,7 +11,6 @@ fi
 
 # Validate inputs
 validate_path "$ARCHIVE_PATH" "ARCHIVE_PATH" || exit 1
-validate_suffix "$ARCHIVE_SUFFIX" "ARCHIVE_SUFFIX" || exit 1
 
 if ! sudo -u $NGINX_RUN_USER test -w "$ARCHIVE_PATH"; then
   echo "ERROR: ARCHIVE_PATH is not writable by the nginx user."
@@ -23,7 +22,6 @@ ARCHIVE_PATH_ESC=$(escape_for_sed "$ARCHIVE_PATH")
 
 sed -i "/record off/d" ${NGINX_APP_CONF_FILE}
 sed -i "s|ARCHIVE_PATH|$ARCHIVE_PATH_ESC|g" "${NGINX_CONFD_DIR}/apps/archive.conf"
-sed -i "s|ARCHIVE_SUFFIX|$ARCHIVE_SUFFIX|g" "${NGINX_CONFD_DIR}/apps/archive.conf"
 
 /scripts/enableService.sh archive
 

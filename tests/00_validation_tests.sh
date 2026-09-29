@@ -493,46 +493,6 @@ test_log_level_invalid_empty() {
 }
 
 # ============================================================================
-# validate_suffix tests
-# ============================================================================
-
-test_suffix_valid_mp4() {
-  run_validation_test "validate_suffix" "mp4" "mp4 format" 0
-}
-
-test_suffix_valid_flv() {
-  run_validation_test "validate_suffix" "flv" "flv format" 0
-}
-
-test_suffix_valid_mkv() {
-  run_validation_test "validate_suffix" "mkv" "mkv format" 0
-}
-
-test_suffix_valid_uppercase() {
-  run_validation_test "validate_suffix" "MP4" "uppercase" 0
-}
-
-test_suffix_invalid_with_dot() {
-  run_validation_test "validate_suffix" ".mp4" "with leading dot" 1
-}
-
-test_suffix_invalid_with_slash() {
-  run_validation_test "validate_suffix" "mp4/flv" "with slash" 1
-}
-
-test_suffix_invalid_special_chars() {
-  run_validation_test "validate_suffix" "mp4-flv" "with dash" 1
-}
-
-test_suffix_invalid_empty() {
-  run_validation_test "validate_suffix" "" "empty string" 1
-}
-
-test_suffix_invalid_too_long() {
-  run_validation_test "validate_suffix" "verylongext" "too long (11 chars)" 1
-}
-
-# ============================================================================
 # validate_boolean tests
 # ============================================================================
 
@@ -743,18 +703,6 @@ run_test "  valid: emerg" test_log_level_valid_emerg
 run_test "  invalid: unknown" test_log_level_invalid_unknown
 run_test "  invalid: uppercase" test_log_level_invalid_uppercase
 run_test "  invalid: empty" test_log_level_invalid_empty
-
-echo ""
-echo "Testing validate_suffix..."
-run_test "  valid: mp4" test_suffix_valid_mp4
-run_test "  valid: flv" test_suffix_valid_flv
-run_test "  valid: mkv" test_suffix_valid_mkv
-run_test "  valid: uppercase" test_suffix_valid_uppercase
-run_test "  invalid: with dot" test_suffix_invalid_with_dot
-run_test "  invalid: with slash" test_suffix_invalid_with_slash
-run_test "  invalid: special chars" test_suffix_invalid_special_chars
-run_test "  invalid: empty" test_suffix_invalid_empty
-run_test "  invalid: too long" test_suffix_invalid_too_long
 
 echo ""
 echo "Testing validate_boolean..."
