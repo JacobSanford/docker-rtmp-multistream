@@ -993,9 +993,10 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>In <code>env/relay.env</code>, add the same variables with a comment, so users can find them:</p>
+<p>In <code>env/relay.env.example</code>, add the same variables under a comment, so users can find them. Leave the key uncommented and empty, and comment out every other variable at its default:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># Example</span>
 </span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># EXAMPLE_INGEST=live.example.com</span>
 </span></code></pre></div>
 </li>
 </ol>
@@ -1063,7 +1064,7 @@
 <p>Stream end to end with your real key. Build with <code>docker compose build</code>, then set <code>EXAMPLE_KEY</code> in <code>env/relay.env</code> and start with <code>docker compose up -d --force-recreate</code>. Publish a test pattern:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>ffmpeg<span class="w"> </span>-re<span class="w"> </span>-f<span class="w"> </span>lavfi<span class="w"> </span>-i<span class="w"> </span><span class="nv">testsrc</span><span class="o">=</span><span class="nv">size</span><span class="o">=</span>1280x720:rate<span class="o">=</span><span class="m">30</span><span class="w"> </span>-f<span class="w"> </span>lavfi<span class="w"> </span>-i<span class="w"> </span>sine<span class="w"> </span>-t<span class="w"> </span><span class="m">60</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-c:a<span class="w"> </span>aac<span class="w"> </span>-f<span class="w"> </span>flv<span class="w"> </span>rtmp://localhost:1935/relay/test
 </span></code></pre></div>
-<p>The stream appears in your service's dashboard. <code>env/relay.env</code> is tracked by git: remove the key before you commit.</p>
+<p>The stream appears in your service's dashboard. <code>env/relay.env</code> is ignored by git, so the key stays out of your commit.</p>
 </li>
 </ol>
 <h2 id="document-the-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.8</span> Document the Service</h2>

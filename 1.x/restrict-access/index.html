@@ -860,7 +860,7 @@
 <p>In your streaming software, set the server to the address you bound, for example <code>rtmp://192.168.1.20:1935/relay</code>. A server of <code>localhost</code> or <code>127.0.0.1</code> stops working unless you bound <code>127.0.0.1</code>.</p>
 </li>
 </ol>
-<p><code>docker-compose.yml</code> is tracked by git, like <code>env/relay.env</code>. If a later <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: docker-compose.yml</code>, save your copy, run <code>git checkout docker-compose.yml</code>, pull again, then put your <code>ports:</code> line back.</p>
+<p><code>docker-compose.yml</code> is tracked by git, unlike <code>env/relay.env</code>. If a later <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: docker-compose.yml</code>, save your copy, run <code>git checkout docker-compose.yml</code>, pull again, then put your <code>ports:</code> line back.</p>
 <div class="admonition warning">
 <p class="admonition-title">A host firewall may not block Docker ports</p>
 <p>Docker writes its own iptables rules for published ports, so host firewall tools such as <code>ufw</code> may not block them. Bind the port as above, or block it at a firewall in front of the host.</p>

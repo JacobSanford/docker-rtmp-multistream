@@ -874,7 +874,7 @@
 </ul>
 <h2 id="where-stream-keys-live"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5</span> Where Stream Keys Live</h2>
 <ul>
-<li><strong><code>env/relay.env</code></strong>, which is tracked by git, and which <code>.gitignore</code> does not exclude. After adding keys, run <code>git update-index --skip-worktree env/relay.env</code> so a later <code>git commit -a</code> cannot publish them. See <a href="../configuration/">Change Relay Settings</a>.</li>
+<li><strong><code>env/relay.env</code></strong>, in plain text. <code>.gitignore</code> excludes it, so git does not commit it; the tracked template is <code>env/relay.env.example</code>, which holds no keys. See <a href="../configuration/">Change Relay Settings</a>.</li>
 <li><strong>The container environment.</strong> Anyone who can run <code>docker inspect</code> on the container can read them. The relay has no support for Docker secrets or <code>*_FILE</code> variables.</li>
 <li><strong>The generated nginx config</strong> inside the container, in plain text.</li>
 <li><strong>The container log</strong>, when <code>NGINX_ERROR_LOG_LEVEL</code> is <code>info</code> or more verbose: nginx logs the full push URL, including the key, when it starts relaying. Return to <code>error</code> (the default) after troubleshooting, and remove keys before sharing logs.</li>

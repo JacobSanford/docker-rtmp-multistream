@@ -810,35 +810,37 @@
 <p>TODO(verify: current Twitch and YouTube menu paths to the stream key)</p>
 </li>
 <li>
-<p>In <code>env/relay.env</code>, set each key, then save the file:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span>live_123456789_abcdefghij
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nv">YOUTUBE_KEY</span><span class="o">=</span>abcd-efgh-ijkl-mnop-qrst
+<p>Create your settings file from the template:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>cp<span class="w"> </span>env/relay.env.example<span class="w"> </span>env/relay.env
 </span></code></pre></div>
-<p>Paste each key with no spaces or quotes. Leave a key empty to turn that service off.</p>
-<div class="admonition warning">
-<p class="admonition-title">Keep your keys out of git</p>
-<p><code>env/relay.env</code> is tracked by git. After adding keys, run <code>git update-index --skip-worktree env/relay.env</code> so a later <code>git commit -a</code> cannot publish them.</p>
-</div>
+<p><code>env/relay.env</code> is ignored by git, so your keys cannot be committed.</p>
 </li>
 <li>
-<p>If your streaming PC's address does not start with <code>192.168.</code>, add its subnet to <code>PUBLISH_IP_RANGE</code> in <code>env/relay.env</code>, keeping the default ranges. For a streaming PC at <code>10.0.0.25</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">172</span>.16.0.0/12,192.168.0.0/16,10.0.0.0/24
+<p>In <code>env/relay.env</code>, set each key, then save the file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span>live_123456789_abcdefghij
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nv">YOUTUBE_KEY</span><span class="o">=</span>abcd-efgh-ijkl-mnop-qrst
+</span></code></pre></div>
+<p>Paste each key with no spaces or quotes. Leave a key empty to turn that service off.</p>
+</li>
+<li>
+<p>If your streaming PC's address does not start with <code>192.168.</code>, uncomment <code>PUBLISH_IP_RANGE</code> in <code>env/relay.env</code> and set it to the default ranges plus its subnet. For a streaming PC at <code>10.0.0.25</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">172</span>.16.0.0/12,192.168.0.0/16,10.0.0.0/24
 </span></code></pre></div>
 <p>The relay refuses streams from any address outside this list.</p>
 </li>
 <li>
 <p>Start the relay:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>./start.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>./start.sh
 </span></code></pre></div>
 <p><code>start.sh</code> removes any existing relay container, rebuilds the image against the latest base image, and runs the relay in the foreground. Press Ctrl+C to stop it.</p>
 </li>
 <li>
 <p>In a second terminal on the relay host, confirm each service is enabled:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
 </span></code></pre></div>
 <p>Expected output:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>Twitch Non-Partner configuration complete, and service enabled.
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>YouTube configuration complete, and service enabled.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>Twitch Non-Partner configuration complete, and service enabled.
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>YouTube configuration complete, and service enabled.
 </span></code></pre></div>
 <p>If you see an <code>ERROR:</code> line, the relay has stopped. See <a href="../troubleshooting/connection-issues/#invalid-environment-value">Invalid Environment Value</a>.</p>
 </li>
