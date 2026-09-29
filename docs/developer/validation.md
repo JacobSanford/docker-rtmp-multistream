@@ -32,7 +32,7 @@ If a value fails validation, its startup script exits with status 1, and `build/
 | `TWITCH_FPS` (1–120), `TWITCH_HEIGHT` (144–4320), `TWITCH_KBITS_PER_VIDEO_FRAME` (1–1000), `TWITCH_FFMPEG_THREADS` (0–64), `TWITCH_AUDIO_CHANNELS` (1–2) | `validate_number` | `90_configure_twitch.sh` |
 | `TWITCH_AUDIO_BITRATE` | `validate_bitrate` | `90_configure_twitch.sh` |
 
-The Twitch encoder variables are validated only in non-partner mode. A new service must validate each of its variables the same way: see [Adding Services](adding-services/overview.md).
+The Twitch encoder variables are validated only in non-partner mode. A new service must validate each of its variables the same way: see [Add a Streaming Service](adding-services/overview.md).
 
 ## Validation Functions
 
@@ -274,5 +274,5 @@ See `tests/README.md` for detailed test documentation.
 ## See Also
 
 - [Security](../security.md) - What the relay protects against, and what it does not
-- [Testing](testing.md) - Running the test suites
-- [Adding Services](adding-services/overview.md) - Validating a new service's variables
+- [Run the Tests](testing.md) - Running the test suites
+- [Add a Streaming Service](adding-services/overview.md) - Validating a new service's variables

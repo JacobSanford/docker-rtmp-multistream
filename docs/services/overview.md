@@ -32,7 +32,7 @@ For a detailed comparison of these patterns, see **[Service Patterns Reference](
 
 ## Adding Custom Services
 
-Want to add support for another streaming platform? See the [Adding Services Guide](../developer/adding-services/overview.md).
+Want to add support for another streaming platform? See the [Add a Streaming Service](../developer/adding-services/overview.md).
 
 ## See Also
 

@@ -1,120 +1,206 @@
 ---
-title: Adding New Streaming Services
-description: Guide for adding support for new streaming platforms
+title: Add a Streaming Service
+description: Add a new streaming destination to the relay, from config files to a verified end-to-end stream
 audience: developers
 doc_type: howto
 tags: [development, services, extending, customization]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
-# Adding New Streaming Services
+# Add a Streaming Service
 
-This guide explains how to add support for new streaming services to docker-rtmp-multistream.
+This guide adds a new streaming destination to the relay. The examples add a service called `example`, with the variables `EXAMPLE_KEY` and `EXAMPLE_INGEST`. Replace these with your service's name.
 
-## Overview
+For the exact rules each file must follow, see the [Service Contract Reference](configuration.md).
 
-Adding a new streaming service involves two main steps:
+## Before You Begin
 
-1. **[Service Configuration](configuration.md)** - Create nginx configs, environment variables, and pre-init scripts
-2. **[Service Testing](testing.md)** - Add comprehensive automated tests
+- Choose a pattern. **Simple Relay** forwards the stream unchanged. **Transformer** re-encodes it with FFmpeg first. See [Service Patterns](../../techref/service-patterns.md).
+- Check the service's ingest protocol. nginx's `push` sends plain RTMP. If the service accepts only RTMPS, use the Transformer pattern: the image's FFmpeg supports `rtmps://` output.
+- Pick a lowercase service name (`example`) and an uppercase variable prefix (`EXAMPLE_`). The name is used for file names and the `enableService.sh` argument, and they must match exactly.
 
-Both steps are required for a complete service implementation.
+## Create the Config Files
 
-## Service Patterns
+Placeholders in these files are bare uppercase tokens, which the startup script replaces with `sed`. Do not wrap them in braces: `{EXAMPLE_KEY}` becomes `{abc123}`.
 
-Before implementing a new service, choose the appropriate pattern. See **[Service Patterns Reference](../../techref/service-patterns.md)** for a detailed comparison of Simple Relay and Transformer patterns, including use cases, pros/cons, and examples.
+### Simple Relay
 
-## Quick Start
+Create `build/conf/nginx/http.d/apps/example.conf`. It holds directives only, with no `application` block, because it is included inside `application relay`:
 
-### 1. Configuration
+```nginx
+include http.d/auth.conf;
 
-Follow the [Service Configuration](configuration.md) guide to:
+push rtmp://EXAMPLE_INGEST/app/EXAMPLE_KEY;
+```
 
-- Create nginx RTMP configuration files (`apps/` and optionally `transformers/`)
-- Define environment variables in `Dockerfile` and `env/relay.env`
-- Add commented includes to `app.conf`
-- Create pre-init script (`90_configure_{service}.sh`)
-- Make script executable
+Replace `/app/` with the path your service's ingest URL uses.
 
-### 2. Testing
+### Transformer
 
-Follow the [Service Testing](testing.md) guide to:
+Create two files. `build/conf/nginx/http.d/transformers/example.conf` is included inside `application relay` and runs FFmpeg for each incoming stream:
 
-- Add unit tests to `tests/02_unit_tests.sh` (service enablement, variable replacement, security)
-- Add integration test to `tests/03_integration_tests.sh` (container startup)
-- Add validation tests to `tests/00_validation_tests.sh` (if new validation functions added)
-- Run all tests: `./tests/test.sh`
-- Perform manual end-to-end testing
+```nginx
+exec ffmpeg -i rtmp://127.0.0.1/$app/$name
+    -c:a aac -b:a 128k
+    -c:v libx264 -preset veryfast
+    -b:v EXAMPLE_VIDEO_BITRATEk
+    -f flv rtmp://127.0.0.1/example/$name;
+```
 
-### 3. Documentation
+`build/conf/nginx/http.d/apps/example.conf` is a separate application, at server level, that receives FFmpeg's output and pushes it to the service:
 
-Add service-specific documentation:
+```nginx
+application example {
+    live on;
+    record off;
 
-- Create `docs/services/{service}.md` with:
-  - Overview and configuration variables
-  - Quality settings and recommendations
-  - Troubleshooting tips
-- Update `mkdocs.yml` navigation to include your service
+    include http.d/auth.conf;
 
-## Implementation Checklist
+    push rtmp://EXAMPLE_INGEST/app/EXAMPLE_KEY;
+}
+```
 
-Use this checklist to track your progress:
+Keep `include http.d/auth.conf;` in every application block. Without it, the application accepts a publish from any address.
 
-### Configuration
-- [ ] Created nginx config files (`apps/` and/or `transformers/`)
-- [ ] Added environment variables to `Dockerfile`
-- [ ] Added environment variables to `env/relay.env`
-- [ ] Added commented includes to `app.conf`
-- [ ] Created pre-init script with validation
-- [ ] Made script executable (`chmod +x`)
+## Add the Includes to app.conf
 
-### Testing
-- [ ] Added 4-5 unit tests (enable, skip, variables, security, transformer if applicable)
-- [ ] Added integration test (container startup)
-- [ ] Added validation tests (if new functions added)
-- [ ] All tests pass: `./tests/test.sh` exits with code 0
-- [ ] Manual end-to-end testing completed
+In `build/conf/nginx/http.d/app.conf`, add commented include lines. Write `#include` with no space, and keep the literal `NGINX_CONFD_DIR` token.
 
-### Documentation
-- [ ] Created service documentation page
-- [ ] Updated navigation in `mkdocs.yml`
-- [ ] Added to main README (if appropriate)
+For Simple Relay, add one line inside `application relay`, after the existing services:
 
-## Best Practices
+```nginx
+    application relay {
+      ...
+      # Example (Simple Relay)
+      #include NGINX_CONFD_DIR/apps/example.conf;
+    }
+```
 
-1. **Validate early**: Check for required environment variables at the start of pre-init scripts
-2. **Use validation functions**: Always validate inputs using `validate_input.sh` to prevent injection attacks
-3. **Fail gracefully**: Exit with code 0 if service shouldn't be enabled, exit with code 1 for validation errors
-4. **Escape properly**: Use `escape_for_sed()` when substituting values to handle special characters safely
-5. **Log clearly**: Echo meaningful messages (e.g., "SERVICE configured and enabled")
-6. **Test thoroughly**: Add tests to all relevant test suites
-7. **Security first**: Always test that malicious inputs are rejected
-8. **Document comprehensively**: Help users configure and troubleshoot your service
+For Transformer, add the transformer line inside `application relay`, and the app line after `application relay` closes:
 
-## Examples
+```nginx
+    application relay {
+      ...
+      # Example (Transformer)
+      #include NGINX_CONFD_DIR/transformers/example.conf;
+    }
 
-Study existing service implementations:
+    # Example (Transformer Destination)
+    #include NGINX_CONFD_DIR/apps/example.conf;
+```
 
-### Simple Relay (YouTube)
-- Config: [`apps/youtube.conf`](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/youtube.conf){target="_blank"}
-- Script: [`90_configure_youtube.sh`](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/scripts/pre-init.d/90_configure_youtube.sh){target="_blank"}
-- Docs: [YouTube Configuration](../../services/youtube.md)
+## Add the Variables
 
-### Transformer (Twitch)
-- Transformer: [`transformers/twitch.conf`](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/transformers/twitch.conf){target="_blank"}
-- App: [`apps/twitch.conf`](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/twitch.conf){target="_blank"}
-- Script: [`90_configure_twitch.sh`](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/scripts/pre-init.d/90_configure_twitch.sh){target="_blank"}
-- Docs: [Twitch Configuration](../../services/twitch.md)
+1. In `Dockerfile`, add a default for each variable. Leave the key empty so the service is off by default:
 
-## Detailed Guides
+    ```dockerfile
+    ENV EXAMPLE_INGEST=live.example.com
+    ENV EXAMPLE_KEY=""
+    ```
 
-- **[Service Configuration](configuration.md)** - Step-by-step configuration implementation
-- **[Service Testing](testing.md)** - Comprehensive testing guide
+2. In `env/relay.env`, add the same variables with a comment, so users can find them:
+
+    ```bash
+    # Example
+    EXAMPLE_KEY=
+    ```
+
+## Write the Startup Script
+
+Create `build/scripts/pre-init.d/90_configure_example.sh`:
+
+```bash
+#!/usr/bin/env sh
+set -e
+
+# Source validation functions
+. /scripts/validate_input.sh
+
+if [ -z "$EXAMPLE_KEY" ]; then
+  echo "EXAMPLE_KEY is not set. Skipping Example configuration."
+  exit 0
+fi
+
+# Validate inputs
+validate_stream_key "$EXAMPLE_KEY" "EXAMPLE_KEY" || exit 1
+validate_identifier "$EXAMPLE_INGEST" "EXAMPLE_INGEST" || exit 1
+
+# Escape values for safe sed substitution
+EXAMPLE_KEY_ESC=$(escape_for_sed "$EXAMPLE_KEY")
+
+sed -i "s|EXAMPLE_KEY|$EXAMPLE_KEY_ESC|g" "${NGINX_CONFD_DIR}/apps/example.conf"
+sed -i "s|EXAMPLE_INGEST|$EXAMPLE_INGEST|g" "${NGINX_CONFD_DIR}/apps/example.conf"
+
+/scripts/enableService.sh example
+
+echo "Example configuration complete, and service enabled."
+```
+
+Choose a validator for each variable from the [Input Validation Reference](../validation.md). `validate_identifier` accepts letters, digits, `-` and `_` only; for a host name with dots, add a validator and test it (see [Test a New Service](testing.md#test-a-new-validator)).
+
+For a Transformer, validate its encoder variables too, compute any derived values, and substitute them into the transformer file:
+
+```bash
+validate_number "$EXAMPLE_FPS" "EXAMPLE_FPS" 1 120 || exit 1
+validate_number "$EXAMPLE_KBITS_PER_VIDEO_FRAME" "EXAMPLE_KBITS_PER_VIDEO_FRAME" 1 1000 || exit 1
+
+EXAMPLE_VIDEO_BITRATE=$(( EXAMPLE_KBITS_PER_VIDEO_FRAME * EXAMPLE_FPS ))
+
+sed -i "s|EXAMPLE_VIDEO_BITRATE|$EXAMPLE_VIDEO_BITRATE|g" "${NGINX_CONFD_DIR}/transformers/example.conf"
+```
+
+`enableService.sh example` enables `transformers/example.conf` automatically when that file exists.
+
+Make the script executable:
+
+```bash
+chmod +x build/scripts/pre-init.d/90_configure_example.sh
+```
+
+## Add Tests
+
+Add unit, integration and, for a new validator, validation tests. See [Test a New Service](testing.md).
+
+## Build and Confirm
+
+1. Run the test suites. `test.sh` builds `rtmp-multistream:test` from your working tree first:
+
+    ```bash
+    ./tests/test.sh
+    ```
+
+    The run ends with `All tests passed!`.
+
+2. Start a container with your service enabled, then check that it enabled and that nginx accepts the config:
+
+    ```bash
+    docker run -d --name example-check -e EXAMPLE_KEY=test_key rtmp-multistream:test
+    docker logs example-check 2>&1 | grep -iE "example|error"
+    docker exec example-check nginx -t
+    docker exec example-check grep -n "example.conf" /etc/nginx/http.d/app.conf
+    docker rm -f example-check
+    ```
+
+    Expected: `Example configuration complete, and service enabled.`, `test is successful`, and each `example.conf` include line without a leading `#`. If the include still starts with `#`, the marker in `app.conf` does not match: see [Include Markers](configuration.md#include-markers).
+
+3. Stream end to end with your real key. Build with `docker compose build`, then set `EXAMPLE_KEY` in `env/relay.env` and start with `docker compose up -d --force-recreate`. Publish a test pattern:
+
+    ```bash
+    ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 -f lavfi -i sine -t 60 -c:v libx264 -c:a aac -f flv rtmp://localhost:1935/relay/test
+    ```
+
+    The stream appears in your service's dashboard. `env/relay.env` is tracked by git: remove the key before you commit.
+
+## Document the Service
+
+1. Create `docs/services/example.md`, following `docs/services/youtube.md`: overview, enable steps with a confirm step, and settings.
+2. Add each variable to the [Environment Variables Reference](../../techref/environment.md).
+3. Add the page to the `nav` in `mkdocs.yml`.
 
 ## See Also
 
-- [Architecture Overview](../../techref/architecture.md) - Understanding relay and transformer patterns
-- [Environment Variables Reference](../../techref/environment.md) - Complete variable reference
+- [Service Contract Reference](configuration.md) - Rules for includes, placeholders, scripts and `enableService.sh`
+- [Test a New Service](testing.md) - Tests to add for a new service
 - [Input Validation Reference](../validation.md) - Validation functions for a new service's variables
-- [Testing Guide](../testing.md) - General testing documentation
+- [Architecture](../../techref/architecture.md) - How the relay processes configuration

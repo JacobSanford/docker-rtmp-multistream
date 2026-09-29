@@ -205,4 +205,4 @@ Every stream published to the `relay` application is archived, whichever service
 - [Service Patterns Reference](service-patterns.md) - Detailed comparison of architectural patterns
 - [Change Relay Settings](../configuration.md) - Setup and environment variables
 - [Security](../security.md) - Publish authorization, validation, and what is not protected
-- [Adding New Streaming Services](../developer/adding-services/overview.md) - Implement new streaming services
+- [Add a Streaming Service](../developer/adding-services/overview.md) - Implement new streaming services

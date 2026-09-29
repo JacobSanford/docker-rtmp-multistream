@@ -441,4 +441,4 @@ ARCHIVE_SUFFIX=flv
 ## See Also
 
 - [Change Relay Settings](../configuration.md) - How configuration works
-- [Adding Services](../developer/adding-services/overview.md) - Define custom environment variables
+- [Add a Streaming Service](../developer/adding-services/overview.md) - Define custom environment variables

@@ -91,9 +91,9 @@ nav:
         - Archive: troubleshooting/services/archive.md
   - Developer Guide:
     - Adding Services:
-      - Overview: developer/adding-services/overview.md
-      - Configuration: developer/adding-services/configuration.md
-      - Testing: developer/adding-services/testing.md
+      - Add a Service: developer/adding-services/overview.md
+      - Contract Reference: developer/adding-services/configuration.md
+      - Test a Service: developer/adding-services/testing.md
     - Input Validation: developer/validation.md
     - Testing: developer/testing.md
   - Contributing Documentation: contributing.md

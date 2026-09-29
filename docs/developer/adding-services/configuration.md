@@ -1,190 +1,79 @@
 ---
-title: Service Configuration
-description: Step-by-step configuration implementation for new services
+title: Service Contract Reference
+description: The rules a service's config files, include lines and startup script must follow
 audience: developers
-doc_type: howto
+doc_type: reference
 tags: [development, configuration, nginx, services]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
-# Service Configuration
+# Service Contract Reference
 
-This guide walks through the configuration steps needed to add a new streaming service to docker-rtmp-multistream.
+This page lists the rules a service's files must follow. Break one and the service usually fails silently: the container starts, and the service is never enabled. For the steps, see [Add a Streaming Service](overview.md).
 
-## Choose a Service Pattern
+In the examples, `<SERVICE>` is the lowercase service name, such as `youtube`.
 
-Before you begin, choose the appropriate pattern for your service. See **[Service Patterns Reference](../../techref/service-patterns.md)** for a detailed comparison of Simple Relay and Transformer patterns.
+## Files
 
-## Implementation Steps
+| File | Pattern | Contents | Included from |
+|---|---|---|---|
+| `build/conf/nginx/http.d/apps/<SERVICE>.conf` | Simple Relay | Directives only (`include http.d/auth.conf;`, `push ...;`) | Inside `application relay` |
+| `build/conf/nginx/http.d/apps/<SERVICE>.conf` | Transformer | One `application <SERVICE> { ... }` block that pushes to the service | Server level, after `application relay` |
+| `build/conf/nginx/http.d/transformers/<SERVICE>.conf` | Transformer | One `exec ffmpeg ...;` directive that publishes to `rtmp://127.0.0.1/<SERVICE>/$name` | Inside `application relay` |
+| `build/scripts/pre-init.d/90_configure_<SERVICE>.sh` | Both | Startup script, executable | Run by `build/scripts/run.sh` |
 
-### 1. Create Configuration Files
+Real examples: `apps/youtube.conf` (Simple Relay), and `transformers/twitch.conf` with `apps/twitch.conf` (Transformer).
 
-Create the necessary nginx configuration files in the appropriate directories.
+Every `application` block must contain `include http.d/auth.conf;`. An application without it accepts a publish from any address.
 
-#### For Simple Relay
+## Include Markers
 
-Create `build/conf/nginx/http.d/apps/{service}.conf`:
-
-```nginx
-application {service} {
-    live on;
-    push rtmp://{service-ingest-url}/{path}?streamkey={SERVICE_KEY};
-}
-```
-
-**Example**: [YouTube App Configuration](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/youtube.conf){target="_blank"}
-
-#### For Transformer Pattern
-
-Create both files:
-
-**`build/conf/nginx/http.d/transformers/{service}.conf`**:
-```nginx
-exec ffmpeg -i rtmp://localhost/relay/$name
-  -c:v {SERVICE_CODEC} -preset {SERVICE_PRESET}
-  -b:v {calculated_bitrate} -c:a aac -b:a {SERVICE_AUDIO_BITRATE}
-  -f flv rtmp://localhost/{service}/$name;
-```
-
-**`build/conf/nginx/http.d/apps/{service}.conf`**:
-```nginx
-application {service} {
-    live on;
-    push rtmp://{service-ingest-url}/{path}?streamkey={SERVICE_KEY};
-}
-```
-
-**Examples**:
-- [Twitch Transformer Configuration](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/transformers/twitch.conf){target="_blank"}
-- [Twitch App Configuration](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/twitch.conf){target="_blank"}
-
-### 2. Define Environment Variables
-
-Add environment variables to two locations:
-
-#### Dockerfile
-
-Add default values (initialize secrets as empty strings):
-
-```dockerfile
-ENV SERVICE_KEY=""
-ENV SERVICE_ENDPOINT="default-endpoint"
-ENV SERVICE_BITRATE="3000k"
-```
-
-**Example**: [Dockerfile environment variables](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/Dockerfile#L6-L14){target="_blank"}
-
-#### env/relay.env
-
-Add user-configurable template:
-
-```bash
-# Service Name
-SERVICE_KEY=
-SERVICE_ENDPOINT=default-endpoint
-SERVICE_BITRATE=3000k
-```
-
-**Example**: [relay.env template](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/env/relay.env#L4-L12){target="_blank"}
-
-### 3. Register in Main Configuration
-
-Add include directives to `build/conf/nginx/http.d/app.conf` (commented out):
+`build/conf/nginx/http.d/app.conf` ships every service include commented out:
 
 ```nginx
-# Service: {Service Name}
-# include /etc/nginx/http.d/transformers/{service}.conf;
-# include /etc/nginx/http.d/apps/{service}.conf;
+#include NGINX_CONFD_DIR/apps/<SERVICE>.conf;
+#include NGINX_CONFD_DIR/transformers/<SERVICE>.conf;
 ```
 
-**Example**: [app.conf includes](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/app.conf#L19-L26){target="_blank"}
+- Write `#include` with no space. `enableService.sh` matches `#include <PATH>` exactly. `# include`, with a space, is never matched: the service stays off and the startup script still prints its "service enabled" line.
+- Keep the literal token `NGINX_CONFD_DIR`. `89_configure_app.sh` replaces it with `/etc/nginx/http.d` before any `90_` script runs, and `enableService.sh` matches the replaced path.
+- Put each line where the [Files](#files) table says it is included from.
 
-### 4. Create Pre-init Script
+## Placeholder Tokens
 
-Create `build/scripts/pre-init.d/90_configure_{service}.sh`:
+- A placeholder is a bare uppercase word, named after its variable: `EXAMPLE_KEY`, not `{EXAMPLE_KEY}`. `sed` replaces the word and leaves any braces around it.
+- `sed` replaces every occurrence, including inside a longer token. If one token contains another, substitute the longer one first. `90_configure_twitch.sh` substitutes `TWITCH_DOUBLE_FPS` before `TWITCH_FPS` for this reason.
+- Values derived from variables, such as a bitrate, are computed in the startup script and substituted like any other token. See `TWITCH_VIDEO_BITRATE` in `90_configure_twitch.sh`.
+- Escape free-form values, such as stream keys, host names and paths, with `escape_for_sed` before substituting them. Whitelisted values, such as numbers and identifiers, need no escaping.
 
-```bash
-#!/usr/bin/env sh
-set -e
+## Startup Script
 
-# Source validation functions
-. /scripts/validate_input.sh
+`build/scripts/run.sh` runs every `/scripts/pre-init.d/*sh` in glob (alphanumeric) order, then starts nginx.
 
-# Check if service should be enabled (required env vars present)
-if [ -z "$SERVICE_KEY" ]; then
-  echo "SERVICE_KEY not set. Skipping {service} configuration."
-  exit 0
-fi
+| Rule | Why |
+|---|---|
+| Name it `90_configure_<SERVICE>.sh`, so it sorts after `89_configure_app.sh` | It must run after `89_` has replaced `NGINX_CONFD_DIR` in `app.conf`, or the include marker does not match |
+| Start with `set -e` and source `/scripts/validate_input.sh` | Any failing command stops the script |
+| If the required variable is empty, print `<VARIABLE> is not set. Skipping <Service> configuration.` and exit 0 | The service is optional. Docs and tests grep for `is not set` |
+| Validate every variable before using it, and exit 1 on failure | A non-zero exit makes `run.sh` stop the container, so a bad value never reaches nginx |
+| Call `/scripts/enableService.sh <SERVICE>` last, then print `<Service> configuration complete, and service enabled.` | Docs and tests grep for `service enabled` |
 
-# Validate inputs
-validate_stream_key "$SERVICE_KEY" "SERVICE_KEY" || exit 1
+Variables from the base image are available to every script: `NGINX_CONFD_DIR` (`/etc/nginx/http.d`), `NGINX_APP_CONF_FILE` (`/etc/nginx/http.d/app.conf`) and `NGINX_RUN_USER` (`nginx`).
 
-# Additional validation for other variables
-# validate_identifier "$SERVICE_ENDPOINT" "SERVICE_ENDPOINT" || exit 1
-# validate_bitrate "$SERVICE_BITRATE" "SERVICE_BITRATE" || exit 1
+## enableService.sh
 
-# Escape values for safe sed substitution
-SERVICE_KEY_ESC=$(escape_for_sed "$SERVICE_KEY")
+`/scripts/enableService.sh <SERVICE>`:
 
-# Replace placeholders in config files using sed
-sed -i "s|SERVICE_KEY|$SERVICE_KEY_ESC|g" "${NGINX_CONFD_DIR}/apps/{service}.conf"
-# sed -i "s|SERVICE_ENDPOINT|$SERVICE_ENDPOINT|g" "${NGINX_CONFD_DIR}/apps/{service}.conf"
+1. Exits 0 without changes if `apps/<SERVICE>.conf` does not exist. It prints `Service app definition file (SERVICE_APP_FILE) not found. Skipping service enabling.`, and the calling script carries on. A misspelled `<SERVICE>` therefore fails silently.
+2. Removes the `#` from `#include /etc/nginx/http.d/apps/<SERVICE>.conf` in `app.conf`.
+3. If `transformers/<SERVICE>.conf` exists, does the same for its include line.
 
-# If using transformer, configure transformer variables
-# sed -i "s|SERVICE_CODEC|$SERVICE_CODEC|g" "${NGINX_CONFD_DIR}/transformers/{service}.conf"
-
-# Enable the service by uncommenting includes in app.conf
-/scripts/enableService.sh {service}
-
-echo "{Service} configuration complete, and service enabled."
-```
-
-**Example**: [90_configure_youtube.sh](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/scripts/pre-init.d/90_configure_youtube.sh){target="_blank"}
-
-#### Make Script Executable
-
-```bash
-chmod +x build/scripts/pre-init.d/90_configure_{service}.sh
-```
-
-## Configuration Best Practices
-
-1. **Validate early**: Check for required environment variables at the start of pre-init scripts
-2. **Use validation functions**: Always validate all inputs using functions from `validate_input.sh` to prevent injection attacks
-3. **Fail gracefully**: Exit with code 0 if service shouldn't be enabled (missing optional vars), but exit with code 1 for validation errors
-4. **Escape properly**: Use `escape_for_sed()` when substituting values with sed to handle special characters safely
-5. **Log clearly**: Echo meaningful messages for debugging (e.g., "SERVICE configured and enabled")
-
-## Script Execution Order
-
-Pre-init scripts run in alphanumeric order:
-1. `89_configure_app.sh` - Configures main app placeholders
-2. `90_configure_{service}.sh` - Service-specific configuration
-
-Later scripts can reference files configured by earlier scripts.
-
-## The enableService.sh Utility
-
-The `/scripts/enableService.sh` script uncomments service includes in `app.conf`:
-
-```bash
-/scripts/enableService.sh {service}
-```
-
-This activates the service by uncommenting:
-```nginx
-# include /etc/nginx/http.d/transformers/{service}.conf;
-# include /etc/nginx/http.d/apps/{service}.conf;
-```
-
-## Next Steps
-
-After completing the configuration, proceed to [Adding Service Tests](testing.md) to ensure your service works correctly and securely.
+The argument must equal the app file's base name. Twitch partner mode uses this rule: `enableService.sh twitch-partner` enables `apps/twitch-partner.conf`.
 
 ## See Also
 
-- [Adding Services Overview](../adding-services/overview.md) - Complete guide overview
-- [Adding Service Tests](testing.md) - Testing your service implementation
-- [Architecture Overview](../../techref/architecture.md) - Understanding relay and transformer patterns
-- [Environment Variables Reference](../../techref/environment.md) - Complete variable reference
+- [Add a Streaming Service](overview.md) - Step-by-step guide
+- [Test a New Service](testing.md) - Tests to add for a new service
+- [Input Validation Reference](../validation.md) - Validation functions and what they reject
+- [Architecture](../../techref/architecture.md) - How the relay processes configuration

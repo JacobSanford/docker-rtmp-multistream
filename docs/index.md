@@ -23,7 +23,7 @@ version: 1.x
 * **YouTube**: [Advanced YouTube Configuration](services/youtube.md)
 * **Archive** (local disk): [Advanced Local Archive Configuration](services/archive.md)
 
-Additional streaming services can be added. Please see the [Adding New Streaming Services](developer/adding-services/overview.md) documentation.
+Additional streaming services can be added. Please see the [Add a Streaming Service](developer/adding-services/overview.md) documentation.
 
 ## Getting Started
 

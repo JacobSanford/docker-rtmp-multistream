@@ -43,5 +43,5 @@ Choose the appropriate pattern for your service:
 ## See Also
 
 - [Architecture Overview](architecture.md) - Detailed technical implementation
-- [Adding Services Overview](../developer/adding-services/overview.md) - Step-by-step implementation guide
-- [Service Configuration](../developer/adding-services/configuration.md) - Configuration details
+- [Add a Streaming Service](../developer/adding-services/overview.md) - Step-by-step implementation guide
+- [Service Contract Reference](../developer/adding-services/configuration.md) - Rules for includes, placeholders and scripts
