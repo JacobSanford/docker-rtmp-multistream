@@ -1,5 +1,3 @@
-<center><img src="thumbnail.png" alt="docker-rtmp-multistream"/></center>
-
 # JacobSanford/docker-rtmp-multistream
 
 [![CI](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml/badge.svg)](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml)
