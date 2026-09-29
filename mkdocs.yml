@@ -66,6 +66,8 @@ nav:
     - Requirements: requirements.md
     - Quick Start: quickstart.md
     - Configuration: configuration.md
+    - Restrict Access: restrict-access.md
+    - Security: security.md
     - Streaming Services:
       - Overview: services/overview.md
       - Twitch: services/twitch.md
@@ -92,7 +94,7 @@ nav:
       - Overview: developer/adding-services/overview.md
       - Configuration: developer/adding-services/configuration.md
       - Testing: developer/adding-services/testing.md
-    - Security: security.md
+    - Input Validation: developer/validation.md
     - Testing: developer/testing.md
   - Contributing Documentation: contributing.md
 

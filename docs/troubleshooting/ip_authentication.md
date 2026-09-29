@@ -74,7 +74,8 @@ Each value keeps `172.16.0.0/12` so OBS on the relay's own machine can still pub
 
 ## See Also
 
-- [Security](../security.md) - Security features and best practices
+- [Restrict Who Can Publish and Watch](../restrict-access.md) - Lock down publishing and playback
+- [Security](../security.md) - What the relay protects, and what it does not
 - [Connection Issues](connection-issues.md) - Other connection problems
 - [Change Relay Settings](../configuration.md) - Environment variable setup
 

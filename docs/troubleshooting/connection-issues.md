@@ -235,4 +235,4 @@ docker compose exec relay cat /etc/nginx/nginx.conf
 - **[Troubleshooting Overview](index.md)** - Main troubleshooting guide
 - **Service-Specific Issues** - [Twitch](services/twitch.md), [YouTube](services/youtube.md), [Archive](services/archive.md)
 - **[Configuration](../configuration.md)** - Setup and environment variables
-- **[Security](../security.md)** - IP-based access control
+- **[Restrict Who Can Publish and Watch](../restrict-access.md)** - IP-based access control

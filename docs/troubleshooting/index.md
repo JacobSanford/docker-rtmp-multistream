@@ -157,4 +157,4 @@ If you're still experiencing issues:
 - **[Architecture](../techref/architecture.md)** - Understand how the system works
 - **[Quality Optimization](../performance/quality.md)** - Optimization guidance
 - **[Configuration](../configuration.md)** - Setup details
-- **[Security](../security.md)** - Access control and validation
+- **[Security](../security.md)** - What the relay protects, and what it does not

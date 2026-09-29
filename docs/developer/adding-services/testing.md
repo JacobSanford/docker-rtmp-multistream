@@ -323,4 +323,4 @@ Before submitting your service implementation, ensure:
 - [Adding Services Overview](../adding-services/overview.md) - Complete guide overview
 - [Service Configuration](configuration.md) - Configuration implementation steps
 - [Testing Guide](../testing.md) - General testing documentation
-- [Security](../../security.md) - Security features and validation
+- [Input Validation Reference](../validation.md) - Validation functions and what they reject

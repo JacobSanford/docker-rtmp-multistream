@@ -116,5 +116,5 @@ Study existing service implementations:
 
 - [Architecture Overview](../../techref/architecture.md) - Understanding relay and transformer patterns
 - [Environment Variables Reference](../../techref/environment.md) - Complete variable reference
-- [Security](../../security.md) - Input validation and security features
+- [Input Validation Reference](../validation.md) - Validation functions for a new service's variables
 - [Testing Guide](../testing.md) - General testing documentation
