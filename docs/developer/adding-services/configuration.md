@@ -10,7 +10,7 @@ version: 1.x
 
 # Service Contract Reference
 
-This page lists the rules a service's files must follow. Break one and the service usually fails silently: the container starts, and the service is never enabled. For the steps, see [Add a Streaming Service](overview.md).
+This page lists the rules a service's files must follow. Break an include or naming rule and `enableService.sh` stops the container at startup with an `ERROR:` line. Break a placeholder or auth rule and the container starts but the service misbehaves. For the steps, see [Add a Streaming Service](overview.md).
 
 In the examples, `<SERVICE>` is the lowercase service name, such as `youtube`.
 
@@ -36,7 +36,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 #include NGINX_CONFD_DIR/transformers/<SERVICE>.conf;
 ```
 
-- Write `#include` with no space. `enableService.sh` matches `#include <PATH>` exactly. `# include`, with a space, is never matched: the service stays off and the startup script still prints its "service enabled" line.
+- Write `#include` with no space. `enableService.sh` matches `#include <PATH>;` exactly. With `# include`, with a space, it finds no line to enable and stops the container with `ERROR: No '#include <PATH>;' line in /etc/nginx/http.d/app.conf. Cannot enable <SERVICE>.`
 - Keep the literal token `NGINX_CONFD_DIR`. `89_configure_app.sh` replaces it with `/etc/nginx/http.d` before any `90_` script runs, and `enableService.sh` matches the replaced path.
 - Put each line where the [Files](#files) table says it is included from.
 
@@ -53,7 +53,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 
 | Rule | Why |
 |---|---|
-| Name it `90_configure_<SERVICE>.sh`, so it sorts after `89_configure_app.sh` | It must run after `89_` has replaced `NGINX_CONFD_DIR` in `app.conf`, or the include marker does not match |
+| Name it `90_configure_<SERVICE>.sh`, so it sorts after `89_configure_app.sh` | It must run after `89_` has replaced `NGINX_CONFD_DIR` in `app.conf`. Before that, the include marker does not match and `enableService.sh` stops the container |
 | Start with `set -e` and source `/scripts/validate_input.sh` | Any failing command stops the script |
 | If the required variable is empty, print `<VARIABLE> is not set. Skipping <Service> configuration.` and exit 0 | The service is optional. Docs and tests grep for `is not set` |
 | Validate every variable before using it, and exit 1 on failure | A non-zero exit makes `run.sh` stop the container, so a bad value never reaches nginx |
@@ -65,9 +65,11 @@ Variables from the base image are available to every script: `NGINX_CONFD_DIR` (
 
 `/scripts/enableService.sh <SERVICE>`:
 
-1. Exits 0 without changes if `apps/<SERVICE>.conf` does not exist. It prints `Service app definition file (SERVICE_APP_FILE) not found. Skipping service enabling.`, and the calling script carries on. A misspelled `<SERVICE>` therefore fails silently.
-2. Removes the `#` from `#include /etc/nginx/http.d/apps/<SERVICE>.conf` in `app.conf`.
+1. Exits 1 if no argument is given, or if `apps/<SERVICE>.conf` does not exist: `ERROR: /etc/nginx/http.d/apps/<SERVICE>.conf not found. Cannot enable <SERVICE>.` A misspelled `<SERVICE>` fails this way.
+2. Removes the `#` from `#include /etc/nginx/http.d/apps/<SERVICE>.conf;` in `app.conf`, then exits 1 if `app.conf` has no active `include` line for that file.
 3. If `transformers/<SERVICE>.conf` exists, does the same for its include line.
+
+The startup scripts run with `set -e`, so any of these failures stops the script, and `run.sh` stops the container before nginx starts.
 
 The argument must equal the app file's base name. Twitch partner mode uses this rule: `enableService.sh twitch-partner` enables `apps/twitch-partner.conf`.
 

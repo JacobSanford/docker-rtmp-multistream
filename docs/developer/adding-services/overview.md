@@ -182,7 +182,7 @@ Add unit, integration and, for a new validator, validation tests. See [Test a Ne
     docker rm -f example-check
     ```
 
-    Expected: `Example configuration complete, and service enabled.`, `test is successful`, and each `example.conf` include line without a leading `#`. If the include still starts with `#`, the marker in `app.conf` does not match: see [Include Markers](configuration.md#include-markers).
+    Expected: `Example configuration complete, and service enabled.`, `test is successful`, and each `example.conf` include line without a leading `#`. If the container has stopped with an `ERROR:` line from `enableService.sh`, the file name or the marker in `app.conf` does not match: see [Include Markers](configuration.md#include-markers).
 
 3. Stream end to end with your real key. Build with `docker compose build`, then set `EXAMPLE_KEY` in `env/relay.env` and start with `docker compose up -d --force-recreate`. Publish a test pattern:
 

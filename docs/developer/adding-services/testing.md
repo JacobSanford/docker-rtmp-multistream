@@ -159,7 +159,7 @@ bash tests/02_unit_tests.sh
 
 A suite run on its own ends with `Tests run: <N>, passed: <N>, failed: 0`.
 
-To check that a test can fail, break the thing it tests and run it again. For example, change `#include` to `# include` for your service in `app.conf`: the enable test should fail.
+To check that a test can fail, break the thing it tests and run it again. For example, put a `;` in the key in the variable-replacement test: it should fail.
 
 ## See Also
 

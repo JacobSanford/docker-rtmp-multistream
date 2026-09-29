@@ -70,12 +70,12 @@ Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/deve
 
 1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`), never `{EXAMPLE_KEY}`. Every `application` block includes `http.d/auth.conf`
 2. Add environment variables to `Dockerfile` (defaults) and `env/relay.env` template
-3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` never matches it
+3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` fails
 4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after `89_`):
    - If the required variable is empty, echo `<VAR> is not set. Skipping ...` and exit 0
    - Validate every variable; exit 1 on failure (stops the container)
    - Use sed to replace placeholders in config files
-   - Call `/scripts/enableService.sh <service>` (argument = app file basename; a typo exits 0 silently)
+   - Call `/scripts/enableService.sh <service>` (argument = app file basename; it exits 1, stopping the container, if the file or its `#include` line is missing)
 5. Make script executable: `chmod +x build/scripts/pre-init.d/90_configure_<service>.sh`
 
 ## Environment Variables

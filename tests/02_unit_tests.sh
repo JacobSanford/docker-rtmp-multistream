@@ -230,6 +230,30 @@ test_invalid_twitch_partner_value_rejected() {
 }
 
 # Run tests
+test_enable_service_unknown_name_fails() {
+  docker run --rm --entrypoint sh rtmp-multistream:test -c "
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/enableService.sh no-such-service >/dev/null 2>&1
+  "
+  [ $? -eq 1 ]
+}
+
+test_enable_service_spaced_marker_fails() {
+  docker run --rm --entrypoint sh -e YOUTUBE_KEY=test_key rtmp-multistream:test -c "
+    sed -i 's|#include NGINX_CONFD_DIR/apps/youtube.conf|# include NGINX_CONFD_DIR/apps/youtube.conf|' /etc/nginx/http.d/app.conf
+    /scripts/pre-init.d/89_configure_app.sh >/dev/null 2>&1
+    /scripts/pre-init.d/90_configure_youtube.sh 2>&1 | grep -q 'ERROR: No'
+  "
+  return $?
+}
+
+test_enable_service_before_app_configured_fails() {
+  docker run --rm --entrypoint sh rtmp-multistream:test -c "
+    /scripts/enableService.sh youtube >/dev/null 2>&1
+  "
+  [ $? -eq 1 ]
+}
+
 run_test "No services enabled by default" test_no_services_enabled_by_default
 run_test "Twitch service enables with key" test_twitch_service_enables_with_key
 run_test "YouTube service enables with key" test_youtube_service_enables_with_key
@@ -254,5 +278,8 @@ run_test "Twitch partner mode skips transformer" test_twitch_partner_mode_skips_
 run_test "Twitch non-partner mode includes transformer" test_twitch_nonpartner_mode_includes_transformer
 run_test "Twitch partner mode variables replaced" test_twitch_partner_mode_variables_replaced
 run_test "Invalid TWITCH_PARTNER value rejected" test_invalid_twitch_partner_value_rejected
+run_test "enableService.sh fails on unknown service" test_enable_service_unknown_name_fails
+run_test "enableService.sh fails on spaced include marker" test_enable_service_spaced_marker_fails
+run_test "enableService.sh fails before 89_configure_app.sh" test_enable_service_before_app_configured_fails
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then finish_suite; fi
