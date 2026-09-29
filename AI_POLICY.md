@@ -7,7 +7,7 @@ Contributors may use generative AI tools (e.g., GitHub Copilot, ChatGPT) to assi
 - **Disclosure required** for any AI assistance (see PR template).
 
 **Rationale**
-We follow a provenance-first approach similar to projects that restrict AI-generated code to protect DCO/licensing and quality. See [QEMU’s policy for background.](https://www.qemu.org/docs/master/devel/code-provenance.html)
+We follow a provenance-first approach similar to projects that restrict AI-generated code to protect Developer Certificate of Origin (DCO)/licensing and quality. See [QEMU’s policy for background.](https://www.qemu.org/docs/master/devel/code-provenance.html)
 (Contributors must be able to attest authorship and rights; AI outputs can lack clear provenance.)
 
 **Rules**

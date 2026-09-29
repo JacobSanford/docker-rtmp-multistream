@@ -20,9 +20,9 @@ When adding screenshots or diagrams:
 2. **Optimize size**: Max 500KB per image; use PNG for screenshots, SVG for diagrams
 3. **Always include alt text**:
    ```markdown
-   ![Screenshot of Twitch dashboard showing stream key location](images/twitch-dashboard-stream-key.png)
+   ![Screenshot of Twitch dashboard showing stream key location](../images/services/twitch-dashboard-stream-key.png)
    ```
-4. **Store in**: `docs/images/{section}/` (e.g., `docs/images/services/twitch-dashboard.png`)
+4. **Store in**: `docs/images/<SECTION>/`, for example `docs/images/services/`. Link with a path relative to the page: the example above is from a page in `docs/services/`
 
 ## Style Guide
 
@@ -93,12 +93,13 @@ version: 1.x
 
 Before submitting:
 
-1. Build locally: `mkdocs serve`
-2. Check for broken links (CI will verify)
-3. Verify code examples are copy-pasteable
-4. Test any commands/examples you've added
+1. Install the docs dependencies once: `pip install -r requirements.txt`
+2. Build locally: `mkdocs serve`
+3. Check your links by hand, or run the checker locally: `CI=true mkdocs build --strict`. CI checks links only when docs changes are pushed to `1.x`, after merge, so a broken link fails the deploy rather than the PR. The local check also tests external links, and GitHub may answer them with `429` when rate-limited: rerun later
+4. Verify code examples are copy-pasteable
+5. Test any commands/examples you've added
 
 ## See Also
 
-- [Testing Guide](developer/testing.md) - Running and writing tests
-- [Adding Services Overview](developer/adding-services/overview.md) - Extending the system
+- [Run the Tests](developer/testing.md) - Running the test suites and CI
+- [Add a Streaming Service](developer/adding-services/overview.md) - Extending the system

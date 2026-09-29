@@ -28,13 +28,13 @@ If this PR updates documentation, please ensure:
   version: 1.x
   ---
   ```
-- [ ] Internal links tested (run `mkdocs serve` locally)
+- [ ] Internal links tested (`CI=true mkdocs build --strict` after `pip install -r requirements.txt`)
 - [ ] Code examples tested/verified
 - [ ] Added to `mkdocs.yml` nav if new page
 - [ ] "See Also" section updated with relevant cross-references
 - [ ] No hardcoded version numbers or test counts
 - [ ] Images optimized (<500KB) and include alt text
-- [ ] Followed [contributing guidelines](../docs/contributing.md)
+- [ ] Followed [contributing guidelines](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/docs/contributing.md)
 
 ## Testing
 

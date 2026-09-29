@@ -1,62 +1,62 @@
 ---
-title: Testing
-description: Overview of the test suite and how to run tests
+title: Run the Tests
+description: Run the test suites locally, and how CI runs them
 audience: developers
 doc_type: howto
 tags: [testing, quality, ci, development]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
-# Testing
+# Run the Tests
 
-!!! info "Developer Guide"
-    This page provides a high-level overview. For detailed guidance on adding tests for new services, see [Adding Service Tests](adding-services/testing.md).
+This page describes the test suites and how CI runs them. To add tests for a new service, see [Test a New Service](adding-services/testing.md).
 
-## Running Tests Locally
+## Run All Tests
 
 ```bash
 ./tests/test.sh
 ```
 
-The test suite includes tests across five categories:
+`test.sh` builds the `rtmp-multistream:test` image from your working tree, then runs every suite. It ends with `All tests passed!` and exits 0, or lists the failures and exits 1. Functional tests need `ffmpeg` on the host.
 
-- **Validation Tests**: Input validation and security testing
-- **Smoke Tests**: Quick sanity checks (Docker build, required components)
-- **Unit Tests**: Configuration and environment variable handling (including security validation)
-- **Integration Tests**: Container startup with various service combinations
-- **Functional Tests**: End-to-end RTMP streaming, archiving, and authorization
+## Test Suites
 
-## Test Philosophy
+| Suite | File | Covers |
+|---|---|---|
+| Validation | `tests/00_validation_tests.sh` | Each function in `validate_input.sh`, run inside the container |
+| Smoke | `tests/01_smoke_tests.sh` | The image builds and contains nginx, FFmpeg and the RTMP module |
+| Unit | `tests/02_unit_tests.sh` | Each startup script: enabling, skipping, substitution, rejecting bad values |
+| Integration | `tests/03_integration_tests.sh` | The container starts with each service combination, and stops on an invalid value |
+| Functional | `tests/04_functional_tests.sh` | End-to-end streaming, archiving and publish authorization |
 
-All tests follow fail-fast principles with automatic cleanup. Tests are designed to:
+## Run One Suite
 
-1. **Validate security**: Reject malicious inputs (command injection, path traversal)
-2. **Verify configuration**: Ensure services enable/disable correctly
-3. **Check integration**: Confirm container startup with various combinations
-4. **Test functionality**: Validate end-to-end streaming workflows
-
-## Running Individual Test Suites
-
-Individual test suites can be run separately:
+Only `test.sh` and the smoke tests build the image. Build it before running any other suite on its own:
 
 ```bash
-bash tests/00_validation_tests.sh  # Validation tests
-bash tests/01_smoke_tests.sh      # Smoke tests
-bash tests/02_unit_tests.sh       # Unit tests
-bash tests/03_integration_tests.sh # Integration tests
-bash tests/04_functional_tests.sh  # Functional tests (requires ffmpeg)
+docker build -t rtmp-multistream:test .
+bash tests/02_unit_tests.sh
 ```
 
-Tests automatically clean up containers and temporary files. Exit code 0 = all passed, 1 = failures.
+A suite run on its own ends with `Tests run: <N>, passed: <N>, failed: <N>` and exits non-zero if any test failed.
 
-## CI/CD
+## CI
 
-GitHub Actions automatically runs all test suites on every push and PR via `.github/workflows/ci.yml`. Each test type runs as a separate job:
+`.github/workflows/ci.yml` runs on every push and pull request. Each suite is a separate job:
 
-- Smoke Tests (runs first)
-- Unit Tests (after smoke tests pass)
-- Integration Tests (after smoke tests pass)
-- Functional Tests (after smoke tests pass)
+| Job | Runs after |
+|---|---|
+| Validation tests (builds the image) | Nothing |
+| Smoke tests | Validation tests |
+| Unit tests | Validation tests |
+| Integration tests | Smoke and unit tests |
+| Functional tests | Smoke and unit tests |
+| Build and push images | All five test jobs |
 
-For more detailed testing documentation, see [tests/README.md](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/tests/README.md){target="_blank"} in the repository.
+For per-function test coverage, see [tests/README.md](https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/tests/README.md){target="_blank"}.
+
+## See Also
+
+- [Test a New Service](adding-services/testing.md) - Tests to add for a new service
+- [Input Validation Reference](validation.md) - Validation functions and what they reject

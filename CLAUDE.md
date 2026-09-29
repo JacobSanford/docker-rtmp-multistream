@@ -31,9 +31,9 @@ docker build -t rtmp-multistream .
 **nginx RTMP Module**: The foundation is nginx with the RTMP module (`nginx-mod-rtmp`), configured to receive RTMP streams on port 1935.
 
 **Service-Based Architecture**: The system uses a modular service pattern where each streaming destination (Twitch, YouTube, Archive) is:
-1. Defined in `build/conf/nginx/http.d/apps/{service}.conf` - RTMP application config
-2. Optionally has a transformer in `build/conf/nginx/http.d/transformers/{service}.conf` - FFmpeg encoding pipeline
-3. Configured by a pre-init script in `build/scripts/pre-init.d/90_configure_{service}.sh`
+1. Defined in `build/conf/nginx/http.d/apps/<service>.conf` - directives included inside `application relay` (Simple Relay), or an `application <service>` block at server level (Transformer destination)
+2. Optionally has a transformer in `build/conf/nginx/http.d/transformers/<service>.conf` - FFmpeg encoding pipeline
+3. Configured by a pre-init script in `build/scripts/pre-init.d/90_configure_<service>.sh`
 4. Enabled/disabled dynamically via `build/scripts/enableService.sh`
 
 ### Configuration Flow
@@ -66,16 +66,17 @@ Archive is neither: it is a `recorder` block inside the `relay` application that
 
 ## Adding New Services
 
-Follow the pattern in `docs/services/new.md`:
+Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/developer/adding-services/configuration.md`:
 
-1. Create `build/conf/nginx/http.d/apps/{service}.conf` (and optional transformer)
+1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`), never `{EXAMPLE_KEY}`. Every `application` block includes `http.d/auth.conf`
 2. Add environment variables to `Dockerfile` (defaults) and `env/relay.env` template
-3. Add commented includes to `build/conf/nginx/http.d/app.conf`
-4. Create `build/scripts/pre-init.d/90_configure_{service}.sh`:
-   - Check if service should be enabled (required env vars present)
+3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` never matches it
+4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after `89_`):
+   - If the required variable is empty, echo `<VAR> is not set. Skipping ...` and exit 0
+   - Validate every variable; exit 1 on failure (stops the container)
    - Use sed to replace placeholders in config files
-   - Call `/scripts/enableService.sh {service}`
-5. Make script executable: `chmod +x build/scripts/pre-init.d/90_configure_{service}.sh`
+   - Call `/scripts/enableService.sh <service>` (argument = app file basename; a typo exits 0 silently)
+5. Make script executable: `chmod +x build/scripts/pre-init.d/90_configure_<service>.sh`
 
 ## Environment Variables
 
@@ -93,9 +94,15 @@ Follow the pattern in `docs/services/new.md`:
 - `TWITCH_CODEC`: Video codec (default: libx264)
 - `TWITCH_X264_PRESET`: Encoding preset (default: medium)
 - `TWITCH_ENDPOINT`: Twitch ingest endpoint (default: use10)
+- `TWITCH_PARTNER`: TRUE relays unchanged, FALSE transcodes (default: FALSE)
+- `TWITCH_FFMPEG_THREADS`: x264 encoder threads, 0 = auto (default: 0)
+
+### Archive Settings
+- `ARCHIVE_SUFFIX`: File extension; files are always FLV (default: flv)
 
 ### System
 - `PUBLISH_IP_RANGE`: IP ranges allowed to publish streams, comma-separated (default: 172.16.0.0/12,192.168.0.0/16)
+- `NGINX_ERROR_LOG_LEVEL`: nginx error log level (default: error)
 
 ## Testing
 
@@ -142,7 +149,7 @@ All environment variables are validated before being used in configurations via 
 - `escape_for_sed()` - Safely escapes values for sed substitution
 
 **Security Protections:**
-- Command injection prevention (blocks `;|&$\`{}[]<>`)
+- Command injection prevention (stream keys and identifiers are whitelisted; `validate_path` blocks `` ;|&$`(){}<>#'" ``)
 - Path traversal protection (`validate_path` rejects `..` path segments)
 - Configuration injection prevention (blocks newlines, null bytes)
 - Length limits on stream keys, paths, identifiers, suffixes and numbers
@@ -156,8 +163,8 @@ GitHub Actions automatically runs all test suites on every push and PR via `.git
 - Validation Tests (runs first, builds image)
 - Smoke Tests (after validation tests pass)
 - Unit Tests (parallel with smoke tests)
-- Integration Tests (parallel with smoke tests)
-- Functional Tests (parallel with smoke tests)
+- Integration Tests (after smoke and unit tests pass)
+- Functional Tests (after smoke and unit tests pass)
 - Build and Push (after all tests pass)
 
 ## Key Files

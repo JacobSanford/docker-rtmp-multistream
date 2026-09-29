@@ -1,6 +1,6 @@
 # Test Suite for docker-rtmp-multistream
 
-This directory contains automated integration tests for the RTMP multistream relay.
+This directory contains the automated test suites for the RTMP multistream relay: validation, smoke, unit, integration and functional tests.
 
 ## Running Tests Locally
 
@@ -35,6 +35,10 @@ Comprehensive unit tests for input validation functions that prevent security vu
 - Valid inputs: CIDR notation (Class A/B/C networks, /32 hosts)
 - Invalid inputs: missing CIDR, text, incomplete octets
 
+**validate_ip_ranges**:
+- Valid inputs: one, two or three comma-separated ranges, with spaces around commas
+- Invalid inputs: one bad range in the list, an out-of-range octet in the list, empty
+
 **validate_number**:
 - Valid inputs: integers, zero, with min/max bounds
 - Invalid inputs: text, negative, decimal, out of bounds, more than 9 digits, empty
@@ -54,6 +58,10 @@ Comprehensive unit tests for input validation functions that prevent security vu
 **validate_suffix**:
 - Valid inputs: alphanumeric file extensions (mp4, flv, mkv)
 - Invalid inputs: leading dot, slashes, special chars, excessive length
+
+**validate_boolean**:
+- Valid inputs: `TRUE` and `FALSE` in any case
+- Invalid inputs: `yes`, `no`, `1`, `0`, empty
 
 **escape_for_sed**:
 - Tests proper escaping of pipes, ampersands, backslashes for safe sed substitution
@@ -99,7 +107,13 @@ End-to-end tests of actual RTMP streaming functionality:
 
 ## Running Individual Test Suites
 
-You can run individual test suites directly. Each prints a summary and exits non-zero if any of its tests fail:
+You can run individual test suites directly. Each prints a summary and exits non-zero if any of its tests fail. Only `test.sh` and the smoke tests build the `rtmp-multistream:test` image, so build it first:
+
+```bash
+docker build -t rtmp-multistream:test .
+```
+
+Then run a suite:
 
 ```bash
 # Validation tests only
@@ -125,7 +139,7 @@ Tests provide colored output:
 - ✗ (Red) - Test failed
 
 Example output:
-```
+```text
 === Validation Tests ===
 Testing validate_stream_key...
   ✓ valid: alphanumeric
@@ -147,11 +161,12 @@ Passed: <N>
 
 ## Cleanup
 
-The test suite automatically cleans up:
-- Test containers
-- Temporary files in `tests/tmp/`
+Each test removes the containers it starts. When run through `test.sh`, `tests/tmp/` is deleted on exit, even if tests fail. A suite run on its own, or a run you interrupt, can leave `tests/tmp/` and `test-rtmp-*` containers behind:
 
-Cleanup happens automatically on exit, even if tests fail.
+```bash
+docker ps -a --filter name=test-rtmp- -q | xargs -r docker rm -f
+rm -rf tests/tmp
+```
 
 ## Adding New Tests
 
