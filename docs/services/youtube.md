@@ -28,12 +28,12 @@ The YouTube relay uses a **simple relay pattern** - it forwards your stream dire
 3. Confirm the service is enabled:
 
     ```bash
-    docker compose logs relay | grep YouTube
+    docker compose logs relay | grep -iE "youtube|error"
     ```
 
     Expected output: `YouTube configuration complete, and service enabled.`
 
-    If you see `YOUTUBE_KEY is not set. Skipping YouTube configuration.`, check step 1.
+    If you see `YOUTUBE_KEY is not set. Skipping YouTube configuration.`, check step 1. If you see an `ERROR:` line, the container has stopped: correct the variable it names.
 
 ## Settings
 

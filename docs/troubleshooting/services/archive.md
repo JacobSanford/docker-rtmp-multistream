@@ -27,8 +27,8 @@ Troubleshooting issues specific to local stream archiving.
 ## Archive Not Recording
 
 ### Symptoms
-- Stream works on Twitch/YouTube
-- No files appearing in archive directory
+- No files appear in the archive directory, or
+- The whole relay stops at startup with `ERROR: ARCHIVE_PATH is not writable by the nginx user.`: Twitch and YouTube stop too. See [cause 2](#2-archive-folder-not-mounted-or-not-writable)
 
 ### Possible Causes
 
@@ -151,6 +151,8 @@ To convert an existing archive to a real MP4 file without re-encoding:
 ```bash
 ffmpeg -i <ARCHIVE_FILE> -c copy <OUTPUT_FILE>.mp4
 ```
+
+Replace `<ARCHIVE_FILE>` with the archive's file name and `<OUTPUT_FILE>` with a name for the copy. Confirm the copy by opening `<OUTPUT_FILE>.mp4` in your player.
 
 ## Files Not Named as Expected
 

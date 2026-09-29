@@ -131,7 +131,7 @@ docker compose logs relay | grep "access forbidden"
 
 #### 1. Invalid Environment Value
 
-**Check**: Read the last lines of the log:
+**Check**: Find the error lines in the log:
 
 ```bash
 docker compose logs relay | grep -E "ERROR|\[!\]"
@@ -145,6 +145,8 @@ ERROR: TWITCH_FPS must be a number.
 ```
 
 **Solution**: Correct the named variable in `env/relay.env`, then run `docker compose up -d --force-recreate`.
+
+If the error is `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the problem is the archive folder mount, not the value: see [Archive Folder Not Mounted or Not Writable](services/archive.md#2-archive-folder-not-mounted-or-not-writable).
 
 If you can't tell what's wrong and need the relay back quickly, undo your last change to `env/relay.env` and recreate the container the same way.
 
@@ -166,6 +168,8 @@ failed to bind host port 0.0.0.0:1935/tcp: address already in use
     docker stop <CONTAINER_NAME>
     ```
 
+    `<CONTAINER_NAME>` is the value in the `NAMES` column of the first command's output.
+
 - **`address already in use`**: another program holds the port. Find it:
 
     ```bash
@@ -176,6 +180,14 @@ failed to bind host port 0.0.0.0:1935/tcp: address already in use
 
 Then start the relay: `docker compose up -d`.
 
+#### 3. Outdated Image
+
+**Solution**: Rebuild the image against the latest base image, then recreate the container:
+```bash
+docker compose build --pull
+docker compose up -d --force-recreate
+```
+
 ### Confirm the Fix
 
 The container shows `Up`, and each service you configured is listed as enabled:
@@ -183,14 +195,6 @@ The container shows `Up`, and each service you configured is listed as enabled:
 ```bash
 docker compose ps relay
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
-```
-
-#### 3. Outdated Image
-
-**Solution**: Rebuild the image against the latest base image, then recreate the container:
-```bash
-docker compose build --pull
-docker compose up -d --force-recreate
 ```
 
 ## Advanced Diagnostics

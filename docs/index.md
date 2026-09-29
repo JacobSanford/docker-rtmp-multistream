@@ -4,7 +4,7 @@ description: Lightweight nginx-based RTMP relay/encoder for simultaneous streami
 audience: users
 doc_type: landing
 tags: [rtmp, streaming, nginx, docker, obs, twitch, youtube]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
@@ -12,7 +12,7 @@ version: 1.x
 
 [![CI](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml/badge.svg)](https://github.com/JacobSanford/docker-rtmp-multistream/actions/workflows/ci.yml)
 
-```docker-rtmp-multistream``` is a lightweight nginx-based RTMP relay/encoder. It is intended to complement traditional streaming software (OBS, etc.) by providing a single broadcast target that relays the stream simultaneously to multiple services, optionally archiving it to a local disk.
+`docker-rtmp-multistream` is a lightweight nginx-based Real-Time Messaging Protocol (RTMP) relay/encoder. It is intended to complement streaming software such as OBS Studio by providing a single endpoint that relays the stream simultaneously to multiple services, optionally archiving it to a local disk.
 
 !!! info "Performance Note"
     This project works best if deployed on a dedicated PC that is separate from the one running your streaming software.

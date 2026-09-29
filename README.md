@@ -14,7 +14,7 @@ This project works best if deployed on a dedicated PC, separate from the one run
 
 ## Features
 - Multi-platform streaming (Twitch, YouTube)
-- Twitch transcoding to a configurable resolution and bitrate
+- Twitch transcoding to a configurable resolution and bitrate (non-partner mode; partners get the stream unchanged)
 - Local disk archiving
 - IP-based publish authorization
 

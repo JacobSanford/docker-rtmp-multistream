@@ -4,7 +4,7 @@ description: Complete reference for all configuration environment variables
 audience: developers
 doc_type: reference
 tags: [reference, configuration, environment-variables, settings]
-lastReviewed: 2025-10-21
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
@@ -35,8 +35,10 @@ Every value is validated when the container starts. An invalid value logs an `ER
 
 **Example**:
 ```bash
-NGINX_ERROR_LOG_LEVEL=info  # Log each connection and push while troubleshooting
+NGINX_ERROR_LOG_LEVEL=info
 ```
+
+This logs each connection and push while troubleshooting.
 
 !!! warning
     The log can contain full stream URLs, including stream keys. At `info` and more verbose levels this happens every time you stream. Set the level back to `error` when you have finished troubleshooting.
@@ -59,9 +61,10 @@ NGINX_ERROR_LOG_LEVEL=info  # Log each connection and push while troubleshooting
 
 **Examples**:
 ```bash
-PUBLISH_IP_RANGE=172.16.0.0/12,192.168.1.0/24  # Docker networks + one subnet
-PUBLISH_IP_RANGE=172.16.0.0/12,192.168.1.50/32 # Docker networks + one address
+PUBLISH_IP_RANGE=172.16.0.0/12,192.168.1.0/24
 ```
+
+This allows the Docker networks and one subnet. For the Docker networks and one address, use `172.16.0.0/12,192.168.1.50/32`.
 
 **Note**: Setting this variable replaces the default. When OBS runs on the same machine as the relay, its connection arrives from the Docker network's gateway (for example `172.25.0.1`), so keep `172.16.0.0/12` in the list.
 
@@ -143,9 +146,10 @@ TWITCH_PARTNER=FALSE
 
 **Examples**:
 ```bash
-TWITCH_AUDIO_BITRATE=160k  # Default
-TWITCH_AUDIO_BITRATE=128k  # Good quality
+TWITCH_AUDIO_BITRATE=160k
 ```
+
+`160k` is the default. `128k` uses less upload.
 
 ### TWITCH_AUDIO_CHANNELS
 
@@ -163,8 +167,10 @@ TWITCH_AUDIO_BITRATE=128k  # Good quality
 
 **Example**:
 ```bash
-TWITCH_AUDIO_CHANNELS=2  # Stereo
+TWITCH_AUDIO_CHANNELS=2
 ```
+
+This sends stereo.
 
 ### TWITCH_CODEC
 
@@ -223,8 +229,10 @@ Twitch changes this list. For the current one, open `https://ingest.twitch.tv/in
 
 **Example**:
 ```bash
-TWITCH_ENDPOINT=euc10  # Europe (Frankfurt)
+TWITCH_ENDPOINT=euc10
 ```
+
+This uses Europe (Frankfurt). Set one value, with no comment on the same line.
 
 **Note**: Legacy slugs such as `jfk`, `syd` and `lhr` still resolve, but several route to US servers regardless of their name. Use a slug from the list above.
 
@@ -246,10 +254,10 @@ TWITCH_ENDPOINT=euc10  # Europe (Frankfurt)
 
 **Examples**:
 ```bash
-TWITCH_FFMPEG_THREADS=0   # Let x264 choose (recommended)
-TWITCH_FFMPEG_THREADS=4   # Limit to 4 threads
-TWITCH_FFMPEG_THREADS=8   # Use 8 threads
+TWITCH_FFMPEG_THREADS=0
 ```
+
+`0` lets x264 choose. To limit the encoder to 4 threads, use `4`.
 
 **When to override**: To cap the relay's CPU use on a shared host.
 
@@ -313,10 +321,10 @@ TWITCH_HEIGHT=1080
 
 **Examples**:
 ```bash
-TWITCH_KBITS_PER_VIDEO_FRAME=100  # 1080p: 6000 kbps @ 60fps
-TWITCH_KBITS_PER_VIDEO_FRAME=75   # 720p: 4500 kbps @ 60fps
-TWITCH_KBITS_PER_VIDEO_FRAME=50   # 540p: 3000 kbps @ 60fps
+TWITCH_KBITS_PER_VIDEO_FRAME=100
 ```
+
+At `TWITCH_FPS=60`, `100` gives 6000 kbps, `75` (the default) gives 4500 kbps, and `50` gives 3000 kbps. `TWITCH_HEIGHT` does not change the bitrate.
 
 **See also**: [Twitch Bitrate Reference](../services/twitch.md#bitrate-reference-table)
 
@@ -396,7 +404,7 @@ YOUTUBE_KEY=abcd-efgh-ijkl-mnop-qrst
 
 **Used by**: Archive service configuration
 
-**Valid values**: An absolute path, up to 500 characters, with no spaces, no `..` segments, no newlines and none of `` ; | & $ ` ( ) { } < > ``. The directory must exist inside the container and be writable by the nginx user (UID:GID 100:101). Any other value stops the container at start.
+**Valid values**: An absolute path, up to 500 characters, with no spaces, no `..` segments, no newlines and none of `` ; | & $ ` ( ) { } < > # ' " ``. The directory must exist inside the container and be writable by the nginx user (user ID 100, group ID 101: `docker compose exec relay id nginx` prints `uid=100(nginx) gid=101(nginx)`). Any other value stops the container at start.
 
 **Example**:
 ```bash
@@ -419,7 +427,7 @@ ARCHIVE_PATH=/archive
 
 **Used by**: Archive service configuration
 
-**Valid values**: Letters and digits only, 1 to 10 characters.
+**Valid values**: Letters and digits only, 1 to 10 characters. Checked only when `ARCHIVE_PATH` is set; any other value stops the container at start.
 
 **Example**:
 ```bash

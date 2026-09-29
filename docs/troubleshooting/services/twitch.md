@@ -64,12 +64,10 @@ See [Twitch Configuration](../../services/twitch.md) for all settings.
 **Check**: Try a different ingest server. Set `TWITCH_ENDPOINT` in `env/relay.env` to a region code from [Twitch's ingest list](https://ingest.twitch.tv/ingests){target="_blank"}. The code is the first part of each `url_template` host, for example `use20` from `rtmp://use20.contribute.live-video.net/app/{stream_key}`:
 
 ```bash
-TWITCH_ENDPOINT=use20  # US East (Ohio)
-TWITCH_ENDPOINT=usw20  # US West (Oregon)
-TWITCH_ENDPOINT=euc10  # Europe (Frankfurt)
+TWITCH_ENDPOINT=use20
 ```
 
-The default is `use10` (US East, N. Virginia). Older names such as `jfk` still work as aliases for current servers.
+Other examples: `usw20` (US West, Oregon), `euc10` (Europe, Frankfurt). Set one value only, with no comment on the same line. The default is `use10` (US East, N. Virginia). For older names such as `jfk`, see [`TWITCH_ENDPOINT`](../../techref/environment.md#twitch_endpoint).
 
 Recreate the container so it reads the new value:
 

@@ -26,14 +26,14 @@ The relay streams to Twitch. How you configure the Twitch service depends on whe
 4. Confirm the service is enabled:
 
     ```bash
-    docker compose logs relay | grep Twitch
+    docker compose logs relay | grep -iE "twitch|error"
     ```
 
     Non-partner output: `Twitch Non-Partner configuration complete, and service enabled.`
 
     Partner output: `Twitch Partner configuration complete, and service enabled.`
 
-    If you see `TWITCH_KEY is not set. Skipping Twitch configuration.`, check step 1.
+    If you see `TWITCH_KEY is not set. Skipping Twitch configuration.`, check step 1. If you see an `ERROR:` line, the container has stopped: correct the variable it names.
 
 ## Partner vs. Non-Partner Streaming
 

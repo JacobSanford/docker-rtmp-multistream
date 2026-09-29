@@ -47,7 +47,7 @@ The relay can archive streams to disk in real time. Archives are written inside 
 5. Confirm the service is enabled:
 
     ```bash
-    docker compose logs relay | grep Archive
+    docker compose logs relay | grep -iE "archive|error"
     ```
 
     Expected output: `Archive configuration complete, and service enabled.`
