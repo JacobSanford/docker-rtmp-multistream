@@ -21,22 +21,6 @@ cleanup() {
 # Register cleanup on exit
 trap cleanup EXIT
 
-# Test result function
-test_result() {
-  local test_name=$1
-  local result=$2
-
-  TESTS_RUN=$((TESTS_RUN + 1))
-
-  if [ "$result" -eq 0 ]; then
-    echo -e "${GREEN}✓${NC} $test_name"
-    TESTS_PASSED=$((TESTS_PASSED + 1))
-  else
-    echo -e "${RED}✗${NC} $test_name"
-    TESTS_FAILED=$((TESTS_FAILED + 1))
-  fi
-}
-
 # Print section header
 section() {
   echo -e "\n${YELLOW}=== $1 ===${NC}"
