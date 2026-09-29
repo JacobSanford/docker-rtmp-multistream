@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Lightweight nginx-based RTMP relay/encoder for simultaneous streaming to multiple services" name="description"/>
+<meta access="" by="" cannot="" content="Fixing " forbidden="" name="description" obs="" publish"="" rule"="" when=""/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/troubleshooting/ip_authentication/" rel="canonical"/>
 <link href="../" rel="prev"/>
 <link href="../connection-issues/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>IP Authentication - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>OBS Is Refused: access forbidden by rule - docker-rtmp-multistream</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#troubleshooting-ip-authentication">
+<a class="md-skip" href="#obs-is-refused-access-forbidden-by-rule">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              IP Authentication
+              OBS Is Refused: access forbidden by rule
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,108 +198,48 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Streaming Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
-<span class="md-nav__icon md-icon"></span>
-            Streaming Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../services/overview/">
-<span class="md-ellipsis">
-    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../services/twitch/">
+<a class="md-nav__link" href="../../restrict-access/">
 <span class="md-ellipsis">
-    Twitch
+    
+  
+    Restrict Access
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../services/youtube/">
+<a class="md-nav__link" href="../../security/">
 <span class="md-ellipsis">
-    YouTube
+    
+  
+    Security
+  
+
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../services/archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
-    Technical Reference
+    
+  
+    Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -287,13 +247,157 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Streaming Services
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/overview/">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/twitch/">
+<span class="md-ellipsis">
+    
+  
+    Twitch
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/youtube/">
+<span class="md-ellipsis">
+    
+  
+    YouTube
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/archive/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/architecture/">
 <span class="md-ellipsis">
+    
+  
     Architecture
+  
+
     
   </span>
 </a>
@@ -301,7 +405,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/service-patterns/">
 <span class="md-ellipsis">
+    
+  
     Service Patterns
+  
+
     
   </span>
 </a>
@@ -309,7 +417,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/environment/">
 <span class="md-ellipsis">
+    
+  
     Environment Variables
+  
+
     
   </span>
 </a>
@@ -318,24 +430,36 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_7">
+<nav aria-expanded="true" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -344,14 +468,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -364,43 +496,55 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#solution">
 <span class="md-ellipsis">
-      Solution
+      
+        Solution
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#choosing-an-appropriate-publish_ip_range">
 <span class="md-ellipsis">
-      Choosing an Appropriate PUBLISH_IP_RANGE
+      
+        Choosing an Appropriate PUBLISH_IP_RANGE
+      
     </span>
 </a>
 <nav aria-label="Choosing an Appropriate PUBLISH_IP_RANGE" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connections-from-wan-other-machines-on-lan">
+<a class="md-nav__link" href="#connections-from-other-machines">
 <span class="md-ellipsis">
-      Connections From: WAN, Other Machines on LAN
+      
+        Connections From: Other Machines
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connections-from-the-same-machine-docker-host-localhost">
+<a class="md-nav__link" href="#connections-from-the-same-machine">
 <span class="md-ellipsis">
-      Connections From: The Same Machine (Docker host, localhost)
+      
+        Connections From: The Same Machine
+      
     </span>
 </a>
 </li>
@@ -410,14 +554,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#example-ranges">
 <span class="md-ellipsis">
-      Example Ranges
+      
+        Example Ranges
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -427,30 +575,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -458,7 +622,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -466,7 +634,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -484,7 +656,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -492,14 +668,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -507,13 +691,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -521,7 +713,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -529,7 +725,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -538,9 +738,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../security/">
+<a class="md-nav__link" href="../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -548,7 +752,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -559,7 +767,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -582,43 +794,55 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#solution">
 <span class="md-ellipsis">
-      Solution
+      
+        Solution
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#choosing-an-appropriate-publish_ip_range">
 <span class="md-ellipsis">
-      Choosing an Appropriate PUBLISH_IP_RANGE
+      
+        Choosing an Appropriate PUBLISH_IP_RANGE
+      
     </span>
 </a>
 <nav aria-label="Choosing an Appropriate PUBLISH_IP_RANGE" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connections-from-wan-other-machines-on-lan">
+<a class="md-nav__link" href="#connections-from-other-machines">
 <span class="md-ellipsis">
-      Connections From: WAN, Other Machines on LAN
+      
+        Connections From: Other Machines
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#connections-from-the-same-machine-docker-host-localhost">
+<a class="md-nav__link" href="#connections-from-the-same-machine">
 <span class="md-ellipsis">
-      Connections From: The Same Machine (Docker host, localhost)
+      
+        Connections From: The Same Machine
+      
     </span>
 </a>
 </li>
@@ -628,14 +852,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#example-ranges">
 <span class="md-ellipsis">
-      Example Ranges
+      
+        Example Ranges
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -646,24 +874,45 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="troubleshooting-ip-authentication"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.</span> Troubleshooting: IP Authentication</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1</span> Overview</h2>
-<p>The default configuration relays RTMP from all typical local and docker IPs (172.17.0.0/16,192.168.0.0/16). This restriction can be modified by setting the <a href="../../techref/environment/#system-variables">PUBLISH_IP_RANGE</a> environment variable.</p>
+<h1 id="obs-is-refused-access-forbidden-by-rule"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.</span> OBS Is Refused: access forbidden by rule</h1>
+<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.1</span> Overview</h2>
+<p>The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the <a href="../../techref/environment/#system-variables">PUBLISH_IP_RANGE</a> environment variable.</p>
 <p>If this mask does not include the IP address of the machine you are streaming from, you will see access forbidden errors in the logs and publishing the stream from OBS to your relay will not be accepted.</p>
-<h2 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2</span> Symptoms</h2>
+<h2 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.2</span> Symptoms</h2>
 <p>"access forbidden by rule" errors in the relay logs, e.g.:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, client: 172.22.0.1, server: 0.0.0.0:1935
 </span></code></pre></div>
-<h2 id="solution"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.3</span> Solution</h2>
-<p>This error will provide you with the correct client IP address that was denied access. In the example above, the client's apparent IP is <code>172.22.0.1</code>. Setting the <code>PUBLISH_IP_RANGE</code> to a mask that include this IP address (e.g., <code>172.22.0.0/16</code>) will resolve the issue.</p>
-<h2 id="choosing-an-appropriate-publish_ip_range"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4</span> Choosing an Appropriate PUBLISH_IP_RANGE</h2>
-<p>The streaming software's IP address detected by the <em>docker-rtmp-multistream</em> container may differ from what you expect based on how you are connecting to it.</p>
-<h3 id="connections-from-wan-other-machines-on-lan"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4.1</span> Connections From: WAN, Other Machines on LAN</h3>
-<p>The container typically detects the actual IP (e.g., 192.168.1.100). Choose a mask based on your actual network range.</p>
-<h3 id="connections-from-the-same-machine-docker-host-localhost"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4.2</span> Connections From: The Same Machine (Docker host, localhost)</h3>
-<p>When Docker creates containers, it generally uses a bridge network (usually named <code>docker0</code> or a custom bridge). This creates a virtual network interface that acts as a gateway between your host and containers.</p>
-<p>In this case, the container typically detects the Gateway IP of the Docker bridge network. Choose a mask that includes the entire Docker bridge subnet (e.g., <code>172.22.0.0/16</code>).</p>
-<h2 id="example-ranges"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> Example Ranges</h2>
+<h2 id="solution"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.3</span> Solution</h2>
+<ol>
+<li>
+<p>Find the address the relay refused. It's the <code>client:</code> value in the log line:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"access forbidden"</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>In <code>env/relay.env</code>, uncomment <code>PUBLISH_IP_RANGE</code> and add a range that includes that address. Keep the ranges you still need, because this value replaces the default. For a refused address of <code>10.0.0.25</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">10</span>.0.0.0/24,172.16.0.0/12,192.168.0.0/16
+</span></code></pre></div>
+</li>
+<li>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>Start streaming from OBS, then confirm that nothing was refused:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"access forbidden"</span>
+</span></code></pre></div>
+<p>No output means the connection was allowed.</p>
+</li>
+</ol>
+<h2 id="choosing-an-appropriate-publish_ip_range"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4</span> Choosing an Appropriate PUBLISH_IP_RANGE</h2>
+<h3 id="connections-from-other-machines"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.1</span> Connections From: Other Machines</h3>
+<p>Use the address the relay logged as <code>client:</code> in <a href="#solution">Solution</a> step 1, not the address you expect. Choose a range that covers it: <code>/32</code> for that address only, or its subnet, such as <code>192.168.1.0/24</code>.</p>
+<h3 id="connections-from-the-same-machine"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2</span> Connections From: The Same Machine</h3>
+<p>If OBS runs on the same machine as the relay, its connection reaches the relay from the Docker network's gateway address (for example <code>172.25.0.1</code>), not from <code>127.0.0.1</code>. The default range <code>172.16.0.0/12</code> allows it. If you set your own <code>PUBLISH_IP_RANGE</code>, keep <code>172.16.0.0/12</code> in the list.</p>
+<h2 id="example-ranges"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5</span> Example Ranges</h2>
+<p>Each value keeps <code>172.16.0.0/12</code> so OBS on the relay's own machine can still publish. Drop it only if nothing streams from that machine.</p>
 <table>
 <thead>
 <tr>
@@ -673,32 +922,29 @@
 </thead>
 <tbody>
 <tr>
-<td>Single specific machine only</td>
-<td><code>192.168.1.100/32</code></td>
+<td>Relay machine plus one other machine</td>
+<td><code>172.16.0.0/12,192.168.1.100/32</code></td>
 </tr>
 <tr>
-<td>Specific subnet (e.g., 192.168.1.x)</td>
-<td><code>192.168.1.0/24</code></td>
+<td>Relay machine plus one subnet (192.168.1.x)</td>
+<td><code>172.16.0.0/12,192.168.1.0/24</code></td>
 </tr>
 <tr>
-<td>Entire typical home network</td>
-<td><code>192.168.0.0/16</code></td>
-</tr>
-<tr>
-<td>Allow Docker host + local network</td>
-<td><code>172.17.0.0/16,192.168.0.0/16</code></td>
+<td>Relay machine plus a typical home network</td>
+<td><code>172.16.0.0/12,192.168.0.0/16</code> (the default)</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">Security Recommendation</p>
-<p>Use the most restrictive mask that meets your needs. If you only stream from one machine, use /32 for that single IP.</p>
+<p>Use the most restrictive mask that meets your needs. If you stream from one other machine, use <code>/32</code> for that machine's address.</p>
 </div>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.6</span> See Also</h2>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.6</span> See Also</h2>
 <ul>
-<li><a href="../../security/">Security</a> - Security features and best practices</li>
+<li><a href="../../restrict-access/">Restrict Who Can Publish and Watch</a> - Lock down publishing and playback</li>
+<li><a href="../../security/">Security</a> - What the relay protects, and what it does not</li>
 <li><a href="../connection-issues/">Connection Issues</a> - Other connection problems</li>
-<li><a href="../../configuration/">Configuration Guide</a> - Environment variable setup</li>
+<li><a href="../../configuration/">Change Relay Settings</a> - Environment variable setup</li>
 </ul>
 </article>
 </div>
@@ -727,7 +973,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

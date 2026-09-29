@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="CPU and processing requirements for stream encoding" name="description"/>
+<meta content="Which services use CPU, and the settings that change how much Twitch re-encoding uses" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/performance/hardware/" rel="canonical"/>
 <link href="../../services/archive/" rel="prev"/>
 <link href="../bandwidth/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Hardware Requirements - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>CPU Considerations - docker-rtmp-multistream</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#hardware-requirements">
+<a class="md-skip" href="#cpu-considerations">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Hardware Requirements
+              CPU Considerations
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,30 +198,70 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../restrict-access/">
+<span class="md-ellipsis">
+    
+  
+    Restrict Access
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/">
+<span class="md-ellipsis">
+    
+  
+    Security
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Streaming Services
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../services/overview/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -209,7 +269,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -217,7 +281,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -225,7 +293,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -234,32 +306,48 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
+<nav aria-expanded="true" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Performance
+            
+  
+    Performance
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     Hardware
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     Hardware
+  
+
     
   </span>
 </a>
@@ -270,48 +358,47 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#cpu-considerations">
+<a class="md-nav__link" href="#which-services-use-cpu">
 <span class="md-ellipsis">
-      CPU Considerations
-    </span>
-</a>
-<nav aria-label="CPU Considerations" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#general-guidance">
-<span class="md-ellipsis">
-      General Guidance
+      
+        Which Services Use CPU
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#encoding-impact">
+<a class="md-nav__link" href="#settings-that-change-cpu-use">
 <span class="md-ellipsis">
-      Encoding Impact
+      
+        Settings That Change CPU Use
+      
     </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ffmpeg-thread-management">
 <span class="md-ellipsis">
-      FFmpeg Thread Management
+      
+        FFmpeg Thread Management
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoder-presets">
 <span class="md-ellipsis">
-      Encoder Presets
+      
+        Encoder Presets
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -321,7 +408,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../bandwidth/">
 <span class="md-ellipsis">
+    
+  
     Bandwidth
+  
+
     
   </span>
 </a>
@@ -329,7 +420,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../quality/">
 <span class="md-ellipsis">
+    
+  
     Quality
+  
+
     
   </span>
 </a>
@@ -338,24 +433,36 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Technical Reference
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_6">
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Technical Reference
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/architecture/">
 <span class="md-ellipsis">
+    
+  
     Architecture
+  
+
     
   </span>
 </a>
@@ -363,7 +470,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/service-patterns/">
 <span class="md-ellipsis">
+    
+  
     Service Patterns
+  
+
     
   </span>
 </a>
@@ -371,7 +482,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../techref/environment/">
 <span class="md-ellipsis">
+    
+  
     Environment Variables
+  
+
     
   </span>
 </a>
@@ -380,24 +495,36 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_7">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -405,7 +532,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -413,30 +544,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -444,7 +591,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -452,7 +603,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -470,7 +625,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -478,14 +637,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -493,13 +660,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -507,7 +682,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -515,7 +694,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -524,9 +707,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../security/">
+<a class="md-nav__link" href="../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -534,7 +721,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -545,7 +736,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -566,48 +761,47 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#cpu-considerations">
+<a class="md-nav__link" href="#which-services-use-cpu">
 <span class="md-ellipsis">
-      CPU Considerations
-    </span>
-</a>
-<nav aria-label="CPU Considerations" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#general-guidance">
-<span class="md-ellipsis">
-      General Guidance
+      
+        Which Services Use CPU
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#encoding-impact">
+<a class="md-nav__link" href="#settings-that-change-cpu-use">
 <span class="md-ellipsis">
-      Encoding Impact
+      
+        Settings That Change CPU Use
+      
     </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ffmpeg-thread-management">
 <span class="md-ellipsis">
-      FFmpeg Thread Management
+      
+        FFmpeg Thread Management
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoder-presets">
 <span class="md-ellipsis">
-      Encoder Presets
+      
+        Encoder Presets
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -618,53 +812,45 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="hardware-requirements"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.</span> Hardware Requirements</h1>
-<p>This page covers CPU and processing requirements for docker-rtmp-multistream.</p>
-<h2 id="cpu-considerations"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1</span> CPU Considerations</h2>
-<h3 id="general-guidance"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1.1</span> General Guidance</h3>
-<p>Stream encoding performance depends on available CPU resources:</p>
+<h1 id="cpu-considerations"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> CPU Considerations</h1>
+<p>This page explains which services use CPU and the settings that change how much Twitch re-encoding uses. It gives no minimum CPU figure: the load depends on your resolution, frame rate, preset and processor. To see the load on your host, run <code>docker stats</code> while you stream.</p>
+<h2 id="which-services-use-cpu"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Which Services Use CPU</h2>
+<p>Only Twitch non-partner mode (the default) re-encodes video. It runs FFmpeg with the x264 encoder for as long as you publish, and this is where nearly all of the relay's CPU use comes from.</p>
+<p>These services forward the stream without re-encoding it, and use little CPU:</p>
 <ul>
-<li><strong>More cores/threads = better performance</strong> for video encoding</li>
-<li><strong>Higher clock speeds</strong> improve encoding efficiency</li>
-<li><strong>Relay-only services</strong> (no encoding) require minimal CPU</li>
+<li>YouTube</li>
+<li>Twitch partner mode (<code>TWITCH_PARTNER=TRUE</code>)</li>
+<li>Archive</li>
 </ul>
-<h3 id="encoding-impact"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1.2</span> Encoding Impact</h3>
-<p>Services that re-encode video are CPU-intensive. Re-encoding processes your entire stream in real-time, which requires substantial processing power.</p>
-<p><strong>Simple relay</strong> (no encoding): Minimal CPU usage - nginx forwards streams without processing them.</p>
-<p><strong>With encoding</strong>: Moderate to high CPU usage - FFmpeg re-encodes the video, which is computationally expensive.</p>
-<div class="admonition example">
-<p class="admonition-title">Service Patterns</p>
-<p><strong>Twitch</strong> uses FFmpeg re-encoding for non-partners. Partners can use simple relay mode (no encoding). See <a href="../../services/twitch/">Twitch Configuration</a> for details.</p>
-<p><strong>YouTube</strong> uses simple relay (no encoding). See <a href="../../services/youtube/">YouTube Configuration</a> for details.</p>
+<p>For the two Twitch modes, see <a href="../../services/twitch/#partner-vs-non-partner-streaming">Partner vs. Non-Partner Streaming</a>.</p>
+<h2 id="settings-that-change-cpu-use"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Settings That Change CPU Use</h2>
+<p>These apply to Twitch non-partner mode only.</p>
+<ul>
+<li><strong><code>TWITCH_HEIGHT</code> and <code>TWITCH_FPS</code></strong>: the encoder processes every output pixel of every frame, so a higher resolution or frame rate costs more CPU.</li>
+<li><strong><code>TWITCH_X264_PRESET</code></strong>: see <a href="#encoder-presets">Encoder Presets</a>.</li>
+<li><strong><code>TWITCH_FFMPEG_THREADS</code></strong>: see <a href="#ffmpeg-thread-management">FFmpeg Thread Management</a>.</li>
+</ul>
+<h2 id="ffmpeg-thread-management"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3</span> FFmpeg Thread Management</h2>
+<p>The <code>TWITCH_FFMPEG_THREADS</code> environment variable controls how many threads the libx264 encoder uses in Twitch non-partner mode:</p>
+<ul>
+<li><code>0</code> (default): x264 chooses based on the CPU count</li>
+<li><code>N</code> (1 to 64): x264 uses N threads</li>
+</ul>
+<p>Limit threads when the relay shares a host with other CPU-heavy work. Only Twitch non-partner mode encodes; YouTube, Archive and Twitch partner mode use almost no CPU, so there is nothing to balance between services.</p>
+<h2 id="encoder-presets"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4</span> Encoder Presets</h2>
+<p><code>TWITCH_X264_PRESET</code> sets the x264 preset. From fastest to slowest, the valid values are:</p>
+<p><code>ultrafast</code>, <code>superfast</code>, <code>veryfast</code>, <code>faster</code>, <code>fast</code>, <code>medium</code> (default), <code>slow</code>, <code>slower</code>, <code>veryslow</code>, <code>placebo</code></p>
+<p>A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset does not lower the bitrate: it compresses less efficiently, and quality at that bitrate drops.</p>
+<p>If FFmpeg cannot keep up with your settings, try one preset faster, then lower <code>TWITCH_HEIGHT</code> or <code>TWITCH_FPS</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Preset typos are not caught at startup</p>
+<p>The relay checks only that the preset contains letters, digits, <code>-</code> and <code>_</code>. A misspelled preset such as <code>mediun</code> passes the startup check, and FFmpeg fails with <code>invalid preset 'mediun'</code> when you first publish. See <a href="../../troubleshooting/services/twitch/">Twitch Issues</a>.</p>
 </div>
-<h2 id="ffmpeg-thread-management"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2</span> FFmpeg Thread Management</h2>
-<p>The <code>TWITCH_FFMPEG_THREADS</code> environment variable controls how many CPU threads FFmpeg uses:</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.5</span> See Also</h2>
 <ul>
-<li><code>0</code> (default): FFmpeg automatically optimizes thread usage based on available CPU</li>
-<li><code>N</code> (specific number): Limits FFmpeg to N threads</li>
-</ul>
-<p><strong>When to limit threads</strong>:</p>
-<ul>
-<li>Running multiple encoding services simultaneously</li>
-<li>Sharing CPU with other applications</li>
-<li>Preventing one service from monopolizing CPU resources</li>
-</ul>
-<h2 id="encoder-presets"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3</span> Encoder Presets</h2>
-<p>The x264 encoder preset controls the balance between encoding speed and output quality:</p>
-<ul>
-<li><strong>Faster presets</strong> (<code>ultrafast</code>, <code>veryfast</code>, <code>fast</code>): Lower CPU usage, slightly reduced quality</li>
-<li><strong>Slower presets</strong> (<code>medium</code>, <code>slow</code>, <code>slower</code>): Higher CPU usage, better quality</li>
-</ul>
-<div class="admonition tip">
-<p class="admonition-title">CPU-Constrained Systems</p>
-<p>If encoding causes CPU bottlenecks, switch to faster presets. The quality difference is often minimal for streaming content.</p>
-</div>
-<p>For Twitch encoding settings, see <a href="../../services/twitch/">Twitch Configuration</a>.</p>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.4</span> See Also</h2>
-<ul>
-<li><a href="../bandwidth/">Bandwidth Requirements</a> - Network considerations</li>
-<li><a href="../quality/">Quality Optimization</a> - Stream quality tuning</li>
-<li><a href="../../services/twitch/">Twitch Configuration</a> - Twitch-specific encoding settings</li>
+<li><a href="../bandwidth/">Bandwidth Requirements</a> - Upload and disk space</li>
+<li><a href="../quality/">Quality Optimization</a> - Choosing Twitch resolution, frame rate and bitrate</li>
+<li><a href="../../services/twitch/">Stream to Twitch</a> - Twitch-specific encoding settings</li>
 <li><a href="../../services/overview/">Services Overview</a> - Service pattern comparison</li>
 </ul>
 </article>
@@ -694,7 +880,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Configure YouTube streaming with direct pass-through" name="description"/>
+<meta content="Enable the YouTube service, which forwards your stream without re-encoding" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/youtube/" rel="canonical"/>
 <link href="../twitch/" rel="prev"/>
 <link href="../archive/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>YouTube Service - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Stream to YouTube - docker-rtmp-multistream</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#youtube">
+<a class="md-skip" href="#stream-to-youtube">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              YouTube Service
+              Stream to YouTube
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,30 +198,70 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../restrict-access/">
+<span class="md-ellipsis">
+    
+  
+    Restrict Access
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/">
+<span class="md-ellipsis">
+    
+  
+    Security
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
+<nav aria-expanded="true" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Streaming Services
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../overview/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -209,7 +269,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -218,14 +282,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -238,41 +310,47 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#enable-youtube">
 <span class="md-ellipsis">
-      Configuration
+      
+        Enable YouTube
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#settings">
+<span class="md-ellipsis">
+      
+        Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      
+        A Note on YouTube's Re-encoding
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
-<span class="md-ellipsis">
-      Related Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -280,91 +358,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
-<span class="md-ellipsis">
-    Technical Reference
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_6">
-<span class="md-nav__icon md-icon"></span>
-            Technical Reference
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/architecture/">
-<span class="md-ellipsis">
-    Architecture
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/service-patterns/">
-<span class="md-ellipsis">
-    Service Patterns
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/environment/">
-<span class="md-ellipsis">
-    Environment Variables
+  
+
     
   </span>
 </a>
@@ -376,7 +374,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
-    Troubleshooting
+    
+  
+    Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -384,13 +386,145 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/architecture/">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/service-patterns/">
+<span class="md-ellipsis">
+    
+  
+    Service Patterns
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/environment/">
+<span class="md-ellipsis">
+    
+  
+    Environment Variables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -398,7 +532,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -406,30 +544,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -437,7 +591,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -445,7 +603,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -463,7 +625,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -471,14 +637,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -486,13 +660,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -500,7 +682,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -508,7 +694,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -517,9 +707,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../security/">
+<a class="md-nav__link" href="../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -527,7 +721,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -538,7 +736,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -561,41 +763,47 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#enable-youtube">
 <span class="md-ellipsis">
-      Configuration
+      
+        Enable YouTube
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#settings">
+<span class="md-ellipsis">
+      
+        Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#a-note-on-youtubes-re-encoding">
 <span class="md-ellipsis">
-      A Note on YouTube's Re-encoding
+      
+        A Note on YouTube's Re-encoding
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
-<nav aria-label="See Also" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#related-documentation">
-<span class="md-ellipsis">
-      Related Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -604,29 +812,29 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> YouTube</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Overview</h2>
-<p>The relay streams to YouTube using direct pass-through. To enable this feature, set the <code>YOUTUBE_KEY</code> environment variable in the <code>env/relay.env</code> file to the stream key provided by YouTube.</p>
+<h1 id="stream-to-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.</span> Stream to YouTube</h1>
+<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1</span> Overview</h2>
+<p>The relay streams to YouTube using direct pass-through.</p>
 <p>The YouTube relay uses a <strong>simple relay pattern</strong> - it forwards your stream directly to YouTube without any re-encoding or modification. This preserves your original stream quality for YouTube's reprocessing.</p>
-<h2 id="configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Configuration</h2>
-<p>The YouTube service can be configured by setting the following environment variables:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>YOUTUBE_KEY</code></td>
-<td>The stream key provided by YouTube.</td>
-<td>``</td>
-</tr>
-</tbody>
-</table>
-<h2 id="a-note-on-youtubes-re-encoding"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> A Note on YouTube's Re-encoding</h2>
+<h2 id="enable-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2</span> Enable YouTube</h2>
+<ol>
+<li>In <code>env/relay.env</code>, set <code>YOUTUBE_KEY</code> to the stream key provided by YouTube.</li>
+<li>
+<p>Recreate the container so it reads the new values:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">"youtube|error"</span>
+</span></code></pre></div>
+<p>Expected output: <code>YouTube configuration complete, and service enabled.</code></p>
+<p>If you see <code>YOUTUBE_KEY is not set. Skipping YouTube configuration.</code>, check step 1. If you see an <code>ERROR:</code> line, the container has stopped: correct the variable it names.</p>
+</li>
+</ol>
+<h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3</span> Settings</h2>
+<p><code>YOUTUBE_KEY</code> is the only YouTube variable. For its valid values, see <a href="../../techref/environment/#youtube-variables">YouTube Variables</a>.</p>
+<h2 id="a-note-on-youtubes-re-encoding"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.4</span> A Note on YouTube's Re-encoding</h2>
 <p>YouTube reprocesses every video it receives, including live streams. This means YouTube applies its own encoding to your stream after receiving it.</p>
 <p>Streams that appear acceptable at lower bitrates on platforms like Twitch will often appear distorted on YouTube after YouTube's re-encoding process. Ensure you send YouTube as high-quality/bitrate of a stream as possible to obtain the best results.</p>
 <p>Refer to the <a href="../../performance/quality/">Quality Optimization Guide</a> and <a href="../../performance/bandwidth/">Bandwidth Requirements</a> for:</p>
@@ -635,13 +843,12 @@
 <li>Resolution and framerate considerations</li>
 <li>Bandwidth requirements</li>
 </ul>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> See Also</h2>
-<h3 id="related-documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4.1</span> Related Documentation</h3>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.5</span> See Also</h2>
 <ul>
 <li><strong><a href="../../performance/quality/">Quality Optimization</a></strong> - Stream quality optimization</li>
 <li><strong><a href="../../performance/bandwidth/">Bandwidth Requirements</a></strong> - Network bandwidth guidance</li>
 <li><strong><a href="../../techref/architecture/">Architecture</a></strong> - Learn about relay patterns</li>
-<li><strong><a href="../../quickstart/">Quick Start Guide</a></strong> - Initial setup instructions</li>
+<li><strong><a href="../../quickstart/">Quick Start</a></strong> - Initial setup instructions</li>
 </ul>
 </article>
 </div>
@@ -670,7 +877,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

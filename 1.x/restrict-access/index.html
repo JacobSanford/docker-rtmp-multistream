@@ -5,14 +5,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Who the relay protects against, what it protects, and what it leaves open" name="description"/>
+<meta content="Limit which machines can send a stream to the relay and which can watch it" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
-<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/security/" rel="canonical"/>
-<link href="../restrict-access/" rel="prev"/>
-<link href="../services/overview/" rel="next"/>
+<link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/restrict-access/" rel="canonical"/>
+<link href="../configuration/" rel="prev"/>
+<link href="../security/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
-<title>Security - docker-rtmp-multistream</title>
+<title>Restrict Who Can Publish and Watch - docker-rtmp-multistream</title>
 <link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#security">
+<a class="md-skip" href="#restrict-who-can-publish-and-watch">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Security
+              Restrict Who Can Publish and Watch
             
           </span>
 </div>
@@ -207,25 +207,13 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../restrict-access/">
-<span class="md-ellipsis">
-    
-  
-    Restrict Access
-  
-
-    
-  </span>
-</a>
-</li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
     
   
-    Security
+    Restrict Access
   
 
     
@@ -236,7 +224,7 @@
 <span class="md-ellipsis">
     
   
-    Security
+    Restrict Access
   
 
     
@@ -249,55 +237,37 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reporting-security-issues">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
       
-        Reporting Security Issues
+        Before You Begin
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#threat-model">
+<a class="md-nav__link" href="#limit-who-can-publish">
 <span class="md-ellipsis">
       
-        Threat Model
+        Limit Who Can Publish
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#what-is-protected">
+<a class="md-nav__link" href="#limit-who-can-watch">
 <span class="md-ellipsis">
       
-        What Is Protected
+        Limit Who Can Watch
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#what-is-not-protected">
+<a class="md-nav__link" href="#confirm">
 <span class="md-ellipsis">
       
-        What Is Not Protected
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#where-stream-keys-live">
-<span class="md-ellipsis">
-      
-        Where Stream Keys Live
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#running-the-container">
-<span class="md-ellipsis">
-      
-        Running the Container
+        Confirm
       
     </span>
 </a>
@@ -313,6 +283,18 @@
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../security/">
+<span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+</a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
@@ -779,55 +761,37 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#reporting-security-issues">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
       
-        Reporting Security Issues
+        Before You Begin
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#threat-model">
+<a class="md-nav__link" href="#limit-who-can-publish">
 <span class="md-ellipsis">
       
-        Threat Model
+        Limit Who Can Publish
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#what-is-protected">
+<a class="md-nav__link" href="#limit-who-can-watch">
 <span class="md-ellipsis">
       
-        What Is Protected
+        Limit Who Can Watch
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#what-is-not-protected">
+<a class="md-nav__link" href="#confirm">
 <span class="md-ellipsis">
       
-        What Is Not Protected
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#where-stream-keys-live">
-<span class="md-ellipsis">
-      
-        Where Stream Keys Live
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#running-the-container">
-<span class="md-ellipsis">
-      
-        Running the Container
+        Confirm
       
     </span>
 </a>
@@ -848,51 +812,80 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="security"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.</span> Security</h1>
-<p>This page explains what the relay protects, against whom, and what it leaves to you. To lock down a running relay, see <a href="../restrict-access/">Restrict Who Can Publish and Watch</a>.</p>
-<h2 id="reporting-security-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1</span> Reporting Security Issues</h2>
-<p>Email <a href="mailto:jacob.josh.sanford@gmail.com">jacob.josh.sanford@gmail.com</a> rather than opening a public issue. The same policy is in <code>SECURITY.md</code> at the repository root.</p>
-<h2 id="threat-model"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2</span> Threat Model</h2>
-<p>The relay is built to run on a home or studio network, next to the machine that runs your streaming software. It assumes:</p>
+<h1 id="restrict-who-can-publish-and-watch"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Restrict Who Can Publish and Watch</h1>
+<p>The relay controls who can <strong>publish</strong> (send a stream to it) with <code>PUBLISH_IP_RANGE</code>. It does not control who can <strong>watch</strong>: any machine that can reach port 1935 can play the stream. This page limits both.</p>
+<h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Before You Begin</h2>
 <ul>
-<li><strong>You are trusted.</strong> Whoever edits <code>env/relay.env</code> and <code>docker-compose.yml</code>, or can run <code>docker</code> on the host, controls the relay and can read its stream keys.</li>
-<li><strong>Other machines on the network are not.</strong> They should not be able to send a stream through the relay to your Twitch or YouTube channel.</li>
-<li><strong>Settings can be mistyped.</strong> A bad value should stop the relay at startup rather than produce a broken or unsafe nginx configuration.</li>
+<li>The relay is set up as in <a href="../quickstart/">Quick Start</a>, and runs with <code>docker compose</code>.</li>
+<li>You know the IP address of the machine that runs your streaming software, and the relay host's address on the network your streaming software uses.</li>
+<li>For the confirm steps: <code>ffprobe</code> (part of FFmpeg) on a second machine.</li>
 </ul>
-<p>It does not try to hide your stream from viewers on the network, or to protect stream keys from anyone with access to the host.</p>
-<h2 id="what-is-protected"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3</span> What Is Protected</h2>
+<h2 id="limit-who-can-publish"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Limit Who Can Publish</h2>
+<ol>
+<li>
+<p>In <code>env/relay.env</code>, set <code>PUBLISH_IP_RANGE</code> to the networks or addresses allowed to publish, separated by commas. Every entry needs a prefix: use <code>/32</code> for a single machine. Keep <code>172.16.0.0/12</code> if your streaming software runs on the relay host itself, because its connection arrives from the Docker network. For a streaming PC at <code>192.168.1.50</code> and nothing else:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nv">PUBLISH_IP_RANGE</span><span class="o">=</span><span class="m">172</span>.16.0.0/12,192.168.1.50/32
+</span></code></pre></div>
+<p>Drop <code>172.16.0.0/12</code> if nothing streams from the relay host.</p>
+</li>
+<li>
+<p>Recreate the container:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>Confirm the container started:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</span></code></pre></div>
+<p>If the relay is not running, check <code>docker compose logs relay</code> for an <code>ERROR: PUBLISH_IP_RANGE</code> line and fix the value.</p>
+</li>
+</ol>
+<p><code>127.0.0.1</code> can always publish, whatever this variable says. For more examples and the "access forbidden by rule" error, see <a href="../troubleshooting/ip_authentication/">IP Authentication</a>.</p>
+<h2 id="limit-who-can-watch"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3</span> Limit Who Can Watch</h2>
+<p><code>docker-compose.yml</code> publishes port 1935 on every interface of the relay host. Bind it to one address instead, so only machines that can reach that address can connect, to publish or to watch.</p>
+<ol>
+<li>
+<p>In <code>docker-compose.yml</code>, replace <code>"1935:1935"</code> with the relay host's address on your streaming network. For a relay host at <code>192.168.1.20</code>:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"192.168.1.20:1935:1935"</span>
+</span></code></pre></div>
+<p>To allow only software on the relay host itself, use <code>"127.0.0.1:1935:1935"</code>.</p>
+</li>
+<li>
+<p>Recreate the container:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>In your streaming software, set the server to the address you bound, for example <code>rtmp://192.168.1.20:1935/relay</code>. A server of <code>localhost</code> or <code>127.0.0.1</code> stops working unless you bound <code>127.0.0.1</code>.</p>
+</li>
+</ol>
+<p><code>docker-compose.yml</code> is tracked by git, like <code>env/relay.env</code>. If a later <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: docker-compose.yml</code>, save your copy, run <code>git checkout docker-compose.yml</code>, pull again, then put your <code>ports:</code> line back.</p>
+<div class="admonition warning">
+<p class="admonition-title">A host firewall may not block Docker ports</p>
+<p>Docker writes its own iptables rules for published ports, so host firewall tools such as <code>ufw</code> may not block them. Bind the port as above, or block it at a firewall in front of the host.</p>
+</div>
+<h2 id="confirm"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> Confirm</h2>
+<p>Start streaming, then run these from a machine that should <strong>not</strong> have access. Replace <code>&lt;RELAY_HOST&gt;</code> with any address of the relay host that this machine can reach, and <code>&lt;STREAM_NAME&gt;</code> with the stream name in your streaming software.</p>
+<ol>
+<li>
+<p>Try to watch:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>ffprobe<span class="w"> </span>-v<span class="w"> </span>error<span class="w"> </span>-show_entries<span class="w"> </span><span class="nv">stream</span><span class="o">=</span>codec_name<span class="w"> </span>-of<span class="w"> </span>csv<span class="w"> </span>rtmp://&lt;RELAY_HOST&gt;:1935/relay/&lt;STREAM_NAME&gt;
+</span></code></pre></div>
+<p>With the port bound, this fails with <code>Connection refused</code>. If it prints <code>stream,h264</code>, the machine can watch: check that the <code>ports:</code> line took effect with <code>docker compose ps</code>, which shows the bound address.</p>
+</li>
+<li>
+<p>Try to publish:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>ffmpeg<span class="w"> </span>-re<span class="w"> </span>-f<span class="w"> </span>lavfi<span class="w"> </span>-i<span class="w"> </span>testsrc<span class="w"> </span>-t<span class="w"> </span><span class="m">5</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-f<span class="w"> </span>flv<span class="w"> </span>rtmp://&lt;RELAY_HOST&gt;:1935/relay/test
+</span></code></pre></div>
+<p>This fails with <code>Connection refused</code> if the port is bound, or <code>Broken pipe</code> if the machine can connect but is outside <code>PUBLISH_IP_RANGE</code>. The relay log shows <code>access forbidden by rule</code> for the second case.</p>
+</li>
+</ol>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5</span> See Also</h2>
 <ul>
-<li><strong>Publishing.</strong> Only addresses in <code>PUBLISH_IP_RANGE</code>, plus <code>127.0.0.1</code>, can send a stream to the relay. Others are refused with <code>access forbidden by rule</code> in the log. The default, <code>172.16.0.0/12,192.168.0.0/16</code>, admits the Docker networks and typical home networks.</li>
-<li><strong>Configuration.</strong> Every variable you set is checked against a whitelist or pattern before it is written into the nginx configuration, so a value cannot inject a shell command or an nginx directive. If a value fails, the container stops before nginx starts and the log names the variable. For each check, see the <a href="../developer/validation/">Input Validation Reference</a>.</li>
-</ul>
-<h2 id="what-is-not-protected"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4</span> What Is Not Protected</h2>
-<ul>
-<li><strong>Playback is open.</strong> The relay has publish rules only, and no play rules. Anyone who can reach port 1935 can play <code>rtmp://&lt;RELAY_HOST&gt;/relay/&lt;STREAM_NAME&gt;</code>, and the transcoded Twitch stream at <code>/twitch/&lt;STREAM_NAME&gt;</code>. This was checked against a running container: with <code>PUBLISH_IP_RANGE=10.99.0.0/24</code>, a host outside that range was refused as a publisher but could play <code>relay/&lt;STREAM_NAME&gt;</code>.</li>
-<li><strong>The port is published on every host interface.</strong> <code>docker-compose.yml</code> maps <code>1935:1935</code>. Docker writes its own iptables rules for published ports, so host firewall tools such as <code>ufw</code> may not block them. To close both gaps, see <a href="../restrict-access/#limit-who-can-watch">Limit Who Can Watch</a>.</li>
-<li><strong><code>127.0.0.1</code> can always publish</strong>, whatever <code>PUBLISH_IP_RANGE</code> is set to.</li>
-<li><strong>The <code>twitch</code> application accepts publishes directly.</strong> Any address in <code>PUBLISH_IP_RANGE</code> can publish to <code>/twitch/&lt;STREAM_NAME&gt;</code> and send a stream to Twitch without going through the transcoder.</li>
-</ul>
-<h2 id="where-stream-keys-live"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5</span> Where Stream Keys Live</h2>
-<ul>
-<li><strong><code>env/relay.env</code></strong>, which is tracked by git, and which <code>.gitignore</code> does not exclude. After adding keys, run <code>git update-index --skip-worktree env/relay.env</code> so a later <code>git commit -a</code> cannot publish them. See <a href="../configuration/">Change Relay Settings</a>.</li>
-<li><strong>The container environment.</strong> Anyone who can run <code>docker inspect</code> on the container can read them. The relay has no support for Docker secrets or <code>*_FILE</code> variables.</li>
-<li><strong>The generated nginx config</strong> inside the container, in plain text.</li>
-<li><strong>The container log</strong>, when <code>NGINX_ERROR_LOG_LEVEL</code> is <code>info</code> or more verbose: nginx logs the full push URL, including the key, when it starts relaying. Return to <code>error</code> (the default) after troubleshooting, and remove keys before sharing logs.</li>
-</ul>
-<p>If a key may have leaked, reset it in the service's dashboard.</p>
-<h2 id="running-the-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.6</span> Running the Container</h2>
-<ul>
-<li><strong>Archive path.</strong> The path must be writable by the nginx user. If it is not, the container stops at startup with <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code> Archive writes every stream published to <code>relay</code> at its source bitrate, so a 6000 kbps stream uses about 2.7 GB per hour: watch disk space.</li>
-<li><strong>Read-only filesystem.</strong> A read-only root filesystem breaks startup: the startup scripts rewrite files under <code>NGINX_CONFD_DIR</code> (<code>/etc/nginx/http.d</code>) in place with <code>sed -i</code> and <code>mv</code>.</li>
-<li><strong>Resource limits.</strong> Twitch non-partner mode re-encodes for as long as you stream. Setting a CPU limit on the container keeps it from starving the host. See <a href="../performance/hardware/">CPU Considerations</a>.</li>
-<li><strong>Updates.</strong> To pick up relay and base image fixes, run <code>git pull</code>, then rebuild with <code>docker compose build --pull</code> and restart with <code>docker compose up -d</code>.</li>
-</ul>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.7</span> See Also</h2>
-<ul>
-<li><a href="../restrict-access/">Restrict Who Can Publish and Watch</a> - Lock down publishing and playback</li>
-<li><a href="../developer/validation/">Input Validation Reference</a> - Every validation function and the variables it checks</li>
+<li><a href="../security/">Security</a> - What the relay protects against, and what it does not</li>
 <li><a href="../troubleshooting/ip_authentication/">IP Authentication</a> - Publish refused with "access forbidden by rule"</li>
-<li><a href="../techref/architecture/">Architecture</a> - How configuration is processed</li>
+<li><a href="../techref/environment/#system-variables"><code>PUBLISH_IP_RANGE</code></a> - Default and syntax</li>
 </ul>
 </article>
 </div>

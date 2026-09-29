@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Configure local stream archiving to disk" name="description"/>
+<meta content="Record every incoming stream to a host directory" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/archive/" rel="canonical"/>
 <link href="../youtube/" rel="prev"/>
 <link href="../../performance/hardware/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Archive Service - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Archive Streams to Disk - docker-rtmp-multistream</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#archive">
+<a class="md-skip" href="#archive-streams-to-disk">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Archive Service
+              Archive Streams to Disk
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,30 +198,70 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../restrict-access/">
+<span class="md-ellipsis">
+    
+  
+    Restrict Access
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/">
+<span class="md-ellipsis">
+    
+  
+    Security
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
+<nav aria-expanded="true" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Streaming Services
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../overview/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -209,7 +269,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -217,7 +281,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -226,14 +294,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -246,124 +322,50 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#enable-archive">
 <span class="md-ellipsis">
-      Configuration
+      
+        Enable Archive
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#persistent-storage-setup">
+<a class="md-nav__link" href="#settings">
 <span class="md-ellipsis">
-      Persistent Storage Setup
+      
+        Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#file-naming">
 <span class="md-ellipsis">
-      File Naming
+      
+        File Naming
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
 </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
-<span class="md-ellipsis">
-    Technical Reference
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_6">
-<span class="md-nav__icon md-icon"></span>
-            Technical Reference
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/architecture/">
-<span class="md-ellipsis">
-    Architecture
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/service-patterns/">
-<span class="md-ellipsis">
-    Service Patterns
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/environment/">
-<span class="md-ellipsis">
-    Environment Variables
-    
-  </span>
-</a>
 </li>
 </ul>
 </nav>
@@ -372,7 +374,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
-    Troubleshooting
+    
+  
+    Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -380,13 +386,145 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/architecture/">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/service-patterns/">
+<span class="md-ellipsis">
+    
+  
+    Service Patterns
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/environment/">
+<span class="md-ellipsis">
+    
+  
+    Environment Variables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -394,7 +532,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -402,30 +544,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -433,7 +591,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -441,7 +603,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -459,7 +625,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -467,14 +637,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -482,13 +660,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -496,7 +682,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -504,7 +694,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -513,9 +707,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../security/">
+<a class="md-nav__link" href="../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -523,7 +721,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -534,7 +736,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -557,35 +763,45 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
+<a class="md-nav__link" href="#enable-archive">
 <span class="md-ellipsis">
-      Configuration
+      
+        Enable Archive
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#persistent-storage-setup">
+<a class="md-nav__link" href="#settings">
 <span class="md-ellipsis">
-      Persistent Storage Setup
+      
+        Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#file-naming">
 <span class="md-ellipsis">
-      File Naming
+      
+        File Naming
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -596,60 +812,56 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="archive"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Archive</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Overview</h2>
-<p>The relay can archive streams to local disk in real-time. To enable this feature, set the <code>ARCHIVE_PATH</code> environment variable in the <code>env/relay.env</code> file to specify a directory path inside the Docker container (e.g., <code>/stream_archive</code>).</p>
-<div class="admonition warning">
-<p class="admonition-title">Further Setup Required</p>
-<p>See <a href="#persistent-storage-setup">Persistent Storage Setup</a> for details on how to configure host directory mapping.</p>
-</div>
-<h2 id="configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Configuration</h2>
-<p>The Archive service can be configured by setting the following environment variables:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ARCHIVE_PATH</code></td>
-<td>Specifies the path within the container where the archive videos will be stored. Enabling this feature activates stream archiving.</td>
-<td>``</td>
-</tr>
-<tr>
-<td><code>ARCHIVE_SUFFIX</code></td>
-<td>Defines the file extension or format of the videos saved in the archive.</td>
-<td><code>flv</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="persistent-storage-setup"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Persistent Storage Setup</h2>
-<p>By default, archived videos are stored inside the Docker container. Since Docker containers are ephemeral, these files will be deleted when the container is removed.</p>
-<p>To persist archives on your host machine, map a host directory as a Docker volume. You can do this in your <code>docker-compose.yml</code>:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="nt">relay</span><span class="p">:</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">    </span><span class="nt">build</span><span class="p">:</span>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"1935:1935"</span>
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nt">env_file</span><span class="p">:</span>
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./env/relay.env</span>
-</span><span id="__span-0-9"><a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-</span><span id="__span-0-10"><a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./stream_archive:/archive</span><span class="w">  </span><span class="c1"># Format: Host directory : Container path (ARCHIVE_PATH)</span>
+<h1 id="archive-streams-to-disk"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Archive Streams to Disk</h1>
+<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Overview</h2>
+<p>The relay can archive streams to disk in real time. Archives are written inside the container to <code>ARCHIVE_PATH</code>; mount a host directory there so the files survive container removal.</p>
+<h2 id="enable-archive"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Enable Archive</h2>
+<ol>
+<li>
+<p>Create a host directory and give it to the container's nginx user (UID 100, GID 101):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>stream_archive
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>sudo<span class="w"> </span>chown<span class="w"> </span><span class="m">100</span>:101<span class="w"> </span>stream_archive
 </span></code></pre></div>
-<p>Also, ensure you set permissions on the host directory so that the container can write to it:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>stream_archive
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>chown<span class="w"> </span><span class="m">100</span>:101<span class="w"> </span>stream_archive
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>chmod<span class="w"> </span>o+w<span class="w"> </span>stream_archive
+</li>
+<li>
+<p>In <code>docker-compose.yml</code>, add a <code>volumes:</code> entry to the existing <code>relay</code> service:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span><span class="nt">relay</span><span class="p">:</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./stream_archive:/archive</span>
 </span></code></pre></div>
-<h2 id="file-naming"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> File Naming</h2>
-<p>Archived files are automatically named using a timestamp-based pattern. The file extension is determined by the <code>ARCHIVE_SUFFIX</code> setting (default: <code>flv</code>).</p>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5</span> See Also</h2>
+</li>
+<li>
+<p>In <code>env/relay.env</code>, set <code>ARCHIVE_PATH</code> to the container side of that mount:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span>/archive
+</span></code></pre></div>
+</li>
+<li>
+<p>Recreate the container:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">"archive|error"</span>
+</span></code></pre></div>
+<p>Expected output: <code>Archive configuration complete, and service enabled.</code></p>
+<p>If you see <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code>, the container has stopped: the relay does not run at all, not only archiving. Check that <code>ARCHIVE_PATH</code> matches the container side of the mount in step 2, and that step 1's <code>chown</code> succeeded.</p>
+</li>
+</ol>
+<h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Settings</h2>
+<p><code>ARCHIVE_PATH</code> turns archiving on. <code>ARCHIVE_SUFFIX</code> sets the filename extension only; files are always FLV. For both variables' defaults and valid values, see <a href="../../techref/environment/#archive-variables">Archive Variables</a>.</p>
+<h2 id="file-naming"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.4</span> File Naming</h2>
+<p>Each stream is written to a new file named:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>&lt;stream-name&gt;-&lt;unix-time&gt;_&lt;DDMMYYYY&gt;_&lt;HHMMSS&gt;.&lt;ARCHIVE_SUFFIX&gt;
+</span></code></pre></div>
+<p>For example, a stream published as <code>rtmp://&lt;relay&gt;/relay/live</code> on 25 September 2026 at 14:53:40 UTC produces:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>live-1790348020_25092026_145340.flv
+</span></code></pre></div>
+<p>The date and time are in UTC, not your local time zone. Because the date is day-first, sorting by filename does not sort by date across months; sort by the Unix time after the stream name instead, or by modification time (<code>ls -t</code>).</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.5</span> See Also</h2>
 <ul>
-<li><a href="../../configuration/">Configuration Overview</a> - Docker volumes and environment setup</li>
+<li><a href="../../configuration/">Change Relay Settings</a> - Edit, apply and confirm a setting</li>
 <li><a href="../../requirements/">Requirements</a> - System prerequisites</li>
 <li><a href="../../troubleshooting/">Troubleshooting</a> - Common archive issues</li>
 </ul>
@@ -680,7 +892,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

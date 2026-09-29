@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Adding automated tests for new streaming services" name="description"/>
+<meta content="Add unit, integration and validation tests for a new streaming service" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/testing/" rel="canonical"/>
 <link href="../configuration/" rel="prev"/>
-<link href="../../../security/" rel="next"/>
+<link href="../../validation/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Service Testing - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Test a New Service - docker-rtmp-multistream</title>
+<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#service-testing">
+<a class="md-skip" href="#test-a-new-service">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Service Testing
+              Test a New Service
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,108 +198,48 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Streaming Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
-<span class="md-nav__icon md-icon"></span>
-            Streaming Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/overview/">
-<span class="md-ellipsis">
-    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/twitch/">
+<a class="md-nav__link" href="../../../restrict-access/">
 <span class="md-ellipsis">
-    Twitch
+    
+  
+    Restrict Access
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/youtube/">
+<a class="md-nav__link" href="../../../security/">
 <span class="md-ellipsis">
-    YouTube
+    
+  
+    Security
+  
+
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
-    Technical Reference
+    
+  
+    Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -287,29 +247,57 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/architecture/">
+<a class="md-nav__link" href="../../../services/overview/">
 <span class="md-ellipsis">
-    Architecture
+    
+  
+    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/service-patterns/">
+<a class="md-nav__link" href="../../../services/twitch/">
 <span class="md-ellipsis">
-    Service Patterns
+    
+  
+    Twitch
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/environment/">
+<a class="md-nav__link" href="../../../services/youtube/">
 <span class="md-ellipsis">
-    Environment Variables
+    
+  
+    YouTube
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/archive/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
     
   </span>
 </a>
@@ -321,7 +309,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
-    Troubleshooting
+    
+  
+    Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -329,13 +321,145 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/architecture/">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/service-patterns/">
+<span class="md-ellipsis">
+    
+  
+    Service Patterns
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/environment/">
+<span class="md-ellipsis">
+    
+  
+    Environment Variables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -343,7 +467,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -351,30 +479,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -382,7 +526,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -390,7 +538,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -408,7 +560,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -416,14 +572,22 @@
 <nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -431,13 +595,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -445,7 +617,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -454,14 +630,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -472,226 +656,56 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#why-testing-matters">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
-      Why Testing Matters
+      
+        Before You Begin
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#test-categories">
+<a class="md-nav__link" href="#add-unit-tests">
 <span class="md-ellipsis">
-      Test Categories
-    </span>
-</a>
-<nav aria-label="Test Categories" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#unit-tests-tests02_unit_testssh">
-<span class="md-ellipsis">
-      Unit Tests (tests/02_unit_tests.sh)
-    </span>
-</a>
-<nav aria-label="Unit Tests (tests/02_unit_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#1-test-service-enablement-with-key">
-<span class="md-ellipsis">
-      1. Test Service Enablement with Key
+      
+        Add Unit Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-test-service-skips-without-key">
+<a class="md-nav__link" href="#add-integration-tests">
 <span class="md-ellipsis">
-      2. Test Service Skips Without Key
+      
+        Add Integration Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-test-config-variable-replacement">
+<a class="md-nav__link" href="#test-a-new-validator">
 <span class="md-ellipsis">
-      3. Test Config Variable Replacement
+      
+        Test a New Validator
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-test-malicious-input-rejection">
+<a class="md-nav__link" href="#run-the-tests">
 <span class="md-ellipsis">
-      4. Test Malicious Input Rejection
+      
+        Run the Tests
+      
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-test-transformer-configuration-if-applicable">
-<span class="md-ellipsis">
-      5. Test Transformer Configuration (If Applicable)
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#register-your-unit-tests">
-<span class="md-ellipsis">
-      Register Your Unit Tests
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#integration-tests-tests03_integration_testssh">
-<span class="md-ellipsis">
-      Integration Tests (tests/03_integration_tests.sh)
-    </span>
-</a>
-<nav aria-label="Integration Tests (tests/03_integration_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-container-startup">
-<span class="md-ellipsis">
-      Test Container Startup
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#register-your-integration-test">
-<span class="md-ellipsis">
-      Register Your Integration Test
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#validation-tests-tests00_validation_testssh">
-<span class="md-ellipsis">
-      Validation Tests (tests/00_validation_tests.sh)
-    </span>
-</a>
-<nav aria-label="Validation Tests (tests/00_validation_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-structure">
-<span class="md-ellipsis">
-      Test Structure
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-test-structure">
-<span class="md-ellipsis">
-      Example Test Structure
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#running-your-tests">
-<span class="md-ellipsis">
-      Running Your Tests
-    </span>
-</a>
-<nav aria-label="Running Your Tests" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#run-all-tests">
-<span class="md-ellipsis">
-      Run All Tests
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#run-specific-test-suites">
-<span class="md-ellipsis">
-      Run Specific Test Suites
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#verify-success">
-<span class="md-ellipsis">
-      Verify Success
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#manual-testing">
-<span class="md-ellipsis">
-      Manual Testing
-    </span>
-</a>
-<nav aria-label="Manual Testing" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#verify-logs">
-<span class="md-ellipsis">
-      Verify Logs
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#testing-checklist">
-<span class="md-ellipsis">
-      Testing Checklist
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-testing-pitfalls">
-<span class="md-ellipsis">
-      Common Testing Pitfalls
-    </span>
-</a>
-<nav aria-label="Common Testing Pitfalls" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-1-not-testing-security">
-<span class="md-ellipsis">
-      Pitfall 1: Not Testing Security
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-2-not-cleaning-up-containers">
-<span class="md-ellipsis">
-      Pitfall 2: Not Cleaning Up Containers
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-3-hardcoding-test-values">
-<span class="md-ellipsis">
-      Pitfall 3: Hardcoding Test Values
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-4-not-testing-both-paths">
-<span class="md-ellipsis">
-      Pitfall 4: Not Testing Both Paths
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -702,9 +716,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../security/">
+<a class="md-nav__link" href="../../validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -712,7 +730,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -723,7 +745,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -744,226 +770,56 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#why-testing-matters">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
-      Why Testing Matters
+      
+        Before You Begin
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#test-categories">
+<a class="md-nav__link" href="#add-unit-tests">
 <span class="md-ellipsis">
-      Test Categories
-    </span>
-</a>
-<nav aria-label="Test Categories" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#unit-tests-tests02_unit_testssh">
-<span class="md-ellipsis">
-      Unit Tests (tests/02_unit_tests.sh)
-    </span>
-</a>
-<nav aria-label="Unit Tests (tests/02_unit_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#1-test-service-enablement-with-key">
-<span class="md-ellipsis">
-      1. Test Service Enablement with Key
+      
+        Add Unit Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-test-service-skips-without-key">
+<a class="md-nav__link" href="#add-integration-tests">
 <span class="md-ellipsis">
-      2. Test Service Skips Without Key
+      
+        Add Integration Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-test-config-variable-replacement">
+<a class="md-nav__link" href="#test-a-new-validator">
 <span class="md-ellipsis">
-      3. Test Config Variable Replacement
+      
+        Test a New Validator
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-test-malicious-input-rejection">
+<a class="md-nav__link" href="#run-the-tests">
 <span class="md-ellipsis">
-      4. Test Malicious Input Rejection
+      
+        Run the Tests
+      
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#5-test-transformer-configuration-if-applicable">
-<span class="md-ellipsis">
-      5. Test Transformer Configuration (If Applicable)
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#register-your-unit-tests">
-<span class="md-ellipsis">
-      Register Your Unit Tests
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#integration-tests-tests03_integration_testssh">
-<span class="md-ellipsis">
-      Integration Tests (tests/03_integration_tests.sh)
-    </span>
-</a>
-<nav aria-label="Integration Tests (tests/03_integration_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-container-startup">
-<span class="md-ellipsis">
-      Test Container Startup
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#register-your-integration-test">
-<span class="md-ellipsis">
-      Register Your Integration Test
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#validation-tests-tests00_validation_testssh">
-<span class="md-ellipsis">
-      Validation Tests (tests/00_validation_tests.sh)
-    </span>
-</a>
-<nav aria-label="Validation Tests (tests/00_validation_tests.sh)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#test-structure">
-<span class="md-ellipsis">
-      Test Structure
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#example-test-structure">
-<span class="md-ellipsis">
-      Example Test Structure
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#running-your-tests">
-<span class="md-ellipsis">
-      Running Your Tests
-    </span>
-</a>
-<nav aria-label="Running Your Tests" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#run-all-tests">
-<span class="md-ellipsis">
-      Run All Tests
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#run-specific-test-suites">
-<span class="md-ellipsis">
-      Run Specific Test Suites
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#verify-success">
-<span class="md-ellipsis">
-      Verify Success
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#manual-testing">
-<span class="md-ellipsis">
-      Manual Testing
-    </span>
-</a>
-<nav aria-label="Manual Testing" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#verify-logs">
-<span class="md-ellipsis">
-      Verify Logs
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#testing-checklist">
-<span class="md-ellipsis">
-      Testing Checklist
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-testing-pitfalls">
-<span class="md-ellipsis">
-      Common Testing Pitfalls
-    </span>
-</a>
-<nav aria-label="Common Testing Pitfalls" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-1-not-testing-security">
-<span class="md-ellipsis">
-      Pitfall 1: Not Testing Security
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-2-not-cleaning-up-containers">
-<span class="md-ellipsis">
-      Pitfall 2: Not Cleaning Up Containers
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-3-hardcoding-test-values">
-<span class="md-ellipsis">
-      Pitfall 3: Hardcoding Test Values
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#pitfall-4-not-testing-both-paths">
-<span class="md-ellipsis">
-      Pitfall 4: Not Testing Both Paths
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -974,236 +830,129 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="service-testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.</span> Service Testing</h1>
-<p>This guide explains how to add automated tests for your new streaming service.</p>
-<div class="admonition warning">
-<p class="admonition-title">Testing is Required</p>
-<p>Adding tests is <strong>mandatory</strong> when implementing a new streaming service. Tests ensure your service works correctly and prevent regressions.</p>
-</div>
-<h2 id="why-testing-matters"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.1</span> Why Testing Matters</h2>
-<p>The docker-rtmp-multistream project has tests covering:
-- Input security
-- Smoke tests for build verification
-- Unit tests for service configuration
-- Integration tests for container startup
-- Functional tests for end-to-end streaming</p>
-<p>Your new streaming service must maintain this standard of quality and security.</p>
-<h2 id="test-categories"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2</span> Test Categories</h2>
-<p>Add tests to the following test suites:</p>
-<h3 id="unit-tests-tests02_unit_testssh"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1</span> Unit Tests (<code>tests/02_unit_tests.sh</code>)</h3>
-<p>Unit tests verify that your service configuration scripts work correctly in isolation.</p>
-<h4 id="1-test-service-enablement-with-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.1</span> 1. Test Service Enablement with Key</h4>
-<p>Verifies that the service is properly enabled when the required key is provided:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>test_<span class="o">{</span>service<span class="o">}</span>_service_enables_with_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_{service}.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="s2">    grep -v '^#' /etc/nginx/http.d/app.conf | grep -q 'apps/{service}.conf'</span>
-</span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="s2">  "</span>
-</span><span id="__span-0-7"><a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-0-8"><a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="o">}</span>
+<h1 id="test-a-new-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.</span> Test a New Service</h1>
+<p>This guide adds tests for a new service, continuing the <code>example</code> service from <a href="../overview/">Add a Streaming Service</a>. Replace <code>example</code>, <code>Example</code> and <code>EXAMPLE_</code> with your service's name.</p>
+<h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.1</span> Before You Begin</h2>
+<ul>
+<li>
+<p>The tests run against the <code>rtmp-multistream:test</code> image. <code>./tests/test.sh</code> builds it from your working tree. To run one suite on its own, build it first:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>.
 </span></code></pre></div>
-<h4 id="2-test-service-skips-without-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.2</span> 2. Test Service Skips Without Key</h4>
-<p>Verifies that the service gracefully skips configuration when the key is missing:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>test_<span class="o">{</span>service<span class="o">}</span>_service_skips_without_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="s2">    /scripts/pre-init.d/90_configure_{service}.sh 2&gt;&amp;1 | grep -q 'SERVICE_KEY is not set'</span>
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="s2">  "</span>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="o">}</span>
+</li>
+<li>
+<p>Use placeholder keys such as <code>test_key</code>. Never put a real stream key in a test.</p>
+</li>
+</ul>
+<h2 id="add-unit-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.2</span> Add Unit Tests</h2>
+<p>Add these functions to <code>tests/02_unit_tests.sh</code>, before the <code>run_test</code> lines.</p>
+<p>The enable test filters out commented lines with <code>grep -Ev '^[[:space:]]*#'</code>. The include lines in <code>app.conf</code> are indented, so <code>grep -v '^#'</code> would let a commented include through and the test would pass for a service that is never enabled.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>test_example_service_enables_with_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_example.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="s2">    grep -Ev '^[[:space:]]*#' /etc/nginx/http.d/app.conf | grep -q 'apps/example.conf'</span>
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="s2">  "</span>
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="o">}</span>
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>test_example_service_skips_without_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="s2">    /scripts/pre-init.d/90_configure_example.sh 2&gt;&amp;1 | grep -q 'EXAMPLE_KEY is not set'</span>
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="s2">  "</span>
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="o">}</span>
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>test_example_config_variables_replaced<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>my_stream_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+</span><span id="__span-1-19"><a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-1-20"><a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="s2">    /scripts/pre-init.d/90_configure_example.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-1-21"><a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="s2">    grep -q 'my_stream_key' /etc/nginx/http.d/apps/example.conf</span>
+</span><span id="__span-1-22"><a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="s2">  "</span>
+</span><span id="__span-1-23"><a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
+</span><span id="__span-1-24"><a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="o">}</span>
+</span><span id="__span-1-25"><a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a>
+</span><span id="__span-1-26"><a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a>test_malicious_example_key_rejected<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-1-27"><a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span><span class="s1">'test;rm -rf /'</span><span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+</span><span id="__span-1-28"><a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-1-29"><a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="s2">    /scripts/pre-init.d/90_configure_example.sh 2&gt;&amp;1 | grep -q 'ERROR'</span>
+</span><span id="__span-1-30"><a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="s2">  "</span>
+</span><span id="__span-1-31"><a href="#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
+</span><span id="__span-1-32"><a href="#__codelineno-1-32" id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="o">}</span>
 </span></code></pre></div>
-<h4 id="3-test-config-variable-replacement"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.3</span> 3. Test Config Variable Replacement</h4>
-<p>Verifies that environment variables are correctly substituted in config files:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>test_<span class="o">{</span>service<span class="o">}</span>_config_variables_replaced<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_KEY</span><span class="o">=</span>my_stream_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<p>For a Transformer, also check each computed value in the transformer file. With <code>EXAMPLE_KBITS_PER_VIDEO_FRAME</code> defaulting to <code>50</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>test_example_transformer_bitrate_computed<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span><span class="nb">test</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_FPS</span><span class="o">=</span><span class="m">60</span><span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
 </span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_{service}.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="s2">    grep -q 'my_stream_key' /etc/nginx/http.d/apps/{service}.conf</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_example.sh &gt;/dev/null 2&gt;&amp;1</span>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="s2">    grep -q -- '-b:v 3000k' /etc/nginx/http.d/transformers/example.conf</span>
 </span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s2">  "</span>
 </span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
 </span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="o">}</span>
 </span></code></pre></div>
-<h4 id="4-test-malicious-input-rejection"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.4</span> 4. Test Malicious Input Rejection</h4>
-<p><strong>CRITICAL FOR SECURITY</strong>: Verifies that malicious inputs are rejected:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>test_malicious_<span class="o">{</span>service<span class="o">}</span>_key_rejected<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_KEY</span><span class="o">=</span><span class="s1">'test;rm -rf /'</span><span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
-</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_{service}.sh 2&gt;&amp;1 | grep -q 'ERROR'</span>
-</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="s2">  "</span>
-</span><span id="__span-3-6"><a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-3-7"><a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="o">}</span>
+<p>Register the tests with the other <code>run_test</code> lines, above the final <code>finish_suite</code> line:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>run_test<span class="w"> </span><span class="s2">"Example service enables with key"</span><span class="w"> </span>test_example_service_enables_with_key
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>run_test<span class="w"> </span><span class="s2">"Example service skips without key"</span><span class="w"> </span>test_example_service_skips_without_key
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>run_test<span class="w"> </span><span class="s2">"Example config variables replaced"</span><span class="w"> </span>test_example_config_variables_replaced
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>run_test<span class="w"> </span><span class="s2">"Malicious Example key rejected"</span><span class="w"> </span>test_malicious_example_key_rejected
 </span></code></pre></div>
-<p>This test ensures your validation prevents command injection attacks.</p>
-<h4 id="5-test-transformer-configuration-if-applicable"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.5</span> 5. Test Transformer Configuration (If Applicable)</h4>
-<p>For services using the transformer pattern, verify FFmpeg configuration:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>test_<span class="o">{</span>service<span class="o">}</span>_transformer_configured<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_KEY</span><span class="o">=</span><span class="nb">test</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_HEIGHT</span><span class="o">=</span><span class="m">1080</span><span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
-</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="s2">    /scripts/pre-init.d/89_configure_app.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="s2">    /scripts/pre-init.d/90_configure_{service}.sh &gt;/dev/null 2&gt;&amp;1</span>
-</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="s2">    grep -q 'scale=-1:1080' /etc/nginx/http.d/transformers/{service}.conf</span>
-</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="s2">  "</span>
-</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="o">}</span>
+<h2 id="add-integration-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.3</span> Add Integration Tests</h2>
+<p>Add these to <code>tests/03_integration_tests.sh</code>. The first starts the container with the service on and checks that nginx accepts the generated config. The second checks that a bad value stops the container.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>test_container_starts_with_example<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>test-rtmp-example<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">3</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>test-rtmp-example
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">result</span><span class="o">=</span><span class="nv">$?</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>test-rtmp-example<span class="w"> </span>nginx<span class="w"> </span>-t<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"syntax is ok"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">result</span><span class="o">=</span><span class="m">1</span>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">  </span>docker<span class="w"> </span>stop<span class="w"> </span>test-rtmp-example<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">  </span>docker<span class="w"> </span>rm<span class="w"> </span>test-rtmp-example<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-4-9"><a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$result</span>
+</span><span id="__span-4-10"><a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="o">}</span>
+</span><span id="__span-4-11"><a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>test_container_stops_on_malicious_example_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-4-13"><a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>test-rtmp-example-bad<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span><span class="s1">'a;b'</span><span class="w"> </span>rtmp-multistream:test<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-4-14"><a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">3</span>
+</span><span id="__span-4-15"><a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span>running
+</span><span id="__span-4-16"><a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">  </span><span class="nv">running</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>inspect<span class="w"> </span>-f<span class="w"> </span><span class="s1">'{{.State.Running}}'</span><span class="w"> </span>test-rtmp-example-bad<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span>
+</span><span id="__span-4-17"><a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">  </span>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>test-rtmp-example-bad<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span><span id="__span-4-18"><a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">  </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$running</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"false"</span><span class="w"> </span><span class="o">]</span>
+</span><span id="__span-4-19"><a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="o">}</span>
 </span></code></pre></div>
-<h4 id="register-your-unit-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1.6</span> Register Your Unit Tests</h4>
-<p>At the bottom of <code>tests/02_unit_tests.sh</code>, add:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>run_test<span class="w"> </span><span class="s2">"{Service} service enables with key"</span><span class="w"> </span>test_<span class="o">{</span>service<span class="o">}</span>_service_enables_with_key
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>run_test<span class="w"> </span><span class="s2">"{Service} service skips without key"</span><span class="w"> </span>test_<span class="o">{</span>service<span class="o">}</span>_service_skips_without_key
-</span><span id="__span-5-3"><a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>run_test<span class="w"> </span><span class="s2">"{Service} config variables replaced"</span><span class="w"> </span>test_<span class="o">{</span>service<span class="o">}</span>_config_variables_replaced
-</span><span id="__span-5-4"><a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>run_test<span class="w"> </span><span class="s2">"Malicious {service} key rejected"</span><span class="w"> </span>test_malicious_<span class="o">{</span>service<span class="o">}</span>_key_rejected
-</span><span id="__span-5-5"><a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1"># Add transformer test if applicable:</span>
-</span><span id="__span-5-6"><a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="c1"># run_test "{Service} transformer configured" test_{service}_transformer_configured</span>
+<p>Register them above the final <code>finish_suite</code> line:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>run_test<span class="w"> </span><span class="s2">"Container starts with Example"</span><span class="w"> </span>test_container_starts_with_example
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>run_test<span class="w"> </span><span class="s2">"Container stops on malicious Example key"</span><span class="w"> </span>test_container_stops_on_malicious_example_key
 </span></code></pre></div>
-<h3 id="integration-tests-tests03_integration_testssh"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.2</span> Integration Tests (<code>tests/03_integration_tests.sh</code>)</h3>
-<p>Integration tests verify that the container starts and runs correctly with your service enabled.</p>
-<h4 id="test-container-startup"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.2.1</span> Test Container Startup</h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>test_container_starts_with_<span class="o">{</span>service<span class="o">}()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>test-rtmp-<span class="o">{</span>service<span class="o">}</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">SERVICE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">3</span>
-</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">  </span>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>test-rtmp-<span class="o">{</span>service<span class="o">}</span>
-</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">result</span><span class="o">=</span><span class="nv">$?</span>
-</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span>docker<span class="w"> </span>stop<span class="w"> </span>test-rtmp-<span class="o">{</span>service<span class="o">}</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span>docker<span class="w"> </span>rm<span class="w"> </span>test-rtmp-<span class="o">{</span>service<span class="o">}</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</span><span id="__span-6-8"><a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$result</span>
-</span><span id="__span-6-9"><a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="o">}</span>
+<h2 id="test-a-new-validator"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.4</span> Test a New Validator</h2>
+<p>If you added a function to <code>build/scripts/validate_input.sh</code>, test it in <code>tests/00_validation_tests.sh</code> with the <code>run_validation_test</code> helper defined at the top of that file. It runs the function inside the container, where <code>validate_input.sh</code> exists, and compares the exit code with the expected one: <code>0</code> for accept, <code>1</code> for reject.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>test_example_host_valid<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">  </span>run_validation_test<span class="w"> </span><span class="s2">"validate_example_host"</span><span class="w"> </span><span class="s2">"live.example.com"</span><span class="w"> </span><span class="s2">"host name"</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-6-3"><a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="o">}</span>
+</span><span id="__span-6-4"><a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>test_example_host_invalid_semicolon<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+</span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span>run_validation_test<span class="w"> </span><span class="s2">"validate_example_host"</span><span class="w"> </span><span class="s2">"live.example.com;rm -rf /"</span><span class="w"> </span><span class="s2">"with semicolon"</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="o">}</span>
 </span></code></pre></div>
-<h4 id="register-your-integration-test"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.2.2</span> Register Your Integration Test</h4>
-<p>At the bottom of <code>tests/03_integration_tests.sh</code>, add:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>run_test<span class="w"> </span><span class="s2">"Container starts with {service}"</span><span class="w"> </span>test_container_starts_with_<span class="o">{</span>service<span class="o">}</span>
+<p>Do not call the validator directly from the test function. The suite runs on the host, where the function does not exist: the call returns 127, and every test that expects a rejection passes without testing anything.</p>
+<p><code>run_validation_test</code> wraps the value in single quotes, so it cannot pass a value that contains <code>'</code>. For that case, pass the value through an environment variable, as <code>test_path_invalid_single_quote</code> does.</p>
+<p>Register the tests in the <code>validate_*</code> block near the end of the file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Testing validate_example_host..."</span>
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>run_test<span class="w"> </span><span class="s2">"  valid: host name"</span><span class="w"> </span>test_example_host_valid
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>run_test<span class="w"> </span><span class="s2">"  invalid: semicolon"</span><span class="w"> </span>test_example_host_invalid_semicolon
 </span></code></pre></div>
-<h3 id="validation-tests-tests00_validation_testssh"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.3</span> Validation Tests (<code>tests/00_validation_tests.sh</code>)</h3>
-<p>If you added new validation functions in <code>validate_input.sh</code> for service-specific variables, add automated tests.</p>
-<h4 id="test-structure"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.3.1</span> Test Structure</h4>
-<p>Each validation function should have tests for:</p>
+<h2 id="run-the-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.5</span> Run the Tests</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>./tests/test.sh
+</span></code></pre></div>
+<p>The run ends with <code>All tests passed!</code> and exits 0. Each new test is listed with a <code>✓</code>. To run one suite on its own, build the image first (see <a href="#before-you-begin">Before You Begin</a>), then:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>bash<span class="w"> </span>tests/02_unit_tests.sh
+</span></code></pre></div>
+<p>A suite run on its own ends with <code>Tests run: &lt;N&gt;, passed: &lt;N&gt;, failed: 0</code>.</p>
+<p>To check that a test can fail, break the thing it tests and run it again. For example, put a <code>;</code> in the key in the variable-replacement test: it should fail.</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.6</span> See Also</h2>
 <ul>
-<li><strong>Valid inputs</strong>: Various acceptable formats</li>
-<li><strong>Invalid inputs</strong>: Injection attempts, wrong formats</li>
-<li><strong>Edge cases</strong>: Empty values, boundaries, special characters</li>
-</ul>
-<h4 id="example-test-structure"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.3.2</span> Example Test Structure</h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Testing validate_{service}_format..."</span>
-</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="c1"># Valid inputs</span>
-</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_valid_standard<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span>validate_<span class="o">{</span>service<span class="o">}</span>_format<span class="w"> </span><span class="s2">"standard-value"</span><span class="w"> </span><span class="s2">"TEST"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="o">}</span>
-</span><span id="__span-8-8"><a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>
-</span><span id="__span-8-9"><a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_valid_special<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-8-10"><a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span>validate_<span class="o">{</span>service<span class="o">}</span>_format<span class="w"> </span><span class="s2">"value_with-chars"</span><span class="w"> </span><span class="s2">"TEST"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-8-11"><a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-8-12"><a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="o">}</span>
-</span><span id="__span-8-13"><a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>
-</span><span id="__span-8-14"><a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="c1"># Invalid inputs</span>
-</span><span id="__span-8-15"><a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_invalid_injection<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-8-16"><a href="#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">  </span>!<span class="w"> </span>validate_<span class="o">{</span>service<span class="o">}</span>_format<span class="w"> </span><span class="s2">"value;rm -rf /"</span><span class="w"> </span><span class="s2">"TEST"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-8-17"><a href="#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-8-18"><a href="#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="o">}</span>
-</span><span id="__span-8-19"><a href="#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a>
-</span><span id="__span-8-20"><a href="#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_invalid_length<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-8-21"><a href="#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">  </span>!<span class="w"> </span>validate_<span class="o">{</span>service<span class="o">}</span>_format<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'a%.0s'</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..501<span class="o">}</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TEST"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-8-22"><a href="#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nv">$?</span>
-</span><span id="__span-8-23"><a href="#__codelineno-8-23" id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="o">}</span>
-</span><span id="__span-8-24"><a href="#__codelineno-8-24" id="__codelineno-8-24" name="__codelineno-8-24"></a>
-</span><span id="__span-8-25"><a href="#__codelineno-8-25" id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="c1"># Register tests</span>
-</span><span id="__span-8-26"><a href="#__codelineno-8-26" id="__codelineno-8-26" name="__codelineno-8-26"></a>run_test<span class="w"> </span><span class="s2">"  valid: standard format"</span><span class="w"> </span>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_valid_standard
-</span><span id="__span-8-27"><a href="#__codelineno-8-27" id="__codelineno-8-27" name="__codelineno-8-27"></a>run_test<span class="w"> </span><span class="s2">"  valid: with special chars"</span><span class="w"> </span>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_valid_special
-</span><span id="__span-8-28"><a href="#__codelineno-8-28" id="__codelineno-8-28" name="__codelineno-8-28"></a>run_test<span class="w"> </span><span class="s2">"  invalid: shell metacharacters"</span><span class="w"> </span>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_invalid_injection
-</span><span id="__span-8-29"><a href="#__codelineno-8-29" id="__codelineno-8-29" name="__codelineno-8-29"></a>run_test<span class="w"> </span><span class="s2">"  invalid: excessive length"</span><span class="w"> </span>test_validate_<span class="o">{</span>service<span class="o">}</span>_format_invalid_length
-</span></code></pre></div>
-<h2 id="running-your-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.3</span> Running Your Tests</h2>
-<h3 id="run-all-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.3.1</span> Run All Tests</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>./tests/test.sh
-</span></code></pre></div>
-<p>This runs all tests across all suites. Your new tests will be included automatically.</p>
-<h3 id="run-specific-test-suites"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.3.2</span> Run Specific Test Suites</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># Unit tests only</span>
-</span><span id="__span-10-2"><a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>bash<span class="w"> </span>tests/02_unit_tests.sh
-</span><span id="__span-10-3"><a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a>
-</span><span id="__span-10-4"><a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="c1"># Integration tests only</span>
-</span><span id="__span-10-5"><a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>bash<span class="w"> </span>tests/03_integration_tests.sh
-</span><span id="__span-10-6"><a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>
-</span><span id="__span-10-7"><a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1"># Validation tests only</span>
-</span><span id="__span-10-8"><a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
-</span></code></pre></div>
-<h3 id="verify-success"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.3.3</span> Verify Success</h3>
-<p>All tests must pass (exit code 0) before your service implementation is complete.</p>
-<p>Expected output:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>=== Unit Tests ===
-</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>✓ {Service} service enables with key
-</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>✓ {Service} service skips without key
-</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>✓ {Service} config variables replaced
-</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>✓ Malicious {service} key rejected
-</span><span id="__span-11-6"><a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a>
-</span><span id="__span-11-7"><a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a>=== Integration Tests ===
-</span><span id="__span-11-8"><a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>✓ Container starts with {service}
-</span><span id="__span-11-9"><a href="#__codelineno-11-9" id="__codelineno-11-9" name="__codelineno-11-9"></a>
-</span><span id="__span-11-10"><a href="#__codelineno-11-10" id="__codelineno-11-10" name="__codelineno-11-10"></a>All tests passed!
-</span></code></pre></div></p>
-<h2 id="manual-testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.4</span> Manual Testing</h2>
-<p>After automated tests pass, perform manual end-to-end testing:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Build the image</span>
-</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>rtmp-multistream<span class="w"> </span>.
-</span><span id="__span-12-3"><a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a>
-</span><span id="__span-12-4"><a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="c1"># Configure environment</span>
-</span><span id="__span-12-5"><a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"SERVICE_KEY=your-test-key"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>env/relay.env
-</span><span id="__span-12-6"><a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a>
-</span><span id="__span-12-7"><a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># Start the service</span>
-</span><span id="__span-12-8"><a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a>docker<span class="w"> </span>compose<span class="w"> </span>up
-</span><span id="__span-12-9"><a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a>
-</span><span id="__span-12-10"><a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="c1"># In another terminal, send a test stream</span>
-</span><span id="__span-12-11"><a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a>ffmpeg<span class="w"> </span>-re<span class="w"> </span>-i<span class="w"> </span>test.mp4<span class="w"> </span>-c<span class="w"> </span>copy<span class="w"> </span>-f<span class="w"> </span>flv<span class="w"> </span>rtmp://localhost/relay/test
-</span></code></pre></div>
-<h3 id="verify-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.4.1</span> Verify Logs</h3>
-<p>Check container logs for:
-- Service configuration message: "{Service} configured and enabled"
-- Connection to service ingest server
-- No error messages
-- Stream processing logs</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="o">{</span>service<span class="o">}</span>
-</span></code></pre></div>
-<h2 id="testing-checklist"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.5</span> Testing Checklist</h2>
-<p>Before submitting your service implementation, ensure:</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> <strong>Unit tests added</strong> to <code>tests/02_unit_tests.sh</code>:</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Service enables with key</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Service skips without key</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Config variables replaced correctly</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Malicious input rejected (REQUIRED for security)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Transformer configured (if applicable)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> <strong>Integration test added</strong> to <code>tests/03_integration_tests.sh</code>:</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Container starts with service enabled</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> <strong>Validation tests added</strong> to <code>tests/00_validation_tests.sh</code> (if new validation functions added):</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Valid inputs accepted</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Invalid inputs rejected</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Edge cases handled</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> <strong>All automated tests pass</strong>: <code>./tests/test.sh</code> exits with code 0</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> <strong>Manual testing completed</strong>: Verified end-to-end streaming functionality</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"/><span class="task-list-indicator"></span></label> <strong>Logs verified</strong>: No errors, service enables correctly</li>
-</ul>
-<h2 id="common-testing-pitfalls"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6</span> Common Testing Pitfalls</h2>
-<h3 id="pitfall-1-not-testing-security"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6.1</span> Pitfall 1: Not Testing Security</h3>
-<p><strong>Problem</strong>: Forgetting to test malicious input rejection</p>
-<p><strong>Impact</strong>: Security vulnerabilities (command injection, path traversal)</p>
-<p><strong>Solution</strong>: Always include malicious input tests</p>
-<h3 id="pitfall-2-not-cleaning-up-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6.2</span> Pitfall 2: Not Cleaning Up Containers</h3>
-<p><strong>Problem</strong>: Test containers left running after failure</p>
-<p><strong>Impact</strong>: Port conflicts, resource exhaustion</p>
-<p><strong>Solution</strong>: Always include cleanup in tests (see integration test pattern)</p>
-<h3 id="pitfall-3-hardcoding-test-values"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6.3</span> Pitfall 3: Hardcoding Test Values</h3>
-<p><strong>Problem</strong>: Using production keys or endpoints in tests</p>
-<p><strong>Impact</strong>: Tests may fail, security concerns</p>
-<p><strong>Solution</strong>: Use placeholder values like <code>test_key</code></p>
-<h3 id="pitfall-4-not-testing-both-paths"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6.4</span> Pitfall 4: Not Testing Both Paths</h3>
-<p><strong>Problem</strong>: Only testing successful configuration, not graceful failure</p>
-<p><strong>Impact</strong>: Services may crash or behave unexpectedly when misconfigured</p>
-<p><strong>Solution</strong>: Test both "enables with key" and "skips without key"</p>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.7</span> See Also</h2>
-<ul>
-<li><a href="../overview/">Adding Services Overview</a> - Complete guide overview</li>
-<li><a href="../configuration/">Service Configuration</a> - Configuration implementation steps</li>
-<li><a href="../../testing/">Testing Guide</a> - General testing documentation</li>
-<li><a href="../../../security/">Security</a> - Security features and validation</li>
+<li><a href="../overview/">Add a Streaming Service</a> - Step-by-step guide</li>
+<li><a href="../configuration/">Service Contract Reference</a> - Rules for includes, placeholders and scripts</li>
+<li><a href="../../testing/">Run the Tests</a> - Test suites and CI</li>
+<li><a href="../../validation/">Input Validation Reference</a> - Validation functions and what they reject</li>
 </ul>
 </article>
 </div>
@@ -1232,7 +981,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

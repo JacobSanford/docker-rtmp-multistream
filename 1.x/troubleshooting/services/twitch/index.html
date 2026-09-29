@@ -11,10 +11,10 @@
 <link href="../../connection-issues/" rel="prev"/>
 <link href="../youtube/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Twitch Troubleshooting - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Stream Not Reaching Twitch - docker-rtmp-multistream</title>
+<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#twitch-troubleshooting">
+<a class="md-skip" href="#stream-not-reaching-twitch">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Twitch Troubleshooting
+              Stream Not Reaching Twitch
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,108 +198,48 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Streaming Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
-<span class="md-nav__icon md-icon"></span>
-            Streaming Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/overview/">
-<span class="md-ellipsis">
-    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/twitch/">
+<a class="md-nav__link" href="../../../restrict-access/">
 <span class="md-ellipsis">
-    Twitch
+    
+  
+    Restrict Access
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/youtube/">
+<a class="md-nav__link" href="../../../security/">
 <span class="md-ellipsis">
-    YouTube
+    
+  
+    Security
+  
+
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
-    Technical Reference
+    
+  
+    Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -287,13 +247,157 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Streaming Services
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/overview/">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/twitch/">
+<span class="md-ellipsis">
+    
+  
+    Twitch
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/youtube/">
+<span class="md-ellipsis">
+    
+  
+    YouTube
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/archive/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/architecture/">
 <span class="md-ellipsis">
+    
+  
     Architecture
+  
+
     
   </span>
 </a>
@@ -301,7 +405,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/service-patterns/">
 <span class="md-ellipsis">
+    
+  
     Service Patterns
+  
+
     
   </span>
 </a>
@@ -309,7 +417,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/environment/">
 <span class="md-ellipsis">
+    
+  
     Environment Variables
+  
+
     
   </span>
 </a>
@@ -318,24 +430,36 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_7">
+<nav aria-expanded="true" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -343,7 +467,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -351,38 +479,58 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="true" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -395,28 +543,36 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Common Issues
+      
+        Common Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#transcoding-quality">
 <span class="md-ellipsis">
-      Transcoding Quality
+      
+        Transcoding Quality
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ingest-server-issues">
 <span class="md-ellipsis">
-      Ingest Server Issues
+      
+        Ingest Server Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#stream-not-appearing">
 <span class="md-ellipsis">
-      Stream Not Appearing
+      
+        Stream Not Appearing
+      
     </span>
 </a>
 <nav aria-label="Stream Not Appearing" class="md-nav">
@@ -424,41 +580,60 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Possible Causes
+      
+        Possible Causes
+      
     </span>
 </a>
 <nav aria-label="Possible Causes" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-service-not-enabled">
+<a class="md-nav__link" href="#service-not-enabled">
 <span class="md-ellipsis">
-      1. Service Not Enabled
+      
+        Service Not Enabled
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-invalid-stream-key">
+<a class="md-nav__link" href="#wrong-stream-key">
 <span class="md-ellipsis">
-      2. Invalid Stream Key
+      
+        Wrong Stream Key
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-platform-specific-issues">
+<a class="md-nav__link" href="#platform-specific-issues">
 <span class="md-ellipsis">
-      3. Platform-Specific Issues
+      
+        Platform-Specific Issues
+      
     </span>
 </a>
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#confirm-the-fix">
+<span class="md-ellipsis">
+      
+        Confirm the Fix
+      
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -466,32 +641,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      Debug Logs
+      
+        Debug Logs
+      
     </span>
 </a>
-<nav aria-label="Debug Logs" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#enable-detailed-logging">
-<span class="md-ellipsis">
-      Enable Detailed Logging
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-log-messages">
-<span class="md-ellipsis">
-      Common Log Messages
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -501,7 +662,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -509,7 +674,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -527,7 +696,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -535,14 +708,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -550,13 +731,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -564,7 +753,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -572,7 +765,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -581,9 +778,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../security/">
+<a class="md-nav__link" href="../../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -591,7 +792,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -602,7 +807,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -625,28 +834,36 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Common Issues
+      
+        Common Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#transcoding-quality">
 <span class="md-ellipsis">
-      Transcoding Quality
+      
+        Transcoding Quality
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#ingest-server-issues">
 <span class="md-ellipsis">
-      Ingest Server Issues
+      
+        Ingest Server Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#stream-not-appearing">
 <span class="md-ellipsis">
-      Stream Not Appearing
+      
+        Stream Not Appearing
+      
     </span>
 </a>
 <nav aria-label="Stream Not Appearing" class="md-nav">
@@ -654,41 +871,60 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Possible Causes
+      
+        Possible Causes
+      
     </span>
 </a>
 <nav aria-label="Possible Causes" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-service-not-enabled">
+<a class="md-nav__link" href="#service-not-enabled">
 <span class="md-ellipsis">
-      1. Service Not Enabled
+      
+        Service Not Enabled
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-invalid-stream-key">
+<a class="md-nav__link" href="#wrong-stream-key">
 <span class="md-ellipsis">
-      2. Invalid Stream Key
+      
+        Wrong Stream Key
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-platform-specific-issues">
+<a class="md-nav__link" href="#platform-specific-issues">
 <span class="md-ellipsis">
-      3. Platform-Specific Issues
+      
+        Platform-Specific Issues
+      
     </span>
 </a>
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#confirm-the-fix">
+<span class="md-ellipsis">
+      
+        Confirm the Fix
+      
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -696,32 +932,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      Debug Logs
+      
+        Debug Logs
+      
     </span>
 </a>
-<nav aria-label="Debug Logs" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#enable-detailed-logging">
-<span class="md-ellipsis">
-      Enable Detailed Logging
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-log-messages">
-<span class="md-ellipsis">
-      Common Log Messages
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -732,9 +954,9 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="twitch-troubleshooting"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.</span> Twitch Troubleshooting</h1>
+<h1 id="stream-not-reaching-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.</span> Stream Not Reaching Twitch</h1>
 <p>Troubleshooting issues specific to streaming to Twitch.</p>
-<h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.1</span> Common Issues</h2>
+<h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.1</span> Common Issues</h2>
 <table>
 <thead>
 <tr>
@@ -762,77 +984,89 @@
 </tbody>
 </table>
 <hr/>
-<h2 id="transcoding-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.2</span> Transcoding Quality</h2>
+<h2 id="transcoding-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.2</span> Transcoding Quality</h2>
 <p><strong>Issue</strong>: Stream looks worse on Twitch than expected</p>
-<p><strong>Check</strong>: Verify transcoding settings:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>grep<span class="w"> </span>TWITCH<span class="w"> </span>env/relay.env
+<p>These settings apply only when <code>TWITCH_PARTNER=FALSE</code> (the default). In partner mode the relay passes the stream through unchanged, so set quality in OBS instead.</p>
+<p><strong>Solution</strong>: In <code>env/relay.env</code>, raise the bitrate or use a slower encoder preset:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Video bitrate is TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS: 100 × 60 = 6000 kbps (default 75 × 60 = 4500)</span>
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nv">TWITCH_KBITS_PER_VIDEO_FRAME</span><span class="o">=</span><span class="m">100</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Better quality per bit, but uses more CPU (default: medium)</span>
+</span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="nv">TWITCH_X264_PRESET</span><span class="o">=</span>slow
 </span></code></pre></div>
-<p><strong>Solution</strong>: Adjust quality settings:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Increase bitrate</span>
-</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nv">TWITCH_KBITS_PER_VIDEO_FRAME</span><span class="o">=</span><span class="m">100</span><span class="w">  </span><span class="c1"># From 75</span>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># Better encoding quality (more CPU)</span>
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="nv">TWITCH_X264_PRESET</span><span class="o">=</span>slow<span class="w">  </span><span class="c1"># From medium</span>
-</span></code></pre></div></p>
-<p>See <a href="../../../services/twitch/">Twitch Configuration</a> for detailed settings.</p>
-<h2 id="ingest-server-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.3</span> Ingest Server Issues</h2>
+<p>Recreate the container so it reads the new values:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+<p>While streaming, check the relay's CPU use:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>stats<span class="w"> </span>--no-stream
+</span></code></pre></div>
+<p>If <code>CPU %</code> stays near the machine's limit, set <code>TWITCH_X264_PRESET</code> back to <code>medium</code>.</p>
+<p>Watch the stream on Twitch to confirm the quality changed.</p>
+<p>See <a href="../../../services/twitch/">Twitch Configuration</a> for all settings.</p>
+<h2 id="ingest-server-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.3</span> Ingest Server Issues</h2>
 <p><strong>Issue</strong>: Stream works sometimes, fails other times</p>
-<p><strong>Check</strong>: Test different ingest servers:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># Try different endpoints</span>
-</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>lax<span class="w">  </span><span class="c1"># Los Angeles</span>
-</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>ord<span class="w">  </span><span class="c1"># Chicago</span>
-</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>iad<span class="w">  </span><span class="c1"># Ashburn</span>
+<p><strong>Check</strong>: Try a different ingest server. Set <code>TWITCH_ENDPOINT</code> in <code>env/relay.env</code> to a region code from <a href="https://ingest.twitch.tv/ingests" target="_blank">Twitch's ingest list</a>. The code is the first part of each <code>url_template</code> host, for example <code>use20</code> from <code>rtmp://use20.contribute.live-video.net/app/{stream_key}</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nv">TWITCH_ENDPOINT</span><span class="o">=</span>use20
 </span></code></pre></div>
-<p><strong>Verify connectivity</strong>:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span><span class="w"> </span>live-&lt;endpoint&gt;.twitch.tv
-</span></code></pre></div></p>
-<p>Replace <code>&lt;endpoint&gt;</code> with your chosen endpoint (e.g., <code>jfk</code>, <code>lax</code>, <code>ord</code>).</p>
-<h2 id="stream-not-appearing"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4</span> Stream Not Appearing</h2>
-<h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.1</span> Symptoms</h3>
+<p>Other examples: <code>usw20</code> (US West, Oregon), <code>euc10</code> (Europe, Frankfurt). Set one value only, with no comment on the same line. The default is <code>use10</code> (US East, N. Virginia). For older names such as <code>jfk</code>, see <a href="../../../techref/environment/#twitch_endpoint"><code>TWITCH_ENDPOINT</code></a>.</p>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+<p><strong>Verify connectivity</strong>: Test that the relay can open a Real-Time Messaging Protocol (RTMP) connection (TCP port 1935) to Twitch:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nc<span class="w"> </span>-zv<span class="w"> </span>&lt;TWITCH_ENDPOINT&gt;.contribute.live-video.net<span class="w"> </span><span class="m">1935</span>
+</span></code></pre></div>
+<p>Replace <code>&lt;TWITCH_ENDPOINT&gt;</code> with your <code>TWITCH_ENDPOINT</code> value (default <code>use10</code>). A working connection prints <code>open</code> (the IP address will differ):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>use10.contribute.live-video.net (35.55.30.14:1935) open
+</span></code></pre></div>
+<p>If the command does not print <code>open</code>, outbound port 1935 is blocked between the relay and Twitch. If it prints <code>open</code>, stream for a while on the new endpoint to confirm the drops have stopped.</p>
+<h2 id="stream-not-appearing"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4</span> Stream Not Appearing</h2>
+<h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.1</span> Symptoms</h3>
 <ul>
 <li>OBS shows "Streaming" but stream doesn't appear on Twitch</li>
 <li>No errors in OBS</li>
 </ul>
-<h3 id="possible-causes"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2</span> Possible Causes</h3>
-<h4 id="1-service-not-enabled"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.1</span> 1. Service Not Enabled</h4>
+<h3 id="possible-causes"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.2</span> Possible Causes</h3>
+<h4 id="service-not-enabled"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.2.1</span> Service Not Enabled</h4>
 <p><strong>Check</strong>: Look at container logs during startup:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"configured and enabled"</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
 </span></code></pre></div>
-<p><strong>Expected output</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>Twitch configured and enabled.
-</span></code></pre></div></p>
+<p>When Twitch is enabled, one of these lines appears, depending on <code>TWITCH_PARTNER</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>Twitch Partner configuration complete, and service enabled.
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>Twitch Non-Partner configuration complete, and service enabled.
+</span></code></pre></div>
+<p>If Twitch is not enabled, this line appears instead: <code>TWITCH_KEY is not set. Skipping Twitch configuration.</code></p>
 <p><strong>Solution</strong>: If Twitch is missing:
-- Verify <code>TWITCH_KEY</code> is set in <code>env/relay.env</code>
-- Restart container after setting the key</p>
-<h4 id="2-invalid-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.2</span> 2. Invalid Stream Key</h4>
-<p><strong>Check</strong>: Look for authentication errors in logs:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"error\|auth\|publish"</span>
+- Verify <code>TWITCH_KEY</code> is set in <code>env/relay.env</code></p>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
 </span></code></pre></div>
-<p><strong>Solution</strong>:
-- Verify stream key is correct in <code>env/relay.env</code>
-- Check for extra spaces or quotes around key
-- Get fresh key from Twitch dashboard</p>
-<h4 id="3-platform-specific-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2.3</span> 3. Platform-Specific Issues</h4>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
+</span></code></pre></div>
+<h4 id="wrong-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.2.2</span> Wrong Stream Key</h4>
+<p>A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.</p>
+<p><strong>Check</strong>: Confirm the relay can reach Twitch:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nc<span class="w"> </span>-zv<span class="w"> </span>&lt;TWITCH_ENDPOINT&gt;.contribute.live-video.net<span class="w"> </span><span class="m">1935</span>
+</span></code></pre></div>
+<p>Then start streaming and open Stream Manager. If the command above prints <code>open</code> and Stream Manager shows no incoming stream, the key is the likely cause.</p>
+<p><strong>Solution</strong>: Copy the key again from Twitch dashboard into <code>env/relay.env</code>.</p>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
+</span></code></pre></div>
+<h4 id="platform-specific-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.2.3</span> Platform-Specific Issues</h4>
 <ul>
 <li>Verify stream key hasn't expired</li>
 <li>Check Twitch dashboard for account status</li>
 <li>Ensure you're not already streaming from another source</li>
 </ul>
-<h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5</span> Debug Logs</h2>
-<h3 id="enable-detailed-logging"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5.1</span> Enable Detailed Logging</h3>
-<p>For Twitch-specific issues, check logs:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Twitch-specific logs</span>
-</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>twitch
-</span></code></pre></div>
-<h3 id="common-log-messages"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5.2</span> Common Log Messages</h3>
-<p><strong>Success messages</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>Twitch configured and enabled.
-</span></code></pre></div></p>
-<p><strong>Error messages</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>ERROR: TWITCH_KEY is not set
-</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>ERROR: Failed to validate TWITCH_KEY
-</span></code></pre></div></p>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.6</span> See Also</h2>
+<h3 id="confirm-the-fix"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.4.3</span> Confirm the Fix</h3>
+<p>Start streaming in OBS and open Twitch Stream Manager. The stream shows as live.</p>
+<h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.5</span> Debug Logs</h2>
+<p>For the startup lines every service prints, and which ones mean the container stopped, see <a href="../../#check-service-status">Check Service Status</a>. For more detail while streaming, see <a href="../../connection-issues/#increase-log-verbosity">Increase Log Verbosity</a>.</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.6</span> See Also</h2>
 <ul>
 <li><strong><a href="../../">Troubleshooting Overview</a></strong> - Main troubleshooting guide</li>
 <li><strong><a href="../../connection-issues/">Connection Issues</a></strong> - Network and connectivity problems</li>
@@ -865,7 +1099,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

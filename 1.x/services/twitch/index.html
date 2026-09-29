@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Configure Twitch streaming with automatic transcoding and optimization" name="description"/>
+<meta content="Enable the Twitch service in partner or non-partner mode and tune its output" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/services/twitch/" rel="canonical"/>
 <link href="../overview/" rel="prev"/>
 <link href="../youtube/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Twitch Service - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Stream to Twitch - docker-rtmp-multistream</title>
+<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#twitch">
+<a class="md-skip" href="#stream-to-twitch">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Twitch Service
+              Stream to Twitch
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,30 +198,70 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../restrict-access/">
+<span class="md-ellipsis">
+    
+  
+    Restrict Access
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../security/">
+<span class="md-ellipsis">
+    
+  
+    Security
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
+<nav aria-expanded="true" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Streaming Services
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../overview/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -210,14 +270,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -230,61 +298,64 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#enable-twitch">
+<span class="md-ellipsis">
+      
+        Enable Twitch
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#partner-vs-non-partner-streaming">
 <span class="md-ellipsis">
-      Partner vs. Non-Partner Streaming
+      
+        Partner vs. Non-Partner Streaming
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#partner-streaming">
+<a class="md-nav__link" href="#settings">
 <span class="md-ellipsis">
-      Partner Streaming
+      
+        Settings
+      
     </span>
 </a>
-<nav aria-label="Partner Streaming" class="md-nav">
+<nav aria-label="Settings" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration-partners">
+<a class="md-nav__link" href="#fixed-output-settings">
 <span class="md-ellipsis">
-      Configuration (Partners)
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#non-partner-streaming">
-<span class="md-ellipsis">
-      Non-Partner Streaming
-    </span>
-</a>
-<nav aria-label="Non-Partner Streaming" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#configuration-non-partners">
-<span class="md-ellipsis">
-      Configuration (Non-Partners)
+      
+        Fixed Output Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#optimizing-twitch-quality">
 <span class="md-ellipsis">
-      Optimizing Twitch Quality
+      
+        Optimizing Twitch Quality
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#recommended-bitrates">
 <span class="md-ellipsis">
-      Recommended Bitrates
+      
+        Recommended Bitrates
+      
     </span>
 </a>
 <nav aria-label="Recommended Bitrates" class="md-nav">
@@ -292,14 +363,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#twitch_kbits_per_video_frame">
 <span class="md-ellipsis">
-      TWITCH_KBITS_PER_VIDEO_FRAME
+      
+        TWITCH_KBITS_PER_VIDEO_FRAME
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#bitrate-reference-table">
 <span class="md-ellipsis">
-      Bitrate Reference Table
+      
+        Bitrate Reference Table
+      
     </span>
 </a>
 </li>
@@ -312,7 +387,9 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -322,7 +399,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -330,91 +411,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
-<span class="md-ellipsis">
-    Technical Reference
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_6">
-<span class="md-nav__icon md-icon"></span>
-            Technical Reference
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/architecture/">
-<span class="md-ellipsis">
-    Architecture
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/service-patterns/">
-<span class="md-ellipsis">
-    Service Patterns
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../techref/environment/">
-<span class="md-ellipsis">
-    Environment Variables
+  
+
     
   </span>
 </a>
@@ -426,7 +427,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
-    Troubleshooting
+    
+  
+    Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -434,13 +439,145 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/architecture/">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/service-patterns/">
+<span class="md-ellipsis">
+    
+  
+    Service Patterns
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../techref/environment/">
+<span class="md-ellipsis">
+    
+  
+    Environment Variables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -448,7 +585,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -456,30 +597,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -487,7 +644,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -495,7 +656,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -513,7 +678,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -521,14 +690,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -536,13 +713,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -550,7 +735,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -558,7 +747,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -567,9 +760,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../security/">
+<a class="md-nav__link" href="../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -577,7 +774,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -588,7 +789,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -611,61 +816,64 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#overview">
 <span class="md-ellipsis">
-      Overview
+      
+        Overview
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#enable-twitch">
+<span class="md-ellipsis">
+      
+        Enable Twitch
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#partner-vs-non-partner-streaming">
 <span class="md-ellipsis">
-      Partner vs. Non-Partner Streaming
+      
+        Partner vs. Non-Partner Streaming
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#partner-streaming">
+<a class="md-nav__link" href="#settings">
 <span class="md-ellipsis">
-      Partner Streaming
+      
+        Settings
+      
     </span>
 </a>
-<nav aria-label="Partner Streaming" class="md-nav">
+<nav aria-label="Settings" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#configuration-partners">
+<a class="md-nav__link" href="#fixed-output-settings">
 <span class="md-ellipsis">
-      Configuration (Partners)
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#non-partner-streaming">
-<span class="md-ellipsis">
-      Non-Partner Streaming
-    </span>
-</a>
-<nav aria-label="Non-Partner Streaming" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#configuration-non-partners">
-<span class="md-ellipsis">
-      Configuration (Non-Partners)
+      
+        Fixed Output Settings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#optimizing-twitch-quality">
 <span class="md-ellipsis">
-      Optimizing Twitch Quality
+      
+        Optimizing Twitch Quality
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#recommended-bitrates">
 <span class="md-ellipsis">
-      Recommended Bitrates
+      
+        Recommended Bitrates
+      
     </span>
 </a>
 <nav aria-label="Recommended Bitrates" class="md-nav">
@@ -673,14 +881,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#twitch_kbits_per_video_frame">
 <span class="md-ellipsis">
-      TWITCH_KBITS_PER_VIDEO_FRAME
+      
+        TWITCH_KBITS_PER_VIDEO_FRAME
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#bitrate-reference-table">
 <span class="md-ellipsis">
-      Bitrate Reference Table
+      
+        Bitrate Reference Table
+      
     </span>
 </a>
 </li>
@@ -693,7 +905,9 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -704,116 +918,75 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.</span> Twitch</h1>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1</span> Overview</h2>
-<p>The relay streams to Twitch. To enable this feature, set the <code>TWITCH_KEY</code> environment variable in the <code>env/relay.env</code> file to the stream key provided by Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.</p>
-<h2 id="partner-vs-non-partner-streaming"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2</span> Partner vs. Non-Partner Streaming</h2>
+<h1 id="stream-to-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Stream to Twitch</h1>
+<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Overview</h2>
+<p>The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.</p>
+<h2 id="enable-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Enable Twitch</h2>
+<ol>
+<li>In <code>env/relay.env</code>, set <code>TWITCH_KEY</code> to the stream key provided by Twitch.</li>
+<li>Partners only: set <code>TWITCH_PARTNER=TRUE</code>.</li>
+<li>
+<p>Recreate the container so it reads the new values:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+</li>
+<li>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">"twitch|error"</span>
+</span></code></pre></div>
+<p>Non-partner output: <code>Twitch Non-Partner configuration complete, and service enabled.</code></p>
+<p>Partner output: <code>Twitch Partner configuration complete, and service enabled.</code></p>
+<p>If you see <code>TWITCH_KEY is not set. Skipping Twitch configuration.</code>, check step 1. If you see an <code>ERROR:</code> line, the container has stopped: correct the variable it names.</p>
+</li>
+</ol>
+<h2 id="partner-vs-non-partner-streaming"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Partner vs. Non-Partner Streaming</h2>
 <p>Twitch partners with transcoding services should send higher-bitrate streams to take advantage of Twitch's multi-bitrate transcoding. Non-partners should use the relay's built-in transcoding to optimize their streams for Twitch.</p>
-<h2 id="partner-streaming"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3</span> Partner Streaming</h2>
-<p>For Twitch Partners, the Twitch relay uses a <strong>simple relay pattern</strong> - it forwards your stream directly to Twitch without any re-encoding or modification. This preserves your original stream quality for Twitch's transcoding services.</p>
-<h3 id="configuration-partners"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3.1</span> Configuration (Partners)</h3>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>TWITCH_KEY</code></td>
-<td>The stream key provided by Twitch.</td>
-<td>``</td>
-</tr>
-<tr>
-<td><code>TWITCH_PARTNER</code></td>
-<td>Boolean flag to indicate if the user is a Twitch Partner.</td>
-<td><code>FALSE</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_ENDPOINT</code></td>
-<td>The Twitch ingest server slug to use. See the <a href="https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US" target="_blank">Recommended Ingest Endpoints</a> or the <a href="../../techref/environment/#twitch_endpoint">complete endpoint list</a>.</td>
-<td><code>jfk</code></td>
-</tr>
-</tbody>
-</table>
-<p>All other Twitch-related environment variables are ignored when using the partner configuration.</p>
-<h2 id="non-partner-streaming"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4</span> Non-Partner Streaming</h2>
-<p>For non-partners, the Twitch relay uses a <strong>transformer pattern</strong> - it re-encodes the incoming stream using FFmpeg before forwarding it to Twitch. This allows you to send a high-quality stream from your streaming software while the relay optimizes it for Twitch's requirements.</p>
-<h3 id="configuration-non-partners"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4.1</span> Configuration (Non-Partners)</h3>
-<p>The Twitch service can be configured by setting the following environment variables:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>TWITCH_KEY</code></td>
-<td>The stream key provided by Twitch.</td>
-<td>``</td>
-</tr>
-<tr>
-<td><code>TWITCH_AUDIO_BITRATE</code></td>
-<td>The audio bitrate for the stream. 160k is the Maximum audio bit rate supported by Twitch.</td>
-<td><code>160k</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_CODEC</code></td>
-<td>The codec to use for the stream. This is unlikely to change.</td>
-<td><code>libx264</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_ENDPOINT</code></td>
-<td>The Twitch ingest server slug to use. See the <a href="https://help.twitch.tv/s/twitch-ingest-recommendation?language=en_US" target="_blank">Recommended Ingest Endpoints</a> or the <a href="../../techref/environment/#twitch_endpoint">complete endpoint list</a>.</td>
-<td><code>jfk</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_FFMPEG_THREADS</code></td>
-<td>The number of CPU threads to use for encoding. The default <code>0</code> instructs FFmpeg to auto-optimize.</td>
-<td><code>0</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_FPS</code></td>
-<td>The frames per second for the stream.</td>
-<td><code>60</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_HEIGHT</code></td>
-<td>The height of the video stream in pixels.</td>
-<td><code>720</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_KBITS_PER_VIDEO_FRAME</code></td>
-<td>The number of kilobits per video frame. Change this to control the bitrate of the video stream. See <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> below.</td>
-<td><code>75</code></td>
-</tr>
-<tr>
-<td><code>TWITCH_X264_PRESET</code></td>
-<td>The x264 preset to use for encoding. A list of options is available <a href="https://trac.ffmpeg.org/wiki/Encode/H.264" target="_blank">in the x264 documentation</a>. 'Slower' presets increase computational costs but typically provide higher quality output at the same bitrate. Slower than <code>medium</code> generally offers rapidly diminishing returns.</td>
-<td><code>medium</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="optimizing-twitch-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4.2</span> Optimizing Twitch Quality</h3>
-<p>For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections.</p>
-<p>Twitch provides a <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">guide</a> on encoding settings. Key points:</p>
 <ul>
-<li><strong>Maximum video bitrate</strong>: 6000 kbps (even for 1080p/60fps)</li>
-<li><strong>Transcoding availability</strong>: <a href="https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US" target="_blank">Twitch does not reliably transcode streams for non-partners</a></li>
+<li><strong>Partner mode</strong> (<code>TWITCH_PARTNER=TRUE</code>) uses the <strong>simple relay pattern</strong>: the relay forwards your stream to Twitch without re-encoding it. Only <code>TWITCH_KEY</code> and <code>TWITCH_ENDPOINT</code> apply; all other Twitch variables are ignored.</li>
+<li><strong>Non-partner mode</strong> (the default) uses the <strong>transformer pattern</strong>: the relay re-encodes the stream with FFmpeg before forwarding it, so you can send a high-quality stream from your streaming software while the relay produces one suited to Twitch.</li>
 </ul>
-<h3 id="recommended-bitrates"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4.3</span> Recommended Bitrates</h3>
-<h4 id="twitch_kbits_per_video_frame"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4.3.1</span> TWITCH_KBITS_PER_VIDEO_FRAME</h4>
+<h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> Settings</h2>
+<p>Choose <code>TWITCH_ENDPOINT</code> from the <a href="../../techref/environment/#twitch_endpoint">current endpoint list</a>. In non-partner mode, the encoder settings (<code>TWITCH_HEIGHT</code>, <code>TWITCH_FPS</code>, <code>TWITCH_KBITS_PER_VIDEO_FRAME</code>, <code>TWITCH_X264_PRESET</code>, <code>TWITCH_AUDIO_BITRATE</code>, <code>TWITCH_AUDIO_CHANNELS</code>, <code>TWITCH_FFMPEG_THREADS</code>) control the output.</p>
+<p>For every Twitch variable's default and valid values, see <a href="../../techref/environment/#twitch-variables">Twitch Variables</a>.</p>
+<h3 id="fixed-output-settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.1</span> Fixed Output Settings</h3>
+<p>The transformer always applies these settings. No variable changes them.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audio codec</td>
+<td>AAC, 44.1 kHz</td>
+</tr>
+<tr>
+<td>Video codec</td>
+<td>H.264, Main profile, 4:2:0 (<code>yuv420p</code>)</td>
+</tr>
+<tr>
+<td>Rate control</td>
+<td>Constant bitrate (CBR)</td>
+</tr>
+<tr>
+<td>Keyframe interval</td>
+<td>2 seconds (<code>2 × TWITCH_FPS</code> frames), no scene-cut keyframes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optimizing-twitch-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.2</span> Optimizing Twitch Quality</h3>
+<p>For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections, and <a href="https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US" target="_blank">Twitch does not reliably transcode streams for non-partners</a>.</p>
+<p>Twitch publishes its bitrate and encoder limits in its <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">Broadcasting Guidelines</a>. Check them before raising <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_AUDIO_BITRATE</code> above the defaults.</p>
+<h3 id="recommended-bitrates"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.3</span> Recommended Bitrates</h3>
+<h4 id="twitch_kbits_per_video_frame"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.3.1</span> TWITCH_KBITS_PER_VIDEO_FRAME</h4>
 <p>This setting controls the video bitrate using the formula: <code>bitrate = TWITCH_KBITS_PER_VIDEO_FRAME * FPS</code></p>
 <p>Recommended starting values:
 - <strong>1080p streams</strong>: <code>100</code>
 - <strong>720p streams</strong>: <code>75</code></p>
 <p>If your stream is pixelated or blurry, increase this value. If you are dropping frames, decrease it.</p>
-<h4 id="bitrate-reference-table"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4.3.2</span> Bitrate Reference Table</h4>
+<h4 id="bitrate-reference-table"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.3.2</span> Bitrate Reference Table</h4>
 <table>
 <thead>
 <tr>
@@ -874,7 +1047,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5</span> See Also</h2>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5</span> See Also</h2>
 <ul>
 <li><a href="../../techref/architecture/">Architecture</a> - Learn more about the transformer pattern</li>
 <li><a href="../../techref/environment/">Environment Variables Reference</a> - Complete variable reference</li>
@@ -907,7 +1080,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

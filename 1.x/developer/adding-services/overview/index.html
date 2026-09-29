@@ -5,16 +5,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Guide for adding support for new streaming platforms" name="description"/>
+<meta content="Add a new streaming destination to the relay, from config files to a verified end-to-end stream" name="description"/>
 <meta content="Jacob Sanford" name="author"/>
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/developer/adding-services/overview/" rel="canonical"/>
 <link href="../../../troubleshooting/services/archive/" rel="prev"/>
 <link href="../configuration/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>Adding New Streaming Services - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Add a Streaming Service - docker-rtmp-multistream</title>
+<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#adding-new-streaming-services">
+<a class="md-skip" href="#add-a-streaming-service">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Adding New Streaming Services
+              Add a Streaming Service
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,108 +198,48 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Streaming Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
-<span class="md-nav__icon md-icon"></span>
-            Streaming Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/overview/">
-<span class="md-ellipsis">
-    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/twitch/">
+<a class="md-nav__link" href="../../../restrict-access/">
 <span class="md-ellipsis">
-    Twitch
+    
+  
+    Restrict Access
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/youtube/">
+<a class="md-nav__link" href="../../../security/">
 <span class="md-ellipsis">
-    YouTube
+    
+  
+    Security
+  
+
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
-    Technical Reference
+    
+  
+    Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -287,29 +247,57 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Streaming Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/architecture/">
+<a class="md-nav__link" href="../../../services/overview/">
 <span class="md-ellipsis">
-    Architecture
+    
+  
+    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/service-patterns/">
+<a class="md-nav__link" href="../../../services/twitch/">
 <span class="md-ellipsis">
-    Service Patterns
+    
+  
+    Twitch
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../techref/environment/">
+<a class="md-nav__link" href="../../../services/youtube/">
 <span class="md-ellipsis">
-    Environment Variables
+    
+  
+    YouTube
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/archive/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
     
   </span>
 </a>
@@ -321,7 +309,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
 <span class="md-ellipsis">
-    Troubleshooting
+    
+  
+    Performance
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -329,13 +321,145 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_7">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/architecture/">
+<span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/service-patterns/">
+<span class="md-ellipsis">
+    
+  
+    Service Patterns
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../techref/environment/">
+<span class="md-ellipsis">
+    
+  
+    Environment Variables
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -343,7 +467,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -351,30 +479,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -382,7 +526,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/youtube/">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -390,7 +538,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../troubleshooting/services/archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -408,7 +560,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -416,14 +572,22 @@
 <nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -431,21 +595,33 @@
 <nav aria-expanded="true" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -456,45 +632,39 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
-      Overview
+      
+        Before You Begin
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#service-patterns">
+<a class="md-nav__link" href="#create-the-config-files">
 <span class="md-ellipsis">
-      Service Patterns
+      
+        Create the Config Files
+      
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#quick-start">
-<span class="md-ellipsis">
-      Quick Start
-    </span>
-</a>
-<nav aria-label="Quick Start" class="md-nav">
+<nav aria-label="Create the Config Files" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-configuration">
+<a class="md-nav__link" href="#simple-relay">
 <span class="md-ellipsis">
-      1. Configuration
+      
+        Simple Relay
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-testing">
+<a class="md-nav__link" href="#transformer">
 <span class="md-ellipsis">
-      2. Testing
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-documentation">
-<span class="md-ellipsis">
-      3. Documentation
+      
+        Transformer
+      
     </span>
 </a>
 </li>
@@ -502,80 +672,65 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#implementation-checklist">
+<a class="md-nav__link" href="#add-the-includes-to-appconf">
 <span class="md-ellipsis">
-      Implementation Checklist
-    </span>
-</a>
-<nav aria-label="Implementation Checklist" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
-<span class="md-ellipsis">
-      Configuration
+      
+        Add the Includes to app.conf
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#testing">
+<a class="md-nav__link" href="#add-the-variables">
 <span class="md-ellipsis">
-      Testing
+      
+        Add the Variables
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#documentation">
+<a class="md-nav__link" href="#write-the-startup-script">
 <span class="md-ellipsis">
-      Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#best-practices">
-<span class="md-ellipsis">
-      Best Practices
+      
+        Write the Startup Script
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#examples">
+<a class="md-nav__link" href="#add-tests">
 <span class="md-ellipsis">
-      Examples
-    </span>
-</a>
-<nav aria-label="Examples" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#simple-relay-youtube">
-<span class="md-ellipsis">
-      Simple Relay (YouTube)
+      
+        Add Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#transformer-twitch">
+<a class="md-nav__link" href="#build-and-confirm">
 <span class="md-ellipsis">
-      Transformer (Twitch)
+      
+        Build and Confirm
+      
     </span>
 </a>
 </li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#detailed-guides">
+<a class="md-nav__link" href="#document-the-service">
 <span class="md-ellipsis">
-      Detailed Guides
+      
+        Document the Service
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -585,7 +740,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -593,7 +752,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -602,9 +765,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../security/">
+<a class="md-nav__link" href="../../validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -612,7 +779,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -623,7 +794,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -644,45 +819,39 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#overview">
+<a class="md-nav__link" href="#before-you-begin">
 <span class="md-ellipsis">
-      Overview
+      
+        Before You Begin
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#service-patterns">
+<a class="md-nav__link" href="#create-the-config-files">
 <span class="md-ellipsis">
-      Service Patterns
+      
+        Create the Config Files
+      
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#quick-start">
-<span class="md-ellipsis">
-      Quick Start
-    </span>
-</a>
-<nav aria-label="Quick Start" class="md-nav">
+<nav aria-label="Create the Config Files" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-configuration">
+<a class="md-nav__link" href="#simple-relay">
 <span class="md-ellipsis">
-      1. Configuration
+      
+        Simple Relay
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-testing">
+<a class="md-nav__link" href="#transformer">
 <span class="md-ellipsis">
-      2. Testing
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#3-documentation">
-<span class="md-ellipsis">
-      3. Documentation
+      
+        Transformer
+      
     </span>
 </a>
 </li>
@@ -690,80 +859,65 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#implementation-checklist">
+<a class="md-nav__link" href="#add-the-includes-to-appconf">
 <span class="md-ellipsis">
-      Implementation Checklist
-    </span>
-</a>
-<nav aria-label="Implementation Checklist" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#configuration">
-<span class="md-ellipsis">
-      Configuration
+      
+        Add the Includes to app.conf
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#testing">
+<a class="md-nav__link" href="#add-the-variables">
 <span class="md-ellipsis">
-      Testing
+      
+        Add the Variables
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#documentation">
+<a class="md-nav__link" href="#write-the-startup-script">
 <span class="md-ellipsis">
-      Documentation
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#best-practices">
-<span class="md-ellipsis">
-      Best Practices
+      
+        Write the Startup Script
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#examples">
+<a class="md-nav__link" href="#add-tests">
 <span class="md-ellipsis">
-      Examples
-    </span>
-</a>
-<nav aria-label="Examples" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#simple-relay-youtube">
-<span class="md-ellipsis">
-      Simple Relay (YouTube)
+      
+        Add Tests
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#transformer-twitch">
+<a class="md-nav__link" href="#build-and-confirm">
 <span class="md-ellipsis">
-      Transformer (Twitch)
+      
+        Build and Confirm
+      
     </span>
 </a>
 </li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#detailed-guides">
+<a class="md-nav__link" href="#document-the-service">
 <span class="md-ellipsis">
-      Detailed Guides
+      
+        Document the Service
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -774,107 +928,156 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="adding-new-streaming-services"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.</span> Adding New Streaming Services</h1>
-<p>This guide explains how to add support for new streaming services to docker-rtmp-multistream.</p>
-<h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.1</span> Overview</h2>
-<p>Adding a new streaming service involves two main steps:</p>
+<h1 id="add-a-streaming-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.</span> Add a Streaming Service</h1>
+<p>This guide adds a new streaming destination to the relay. The examples add a service called <code>example</code>, with the variables <code>EXAMPLE_KEY</code> and <code>EXAMPLE_INGEST</code>. Replace these with your service's name.</p>
+<p>For the exact rules each file must follow, see the <a href="../configuration/">Service Contract Reference</a>.</p>
+<h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.1</span> Before You Begin</h2>
+<ul>
+<li>Choose a pattern. <strong>Simple Relay</strong> forwards the stream unchanged. <strong>Transformer</strong> re-encodes it with FFmpeg first. See <a href="../../../techref/service-patterns/">Service Patterns</a>.</li>
+<li>Check the service's ingest protocol. nginx's <code>push</code> sends plain RTMP. If the service accepts only RTMPS, use the Transformer pattern: the image's FFmpeg supports <code>rtmps://</code> output.</li>
+<li>Pick a lowercase service name (<code>example</code>) and an uppercase variable prefix (<code>EXAMPLE_</code>). The name is used for file names and the <code>enableService.sh</code> argument, and they must match exactly.</li>
+</ul>
+<h2 id="create-the-config-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2</span> Create the Config Files</h2>
+<p>Placeholders in these files are bare uppercase tokens, which the startup script replaces with <code>sed</code>. Do not wrap them in braces: <code>{EXAMPLE_KEY}</code> becomes <code>{abc123}</code>.</p>
+<h3 id="simple-relay"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1</span> Simple Relay</h3>
+<p>Create <code>build/conf/nginx/http.d/apps/example.conf</code>. It holds directives only, with no <code>application</code> block, because it is included inside <code>application relay</code>:</p>
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">include</span><span class="w"> </span><span class="n">http.d/auth.conf</span>;
+</span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">push</span><span class="w"> </span><span class="s">rtmp://EXAMPLE_INGEST/app/EXAMPLE_KEY</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Replace <code>/app/</code> with the path your service's ingest URL uses.</p>
+<h3 id="transformer"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.2</span> Transformer</h3>
+<p>Create two files. <code>build/conf/nginx/http.d/transformers/example.conf</code> is included inside <code>application relay</code> and runs FFmpeg for each incoming stream:</p>
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">exec</span><span class="w"> </span><span class="s">ffmpeg</span><span class="w"> </span><span class="s">-i</span><span class="w"> </span><span class="s">rtmp://127.0.0.1/</span><span class="nv">$app/$name</span>
+</span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="s">-c:a</span><span class="w"> </span><span class="s">aac</span><span class="w"> </span><span class="s">-b:a</span><span class="w"> </span><span class="mi">128k</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="s">-c:v</span><span class="w"> </span><span class="s">libx264</span><span class="w"> </span><span class="s">-preset</span><span class="w"> </span><span class="s">veryfast</span>
+</span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="s">-b:v</span><span class="w"> </span><span class="s">EXAMPLE_VIDEO_BITRATEk</span>
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="s">-f</span><span class="w"> </span><span class="s">flv</span><span class="w"> </span><span class="s">rtmp://127.0.0.1/example/</span><span class="nv">$name</span><span class="p">;</span>
+</span></code></pre></div>
+<p><code>build/conf/nginx/http.d/apps/example.conf</code> is a separate application, at server level, that receives FFmpeg's output and pushes it to the service:</p>
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">application</span><span class="w"> </span><span class="s">example</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="kn">live</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+</span><span id="__span-2-3"><a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="kn">record</span><span class="w"> </span><span class="no">off</span><span class="p">;</span>
+</span><span id="__span-2-4"><a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="kn">include</span><span class="w"> </span><span class="s">http.d/auth.conf</span><span class="p">;</span>
+</span><span id="__span-2-6"><a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="kn">push</span><span class="w"> </span><span class="s">rtmp://EXAMPLE_INGEST/app/EXAMPLE_KEY</span><span class="p">;</span>
+</span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Keep <code>include http.d/auth.conf;</code> in every application block. Without it, the application accepts a publish from any address.</p>
+<h2 id="add-the-includes-to-appconf"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.3</span> Add the Includes to app.conf</h2>
+<p>In <code>build/conf/nginx/http.d/app.conf</code>, add commented include lines. Write <code>#include</code> with no space, and keep the literal <code>NGINX_CONFD_DIR</code> token.</p>
+<p>For Simple Relay, add one line inside <code>application relay</code>, after the existing services:</p>
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="w">    </span><span class="k">application</span><span class="w"> </span><span class="s">relay</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">      </span><span class="kn">...</span>
+</span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">      </span><span class="c1"># Example (Simple Relay)</span>
+</span><span id="__span-3-4"><a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">      </span><span class="c1">#include NGINX_CONFD_DIR/apps/example.conf;</span>
+</span><span id="__span-3-5"><a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="err">}</span>
+</span></code></pre></div>
+<p>For Transformer, add the transformer line inside <code>application relay</code>, and the app line after <code>application relay</code> closes:</p>
+<div class="language-nginx highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="w">    </span><span class="k">application</span><span class="w"> </span><span class="s">relay</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">      </span><span class="kn">...</span>
+</span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">      </span><span class="c1"># Example (Transformer)</span>
+</span><span id="__span-4-4"><a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">      </span><span class="c1">#include NGINX_CONFD_DIR/transformers/example.conf;</span>
+</span><span id="__span-4-5"><a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="err">}</span>
+</span><span id="__span-4-6"><a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="c1"># Example (Transformer Destination)</span>
+</span><span id="__span-4-8"><a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="c1">#include NGINX_CONFD_DIR/apps/example.conf;</span>
+</span></code></pre></div>
+<h2 id="add-the-variables"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.4</span> Add the Variables</h2>
 <ol>
-<li><strong><a href="../configuration/">Service Configuration</a></strong> - Create nginx configs, environment variables, and pre-init scripts</li>
-<li><strong><a href="../testing/">Service Testing</a></strong> - Add comprehensive automated tests</li>
+<li>
+<p>In <code>Dockerfile</code>, add a default for each variable. Leave the key empty so the service is off by default:</p>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">EXAMPLE_INGEST</span><span class="o">=</span>live.example.com
+</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span><span class="s2">""</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>In <code>env/relay.env</code>, add the same variables with a comment, so users can find them:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># Example</span>
+</span><span id="__span-6-2"><a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>
+</span></code></pre></div>
+</li>
 </ol>
-<p>Both steps are required for a complete service implementation.</p>
-<h2 id="service-patterns"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.2</span> Service Patterns</h2>
-<p>Before implementing a new service, choose the appropriate pattern. See <strong><a href="../../../techref/service-patterns/">Service Patterns Reference</a></strong> for a detailed comparison of Simple Relay and Transformer patterns, including use cases, pros/cons, and examples.</p>
-<h2 id="quick-start"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3</span> Quick Start</h2>
-<h3 id="1-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.1</span> 1. Configuration</h3>
-<p>Follow the <a href="../configuration/">Service Configuration</a> guide to:</p>
-<ul>
-<li>Create nginx RTMP configuration files (<code>apps/</code> and optionally <code>transformers/</code>)</li>
-<li>Define environment variables in <code>Dockerfile</code> and <code>env/relay.env</code></li>
-<li>Add commented includes to <code>app.conf</code></li>
-<li>Create pre-init script (<code>90_configure_{service}.sh</code>)</li>
-<li>Make script executable</li>
-</ul>
-<h3 id="2-testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2</span> 2. Testing</h3>
-<p>Follow the <a href="../testing/">Service Testing</a> guide to:</p>
-<ul>
-<li>Add unit tests to <code>tests/02_unit_tests.sh</code> (service enablement, variable replacement, security)</li>
-<li>Add integration test to <code>tests/03_integration_tests.sh</code> (container startup)</li>
-<li>Add validation tests to <code>tests/00_validation_tests.sh</code> (if new validation functions added)</li>
-<li>Run all tests: <code>./tests/test.sh</code></li>
-<li>Perform manual end-to-end testing</li>
-</ul>
-<h3 id="3-documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.3</span> 3. Documentation</h3>
-<p>Add service-specific documentation:</p>
-<ul>
-<li>Create <code>docs/services/{service}.md</code> with:</li>
-<li>Overview and configuration variables</li>
-<li>Quality settings and recommendations</li>
-<li>Troubleshooting tips</li>
-<li>Update <code>mkdocs.yml</code> navigation to include your service</li>
-</ul>
-<h2 id="implementation-checklist"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.4</span> Implementation Checklist</h2>
-<p>Use this checklist to track your progress:</p>
-<h3 id="configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.4.1</span> Configuration</h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Created nginx config files (<code>apps/</code> and/or <code>transformers/</code>)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added environment variables to <code>Dockerfile</code></li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added environment variables to <code>env/relay.env</code></li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added commented includes to <code>app.conf</code></li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Created pre-init script with validation</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Made script executable (<code>chmod +x</code>)</li>
-</ul>
-<h3 id="testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.4.2</span> Testing</h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added 4-5 unit tests (enable, skip, variables, security, transformer if applicable)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added integration test (container startup)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added validation tests (if new functions added)</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> All tests pass: <code>./tests/test.sh</code> exits with code 0</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Manual end-to-end testing completed</li>
-</ul>
-<h3 id="documentation"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.4.3</span> Documentation</h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Created service documentation page</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Updated navigation in <code>mkdocs.yml</code></li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Added to main README (if appropriate)</li>
-</ul>
-<h2 id="best-practices"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.5</span> Best Practices</h2>
+<h2 id="write-the-startup-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.5</span> Write the Startup Script</h2>
+<p>Create <code>build/scripts/pre-init.d/90_configure_example.sh</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="ch">#!/usr/bin/env sh</span>
+</span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nb">set</span><span class="w"> </span>-e
+</span><span id="__span-7-3"><a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># Source validation functions</span>
+</span><span id="__span-7-5"><a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>.<span class="w"> </span>/scripts/validate_input.sh
+</span><span id="__span-7-6"><a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_KEY</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-7-8"><a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"EXAMPLE_KEY is not set. Skipping Example configuration."</span>
+</span><span id="__span-7-9"><a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-7-10"><a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="k">fi</span>
+</span><span id="__span-7-11"><a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a href="#__codelineno-7-12" id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="c1"># Validate inputs</span>
+</span><span id="__span-7-13"><a href="#__codelineno-7-13" id="__codelineno-7-13" name="__codelineno-7-13"></a>validate_stream_key<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_KEY</span><span class="s2">"</span><span class="w"> </span><span class="s2">"EXAMPLE_KEY"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-7-14"><a href="#__codelineno-7-14" id="__codelineno-7-14" name="__codelineno-7-14"></a>validate_identifier<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_INGEST</span><span class="s2">"</span><span class="w"> </span><span class="s2">"EXAMPLE_INGEST"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-7-15"><a href="#__codelineno-7-15" id="__codelineno-7-15" name="__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a href="#__codelineno-7-16" id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="c1"># Escape values for safe sed substitution</span>
+</span><span id="__span-7-17"><a href="#__codelineno-7-17" id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="nv">EXAMPLE_KEY_ESC</span><span class="o">=</span><span class="k">$(</span>escape_for_sed<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_KEY</span><span class="s2">"</span><span class="k">)</span>
+</span><span id="__span-7-18"><a href="#__codelineno-7-18" id="__codelineno-7-18" name="__codelineno-7-18"></a>
+</span><span id="__span-7-19"><a href="#__codelineno-7-19" id="__codelineno-7-19" name="__codelineno-7-19"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|EXAMPLE_KEY|</span><span class="nv">$EXAMPLE_KEY_ESC</span><span class="s2">|g"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NGINX_CONFD_DIR</span><span class="si">}</span><span class="s2">/apps/example.conf"</span>
+</span><span id="__span-7-20"><a href="#__codelineno-7-20" id="__codelineno-7-20" name="__codelineno-7-20"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|EXAMPLE_INGEST|</span><span class="nv">$EXAMPLE_INGEST</span><span class="s2">|g"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NGINX_CONFD_DIR</span><span class="si">}</span><span class="s2">/apps/example.conf"</span>
+</span><span id="__span-7-21"><a href="#__codelineno-7-21" id="__codelineno-7-21" name="__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a href="#__codelineno-7-22" id="__codelineno-7-22" name="__codelineno-7-22"></a>/scripts/enableService.sh<span class="w"> </span>example
+</span><span id="__span-7-23"><a href="#__codelineno-7-23" id="__codelineno-7-23" name="__codelineno-7-23"></a>
+</span><span id="__span-7-24"><a href="#__codelineno-7-24" id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Example configuration complete, and service enabled."</span>
+</span></code></pre></div>
+<p>Choose a validator for each variable from the <a href="../../validation/">Input Validation Reference</a>. <code>validate_identifier</code> accepts letters, digits, <code>-</code> and <code>_</code> only; for a host name with dots, add a validator and test it (see <a href="../testing/#test-a-new-validator">Test a New Service</a>).</p>
+<p>For a Transformer, validate its encoder variables too, compute any derived values, and substitute them into the transformer file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_FPS</span><span class="s2">"</span><span class="w"> </span><span class="s2">"EXAMPLE_FPS"</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$EXAMPLE_KBITS_PER_VIDEO_FRAME</span><span class="s2">"</span><span class="w"> </span><span class="s2">"EXAMPLE_KBITS_PER_VIDEO_FRAME"</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+</span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="nv">EXAMPLE_VIDEO_BITRATE</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="nv">EXAMPLE_KBITS_PER_VIDEO_FRAME</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">EXAMPLE_FPS</span><span class="w"> </span><span class="k">))</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|EXAMPLE_VIDEO_BITRATE|</span><span class="nv">$EXAMPLE_VIDEO_BITRATE</span><span class="s2">|g"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NGINX_CONFD_DIR</span><span class="si">}</span><span class="s2">/transformers/example.conf"</span>
+</span></code></pre></div>
+<p><code>enableService.sh example</code> enables <code>transformers/example.conf</code> automatically when that file exists.</p>
+<p>Make the script executable:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>build/scripts/pre-init.d/90_configure_example.sh
+</span></code></pre></div>
+<h2 id="add-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.6</span> Add Tests</h2>
+<p>Add unit, integration and, for a new validator, validation tests. See <a href="../testing/">Test a New Service</a>.</p>
+<h2 id="build-and-confirm"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.7</span> Build and Confirm</h2>
 <ol>
-<li><strong>Validate early</strong>: Check for required environment variables at the start of pre-init scripts</li>
-<li><strong>Use validation functions</strong>: Always validate inputs using <code>validate_input.sh</code> to prevent injection attacks</li>
-<li><strong>Fail gracefully</strong>: Exit with code 0 if service shouldn't be enabled, exit with code 1 for validation errors</li>
-<li><strong>Escape properly</strong>: Use <code>escape_for_sed()</code> when substituting values to handle special characters safely</li>
-<li><strong>Log clearly</strong>: Echo meaningful messages (e.g., "SERVICE configured and enabled")</li>
-<li><strong>Test thoroughly</strong>: Add tests to all relevant test suites</li>
-<li><strong>Security first</strong>: Always test that malicious inputs are rejected</li>
-<li><strong>Document comprehensively</strong>: Help users configure and troubleshoot your service</li>
+<li>
+<p>Run the test suites. <code>test.sh</code> builds <code>rtmp-multistream:test</code> from your working tree first:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>./tests/test.sh
+</span></code></pre></div>
+<p>The run ends with <code>All tests passed!</code>.</p>
+</li>
+<li>
+<p>Start a container with your service enabled, then check that it enabled and that nginx accepts the config:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>example-check<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>example-check<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">"example|error"</span>
+</span><span id="__span-11-3"><a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>example-check<span class="w"> </span>nginx<span class="w"> </span>-t
+</span><span id="__span-11-4"><a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>example-check<span class="w"> </span>grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">"example.conf"</span><span class="w"> </span>/etc/nginx/http.d/app.conf
+</span><span id="__span-11-5"><a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>example-check
+</span></code></pre></div>
+<p>Expected: <code>Example configuration complete, and service enabled.</code>, <code>test is successful</code>, and each <code>example.conf</code> include line without a leading <code>#</code>. If the container has stopped with an <code>ERROR:</code> line from <code>enableService.sh</code>, the file name or the marker in <code>app.conf</code> does not match: see <a href="../configuration/#include-markers">Include Markers</a>.</p>
+</li>
+<li>
+<p>Stream end to end with your real key. Build with <code>docker compose build</code>, then set <code>EXAMPLE_KEY</code> in <code>env/relay.env</code> and start with <code>docker compose up -d --force-recreate</code>. Publish a test pattern:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>ffmpeg<span class="w"> </span>-re<span class="w"> </span>-f<span class="w"> </span>lavfi<span class="w"> </span>-i<span class="w"> </span><span class="nv">testsrc</span><span class="o">=</span><span class="nv">size</span><span class="o">=</span>1280x720:rate<span class="o">=</span><span class="m">30</span><span class="w"> </span>-f<span class="w"> </span>lavfi<span class="w"> </span>-i<span class="w"> </span>sine<span class="w"> </span>-t<span class="w"> </span><span class="m">60</span><span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-c:a<span class="w"> </span>aac<span class="w"> </span>-f<span class="w"> </span>flv<span class="w"> </span>rtmp://localhost:1935/relay/test
+</span></code></pre></div>
+<p>The stream appears in your service's dashboard. <code>env/relay.env</code> is tracked by git: remove the key before you commit.</p>
+</li>
 </ol>
-<h2 id="examples"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.6</span> Examples</h2>
-<p>Study existing service implementations:</p>
-<h3 id="simple-relay-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.6.1</span> Simple Relay (YouTube)</h3>
+<h2 id="document-the-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.8</span> Document the Service</h2>
+<ol>
+<li>Create <code>docs/services/example.md</code>, following <code>docs/services/youtube.md</code>: overview, enable steps with a confirm step, and settings.</li>
+<li>Add each variable to the <a href="../../../techref/environment/">Environment Variables Reference</a>.</li>
+<li>Add the page to the <code>nav</code> in <code>mkdocs.yml</code>.</li>
+</ol>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.9</span> See Also</h2>
 <ul>
-<li>Config: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/youtube.conf" target="_blank"><code>apps/youtube.conf</code></a></li>
-<li>Script: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/scripts/pre-init.d/90_configure_youtube.sh" target="_blank"><code>90_configure_youtube.sh</code></a></li>
-<li>Docs: <a href="../../../services/youtube/">YouTube Configuration</a></li>
-</ul>
-<h3 id="transformer-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.6.2</span> Transformer (Twitch)</h3>
-<ul>
-<li>Transformer: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/transformers/twitch.conf" target="_blank"><code>transformers/twitch.conf</code></a></li>
-<li>App: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/conf/nginx/http.d/apps/twitch.conf" target="_blank"><code>apps/twitch.conf</code></a></li>
-<li>Script: <a href="https://github.com/JacobSanford/docker-rtmp-multistream/blob/1.x/build/scripts/pre-init.d/90_configure_twitch.sh" target="_blank"><code>90_configure_twitch.sh</code></a></li>
-<li>Docs: <a href="../../../services/twitch/">Twitch Configuration</a></li>
-</ul>
-<h2 id="detailed-guides"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.7</span> Detailed Guides</h2>
-<ul>
-<li><strong><a href="../configuration/">Service Configuration</a></strong> - Step-by-step configuration implementation</li>
-<li><strong><a href="../testing/">Service Testing</a></strong> - Comprehensive testing guide</li>
-</ul>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.8</span> See Also</h2>
-<ul>
-<li><a href="../../../techref/architecture/">Architecture Overview</a> - Understanding relay and transformer patterns</li>
-<li><a href="../../../techref/environment/">Environment Variables Reference</a> - Complete variable reference</li>
-<li><a href="../../../security/">Security</a> - Input validation and security features</li>
-<li><a href="../../testing/">Testing Guide</a> - General testing documentation</li>
+<li><a href="../configuration/">Service Contract Reference</a> - Rules for includes, placeholders, scripts and <code>enableService.sh</code></li>
+<li><a href="../testing/">Test a New Service</a> - Tests to add for a new service</li>
+<li><a href="../../validation/">Input Validation Reference</a> - Validation functions for a new service's variables</li>
+<li><a href="../../../techref/architecture/">Architecture</a> - How the relay processes configuration</li>
 </ul>
 </article>
 </div>
@@ -903,7 +1106,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>

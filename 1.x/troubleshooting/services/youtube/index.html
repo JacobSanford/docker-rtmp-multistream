@@ -11,10 +11,10 @@
 <link href="../twitch/" rel="prev"/>
 <link href="../archive/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.23" name="generator"/>
-<title>YouTube Troubleshooting - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.84d31ad4.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<title>Stream Not Reaching YouTube - docker-rtmp-multistream</title>
+<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -26,7 +26,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#youtube-troubleshooting">
+<a class="md-skip" href="#stream-not-reaching-youtube">
           Skip to content
         </a>
 </div>
@@ -52,7 +52,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              YouTube Troubleshooting
+              Stream Not Reaching YouTube
             
           </span>
 </div>
@@ -139,7 +139,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../..">
 <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
 </a>
@@ -148,7 +152,11 @@
 <input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -156,13 +164,21 @@
 <nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../requirements/">
 <span class="md-ellipsis">
+    
+  
     Requirements
+  
+
     
   </span>
 </a>
@@ -170,7 +186,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../quickstart/">
 <span class="md-ellipsis">
-    QuickStart
+    
+  
+    Quick Start
+  
+
     
   </span>
 </a>
@@ -178,108 +198,48 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../configuration/">
 <span class="md-ellipsis">
+    
+  
     Configuration
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Streaming Services
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_4">
-<span class="md-nav__icon md-icon"></span>
-            Streaming Services
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/overview/">
-<span class="md-ellipsis">
-    Overview
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/twitch/">
+<a class="md-nav__link" href="../../../restrict-access/">
 <span class="md-ellipsis">
-    Twitch
+    
+  
+    Restrict Access
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/youtube/">
+<a class="md-nav__link" href="../../../security/">
 <span class="md-ellipsis">
-    YouTube
+    
+  
+    Security
+  
+
     
   </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../services/archive/">
-<span class="md-ellipsis">
-    Archive
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
-<span class="md-ellipsis">
-    Performance
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_5">
-<span class="md-nav__icon md-icon"></span>
-            Performance
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/hardware/">
-<span class="md-ellipsis">
-    Hardware
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/bandwidth/">
-<span class="md-ellipsis">
-    Bandwidth
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../../performance/quality/">
-<span class="md-ellipsis">
-    Quality
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_6" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
 <span class="md-ellipsis">
-    Technical Reference
+    
+  
+    Streaming Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -287,13 +247,157 @@
 <nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_2_6">
 <span class="md-nav__icon md-icon"></span>
-            Technical Reference
+            
+  
+    Streaming Services
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/overview/">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/twitch/">
+<span class="md-ellipsis">
+    
+  
+    Twitch
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/youtube/">
+<span class="md-ellipsis">
+    
+  
+    YouTube
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../services/archive/">
+<span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/hardware/">
+<span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/bandwidth/">
+<span class="md-ellipsis">
+    
+  
+    Bandwidth
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../performance/quality/">
+<span class="md-ellipsis">
+    
+  
+    Quality
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Technical Reference
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Technical Reference
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/architecture/">
 <span class="md-ellipsis">
+    
+  
     Architecture
+  
+
     
   </span>
 </a>
@@ -301,7 +405,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/service-patterns/">
 <span class="md-ellipsis">
+    
+  
     Service Patterns
+  
+
     
   </span>
 </a>
@@ -309,7 +417,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../techref/environment/">
 <span class="md-ellipsis">
+    
+  
     Environment Variables
+  
+
     
   </span>
 </a>
@@ -318,24 +430,36 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Troubleshooting
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_2_7">
+<nav aria-expanded="true" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
 <span class="md-nav__icon md-icon"></span>
-            Troubleshooting
+            
+  
+    Troubleshooting
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../">
 <span class="md-ellipsis">
+    
+  
     Overview
+  
+
     
   </span>
 </a>
@@ -343,7 +467,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../ip_authentication/">
 <span class="md-ellipsis">
+    
+  
     IP Authentication
+  
+
     
   </span>
 </a>
@@ -351,30 +479,46 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../connection-issues/">
 <span class="md-ellipsis">
+    
+  
     Connection Issues
+  
+
     
   </span>
 </a>
 </li>
 <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_7_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_9_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9_4" id="__nav_2_9_4_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_2_7_4_label" class="md-nav" data-md-level="3">
-<label class="md-nav__title" for="__nav_2_7_4">
+<nav aria-expanded="true" aria-labelledby="__nav_2_9_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_2_9_4">
 <span class="md-nav__icon md-icon"></span>
-            Services
+            
+  
+    Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../twitch/">
 <span class="md-ellipsis">
+    
+  
     Twitch
+  
+
     
   </span>
 </a>
@@ -383,14 +527,22 @@
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
 <label class="md-nav__link md-nav__link--active" for="__toc">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
+    
+  
     YouTube
+  
+
     
   </span>
 </a>
@@ -403,35 +555,27 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Common Issues
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#stream-not-visible">
-<span class="md-ellipsis">
-      Stream Not Visible
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#stream-latency">
-<span class="md-ellipsis">
-      Stream Latency
+      
+        Common Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoding-warnings">
 <span class="md-ellipsis">
-      Encoding Warnings
+      
+        Encoding Warnings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#stream-not-appearing">
 <span class="md-ellipsis">
-      Stream Not Appearing
+      
+        Stream Not Appearing
+      
     </span>
 </a>
 <nav aria-label="Stream Not Appearing" class="md-nav">
@@ -439,41 +583,60 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Possible Causes
+      
+        Possible Causes
+      
     </span>
 </a>
 <nav aria-label="Possible Causes" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-service-not-enabled">
+<a class="md-nav__link" href="#service-not-enabled">
 <span class="md-ellipsis">
-      1. Service Not Enabled
+      
+        Service Not Enabled
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-invalid-stream-key">
+<a class="md-nav__link" href="#wrong-stream-key">
 <span class="md-ellipsis">
-      2. Invalid Stream Key
+      
+        Wrong Stream Key
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-platform-specific-issues">
+<a class="md-nav__link" href="#platform-specific-issues">
 <span class="md-ellipsis">
-      3. Platform-Specific Issues
+      
+        Platform-Specific Issues
+      
     </span>
 </a>
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#confirm-the-fix">
+<span class="md-ellipsis">
+      
+        Confirm the Fix
+      
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -481,32 +644,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      Debug Logs
+      
+        Debug Logs
+      
     </span>
 </a>
-<nav aria-label="Debug Logs" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#enable-detailed-logging">
-<span class="md-ellipsis">
-      Enable Detailed Logging
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-log-messages">
-<span class="md-ellipsis">
-      Common Log Messages
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -516,7 +665,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../archive/">
 <span class="md-ellipsis">
+    
+  
     Archive
+  
+
     
   </span>
 </a>
@@ -534,7 +687,11 @@
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
 <span class="md-ellipsis">
+    
+  
     Developer Guide
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -542,14 +699,22 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
-            Developer Guide
+            
+  
+    Developer Guide
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--nested">
 <input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3_1" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
 <span class="md-ellipsis">
+    
+  
     Adding Services
+  
+
     
   </span>
 <span class="md-nav__icon md-icon"></span>
@@ -557,13 +722,21 @@
 <nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
 <label class="md-nav__title" for="__nav_3_1">
 <span class="md-nav__icon md-icon"></span>
-            Adding Services
+            
+  
+    Adding Services
+  
+
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/overview/">
 <span class="md-ellipsis">
-    Overview
+    
+  
+    Add a Service
+  
+
     
   </span>
 </a>
@@ -571,7 +744,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/configuration/">
 <span class="md-ellipsis">
-    Configuration
+    
+  
+    Contract Reference
+  
+
     
   </span>
 </a>
@@ -579,7 +756,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/adding-services/testing/">
 <span class="md-ellipsis">
-    Testing
+    
+  
+    Test a Service
+  
+
     
   </span>
 </a>
@@ -588,9 +769,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../security/">
+<a class="md-nav__link" href="../../../developer/validation/">
 <span class="md-ellipsis">
-    Security
+    
+  
+    Input Validation
+  
+
     
   </span>
 </a>
@@ -598,7 +783,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../developer/testing/">
 <span class="md-ellipsis">
+    
+  
     Testing
+  
+
     
   </span>
 </a>
@@ -609,7 +798,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../../contributing/">
 <span class="md-ellipsis">
+    
+  
     Contributing Documentation
+  
+
     
   </span>
 <span class="md-status md-status--ready"></span>
@@ -632,35 +825,27 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#common-issues">
 <span class="md-ellipsis">
-      Common Issues
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#stream-not-visible">
-<span class="md-ellipsis">
-      Stream Not Visible
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#stream-latency">
-<span class="md-ellipsis">
-      Stream Latency
+      
+        Common Issues
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#encoding-warnings">
 <span class="md-ellipsis">
-      Encoding Warnings
+      
+        Encoding Warnings
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#stream-not-appearing">
 <span class="md-ellipsis">
-      Stream Not Appearing
+      
+        Stream Not Appearing
+      
     </span>
 </a>
 <nav aria-label="Stream Not Appearing" class="md-nav">
@@ -668,41 +853,60 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#symptoms">
 <span class="md-ellipsis">
-      Symptoms
+      
+        Symptoms
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#possible-causes">
 <span class="md-ellipsis">
-      Possible Causes
+      
+        Possible Causes
+      
     </span>
 </a>
 <nav aria-label="Possible Causes" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#1-service-not-enabled">
+<a class="md-nav__link" href="#service-not-enabled">
 <span class="md-ellipsis">
-      1. Service Not Enabled
+      
+        Service Not Enabled
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#2-invalid-stream-key">
+<a class="md-nav__link" href="#wrong-stream-key">
 <span class="md-ellipsis">
-      2. Invalid Stream Key
+      
+        Wrong Stream Key
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3-platform-specific-issues">
+<a class="md-nav__link" href="#platform-specific-issues">
 <span class="md-ellipsis">
-      3. Platform-Specific Issues
+      
+        Platform-Specific Issues
+      
     </span>
 </a>
 </li>
 </ul>
 </nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#confirm-the-fix">
+<span class="md-ellipsis">
+      
+        Confirm the Fix
+      
+    </span>
+</a>
 </li>
 </ul>
 </nav>
@@ -710,32 +914,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#debug-logs">
 <span class="md-ellipsis">
-      Debug Logs
+      
+        Debug Logs
+      
     </span>
 </a>
-<nav aria-label="Debug Logs" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#enable-detailed-logging">
-<span class="md-ellipsis">
-      Enable Detailed Logging
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#common-log-messages">
-<span class="md-ellipsis">
-      Common Log Messages
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
-      See Also
+      
+        See Also
+      
     </span>
 </a>
 </li>
@@ -746,9 +936,9 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="youtube-troubleshooting"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.</span> YouTube Troubleshooting</h1>
+<h1 id="stream-not-reaching-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.</span> Stream Not Reaching YouTube</h1>
 <p>Troubleshooting issues specific to streaming to YouTube.</p>
-<h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.1</span> Common Issues</h2>
+<h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.1</span> Common Issues</h2>
 <table>
 <thead>
 <tr>
@@ -757,14 +947,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><strong><a href="#stream-not-visible">Stream Not Visible</a></strong></td>
-<td>Stream connects but is not visible on your YouTube channel</td>
-</tr>
-<tr>
-<td><strong><a href="#stream-latency">Stream Latency</a></strong></td>
-<td>Excessive delay between OBS and YouTube viewers</td>
-</tr>
 <tr>
 <td><strong><a href="#encoding-warnings">Encoding Warnings</a></strong></td>
 <td>YouTube Studio shows encoding or quality warnings</td>
@@ -780,78 +962,57 @@
 </tbody>
 </table>
 <hr/>
-<h2 id="stream-not-visible"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.2</span> Stream Not Visible</h2>
-<p><strong>Issue</strong>: Stream connects but not visible on channel</p>
-<p><strong>Check</strong>:
-1. YouTube Studio → Live dashboard
-2. Verify "Stream status" shows "Live"
-3. Check stream visibility settings (Public/Unlisted/Private)</p>
-<p><strong>Solution</strong>:
-- Set visibility to "Public" in YouTube Studio
-- Wait 30-60 seconds for stream to appear
-- Refresh browser page</p>
-<h2 id="stream-latency"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.3</span> Stream Latency</h2>
-<p><strong>Issue</strong>: Excessive delay between OBS and YouTube</p>
-<p><strong>Check</strong>: YouTube Studio → Stream settings → Latency</p>
-<p><strong>Options</strong>:
-- <strong>Normal latency</strong>: 8-12 seconds (default)
-- <strong>Low latency</strong>: 4-8 seconds
-- <strong>Ultra-low latency</strong>: 2-4 seconds</p>
-<p><strong>Note</strong>: Lower latency may affect stream quality for viewers with slow connections.</p>
-<h2 id="encoding-warnings"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.4</span> Encoding Warnings</h2>
-<p><strong>Issue</strong>: YouTube shows encoding warnings</p>
-<p><strong>Check</strong>: YouTube Studio → Live dashboard → Stream health</p>
-<p><strong>Common warnings</strong>:
-- "Audio not synced with video" - Check OBS audio settings
-- "Resolution mismatch" - Ensure OBS output matches expected resolution
-- "Bitrate too low" - Increase OBS bitrate</p>
-<p><strong>Solution</strong>: YouTube prefers high bitrate for best quality (15-20 Mbps recommended).</p>
-<h2 id="stream-not-appearing"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5</span> Stream Not Appearing</h2>
-<h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5.1</span> Symptoms</h3>
+<h2 id="encoding-warnings"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.2</span> Encoding Warnings</h2>
+<p><strong>Issue</strong>: YouTube Studio shows stream health warnings</p>
+<p>The relay passes the YouTube stream through unchanged, so the warnings describe what OBS sends. Fix them in OBS. For YouTube's recommended settings, see <a href="https://support.google.com/youtube/answer/2853702" target="_blank">Choose live encoder settings, bitrates, and resolutions</a>.</p>
+<h2 id="stream-not-appearing"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3</span> Stream Not Appearing</h2>
+<h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.1</span> Symptoms</h3>
 <ul>
 <li>OBS shows "Streaming" but stream doesn't appear on YouTube</li>
 <li>No errors in OBS</li>
 </ul>
-<h3 id="possible-causes"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5.2</span> Possible Causes</h3>
-<h4 id="1-service-not-enabled"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5.2.1</span> 1. Service Not Enabled</h4>
+<h3 id="possible-causes"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2</span> Possible Causes</h3>
+<h4 id="service-not-enabled"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2.1</span> Service Not Enabled</h4>
 <p><strong>Check</strong>: Look at container logs during startup:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"configured and enabled"</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
 </span></code></pre></div>
-<p><strong>Expected output</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>YouTube configured and enabled.
-</span></code></pre></div></p>
+<p>When YouTube is enabled, this line appears:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>YouTube configuration complete, and service enabled.
+</span></code></pre></div>
+<p>If YouTube is not enabled, this line appears instead: <code>YOUTUBE_KEY is not set. Skipping YouTube configuration.</code></p>
 <p><strong>Solution</strong>: If YouTube is missing:
-- Verify <code>YOUTUBE_KEY</code> is set in <code>env/relay.env</code>
-- Restart container after setting the key</p>
-<h4 id="2-invalid-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5.2.2</span> 2. Invalid Stream Key</h4>
-<p><strong>Check</strong>: Look for authentication errors in logs:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"error\|auth\|publish"</span>
+- Verify <code>YOUTUBE_KEY</code> is set in <code>env/relay.env</code></p>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
 </span></code></pre></div>
-<p><strong>Solution</strong>:
-- Verify stream key is correct in <code>env/relay.env</code>
-- Check for extra spaces or quotes around key
-- Get fresh key from YouTube Studio</p>
-<h4 id="3-platform-specific-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.5.2.3</span> 3. Platform-Specific Issues</h4>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
+</span></code></pre></div>
+<h4 id="wrong-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2.2</span> Wrong Stream Key</h4>
+<p>A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.</p>
+<p><strong>Check</strong>: Confirm the relay can reach YouTube:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nc<span class="w"> </span>-zv<span class="w"> </span>a.rtmp.youtube.com<span class="w"> </span><span class="m">1935</span>
+</span></code></pre></div>
+<p>Then start streaming and open YouTube Studio → Go Live. If the command above prints <code>open</code> and YouTube Studio → Go Live shows no incoming stream, the key is the likely cause.</p>
+<p><strong>Solution</strong>: Copy the key again from YouTube Studio into <code>env/relay.env</code>.</p>
+<p>Recreate the container so it reads the new value:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate
+</span></code></pre></div>
+<p>Confirm the service is enabled:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
+</span></code></pre></div>
+<h4 id="platform-specific-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2.3</span> Platform-Specific Issues</h4>
 <ul>
 <li>Verify you've scheduled a live stream or enabled "Stream now"</li>
 <li>Check YouTube Studio for stream health warnings</li>
+<li>Check the stream's visibility (Public/Unlisted/Private) in YouTube Studio</li>
 <li>Confirm account is verified for live streaming</li>
 </ul>
-<h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.6</span> Debug Logs</h2>
-<h3 id="enable-detailed-logging"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.6.1</span> Enable Detailed Logging</h3>
-<p>For YouTube-specific issues, check logs:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># YouTube-specific logs</span>
-</span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>youtube
-</span></code></pre></div>
-<h3 id="common-log-messages"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.6.2</span> Common Log Messages</h3>
-<p><strong>Success messages</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>YouTube configured and enabled.
-</span></code></pre></div></p>
-<p><strong>Error messages</strong>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>ERROR: YOUTUBE_KEY is not set
-</span><span id="__span-5-2"><a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>ERROR: Failed to validate YOUTUBE_KEY
-</span></code></pre></div></p>
-<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.7</span> See Also</h2>
+<h3 id="confirm-the-fix"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.3</span> Confirm the Fix</h3>
+<p>Start streaming in OBS and open YouTube Studio → Go Live. The stream shows as receiving.</p>
+<h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.4</span> Debug Logs</h2>
+<p>For the startup lines every service prints, and which ones mean the container stopped, see <a href="../../#check-service-status">Check Service Status</a>. For more detail while streaming, see <a href="../../connection-issues/#increase-log-verbosity">Increase Log Verbosity</a>.</p>
+<h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.5</span> See Also</h2>
 <ul>
 <li><strong><a href="../../">Troubleshooting Overview</a></strong> - Main troubleshooting guide</li>
 <li><strong><a href="../../connection-issues/">Connection Issues</a></strong> - Network and connectivity problems</li>
@@ -884,7 +1045,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
 </body>
 </html>
