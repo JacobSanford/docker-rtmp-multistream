@@ -112,10 +112,6 @@ plugins:
       ignore_urls:
         - 'https://help.twitch.tv/*'  # May rate-limit
         - 'https://studio.youtube.com'  # Requires auth
-#  - to-pdf:
-#      cover_title: docker-rtmp-multistream
-#      cover_subtitle: Documentation and User Guide
-#      download_link: header
   - enumerate-headings:
       exclude:
         - index.md
