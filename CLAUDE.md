@@ -131,21 +131,22 @@ All environment variables are validated before being used in configurations via 
 
 **Validation Functions:**
 - `validate_stream_key()` - Prevents command injection in stream keys
-- `validate_path()` - Ensures safe file paths, blocks shell metacharacters
-- `validate_ip_range()` - Validates CIDR notation
-- `validate_number()` - Enforces numeric types with optional min/max bounds
+- `validate_path()` - Ensures safe file paths, blocks spaces, `..` segments and shell metacharacters
+- `validate_ip_range()` / `validate_ip_ranges()` - Validates CIDR notation (single / comma-separated)
+- `validate_number()` - Enforces non-negative integers of at most 9 digits with optional min/max bounds
 - `validate_identifier()` - Validates alphanumeric identifiers (codecs, presets)
 - `validate_bitrate()` - Validates bitrate format (numeric or with k/K suffix)
 - `validate_log_level()` - Whitelist validation for nginx log levels
 - `validate_suffix()` - Validates file extensions
+- `validate_boolean()` - Validates TRUE/FALSE, case insensitive
 - `escape_for_sed()` - Safely escapes values for sed substitution
 
 **Security Protections:**
 - Command injection prevention (blocks `;|&$\`{}[]<>`)
-- Path traversal protection (blocks `../` sequences)
+- Path traversal protection (`validate_path` rejects `..` path segments)
 - Configuration injection prevention (blocks newlines, null bytes)
-- Buffer overflow mitigation (length limits on all inputs)
-- Fail-fast behavior (`set -e` in all scripts)
+- Length limits on stream keys, paths, identifiers, suffixes and numbers
+- Fail-fast behavior (`set -e` in the pre-init scripts; `build/scripts/run.sh` stops the container when one fails)
 
 All configuration scripts validate inputs before use, preventing malicious values from reaching nginx configs or shell commands.
 
