@@ -15,7 +15,6 @@ TESTS_FAILED=0
 # Cleanup function
 cleanup() {
   echo -e "\n${YELLOW}Cleaning up test resources...${NC}"
-  docker compose -f docker-compose.test.yml down -v 2>/dev/null || true
   rm -rf tmp 2>/dev/null || true
 }
 
