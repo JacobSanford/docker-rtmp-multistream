@@ -850,10 +850,10 @@
 </li>
 </ol>
 <h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Settings</h2>
-<p><code>ARCHIVE_PATH</code> turns archiving on. <code>ARCHIVE_SUFFIX</code> sets the filename extension only; files are always FLV. For both variables' defaults and valid values, see <a href="../../techref/environment/#archive-variables">Archive Variables</a>.</p>
+<p><code>ARCHIVE_PATH</code> turns archiving on. For its default and valid values, see <a href="../../techref/environment/#archive_path"><code>ARCHIVE_PATH</code></a>. Archives are always FLV files.</p>
 <h2 id="file-naming"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.4</span> File Naming</h2>
 <p>Each stream is written to a new file named:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>&lt;stream-name&gt;-&lt;unix-time&gt;_&lt;DDMMYYYY&gt;_&lt;HHMMSS&gt;.&lt;ARCHIVE_SUFFIX&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>&lt;stream-name&gt;-&lt;unix-time&gt;_&lt;DDMMYYYY&gt;_&lt;HHMMSS&gt;.flv
 </span></code></pre></div>
 <p>For example, a stream published as <code>rtmp://&lt;relay&gt;/relay/live</code> on 25 September 2026 at 14:53:40 UTC produces:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>live-1790348020_25092026_145340.flv

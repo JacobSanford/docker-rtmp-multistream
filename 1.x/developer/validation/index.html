@@ -753,15 +753,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#validate_suffixsuffix-name">
-<span class="md-ellipsis">
-      
-        validate_suffix(suffix, name)
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#validate_booleanvalue-name">
 <span class="md-ellipsis">
       
@@ -977,15 +968,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#validate_suffixsuffix-name">
-<span class="md-ellipsis">
-      
-        validate_suffix(suffix, name)
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#validate_booleanvalue-name">
 <span class="md-ellipsis">
       
@@ -1111,11 +1093,6 @@
 <td><code>90_configure_archive.sh</code></td>
 </tr>
 <tr>
-<td><code>ARCHIVE_SUFFIX</code></td>
-<td><code>validate_suffix</code></td>
-<td><code>90_configure_archive.sh</code></td>
-</tr>
-<tr>
 <td><code>TWITCH_KEY</code>, <code>YOUTUBE_KEY</code></td>
 <td><code>validate_stream_key</code></td>
 <td><code>90_configure_twitch.sh</code>, <code>90_configure_youtube.sh</code></td>
@@ -1221,42 +1198,31 @@
 <p><strong>Usage:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>validate_log_level<span class="w"> </span><span class="s2">"</span><span class="nv">$NGINX_ERROR_LOG_LEVEL</span><span class="s2">"</span><span class="w"> </span><span class="s2">"NGINX_ERROR_LOG_LEVEL"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h3 id="validate_suffixsuffix-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.8</span> <code>validate_suffix(suffix, name)</code></h3>
-<p>Validates file extensions for archive recordings.</p>
-<p><strong>Allowed characters:</strong> <code>a-z A-Z 0-9</code></p>
-<p><strong>Blocks:</strong>
-- Leading dots: <code>.mp4</code>
-- Paths: <code>mp4/flv</code>
-- Special characters: <code>mp4-flv</code>
-- More than 10 characters</p>
-<p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>validate_suffix<span class="w"> </span><span class="s2">"</span><span class="nv">$ARCHIVE_SUFFIX</span><span class="s2">"</span><span class="w"> </span><span class="s2">"ARCHIVE_SUFFIX"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-</span></code></pre></div></p>
-<h3 id="validate_booleanvalue-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.9</span> <code>validate_boolean(value, name)</code></h3>
+<h3 id="validate_booleanvalue-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.8</span> <code>validate_boolean(value, name)</code></h3>
 <p>Validates on/off settings such as <code>TWITCH_PARTNER</code>.</p>
 <p><strong>Allowed values:</strong> <code>TRUE</code> or <code>FALSE</code>, in any case (<code>true</code>, <code>True</code> and <code>FALSE</code> are all accepted)</p>
 <p><strong>Blocks:</strong> Any other value, including <code>yes</code>, <code>1</code> and empty</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>validate_boolean<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_PARTNER</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_PARTNER"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>validate_boolean<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_PARTNER</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_PARTNER"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span></code></pre></div></p>
-<h3 id="escape_for_sedvalue"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.10</span> <code>escape_for_sed(value)</code></h3>
+<h3 id="escape_for_sedvalue"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.9</span> <code>escape_for_sed(value)</code></h3>
 <p>Escapes special characters for safe sed substitution.</p>
 <p><strong>Escapes:</strong> <code>\ | &amp;</code></p>
 <p><strong>Returns:</strong> Escaped string safe for use in sed commands</p>
 <p><strong>Usage:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nv">SAFE_KEY</span><span class="o">=</span><span class="k">$(</span>escape_for_sed<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_KEY</span><span class="s2">"</span><span class="k">)</span>
-</span><span id="__span-9-2"><a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|TWITCH_KEY|</span><span class="nv">$SAFE_KEY</span><span class="s2">|g"</span><span class="w"> </span>config.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="nv">SAFE_KEY</span><span class="o">=</span><span class="k">$(</span>escape_for_sed<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_KEY</span><span class="s2">"</span><span class="k">)</span>
+</span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">"s|TWITCH_KEY|</span><span class="nv">$SAFE_KEY</span><span class="s2">|g"</span><span class="w"> </span>config.conf
 </span></code></pre></div></p>
 <h2 id="attack-vectors-mitigated"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3</span> Attack Vectors Mitigated</h2>
 <h3 id="command-injection"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.1</span> Command Injection</h3>
 <p><strong>Risk:</strong> Malicious environment variables containing shell commands</p>
 <p><strong>Mitigation:</strong>
 - Every user-set variable validated before use
-- Stream keys, identifiers, suffixes and booleans are whitelisted, so shell metacharacters such as <code>;|&amp;$`()&lt;&gt;{}[]</code> cannot appear in them
+- Stream keys, identifiers and booleans are whitelisted, so shell metacharacters such as <code>;|&amp;$`()&lt;&gt;{}[]</code> cannot appear in them
 - Stream keys, <code>TWITCH_ENDPOINT</code> and <code>ARCHIVE_PATH</code> escaped before <code>sed</code> substitution
 - A failing startup script stops the container before nginx starts (<code>build/scripts/run.sh</code>)</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">"key123;rm -rf /"</span><span class="w">  </span><span class="c1"># Rejected by validate_stream_key()</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s2">"key123;rm -rf /"</span><span class="w">  </span><span class="c1"># Rejected by validate_stream_key()</span>
 </span></code></pre></div></p>
 <h3 id="configuration-injection"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.2</span> Configuration Injection</h3>
 <p><strong>Risk:</strong> Newlines or control characters injecting malicious config directives</p>
@@ -1264,7 +1230,7 @@
 - Stream keys and paths containing a newline or null byte are rejected
 - Every other validator matches the whole value against a single-line pattern or a fixed list</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s1">$'abc\ndef'</span><span class="w">  </span><span class="c1"># Rejected (newline)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s1">$'abc\ndef'</span><span class="w">  </span><span class="c1"># Rejected (newline)</span>
 </span></code></pre></div></p>
 <p>In <code>env/relay.env</code>, <code>\n</code> is a literal backslash and <code>n</code>, not a newline. A key written that way is rejected because <code>\</code> is outside the allowed characters.</p>
 <h3 id="path-traversal"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.3</span> Path Traversal</h3>
@@ -1276,8 +1242,8 @@
 - Spaces and tabs rejected (nginx would split the path into several arguments)
 - Path validation before writability check</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"../../etc/passwd"</span><span class="w">  </span><span class="c1"># Rejected (relative)</span>
-</span><span id="__span-12-2"><a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"/tmp/../../../etc"</span><span class="w">  </span><span class="c1"># Rejected (traversal)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"../../etc/passwd"</span><span class="w">  </span><span class="c1"># Rejected (relative)</span>
+</span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span><span class="s2">"/tmp/../../../etc"</span><span class="w">  </span><span class="c1"># Rejected (traversal)</span>
 </span></code></pre></div></p>
 <h3 id="length-limits"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.4</span> Length Limits</h3>
 <p>These are sanity limits on values that end up in nginx and FFmpeg configuration.</p>
@@ -1290,7 +1256,7 @@
 </ul>
 <p>Bitrates and IP ranges have no length limit. Each IP range must still match the <code>x.x.x.x/y</code> shape.</p>
 <p><strong>Example blocked:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'a%.0s'</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..201<span class="o">}</span><span class="k">)</span><span class="w">  </span><span class="c1"># Rejected (too long)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'a%.0s'</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..201<span class="o">}</span><span class="k">)</span><span class="w">  </span><span class="c1"># Rejected (too long)</span>
 </span></code></pre></div></p>
 <h2 id="testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.4</span> Testing</h2>
 <p>All validation functions are tested with test cases covering:
@@ -1298,7 +1264,7 @@
 - Invalid inputs (injection attempts, traversal, length limits)
 - Edge cases (empty, boundaries, special formats)</p>
 <p>Run validation tests:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>bash<span class="w"> </span>tests/00_validation_tests.sh
 </span></code></pre></div></p>
 <p>See <code>tests/README.md</code> for detailed test documentation.</p>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.5</span> See Also</h2>

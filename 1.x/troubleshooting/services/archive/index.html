@@ -1083,23 +1083,20 @@
 </span></code></pre></div>
 <h2 id="file-format-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.3</span> File Format Issues</h2>
 <p><strong>Issue</strong>: Archive files won't play or are corrupted</p>
-<p>Archives are always recorded as FLV (Flash Video), whatever <code>ARCHIVE_SUFFIX</code> says. <code>ARCHIVE_SUFFIX</code> only sets the file extension. A file named <code>.mp4</code> is still FLV inside, and some players refuse it.</p>
-<p><strong>Solution</strong>: Set the extension to match the content in <code>env/relay.env</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">ARCHIVE_SUFFIX</span><span class="o">=</span>flv
-</span></code></pre></div>
-<p>To convert an existing archive to a real MP4 file without re-encoding:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>ffmpeg<span class="w"> </span>-i<span class="w"> </span>&lt;ARCHIVE_FILE&gt;<span class="w"> </span>-c<span class="w"> </span>copy<span class="w"> </span>&lt;OUTPUT_FILE&gt;.mp4
+<p>Archives are always recorded as FLV (Flash Video). Some players and editors refuse FLV files.</p>
+<p><strong>Solution</strong>: Convert the archive to MP4 without re-encoding:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>ffmpeg<span class="w"> </span>-i<span class="w"> </span>&lt;ARCHIVE_FILE&gt;<span class="w"> </span>-c<span class="w"> </span>copy<span class="w"> </span>&lt;OUTPUT_FILE&gt;.mp4
 </span></code></pre></div>
 <p>Replace <code>&lt;ARCHIVE_FILE&gt;</code> with the archive's file name and <code>&lt;OUTPUT_FILE&gt;</code> with a name for the copy. Confirm the copy by opening <code>&lt;OUTPUT_FILE&gt;.mp4</code> in your player.</p>
 <h2 id="files-not-named-as-expected"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.4</span> Files Not Named as Expected</h2>
-<p>The name is <code>&lt;stream-name&gt;-&lt;unix-time&gt;_&lt;DDMMYYYY&gt;_&lt;HHMMSS&gt;.&lt;ARCHIVE_SUFFIX&gt;</code>, with the date and time in UTC. See <a href="../../../services/archive/#file-naming">File Naming</a> for an example and how to sort the files.</p>
+<p>The name is <code>&lt;stream-name&gt;-&lt;unix-time&gt;_&lt;DDMMYYYY&gt;_&lt;HHMMSS&gt;.flv</code>, with the date and time in UTC. See <a href="../../../services/archive/#file-naming">File Naming</a> for an example and how to sort the files.</p>
 <h2 id="archive-grows-too-large"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.5</span> Archive Grows Too Large</h2>
 <p><strong>Issue</strong>: Disk filling up with old archives</p>
 <p>List the recordings older than 30 days first:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>find<span class="w"> </span>./stream_archive<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*.flv"</span><span class="w"> </span>-mtime<span class="w"> </span>+30<span class="w"> </span>-print
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>find<span class="w"> </span>./stream_archive<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*.flv"</span><span class="w"> </span>-mtime<span class="w"> </span>+30<span class="w"> </span>-print
 </span></code></pre></div>
 <p>If the list is what you expect to lose, delete them. This cannot be undone:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>sudo<span class="w"> </span>find<span class="w"> </span>./stream_archive<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*.flv"</span><span class="w"> </span>-mtime<span class="w"> </span>+30<span class="w"> </span>-delete
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a>sudo<span class="w"> </span>find<span class="w"> </span>./stream_archive<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*.flv"</span><span class="w"> </span>-mtime<span class="w"> </span>+30<span class="w"> </span>-delete
 </span></code></pre></div>
 <h2 id="debug-logs"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.6</span> Debug Logs</h2>
 <p>For the startup lines every service prints, and which ones mean the container stopped, see <a href="../../#check-service-status">Check Service Status</a>. For more detail while streaming, see <a href="../../connection-issues/#increase-log-verbosity">Increase Log Verbosity</a>.</p>

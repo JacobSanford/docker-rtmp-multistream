@@ -627,15 +627,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#archive_suffix">
-<span class="md-ellipsis">
-      
-        ARCHIVE_SUFFIX
-      
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -1104,15 +1095,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#archive_suffix">
-<span class="md-ellipsis">
-      
-        ARCHIVE_SUFFIX
-      
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -1420,17 +1402,6 @@
 </span></code></pre></div></p>
 <p><strong>Note</strong>: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See <a href="../../services/archive/#enable-archive">Enable Archive</a>.</p>
 <p><strong>See also</strong>: <a href="../../services/archive/">Archive Configuration</a></p>
-<h3 id="archive_suffix"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4.2</span> ARCHIVE_SUFFIX</h3>
-<p><strong>Description</strong>: Filename extension for archived stream files. The recorder always writes an FLV container; this value changes only the extension.</p>
-<p><strong>Type</strong>: String</p>
-<p><strong>Default</strong>: <code>flv</code></p>
-<p><strong>Required</strong>: No</p>
-<p><strong>Used by</strong>: Archive service configuration</p>
-<p><strong>Valid values</strong>: Letters and digits only, 1 to 10 characters. Checked only when <code>ARCHIVE_PATH</code> is set; any other value stops the container at start.</p>
-<p><strong>Example</strong>:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="nv">ARCHIVE_SUFFIX</span><span class="o">=</span>flv
-</span></code></pre></div></p>
-<p><strong>Note</strong>: Keep <code>flv</code>. Other values such as <code>mp4</code> produce FLV files with a misleading extension. To get an MP4, remux after recording: <code>ffmpeg -i input.flv -c copy output.mp4</code></p>
 <hr/>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> See Also</h2>
 <ul>

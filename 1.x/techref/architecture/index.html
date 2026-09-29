@@ -1236,11 +1236,11 @@
 </span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="kn">record</span><span class="w"> </span><span class="s">all</span><span class="p">;</span>
 </span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="kn">record_path</span><span class="w"> </span><span class="s">ARCHIVE_PATH</span><span class="p">;</span>
 </span><span id="__span-8-4"><a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="kn">record_unique</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
-</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="kn">record_suffix</span><span class="w"> </span><span class="s">_%d%m%Y_%H%M%S.ARCHIVE_SUFFIX</span><span class="p">;</span>
+</span><span id="__span-8-5"><a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="kn">record_suffix</span><span class="w"> </span><span class="s">_%d%m%Y_%H%M%S.flv</span><span class="p">;</span>
 </span><span id="__span-8-6"><a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">    </span><span class="kn">record_notify</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
 </span><span id="__span-8-7"><a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="p">}</span>
 </span></code></pre></div>
-<p><code>ARCHIVE_PATH</code> and <code>ARCHIVE_SUFFIX</code> are replaced with their values at container start. For the resulting file names, see <a href="../../services/archive/#file-naming">File Naming</a>.</p>
+<p><code>ARCHIVE_PATH</code> is replaced with its value at container start. For the resulting file names, see <a href="../../services/archive/#file-naming">File Naming</a>.</p>
 <p>Every stream published to the <code>relay</code> application is archived, whichever services are enabled. Streams published directly to the <code>twitch</code> application are not.</p>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.9</span> See Also</h2>
 <ul>
