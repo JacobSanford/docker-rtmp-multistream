@@ -74,7 +74,7 @@ Before you start, check the [Requirements](requirements.md).
     YouTube configuration complete, and service enabled.
     ```
 
-    If you see an `ERROR:` line, the relay has stopped. See [Invalid Environment Value](troubleshooting/connection-issues.md#1-invalid-environment-value).
+    If you see an `ERROR:` line, the relay has stopped. See [Invalid Environment Value](troubleshooting/connection-issues.md#invalid-environment-value).
 
 !!! warning "Security"
     The relay has no password or key authentication. It accepts a stream from any address in `PUBLISH_IP_RANGE`. Keep that list as narrow as your network allows, and never expose port 1935 to the internet.

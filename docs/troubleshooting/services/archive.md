@@ -28,11 +28,11 @@ Troubleshooting issues specific to local stream archiving.
 
 ### Symptoms
 - No files appear in the archive directory, or
-- The whole relay stops at startup with `ERROR: ARCHIVE_PATH is not writable by the nginx user.`: Twitch and YouTube stop too. See [cause 2](#2-archive-folder-not-mounted-or-not-writable)
+- The whole relay stops at startup with `ERROR: ARCHIVE_PATH is not writable by the nginx user.`: Twitch and YouTube stop too. See [Archive Folder Not Mounted or Not Writable](#archive-folder-not-mounted-or-not-writable)
 
 ### Possible Causes
 
-#### 1. Archive Not Enabled
+#### Archive Not Enabled
 
 **Check**: Look for archive configuration in logs:
 
@@ -57,7 +57,7 @@ Confirm the service is enabled:
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
-#### 2. Archive Folder Not Mounted or Not Writable
+#### Archive Folder Not Mounted or Not Writable
 
 **Check**:
 
@@ -111,7 +111,7 @@ This error appears both when no host folder is mounted and when the mounted fold
 
     The output includes `Archive configuration complete, and service enabled.`
 
-#### 3. Disk Space
+#### Disk Space
 
 **Check**: Verify available space:
 

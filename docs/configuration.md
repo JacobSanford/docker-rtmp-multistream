@@ -57,7 +57,7 @@ For every variable, its default and its valid values, see the [Environment Varia
 
     The status is `Up`, and each service you configured prints `… configuration complete, and service enabled.`
 
-    If you see an `ERROR:` line, the value was rejected and the container stopped. The line names the variable. Correct it and repeat from step 2, or undo your edit to get the relay back. See [Invalid Environment Value](troubleshooting/connection-issues.md#1-invalid-environment-value).
+    If you see an `ERROR:` line, the value was rejected and the container stopped. The line names the variable. Correct it and repeat from step 2, or undo your edit to get the relay back. See [Invalid Environment Value](troubleshooting/connection-issues.md#invalid-environment-value).
 
 ## What Turns Each Service On
 

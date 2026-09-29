@@ -20,7 +20,7 @@ Troubleshooting connection problems between OBS and the relay, and container sta
 
 ### Possible Causes
 
-#### 1. Port Not Accessible
+#### Port Not Accessible
 
 **Check**: Verify port 1935 is exposed:
 
@@ -36,7 +36,7 @@ ports:
   - "1935:1935"
 ```
 
-#### 2. IP Address Mismatch
+#### IP Address Mismatch
 
 **Check**: Verify you're using the correct IP address:
 
@@ -48,7 +48,7 @@ ip addr show | grep inet
 - Use the relay PC's local network IP (e.g., `192.168.1.100`)
 - Don't use `127.0.0.1` or `localhost` from another machine
 
-#### 3. Firewall Blocking
+#### Firewall Blocking
 
 **Check**: From the machine running OBS, test whether the relay's port is reachable. Replace `<RELAY_IP>` with the relay machine's LAN address (see the previous check).
 
@@ -73,7 +73,7 @@ A reachable port prints a line containing `succeeded` or `open`.
 - Ubuntu: `sudo ufw allow 1935/tcp`
 - Check if Docker networking is working
 
-#### 4. IP Range Restriction
+#### IP Range Restriction
 
 **Check**: Look for a denied connection in the logs:
 
@@ -129,7 +129,7 @@ docker compose logs relay | grep "access forbidden"
 
 ### Possible Causes
 
-#### 1. Invalid Environment Value
+#### Invalid Environment Value
 
 **Check**: Find the error lines in the log:
 
@@ -146,11 +146,11 @@ ERROR: TWITCH_FPS must be a number.
 
 **Solution**: Correct the named variable in `env/relay.env`, then run `docker compose up -d --force-recreate`.
 
-If the error is `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the problem is the archive folder mount, not the value: see [Archive Folder Not Mounted or Not Writable](services/archive.md#2-archive-folder-not-mounted-or-not-writable).
+If the error is `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the problem is the archive folder mount, not the value: see [Archive Folder Not Mounted or Not Writable](services/archive.md#archive-folder-not-mounted-or-not-writable).
 
 If you can't tell what's wrong and need the relay back quickly, undo your last change to `env/relay.env` and recreate the container the same way.
 
-#### 2. Port Already in Use
+#### Port Already in Use
 
 **Check**: `docker compose up -d` prints one of these:
 
@@ -180,7 +180,7 @@ failed to bind host port 0.0.0.0:1935/tcp: address already in use
 
 Then start the relay: `docker compose up -d`.
 
-#### 3. Outdated Image
+#### Outdated Image
 
 **Solution**: Rebuild the image against the latest base image, then recreate the container:
 ```bash

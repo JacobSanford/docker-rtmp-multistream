@@ -36,7 +36,7 @@ The relay passes the YouTube stream through unchanged, so the warnings describe 
 
 ### Possible Causes
 
-#### 1. Service Not Enabled
+#### Service Not Enabled
 
 **Check**: Look at container logs during startup:
 
@@ -67,7 +67,7 @@ Confirm the service is enabled:
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
-#### 2. Wrong Stream Key
+#### Wrong Stream Key
 
 A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.
 
@@ -93,7 +93,7 @@ Confirm the service is enabled:
 docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 ```
 
-#### 3. Platform-Specific Issues
+#### Platform-Specific Issues
 
 - Verify you've scheduled a live stream or enabled "Stream now"
 - Check YouTube Studio for stream health warnings

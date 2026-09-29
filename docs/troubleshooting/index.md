@@ -38,7 +38,7 @@ Work through these checks in order. Stop at the first one that fails.
     docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
     ```
 
-    If a service shows `Skipping` or `ERROR`, see Service Not Enabled for [Twitch](services/twitch.md#1-service-not-enabled) or [YouTube](services/youtube.md#1-service-not-enabled).
+    If a service shows `Skipping` or `ERROR`, see Service Not Enabled for [Twitch](services/twitch.md#service-not-enabled) or [YouTube](services/youtube.md#service-not-enabled).
 
 4. **Does the stream appear on each platform?** If not, see Stream Not Appearing for [Twitch](services/twitch.md#stream-not-appearing) or [YouTube](services/youtube.md#stream-not-appearing).
 
@@ -115,7 +115,7 @@ ERROR: TWITCH_PARTNER must be TRUE or FALSE (case insensitive).
 [!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
 ```
 
-To fix it, see [Invalid Environment Value](connection-issues.md#1-invalid-environment-value).
+To fix it, see [Invalid Environment Value](connection-issues.md#invalid-environment-value).
 
 ### Test Configuration Syntax
 
