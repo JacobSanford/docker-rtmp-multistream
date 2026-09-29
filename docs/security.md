@@ -56,10 +56,11 @@ Validates the archive path.
 - Spaces and tabs (nginx would split the path into several arguments)
 - `..` path segments (`/tmp/../etc` is rejected; `/tmp/a..b` is accepted)
 - The characters `` ; | & $ ` ( ) { } < > ``
+- `#` (starts an nginx comment) and `'` or `"` (change how nginx reads the directive)
 - Newlines and null bytes
 - More than 500 characters
 
-**Not blocked:** `[ ] # ' " * ? ~`. Avoid them: `#` starts an nginx comment, and quotes change how nginx reads the directive.
+**Not blocked:** `[ ] * ? ~`
 
 An empty path is accepted, and Archive is skipped.
 

@@ -29,7 +29,7 @@ Comprehensive unit tests for input validation functions that prevent security vu
 
 **validate_path**:
 - Valid inputs: absolute paths, with dash/underscore, empty
-- Invalid inputs: relative paths, shell metacharacters (`;|&$\``), excessive length
+- Invalid inputs: relative paths, spaces, `..` segments, shell metacharacters (`` ;|&$` ``), `#` and quotes, excessive length
 
 **validate_ip_range**:
 - Valid inputs: CIDR notation (Class A/B/C networks, /32 hosts)

@@ -97,6 +97,12 @@ validate_path() {
     return 1
   fi
 
+  # nginx treats # as a comment and quotes as argument delimiters
+  if echo "$path" | grep -qE "[#'\"]"; then
+    echo "ERROR: $name must not contain #, ' or \"."
+    return 1
+  fi
+
   # Check for newlines or null bytes
   local line_count=$(printf '%s' "$path" | wc -l)
   if [ "$line_count" -gt 0 ]; then

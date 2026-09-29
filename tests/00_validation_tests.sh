@@ -142,6 +142,23 @@ test_path_invalid_trailing_dotdot() {
   run_validation_test "validate_path" "/tmp/archive/.." "ending in /.." 1
 }
 
+test_path_invalid_hash() {
+  run_validation_test "validate_path" "/tmp/archive#old" "with hash" 1
+}
+
+test_path_invalid_double_quote() {
+  run_validation_test "validate_path" '/tmp/archive"old' "with double quote" 1
+}
+
+test_path_invalid_single_quote() {
+  docker run --rm --entrypoint sh -e TEST_PATH="/tmp/archive'old" rtmp-multistream:test -c '
+    . /scripts/validate_input.sh
+    validate_path "$TEST_PATH" "TEST_VAR" >/dev/null 2>&1
+  '
+  local result=$?
+  [ $result -eq 1 ]
+}
+
 test_path_invalid_too_long() {
   local long_path="/$(printf 'a%.0s' {1..501})"
   run_validation_test "validate_path" "$long_path" "too long (501 chars)" 1
@@ -643,6 +660,9 @@ run_test "  valid: dots inside a name" test_path_valid_dots_in_name
 run_test "  invalid: space" test_path_invalid_space
 run_test "  invalid: ../ traversal" test_path_invalid_traversal
 run_test "  invalid: ending in /.." test_path_invalid_trailing_dotdot
+run_test "  invalid: hash" test_path_invalid_hash
+run_test "  invalid: double quote" test_path_invalid_double_quote
+run_test "  invalid: single quote" test_path_invalid_single_quote
 run_test "  invalid: too long" test_path_invalid_too_long
 
 echo ""
