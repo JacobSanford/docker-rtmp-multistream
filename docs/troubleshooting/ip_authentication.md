@@ -1,5 +1,5 @@
 ---
-title: OBS Is Refused: access forbidden by rule
+title: "OBS Is Refused: access forbidden by rule"
 description: Fixing "access forbidden by rule" when OBS cannot publish
 audience: users
 doc_type: howto
