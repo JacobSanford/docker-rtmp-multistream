@@ -328,6 +328,15 @@ test_number_invalid_above_max() {
   [ $result -eq 1 ]
 }
 
+test_number_invalid_overflow() {
+  docker run --rm --entrypoint sh rtmp-multistream:test -c "
+    . /scripts/validate_input.sh
+    validate_number '99999999999999999999999' 'TEST' '1' '120' >/dev/null 2>&1
+  "
+  local result=$?
+  [ $result -eq 1 ]
+}
+
 test_number_invalid_empty() {
   docker run --rm --entrypoint sh rtmp-multistream:test -c "
     . /scripts/validate_input.sh
@@ -674,6 +683,7 @@ run_test "  invalid: negative" test_number_invalid_negative
 run_test "  invalid: decimal" test_number_invalid_decimal
 run_test "  invalid: below min" test_number_invalid_below_min
 run_test "  invalid: above max" test_number_invalid_above_max
+run_test "  invalid: overflow past max" test_number_invalid_overflow
 run_test "  invalid: empty" test_number_invalid_empty
 
 echo ""

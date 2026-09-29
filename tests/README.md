@@ -37,7 +37,7 @@ Comprehensive unit tests for input validation functions that prevent security vu
 
 **validate_number**:
 - Valid inputs: integers, zero, with min/max bounds
-- Invalid inputs: text, negative, decimal, out of bounds, empty
+- Invalid inputs: text, negative, decimal, out of bounds, more than 9 digits, empty
 
 **validate_identifier**:
 - Valid inputs: alphanumeric with dash/underscore

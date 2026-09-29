@@ -191,6 +191,12 @@ validate_number() {
     return 1
   fi
 
+  # sh integer tests treat values that overflow as passing, so cap the length
+  if [ ${#value} -gt 9 ]; then
+    echo "ERROR: $name must be at most 9 digits."
+    return 1
+  fi
+
   # Check range if provided
   if [ -n "$min" ] && [ "$value" -lt "$min" ]; then
     echo "ERROR: $name must be >= $min."
