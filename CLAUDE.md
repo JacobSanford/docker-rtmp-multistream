@@ -41,7 +41,8 @@ docker build -t rtmp-multistream .
 1. **Dockerfile**: Defines default environment variables for all services
 2. **env/relay.env**: User overrides (stream keys, quality settings), copied from the tracked `env/relay.env.example` template and ignored by git
 3. **Pre-init Scripts** (run at container start, alphanumeric order):
-   - `89_configure_app.sh`: Replaces placeholder variables in nginx config
+   - `10_configure_nginx.sh` (base image): Replaces `NGINX_CONFD_DIR`, `NGINX_RUN_USER` and log file paths in nginx config
+   - `89_configure_app.sh`: Validates `PUBLISH_IP_RANGE` and the log level, fills in `app.conf` and `auth.conf`. Also replaces `NGINX_CONFD_DIR`, for tests that skip `10_`
    - `90_configure_*.sh`: Each service checks if required env vars are set, configures service-specific settings via sed, and calls `enableService.sh`
 4. **enableService.sh**: Uncomments the service's include directives in `app.conf` to activate it
 
@@ -71,7 +72,7 @@ Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/deve
 1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`), never `{EXAMPLE_KEY}`. Every `application` block includes `http.d/auth.conf`
 2. Add environment variables to `Dockerfile` (defaults) and the `env/relay.env.example` template
 3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` fails
-4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after `89_`):
+4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after the base image's `10_configure_nginx.sh`):
    - If the required variable is empty, echo `<VAR> is not set. Skipping ...` and exit 0
    - Validate every variable; exit 1 on failure (stops the container)
    - Use sed to replace placeholders in config files

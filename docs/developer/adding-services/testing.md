@@ -26,6 +26,8 @@ This guide adds tests for a new service, continuing the `example` service from [
 
 Add these functions to `tests/02_unit_tests.sh`, before the `run_test` lines.
 
+Each test runs `89_configure_app.sh` before the service script. `--entrypoint sh` skips `run.sh`, so the base image's `10_configure_nginx.sh` never runs, and `89_` is what replaces `NGINX_CONFD_DIR` in `app.conf`.
+
 The enable test filters out commented lines with `grep -Ev '^[[:space:]]*#'`. The include lines in `app.conf` are indented, so `grep -v '^#'` would let a commented include through and the test would pass for a service that is never enabled.
 
 ```bash

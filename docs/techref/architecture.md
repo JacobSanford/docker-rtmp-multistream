@@ -96,9 +96,13 @@ When the container starts, configuration happens in this order:
    env/relay.env when you start it with docker compose (docker-compose.yml
    passes it as env_file)
 2. build/scripts/run.sh runs each pre-init script in alphanumeric order:
-   a. 89_configure_app.sh - validates PUBLISH_IP_RANGE and the log level,
+   a. 10_configure_nginx.sh (from the base image) - replaces NGINX_CONFD_DIR,
+      NGINX_RUN_USER and the log file paths in nginx.conf and app.conf
+   b. 89_configure_app.sh - validates PUBLISH_IP_RANGE and the log level,
       fills in app.conf and auth.conf
-   b. 90_configure_*.sh - one per service
+   c. 90_configure_*.sh - one per service
+   The base image's other scripts (01_, 50_, 95_, 96_, 99_) log startup
+   progress and timing.
 3. Each service script:
    - Exits 0 without changes if its required variable is empty
    - Validates its variables, and exits 1 if one is invalid
@@ -135,7 +139,7 @@ Service includes are commented out in `build/conf/nginx/http.d/app.conf`. The Tw
     #include NGINX_CONFD_DIR/apps/twitch.conf;
 ```
 
-At startup, `89_configure_app.sh` replaces `NGINX_CONFD_DIR` with its value, `/etc/nginx/http.d`. `90_configure_twitch.sh` then runs:
+At startup, the base image's `10_configure_nginx.sh` replaces `NGINX_CONFD_DIR` with its value, `/etc/nginx/http.d`. `90_configure_twitch.sh` then runs:
 
 ```bash
 /scripts/enableService.sh twitch

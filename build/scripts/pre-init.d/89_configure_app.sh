@@ -8,6 +8,8 @@ set -e
 validate_ip_ranges "$PUBLISH_IP_RANGE" "PUBLISH_IP_RANGE" || exit 1
 validate_log_level "$NGINX_ERROR_LOG_LEVEL" "NGINX_ERROR_LOG_LEVEL" || exit 1
 
+# The base image's 10_configure_nginx.sh already does this at startup. Kept for
+# tests that run this script without it (docker run --entrypoint sh).
 sed -i "s|NGINX_CONFD_DIR|$NGINX_CONFD_DIR|g" "${NGINX_APP_CONF_FILE}"
 sed -i "s|NGINX_ERROR_LOG_LEVEL|$NGINX_ERROR_LOG_LEVEL|g" "${NGINX_APP_CONF_FILE}"
 
