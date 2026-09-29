@@ -106,6 +106,9 @@ plugins:
       raise_error_after_finish: true  # Check all links before failing
       validate_external_urls: true  # Check external links too
       validate_rendered_template: true
+      retry_max_times: 3  # Retry failed links after 2s, 4s, 8s
+      raise_error_excludes:
+        429: ['https://github.com/*']  # Shared runner IPs get rate-limited
       ignore_urls:
         - 'https://help.twitch.tv/*'  # May rate-limit
         - 'https://studio.youtube.com'  # Requires auth
