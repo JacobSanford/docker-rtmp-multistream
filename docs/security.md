@@ -159,7 +159,7 @@ sed -i "s|TWITCH_KEY|$SAFE_KEY|g" config.conf
 
 ### 1. Stream Keys
 - **Never commit** stream keys to version control
-- Store keys in `env/relay.env` (gitignored)
+- `env/relay.env` is tracked by git, and `.gitignore` does not exclude it. After adding keys, run `git update-index --skip-worktree env/relay.env` so a later `git commit -a` cannot publish them. See [Change Relay Settings](configuration.md).
 - Use Docker secrets for production deployments
 - Rotate keys regularly
 

@@ -179,7 +179,7 @@ Default: `192.168.0.0/16` (local network only)
 ### Stream Keys
 
 Service stream keys are:
-- Stored in `env/relay.env` (not committed to git)
+- Stored in `env/relay.env`, which is tracked by git. To keep keys out of commits, see [Change Relay Settings](../configuration.md)
 - Injected into config at runtime
 - Present in plain text in the generated nginx config inside the container
 - Written to the container log when `NGINX_ERROR_LOG_LEVEL` is `info` or more verbose: nginx logs the full push URL, including the key, when it starts relaying a stream
