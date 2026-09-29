@@ -19,17 +19,10 @@ validate_stream_key() {
     return 1
   fi
 
-  # Check for path traversal attempts
-  if echo "$key" | grep -qE '\.\./'; then
-    echo "ERROR: $name contains path traversal sequence."
-    return 1
-  fi
-
-  # Check for newlines or null bytes (config injection)
-  # Count lines - if more than 1, contains newline
+  # Check for newlines (config injection)
   local line_count=$(printf '%s' "$key" | wc -l)
   if [ "$line_count" -gt 0 ]; then
-    echo "ERROR: $name contains newline or null byte."
+    echo "ERROR: $name contains a newline."
     return 1
   fi
 
@@ -103,10 +96,10 @@ validate_path() {
     return 1
   fi
 
-  # Check for newlines or null bytes
+  # Check for newlines
   local line_count=$(printf '%s' "$path" | wc -l)
   if [ "$line_count" -gt 0 ]; then
-    echo "ERROR: $name contains newline or null byte."
+    echo "ERROR: $name contains a newline."
     return 1
   fi
 

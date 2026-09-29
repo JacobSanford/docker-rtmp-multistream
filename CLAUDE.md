@@ -147,7 +147,7 @@ All environment variables are validated before being used in configurations via 
 **Security Protections:**
 - Command injection prevention (stream keys and identifiers are whitelisted; `validate_path` blocks `` ;|&$`(){}<>#'" ``)
 - Path traversal protection (`validate_path` rejects `..` path segments)
-- Configuration injection prevention (blocks newlines, null bytes)
+- Configuration injection prevention (blocks newlines)
 - Length limits on stream keys, paths, identifiers and numbers
 - Fail-fast behavior (`set -e` in the pre-init scripts; `build/scripts/run.sh` stops the container when one fails)
 

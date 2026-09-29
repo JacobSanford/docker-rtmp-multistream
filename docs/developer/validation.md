@@ -44,7 +44,7 @@ Validates stream keys (Twitch, YouTube) to prevent command injection.
 
 **Blocks:**
 - Every character outside the allowed set, including spaces, `/`, and shell metacharacters such as `` ;|&$`()<>{}[] ``
-- Newlines and null bytes
+- Newlines
 - More than 200 characters
 
 An empty key is accepted, and the service is skipped.
@@ -66,7 +66,7 @@ Validates the archive path.
 - `..` path segments (`/tmp/../etc` is rejected; `/tmp/a..b` is accepted)
 - The characters `` ; | & $ ` ( ) { } < > ``
 - `#` (starts an nginx comment) and `'` or `"` (change how nginx reads the directive)
-- Newlines and null bytes
+- Newlines
 - More than 500 characters
 
 **Not blocked:** `[ ] * ? ~`
@@ -198,7 +198,7 @@ TWITCH_KEY="key123;rm -rf /"  # Rejected by validate_stream_key()
 **Risk:** Newlines or control characters injecting malicious config directives
 
 **Mitigation:**
-- Stream keys and paths containing a newline or null byte are rejected
+- Stream keys and paths containing a newline are rejected
 - Every other validator matches the whole value against a single-line pattern or a fixed list
 
 **Example blocked:**
