@@ -33,7 +33,15 @@ Before you start, check the [Requirements](requirements.md).
 
     TODO(verify: current Twitch and YouTube menu paths to the stream key)
 
-3. In `env/relay.env`, set each key, then save the file:
+3. Create your settings file from the template:
+
+    ```bash
+    cp env/relay.env.example env/relay.env
+    ```
+
+    `env/relay.env` is ignored by git, so your keys cannot be committed.
+
+4. In `env/relay.env`, set each key, then save the file:
 
     ```bash
     TWITCH_KEY=live_123456789_abcdefghij
@@ -42,10 +50,7 @@ Before you start, check the [Requirements](requirements.md).
 
     Paste each key with no spaces or quotes. Leave a key empty to turn that service off.
 
-    !!! warning "Keep your keys out of git"
-        `env/relay.env` is tracked by git. After adding keys, run `git update-index --skip-worktree env/relay.env` so a later `git commit -a` cannot publish them.
-
-4. If your streaming PC's address does not start with `192.168.`, add its subnet to `PUBLISH_IP_RANGE` in `env/relay.env`, keeping the default ranges. For a streaming PC at `10.0.0.25`:
+5. If your streaming PC's address does not start with `192.168.`, uncomment `PUBLISH_IP_RANGE` in `env/relay.env` and set it to the default ranges plus its subnet. For a streaming PC at `10.0.0.25`:
 
     ```bash
     PUBLISH_IP_RANGE=172.16.0.0/12,192.168.0.0/16,10.0.0.0/24
@@ -53,7 +58,7 @@ Before you start, check the [Requirements](requirements.md).
 
     The relay refuses streams from any address outside this list.
 
-5. Start the relay:
+6. Start the relay:
 
     ```bash
     ./start.sh
@@ -61,7 +66,7 @@ Before you start, check the [Requirements](requirements.md).
 
     `start.sh` removes any existing relay container, rebuilds the image against the latest base image, and runs the relay in the foreground. Press Ctrl+C to stop it.
 
-6. In a second terminal on the relay host, confirm each service is enabled:
+7. In a second terminal on the relay host, confirm each service is enabled:
 
     ```bash
     docker compose logs relay | grep -E "service enabled|Skipping|ERROR"

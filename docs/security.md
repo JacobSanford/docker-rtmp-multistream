@@ -40,7 +40,7 @@ It does not try to hide your stream from viewers on the network, or to protect s
 
 ## Where Stream Keys Live
 
-- **`env/relay.env`**, which is tracked by git, and which `.gitignore` does not exclude. After adding keys, run `git update-index --skip-worktree env/relay.env` so a later `git commit -a` cannot publish them. See [Change Relay Settings](configuration.md).
+- **`env/relay.env`**, in plain text. `.gitignore` excludes it, so git does not commit it; the tracked template is `env/relay.env.example`, which holds no keys. See [Change Relay Settings](configuration.md).
 - **The container environment.** Anyone who can run `docker inspect` on the container can read them. The relay has no support for Docker secrets or `*_FILE` variables.
 - **The generated nginx config** inside the container, in plain text.
 - **The container log**, when `NGINX_ERROR_LOG_LEVEL` is `info` or more verbose: nginx logs the full push URL, including the key, when it starts relaying. Return to `error` (the default) after troubleshooting, and remove keys before sharing logs.

@@ -39,7 +39,7 @@ docker build -t rtmp-multistream .
 ### Configuration Flow
 
 1. **Dockerfile**: Defines default environment variables for all services
-2. **env/relay.env**: User overrides environment variables (stream keys, quality settings)
+2. **env/relay.env**: User overrides (stream keys, quality settings), copied from the tracked `env/relay.env.example` template and ignored by git
 3. **Pre-init Scripts** (run at container start, alphanumeric order):
    - `89_configure_app.sh`: Replaces placeholder variables in nginx config
    - `90_configure_*.sh`: Each service checks if required env vars are set, configures service-specific settings via sed, and calls `enableService.sh`
@@ -69,7 +69,7 @@ Archive is neither: it is a `recorder` block inside the `relay` application that
 Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/developer/adding-services/configuration.md`:
 
 1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`), never `{EXAMPLE_KEY}`. Every `application` block includes `http.d/auth.conf`
-2. Add environment variables to `Dockerfile` (defaults) and `env/relay.env` template
+2. Add environment variables to `Dockerfile` (defaults) and the `env/relay.env.example` template
 3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` fails
 4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after `89_`):
    - If the required variable is empty, echo `<VAR> is not set. Skipping ...` and exit 0

@@ -99,11 +99,12 @@ For Transformer, add the transformer line inside `application relay`, and the ap
     ENV EXAMPLE_KEY=""
     ```
 
-2. In `env/relay.env`, add the same variables with a comment, so users can find them:
+2. In `env/relay.env.example`, add the same variables under a comment, so users can find them. Leave the key uncommented and empty, and comment out every other variable at its default:
 
     ```bash
     # Example
     EXAMPLE_KEY=
+    # EXAMPLE_INGEST=live.example.com
     ```
 
 ## Write the Startup Script
@@ -190,7 +191,7 @@ Add unit, integration and, for a new validator, validation tests. See [Test a Ne
     ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 -f lavfi -i sine -t 60 -c:v libx264 -c:a aac -f flv rtmp://localhost:1935/relay/test
     ```
 
-    The stream appears in your service's dashboard. `env/relay.env` is tracked by git: remove the key before you commit.
+    The stream appears in your service's dashboard. `env/relay.env` is ignored by git, so the key stays out of your commit.
 
 ## Document the Service
 

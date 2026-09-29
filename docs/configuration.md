@@ -14,23 +14,15 @@ Every relay setting is an environment variable in `env/relay.env`. The container
 
 For every variable, its default and its valid values, see the [Environment Variables Reference](techref/environment.md).
 
-!!! warning "`env/relay.env` is tracked by git"
-    The file ships with the repository, and `.gitignore` does not exclude it. After you add stream keys, run this once so git stops tracking your edits and a later `git commit -a` cannot publish them:
+`env/relay.env` is your own copy of `env/relay.env.example`, and `.gitignore` excludes it, so your stream keys cannot be committed and `git pull` never changes the file. If you have not created it yet:
 
-    ```bash
-    git update-index --skip-worktree env/relay.env
-    ```
+```bash
+cp env/relay.env.example env/relay.env
+```
 
-    If a later `git pull` stops with `Your local changes to the following files would be overwritten by merge: env/relay.env`, the file changed upstream. Save your copy, take the new version, then put your keys back:
+Without it, `docker compose` stops with `env file …/env/relay.env not found`.
 
-    ```bash
-    cp env/relay.env ~/relay.env.mine
-    git update-index --no-skip-worktree env/relay.env
-    git checkout -- env/relay.env
-    git pull
-    ```
-
-    Copy your keys from `~/relay.env.mine` into the new `env/relay.env`, run the `--skip-worktree` command again, then delete `~/relay.env.mine`.
+The file only needs the values you change. Any variable that is commented out or missing uses the image's default, so a new variable in a later release needs no edit to your file.
 
 ## Change a Setting
 
@@ -68,6 +60,20 @@ For every variable, its default and its valid values, see the [Environment Varia
 | Archive | `ARCHIVE_PATH` is set to an absolute path inside the container that the nginx user can write to. An unwritable or invalid path stops the container. | [Archive Streams to Disk](services/archive.md) |
 
 `PUBLISH_IP_RANGE` controls which addresses may send a stream to the relay; see [OBS Is Refused](troubleshooting/ip_authentication.md). `NGINX_ERROR_LOG_LEVEL` controls how much the relay logs; see [Increase Log Verbosity](troubleshooting/connection-issues.md#increase-log-verbosity).
+
+## Upgrade From a Tracked `env/relay.env`
+
+Clones made before `env/relay.env.example` was added track `env/relay.env` itself. If `git pull` stops with `Your local changes to the following files would be overwritten by merge: env/relay.env`, move your file aside, pull, then put it back:
+
+```bash
+cp env/relay.env ~/relay.env.mine
+git update-index --no-skip-worktree env/relay.env
+git checkout -- env/relay.env
+git pull
+mv ~/relay.env.mine env/relay.env
+```
+
+`git status` no longer lists `env/relay.env`, and your settings are unchanged. The `--no-skip-worktree` line undoes the workaround that older versions of this page recommended, and does nothing if you never ran it.
 
 ## See Also
 
