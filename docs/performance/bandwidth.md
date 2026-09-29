@@ -1,93 +1,73 @@
 ---
 title: Bandwidth Requirements
-description: Network bandwidth requirements and optimization for multi-streaming
+description: Work out the upload bandwidth and disk space your enabled services need
 audience: users
 doc_type: explanation
-tags: [performance, bandwidth, network, upload, optimization]
-lastReviewed: 2025-11-05
+tags: [performance, bandwidth, network, upload, disk]
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
 # Bandwidth Requirements
 
-This page covers network bandwidth requirements for streaming to multiple services simultaneously.
+This page shows how to work out the upload bandwidth the relay host needs for the services you enable, and the disk space Archive uses.
 
-!!! warning "Stream Relays Use Significant Bandwidth"
-    Unlike single-destination streaming, a relay sends your stream to **multiple services at once**. Your total upload bandwidth must support the sum of all enabled destinations. This can easily exceed typical residential upload speeds.
+!!! warning "The relay sends one stream per service"
+    The relay sends a separate copy of your stream to each enabled service at the same time. The relay host's upload must carry the sum of all of them.
 
-## Understanding Bandwidth Usage
+## What Counts as Upload
 
-When streaming through docker-rtmp-multistream, you send:
+Your streaming software sends one stream to the relay. The relay sends one stream to each enabled service.
 
-1. **One stream to the relay** (your source stream from OBS/streaming software)
-2. **Multiple streams from the relay** (one to each enabled service)
+- **Relay on your local network** (the default: `PUBLISH_IP_RANGE` admits the Docker networks and `192.168.0.0/16`): the stream from your streaming software to the relay stays on your local network. Only the relay's outgoing streams use your internet upload.
+- **Relay on a remote host**: your streaming software's stream to the relay also crosses your internet upload, and the relay host's own upload carries the outgoing streams.
 
-Your upload connection must handle **all outgoing streams simultaneously**.
+## Bitrate per Service
 
-## Bandwidth Calculation
+The source bitrate is the video plus audio bitrate set in your streaming software.
 
-Total upload bandwidth = Sum of all enabled service streams:
+| Service | Bitrate sent |
+|---|---|
+| YouTube | Source bitrate. The stream is passed through unchanged |
+| Twitch partner mode (`TWITCH_PARTNER=TRUE`) | Source bitrate. The stream is passed through unchanged |
+| Twitch non-partner mode (the default) | `TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS` kbps of video, plus `TWITCH_AUDIO_BITRATE`. With the defaults, `75 × 60 = 4500` kbps plus `160` kbps: 4660 kbps |
+| Archive | No network traffic, unless `ARCHIVE_PATH` is on a network mount |
 
+`TWITCH_HEIGHT` does not change the Twitch bitrate. The encoder uses constant bitrate, so the rate depends only on `TWITCH_KBITS_PER_VIDEO_FRAME` and `TWITCH_FPS`.
+
+These figures exclude RTMP and TCP overhead.
+
+## Example Calculation
+
+Source: 6000 kbps video and 160 kbps audio, 6160 kbps in all. YouTube and Twitch (non-partner, default settings) are enabled.
+
+- **Relay on your local network**: 6160 (YouTube) + 4660 (Twitch) = 10820 kbps, about 10.8 Mbps of upload.
+- **Relay on a remote host**: add the 6160 kbps source stream on your side: about 17 Mbps of upload from your network. The relay host needs about 10.8 Mbps of upload.
+
+## Disk Space for Archive
+
+Archive writes every stream published to the `relay` application at its source bitrate.
+
+```text
+GB per hour = source kbps × 0.00045
 ```
-Total Upload = Source to Relay + Relay to Service 1 + Relay to Service 2 + ...
-```
 
-### Example Calculation
+A 6160 kbps source uses about 2.8 GB per hour. A 20000 kbps source uses about 9 GB per hour.
 
-**Scenario**: Streaming to YouTube and Twitch
+## Measure Your Upload
 
-- **Source stream** (OBS → relay): 20 Mbps
-- **YouTube** (relay → YouTube): 20 Mbps (passthrough - uses full source bitrate)
-- **Twitch** (relay → Twitch): 4.5 Mbps (transcoded - uses configured lower bitrate)
+1. Run an upload test, for example at [Speedtest.net](https://www.speedtest.net/){target="_blank"}, from the network the relay's outgoing streams leave from.
+2. Compare the upload figure with your total from [Example Calculation](#example-calculation).
 
-**Total upload needed**: ~44.5 Mbps (20 + 20 + 4.5)
+## Reduce Upload
 
-!!! example "Service Bandwidth Patterns"
-    - **YouTube**: Uses passthrough (full source bandwidth) - see [YouTube Configuration](../services/youtube.md)
-    - **Twitch**: Partners use passthrough (full source). Non-partners use transcoded stream (configurable, typically lower) - see [Twitch Configuration](../services/twitch.md)
-    - **Archive**: Local disk I/O only (no network bandwidth)
-
-## Testing Your Connection
-
-Before multi-streaming, test your upload speed:
-
-1. Visit [Speedtest.net](https://www.speedtest.net/){target="_blank"}
-2. Run the test and note your **upload speed**
-3. Compare against your calculated total bandwidth requirement
-
-!!! tip "Upload vs Download"
-    Your **upload** speed is typically much lower than download speed. Most residential connections have asymmetric bandwidth (e.g., 100 Mbps download / 10 Mbps upload).
-
-## Optimization Strategies
-
-If your upload bandwidth is limited, consider these approaches:
-
-### 1. Reduce Source Bitrate
-
-Lower the bitrate in your streaming software (OBS, etc.). This reduces bandwidth for all services.
-
-**Tradeoff**: Lower source quality affects all destinations.
-
-### 2. Use Service-Specific Transcoding
-
-Configure services like Twitch to use lower transcoded settings rather than passthrough.
-
-**Tradeoff**: Additional CPU usage for encoding.
-
-### 3. Selective Service Enable
-
-Only enable services that fit within your bandwidth constraints. Disable less critical destinations.
-
-### 4. Content-Aware Settings
-
-Adjust settings based on your content type (see [Quality Optimization](quality.md)):
-
-- **High motion content**: Lower resolution, maintain frame rate
-- **High detail content**: Lower frame rate, maintain resolution
+- **Lower the source bitrate** in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. It does not change Twitch non-partner mode, which re-encodes to its own bitrate.
+- **Lower the Twitch non-partner bitrate** with `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. Lowering `TWITCH_HEIGHT` does not reduce the bitrate. See [Quality Optimization](quality.md).
+- **Disable a service** by leaving its key empty in `env/relay.env`.
 
 ## See Also
 
-- [Quality Optimization](quality.md) - Stream quality tuning strategies
-- [Hardware Requirements](hardware.md) - CPU considerations for encoding
-- [Twitch Configuration](../services/twitch.md) - Twitch bandwidth and transcoding
-- [YouTube Configuration](../services/youtube.md) - YouTube bandwidth requirements
+- [Quality Optimization](quality.md) - Choosing Twitch resolution, frame rate and bitrate
+- [CPU Considerations](hardware.md) - CPU cost of Twitch re-encoding
+- [Stream to Twitch](../services/twitch.md) - Twitch settings and bitrate reference table
+- [Stream to YouTube](../services/youtube.md) - YouTube settings

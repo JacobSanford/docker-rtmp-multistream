@@ -38,10 +38,10 @@ Linux is the only supported operating system. The relay may run on macOS or Wind
 
 ## Bandwidth and Hardware
 
-The relay host's upload must carry every service at once. See [Bandwidth Requirements](performance/bandwidth.md) and [Hardware Requirements](performance/hardware.md).
+The relay host's upload must carry every service at once. See [Bandwidth Requirements](performance/bandwidth.md) and [CPU Considerations](performance/hardware.md).
 
 ## See Also
 
 - [Quick Start](quickstart.md) - First-time setup
 - [Bandwidth Requirements](performance/bandwidth.md) - Upload needed per service
-- [Hardware Requirements](performance/hardware.md) - CPU and system resources
+- [CPU Considerations](performance/hardware.md) - CPU cost of Twitch re-encoding

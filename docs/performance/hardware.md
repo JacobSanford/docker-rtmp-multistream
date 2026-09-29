@@ -1,39 +1,36 @@
 ---
-title: Hardware Requirements
-description: CPU and processing requirements for stream encoding
+title: CPU Considerations
+description: Which services use CPU, and the settings that change how much Twitch re-encoding uses
 audience: users
 doc_type: explanation
 tags: [performance, cpu, hardware, encoding, ffmpeg]
-lastReviewed: 2025-11-05
+lastReviewed: 2026-09-29
 version: 1.x
 ---
 
-# Hardware Requirements
+# CPU Considerations
 
-This page covers CPU and processing requirements for docker-rtmp-multistream.
+This page explains which services use CPU and the settings that change how much Twitch re-encoding uses. It gives no minimum CPU figure: the load depends on your resolution, frame rate, preset and processor. To see the load on your host, run `docker stats` while you stream.
 
-## CPU Considerations
+## Which Services Use CPU
 
-### General Guidance
+Only Twitch non-partner mode (the default) re-encodes video. It runs FFmpeg with the x264 encoder for as long as you publish, and this is where nearly all of the relay's CPU use comes from.
 
-Stream encoding performance depends on available CPU resources:
+These services forward the stream without re-encoding it, and use little CPU:
 
-- **More cores/threads = better performance** for video encoding
-- **Higher clock speeds** improve encoding efficiency
-- **Relay-only services** (no encoding) require minimal CPU
+- YouTube
+- Twitch partner mode (`TWITCH_PARTNER=TRUE`)
+- Archive
 
-### Encoding Impact
+For the two Twitch modes, see [Partner vs. Non-Partner Streaming](../services/twitch.md#partner-vs-non-partner-streaming).
 
-Services that re-encode video are CPU-intensive. Re-encoding processes your entire stream in real-time, which requires substantial processing power.
+## Settings That Change CPU Use
 
-**Simple relay** (no encoding): Minimal CPU usage - nginx forwards streams without processing them.
+These apply to Twitch non-partner mode only.
 
-**With encoding**: Moderate to high CPU usage - FFmpeg re-encodes the video, which is computationally expensive.
-
-!!! example "Service Patterns"
-    **Twitch** uses FFmpeg re-encoding for non-partners. Partners can use simple relay mode (no encoding). See [Twitch Configuration](../services/twitch.md) for details.
-
-    **YouTube** uses simple relay (no encoding). See [YouTube Configuration](../services/youtube.md) for details.
+- **`TWITCH_HEIGHT` and `TWITCH_FPS`**: the encoder processes every output pixel of every frame, so a higher resolution or frame rate costs more CPU.
+- **`TWITCH_X264_PRESET`**: see [Encoder Presets](#encoder-presets).
+- **`TWITCH_FFMPEG_THREADS`**: see [FFmpeg Thread Management](#ffmpeg-thread-management).
 
 ## FFmpeg Thread Management
 
@@ -46,19 +43,20 @@ Limit threads when the relay shares a host with other CPU-heavy work. Only Twitc
 
 ## Encoder Presets
 
-The x264 encoder preset controls the balance between encoding speed and output quality:
+`TWITCH_X264_PRESET` sets the x264 preset. From fastest to slowest, the valid values are:
 
-- **Faster presets** (`ultrafast`, `veryfast`, `fast`): Lower CPU usage, slightly reduced quality
-- **Slower presets** (`medium`, `slow`, `slower`): Higher CPU usage, better quality
+`ultrafast`, `superfast`, `veryfast`, `faster`, `fast`, `medium` (default), `slow`, `slower`, `veryslow`, `placebo`
 
-!!! tip "CPU-Constrained Systems"
-    If encoding causes CPU bottlenecks, switch to faster presets. The quality difference is often minimal for streaming content.
+A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset does not lower the bitrate: it compresses less efficiently, and quality at that bitrate drops.
 
-For Twitch encoding settings, see [Twitch Configuration](../services/twitch.md).
+If FFmpeg cannot keep up with your settings, try one preset faster, then lower `TWITCH_HEIGHT` or `TWITCH_FPS`.
+
+!!! warning "Preset typos are not caught at startup"
+    The relay checks only that the preset contains letters, digits, `-` and `_`. A misspelled preset such as `mediun` passes the startup check, and FFmpeg fails with `invalid preset 'mediun'` when you first publish. See [Twitch Issues](../troubleshooting/services/twitch.md).
 
 ## See Also
 
-- [Bandwidth Requirements](bandwidth.md) - Network considerations
-- [Quality Optimization](quality.md) - Stream quality tuning
-- [Twitch Configuration](../services/twitch.md) - Twitch-specific encoding settings
+- [Bandwidth Requirements](bandwidth.md) - Upload and disk space
+- [Quality Optimization](quality.md) - Choosing Twitch resolution, frame rate and bitrate
+- [Stream to Twitch](../services/twitch.md) - Twitch-specific encoding settings
 - [Services Overview](../services/overview.md) - Service pattern comparison
