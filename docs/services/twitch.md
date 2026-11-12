@@ -11,7 +11,7 @@ version: 1.x
 # Stream to Twitch
 
 ## Overview
-The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.
+The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner.
 
 ## Enable Twitch
 

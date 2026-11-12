@@ -146,7 +146,7 @@ ERROR: TWITCH_FPS must be a number.
 
 **Solution**: Correct the named variable in `env/relay.env`, then run `docker compose up -d --force-recreate`.
 
-If the error is `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the problem is the archive folder mount, not the value: see [Archive Folder Not Mounted or Not Writable](services/archive.md#archive-folder-not-mounted-or-not-writable).
+If the error is `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, fix the archive folder mount: see [Archive Folder Not Mounted or Not Writable](services/archive.md#archive-folder-not-mounted-or-not-writable).
 
 If you can't tell what's wrong and need the relay back quickly, undo your last change to `env/relay.env` and recreate the container the same way.
 

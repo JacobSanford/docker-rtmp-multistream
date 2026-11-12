@@ -33,7 +33,7 @@ The source bitrate is the video plus audio bitrate set in your streaming softwar
 | Twitch non-partner mode (the default) | `TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS` kbps of video, plus `TWITCH_AUDIO_BITRATE`. With the defaults, `75 × 60 = 4500` kbps plus `160` kbps: 4660 kbps |
 | Archive | No network traffic, unless `ARCHIVE_PATH` is on a network mount |
 
-`TWITCH_HEIGHT` does not change the Twitch bitrate. The encoder uses constant bitrate, so the rate depends only on `TWITCH_KBITS_PER_VIDEO_FRAME` and `TWITCH_FPS`.
+The encoder uses constant bitrate, so the rate depends only on `TWITCH_KBITS_PER_VIDEO_FRAME` and `TWITCH_FPS`. See [How the Twitch Settings Interact](quality.md#how-the-twitch-settings-interact).
 
 These figures exclude RTMP and TCP overhead.
 
@@ -62,7 +62,7 @@ A 6160 kbps source uses about 2.8 GB per hour. A 20000 kbps source uses about 9 
 ## Reduce Upload
 
 - **Lower the source bitrate** in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. It does not change Twitch non-partner mode, which re-encodes to its own bitrate.
-- **Lower the Twitch non-partner bitrate** with `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. Lowering `TWITCH_HEIGHT` does not reduce the bitrate. See [Quality Optimization](quality.md).
+- **Lower the Twitch non-partner bitrate** with `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. See [Quality Optimization](quality.md).
 - **Disable a service** by leaving its key empty in `env/relay.env`.
 
 ## See Also

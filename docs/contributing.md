@@ -16,7 +16,7 @@ version: 1.x
 
 When adding screenshots or diagrams:
 
-1. **Use descriptive file names**: `twitch-dashboard-stream-key.png` not `screenshot1.png`
+1. **Use descriptive file names**: for example `twitch-dashboard-stream-key.png`
 2. **Optimize size**: Max 500KB per image; use PNG for screenshots, SVG for diagrams
 3. **Always include alt text**:
    ```markdown
@@ -30,17 +30,17 @@ When adding screenshots or diagrams:
 
 Use consistent terminology and capitalization throughout documentation:
 
-- **Docker** (not "docker" or "DOCKER")
-- **GitHub** (not "github" or "GITHUB")
-- **docker compose** (not "docker-compose" or "Docker Compose")
-- **FFmpeg** (not "ffmpeg" or "FFMPEG")
-- **nginx** (not "Nginx" or "NGINX")
+- **Docker**
+- **GitHub**
+- **docker compose** (not "docker-compose")
+- **FFmpeg**
+- **nginx**
 - **stream key** (lowercase in body text)
-- **environment variable** (not "env var" in formal documentation)
+- **environment variable**
 
 ### Headings
 
-- Use Title Case: "Change Relay Settings" not "Change relay settings"
+- Use Title Case: "Change Relay Settings"
 - Keep headings short and descriptive
 - Don't skip heading levels (h2 → h4)
 
@@ -62,7 +62,7 @@ rtmp://<relay-ip>:1935/relay
 
 ### Links
 
-- Use descriptive link text (not "click here")
+- Use link text that names the destination
 - Add `{target="_blank"}` for external links
 - Use relative paths for internal links: `../services/twitch.md`
 

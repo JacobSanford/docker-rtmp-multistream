@@ -22,7 +22,7 @@ docker-rtmp-multistream supports multiple streaming destinations with different 
 
 ¹ Twitch pattern depends on `TWITCH_PARTNER` setting - see [Twitch Configuration](twitch.md#partner-vs-non-partner-streaming)
 
-² Archive is not a relay. It records every stream the `relay` application receives to disk, with no re-encoding. See [Archive Service](../techref/architecture.md#archive-service).
+² Archive records every stream the `relay` application receives to disk, with no re-encoding. See [Archive Service](../techref/architecture.md#archive-service).
 
 ## Service Patterns
 

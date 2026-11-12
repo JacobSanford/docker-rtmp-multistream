@@ -52,7 +52,7 @@ The relay can archive streams to disk in real time. Archives are written inside 
 
     Expected output: `Archive configuration complete, and service enabled.`
 
-    If you see `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the container has stopped: the relay does not run at all, not only archiving. Check that `ARCHIVE_PATH` matches the container side of the mount in step 2, and that step 1's `chown` succeeded.
+    If you see `ERROR: ARCHIVE_PATH is not writable by the nginx user.`, the container has stopped, so Twitch and YouTube are down too. Check that `ARCHIVE_PATH` matches the container side of the mount in step 2, and that step 1's `chown` succeeded.
 
 ## Settings
 
@@ -72,7 +72,7 @@ For example, a stream published as `rtmp://<relay>/relay/live` on 25 September 2
 live-1790348020_25092026_145340.flv
 ```
 
-The date and time are in UTC, not your local time zone. Because the date is day-first, sorting by filename does not sort by date across months; sort by the Unix time after the stream name instead, or by modification time (`ls -t`).
+The date and time are in UTC. Because the date is day-first, sorting by filename does not sort by date across months; sort by the Unix time after the stream name instead, or by modification time (`ls -t`).
 
 ## See Also
 

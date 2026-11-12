@@ -53,7 +53,7 @@ relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, clie
 ## Choosing an Appropriate PUBLISH_IP_RANGE
 
 ### Connections From: Other Machines
-Use the address the relay logged as `client:` in [Solution](#solution) step 1, not the address you expect. Choose a range that covers it: `/32` for that address only, or its subnet, such as `192.168.1.0/24`.
+Use the address the relay logged as `client:` in [Solution](#solution) step 1. Choose a range that covers it: `/32` for that address only, or its subnet, such as `192.168.1.0/24`.
 
 ### Connections From: The Same Machine
 

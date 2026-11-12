@@ -59,7 +59,7 @@ Before raising the bitrate above the default, check Twitch's limits in its [Broa
 
 ## Balancing Quality and Resources
 
-- **Upload-constrained**: lower `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. Lowering `TWITCH_HEIGHT` alone does not reduce upload. See [Bandwidth Requirements](bandwidth.md).
+- **Upload-constrained**: lower `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. See [Bandwidth Requirements](bandwidth.md).
 - **CPU-constrained**: use a faster `TWITCH_X264_PRESET`, or lower `TWITCH_HEIGHT` or `TWITCH_FPS`. See [CPU Considerations](hardware.md).
 
 ## See Also

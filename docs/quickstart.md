@@ -89,7 +89,7 @@ Before you start, check the [Requirements](requirements.md).
 1. In OBS, open **Settings** → **Stream** and set:
     - **Service**: Custom
     - **Server**: `rtmp://<RELAY_IP>:1935/relay`
-    - **Stream Key**: any name, for example `mystream`. This is **not** your Twitch or YouTube key; it names the stream on the relay, in its log and in archive file names.
+    - **Stream Key**: any name, for example `mystream`. It names the stream on the relay, in its log and in archive file names. Your Twitch and YouTube keys go in `env/relay.env`.
     - **Use authentication**: unchecked
 
 2. Open **Settings** → **Output**, set **Output Mode** to **Advanced**, and on the **Streaming** tab set:

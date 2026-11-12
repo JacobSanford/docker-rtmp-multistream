@@ -22,7 +22,7 @@ Linux is the only supported operating system. The relay may run on macOS or Wind
 |---|---|---|
 | Docker Engine ([install](https://docs.docker.com/engine/install/){target="_blank"}) | `docker --version` | Prints a version |
 | Docker Compose v2 plugin ([install](https://docs.docker.com/compose/install/){target="_blank"}) | `docker compose version` | Prints a version. `start.sh` uses `docker compose`; the older standalone `docker-compose` command does not work with it. |
-| Docker without `sudo` ([steps](https://docs.docker.com/engine/install/linux-postinstall/){target="_blank"}) | `docker ps` | Prints a table, not `permission denied` |
+| Docker without `sudo` ([steps](https://docs.docker.com/engine/install/linux-postinstall/){target="_blank"}) | `docker ps` | Prints a table |
 | git | `git --version` | Prints a version |
 
 ## Network

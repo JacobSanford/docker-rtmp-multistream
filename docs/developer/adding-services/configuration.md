@@ -42,7 +42,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 
 ## Placeholder Tokens
 
-- A placeholder is a bare uppercase word, named after its variable: `EXAMPLE_KEY`, not `{EXAMPLE_KEY}`. `sed` replaces the word and leaves any braces around it.
+- A placeholder is a bare uppercase word, named after its variable: `EXAMPLE_KEY`. `sed` replaces only the word, so braces around it end up in the config.
 - `sed` replaces every occurrence, including inside a longer token. If one token contains another, substitute the longer one first. `90_configure_twitch.sh` substitutes `TWITCH_DOUBLE_FPS` before `TWITCH_FPS` for this reason.
 - Values derived from variables, such as a bitrate, are computed in the startup script and substituted like any other token. See `TWITCH_VIDEO_BITRATE` in `90_configure_twitch.sh`.
 - Escape free-form values, such as stream keys, host names and paths, with `escape_for_sed` before substituting them. Whitelisted values, such as numbers and identifiers, need no escaping.

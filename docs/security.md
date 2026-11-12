@@ -33,7 +33,7 @@ It does not try to hide your stream from viewers on the network, or to protect s
 
 ## What Is Not Protected
 
-- **Playback is open.** The relay has publish rules only, and no play rules. Anyone who can reach port 1935 can play `rtmp://<RELAY_HOST>/relay/<STREAM_NAME>`, and the transcoded Twitch stream at `/twitch/<STREAM_NAME>`. This was checked against a running container: with `PUBLISH_IP_RANGE=10.99.0.0/24`, a host outside that range was refused as a publisher but could play `relay/<STREAM_NAME>`.
+- **Playback is open.** The relay has no play rules. Anyone who can reach port 1935 can play `rtmp://<RELAY_HOST>/relay/<STREAM_NAME>`, and the transcoded Twitch stream at `/twitch/<STREAM_NAME>`. This was checked against a running container: with `PUBLISH_IP_RANGE=10.99.0.0/24`, a host outside that range was refused as a publisher but could play `relay/<STREAM_NAME>`.
 - **The port is published on every host interface.** `docker-compose.yml` maps `1935:1935`. Docker writes its own iptables rules for published ports, so host firewall tools such as `ufw` may not block them. To close both gaps, see [Limit Who Can Watch](restrict-access.md#limit-who-can-watch).
 - **`127.0.0.1` can always publish**, whatever `PUBLISH_IP_RANGE` is set to.
 - **The `twitch` application accepts publishes directly.** Any address in `PUBLISH_IP_RANGE` can publish to `/twitch/<STREAM_NAME>` and send a stream to Twitch without going through the transcoder.

@@ -69,7 +69,7 @@ Archive is neither: it is a `recorder` block inside the `relay` application that
 
 Follow `docs/developer/adding-services/overview.md`; the rules are in `docs/developer/adding-services/configuration.md`:
 
-1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`), never `{EXAMPLE_KEY}`. Every `application` block includes `http.d/auth.conf`
+1. Create `build/conf/nginx/http.d/apps/<service>.conf` (and optional transformer). Placeholders are bare uppercase tokens (`EXAMPLE_KEY`); `sed` replaces only the word, so braces around it end up in the config. Every `application` block includes `http.d/auth.conf`
 2. Add environment variables to `Dockerfile` (defaults) and the `env/relay.env.example` template
 3. Add commented includes to `build/conf/nginx/http.d/app.conf` as `#include NGINX_CONFD_DIR/apps/<service>.conf;` - no space after `#`, or `enableService.sh` fails
 4. Create `build/scripts/pre-init.d/90_configure_<service>.sh` (must sort after the base image's `10_configure_nginx.sh`):

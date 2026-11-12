@@ -324,7 +324,7 @@ TWITCH_HEIGHT=1080
 TWITCH_KBITS_PER_VIDEO_FRAME=100
 ```
 
-At `TWITCH_FPS=60`, `100` gives 6000 kbps, `75` (the default) gives 4500 kbps, and `50` gives 3000 kbps. `TWITCH_HEIGHT` does not change the bitrate.
+At `TWITCH_FPS=60`, `100` gives 6000 kbps, `75` (the default) gives 4500 kbps, and `50` gives 3000 kbps. See [How the Twitch Settings Interact](../performance/quality.md#how-the-twitch-settings-interact).
 
 **See also**: [Twitch Bitrate Reference](../services/twitch.md#bitrate-reference-table)
 

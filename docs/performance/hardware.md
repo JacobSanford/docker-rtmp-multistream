@@ -47,7 +47,7 @@ Limit threads when the relay shares a host with other CPU-heavy work. Only Twitc
 
 `ultrafast`, `superfast`, `veryfast`, `faster`, `fast`, `medium` (default), `slow`, `slower`, `veryslow`, `placebo`
 
-A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset does not lower the bitrate: it compresses less efficiently, and quality at that bitrate drops.
+A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset keeps the same bitrate and compresses less efficiently: quality at that bitrate drops.
 
 If FFmpeg cannot keep up with your settings, try one preset faster, then lower `TWITCH_HEIGHT` or `TWITCH_FPS`.
 

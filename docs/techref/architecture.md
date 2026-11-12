@@ -58,11 +58,11 @@ Streaming software (for example OBS Studio)
    twitch app)  (relay)
 ```
 
-Twitch runs in one of the two modes, never both: `TWITCH_PARTNER` selects which.
+`TWITCH_PARTNER` selects which of the two modes Twitch runs in.
 
 ### Detailed Request Flow
 
-1. **Stream Reception**: Your streaming software connects to `rtmp://<RELAY_HOST>:1935/relay/<STREAM_NAME>`. The relay accepts any stream name. It is not a service stream key: do not put your Twitch or YouTube key here
+1. **Stream Reception**: Your streaming software connects to `rtmp://<RELAY_HOST>:1935/relay/<STREAM_NAME>`. The relay accepts any stream name. Your Twitch and YouTube keys go in `env/relay.env`
 2. **Application Routing**: The `relay` application receives the stream
 3. **Authorization**: IP-based authentication checks `PUBLISH_IP_RANGE`
 4. **Service Processing**:
@@ -188,7 +188,7 @@ For publish authorization with `PUBLISH_IP_RANGE`, input validation, where strea
 
 ## Archive Service
 
-The Archive service modifies the main `relay` application rather than creating a separate app. `90_configure_archive.sh` deletes `record off;` from `app.conf` and enables this include inside `application relay`:
+The Archive service adds a recorder to the main `relay` application. `90_configure_archive.sh` deletes `record off;` from `app.conf` and enables this include inside `application relay`:
 
 ```nginx
 recorder all {

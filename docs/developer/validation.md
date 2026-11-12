@@ -114,7 +114,7 @@ Validates alphanumeric identifiers (codecs, presets, endpoints).
 - Spaces, periods, special characters
 - More than 100 characters
 
-This checks the characters only, not the value. A misspelled preset such as `mediun` passes validation and fails only when FFmpeg starts, at the first publish to Twitch.
+This checks only the characters. A misspelled preset such as `mediun` passes validation and fails only when FFmpeg starts, at the first publish to Twitch.
 
 **Usage:**
 ```bash
@@ -206,7 +206,7 @@ TWITCH_KEY="key123;rm -rf /"  # Rejected by validate_stream_key()
 TWITCH_KEY=$'abc\ndef'  # Rejected (newline)
 ```
 
-In `env/relay.env`, `\n` is a literal backslash and `n`, not a newline. A key written that way is rejected because `\` is outside the allowed characters.
+In `env/relay.env`, `\n` is two characters, a backslash and `n`. A key written that way is rejected because `\` is outside the allowed characters.
 
 ### Path Traversal
 **Risk:** Archive paths escaping intended directory structure
