@@ -11,10 +11,10 @@
 <link href="../ip_authentication/" rel="prev"/>
 <link href="../services/twitch/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>OBS Can't Connect or the Relay Won't Start - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -1123,7 +1123,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="obs-cant-connect-or-the-relay-wont-start"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.</span> OBS Can't Connect or the Relay Won't Start</h1>
-<p>Troubleshooting connection problems between OBS and the relay, and container startup issues.</p>
+<p>Use this page when OBS can't connect to the relay or the relay container won't start.</p>
 <h2 id="cannot-connect-from-obs"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.1</span> Cannot Connect from OBS</h2>
 <h3 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.1.1</span> Symptoms</h3>
 <ul>
@@ -1203,7 +1203,7 @@
 </span><span id="__span-11-2"><a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>[!] pre-init.d - 90_configure_twitch.sh failed. Stopping container.
 </span></code></pre></div>
 <p><strong>Solution</strong>: Correct the named variable in <code>env/relay.env</code>, then run <code>docker compose up -d --force-recreate</code>.</p>
-<p>If the error is <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code>, the problem is the archive folder mount, not the value: see <a href="../services/archive/#archive-folder-not-mounted-or-not-writable">Archive Folder Not Mounted or Not Writable</a>.</p>
+<p>If the error is <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code>, fix the archive folder mount: see <a href="../services/archive/#archive-folder-not-mounted-or-not-writable">Archive Folder Not Mounted or Not Writable</a>.</p>
 <p>If you can't tell what's wrong and need the relay back quickly, undo your last change to <code>env/relay.env</code> and recreate the container the same way.</p>
 <h4 id="port-already-in-use"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.2.2.2</span> Port Already in Use</h4>
 <p><strong>Check</strong>: <code>docker compose up -d</code> prints one of these:</p>
@@ -1252,7 +1252,7 @@
 <p>When you start streaming, a line like this appears for each destination:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>relay: create push name='&lt;STREAM_NAME&gt;' ... url='a.rtmp.youtube.com/live2/&lt;YOUTUBE_KEY&gt;' ...
 </span></code></pre></div>
-<p>Valid values, least to most verbose: <code>emerg</code>, <code>alert</code>, <code>crit</code>, <code>error</code> (default), <code>warn</code>, <code>notice</code>, <code>info</code>. <code>debug</code> is also accepted, but this image's nginx gives no more output at <code>debug</code> than at <code>info</code>.</p>
+<p>Valid values, least to most verbose: <code>emerg</code>, <code>alert</code>, <code>crit</code>, <code>error</code> (default), <code>warn</code>, <code>notice</code>, <code>info</code>. <code>debug</code> is also accepted, but in this image's nginx it gives the same output as <code>info</code>.</p>
 <h3 id="check-nginx-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.3.2</span> Check nginx Configuration</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1"># Test nginx config syntax</span>
 </span><span id="__span-20-2"><a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nginx<span class="w"> </span>-t
@@ -1294,7 +1294,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

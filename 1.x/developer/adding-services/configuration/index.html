@@ -11,10 +11,10 @@
 <link href="../overview/" rel="prev"/>
 <link href="../testing/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Service Contract Reference - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -878,15 +878,15 @@
 </span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c1">#include NGINX_CONFD_DIR/transformers/&lt;SERVICE&gt;.conf;</span>
 </span></code></pre></div>
 <ul>
-<li>Write <code>#include</code> with no space. <code>enableService.sh</code> matches <code>#include &lt;PATH&gt;;</code> exactly. With <code># include</code>, with a space, it finds no line to enable and stops the container with <code>ERROR: No '#include &lt;PATH&gt;;' line in /etc/nginx/http.d/app.conf. Cannot enable &lt;SERVICE&gt;.</code></li>
-<li>Keep the literal token <code>NGINX_CONFD_DIR</code>. <code>89_configure_app.sh</code> replaces it with <code>/etc/nginx/http.d</code> before any <code>90_</code> script runs, and <code>enableService.sh</code> matches the replaced path.</li>
+<li>Write <code>#include</code> with no space. <code>enableService.sh</code> matches <code>#include &lt;PATH&gt;;</code> exactly. If you write <code># include</code> (with a space), it finds no line to enable and stops the container with <code>ERROR: No '#include &lt;PATH&gt;;' line in /etc/nginx/http.d/app.conf. Cannot enable &lt;SERVICE&gt;.</code></li>
+<li>Keep the literal token <code>NGINX_CONFD_DIR</code>. The base image's <code>10_configure_nginx.sh</code> replaces it with <code>/etc/nginx/http.d</code> before any <code>90_</code> script runs, and <code>enableService.sh</code> matches the replaced path. <code>89_configure_app.sh</code> replaces it too, so tests that skip the base image's scripts still work: see <a href="../testing/#add-unit-tests">Test a Service</a>.</li>
 <li>Put each line where the <a href="#files">Files</a> table says it is included from.</li>
 </ul>
 <h2 id="placeholder-tokens"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.3</span> Placeholder Tokens</h2>
 <ul>
-<li>A placeholder is a bare uppercase word, named after its variable: <code>EXAMPLE_KEY</code>, not <code>{EXAMPLE_KEY}</code>. <code>sed</code> replaces the word and leaves any braces around it.</li>
+<li>A placeholder is a bare uppercase word, named after its variable: <code>EXAMPLE_KEY</code>. <code>sed</code> replaces only the word, so braces around it end up in the config.</li>
 <li><code>sed</code> replaces every occurrence, including inside a longer token. If one token contains another, substitute the longer one first. <code>90_configure_twitch.sh</code> substitutes <code>TWITCH_DOUBLE_FPS</code> before <code>TWITCH_FPS</code> for this reason.</li>
-<li>Values derived from variables, such as a bitrate, are computed in the startup script and substituted like any other token. See <code>TWITCH_VIDEO_BITRATE</code> in <code>90_configure_twitch.sh</code>.</li>
+<li>Compute derived values, such as a bitrate, in the startup script and substitute them like any other token. See <code>TWITCH_VIDEO_BITRATE</code> in <code>90_configure_twitch.sh</code>.</li>
 <li>Escape free-form values, such as stream keys, host names and paths, with <code>escape_for_sed</code> before substituting them. Whitelisted values, such as numbers and identifiers, need no escaping.</li>
 </ul>
 <h2 id="startup-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">23.4</span> Startup Script</h2>
@@ -900,8 +900,8 @@
 </thead>
 <tbody>
 <tr>
-<td>Name it <code>90_configure_&lt;SERVICE&gt;.sh</code>, so it sorts after <code>89_configure_app.sh</code></td>
-<td>It must run after <code>89_</code> has replaced <code>NGINX_CONFD_DIR</code> in <code>app.conf</code>. Before that, the include marker does not match and <code>enableService.sh</code> stops the container</td>
+<td>Name it <code>90_configure_&lt;SERVICE&gt;.sh</code>, like the other service scripts</td>
+<td>It must sort after the base image's <code>10_configure_nginx.sh</code>, which replaces <code>NGINX_CONFD_DIR</code> in <code>app.conf</code>. If it runs earlier, the marker still holds the token, so <code>enableService.sh</code> finds no match and stops the container</td>
 </tr>
 <tr>
 <td>Start with <code>set -e</code> and source <code>/scripts/validate_input.sh</code></td>
@@ -965,7 +965,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

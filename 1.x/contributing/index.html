@@ -10,10 +10,10 @@
 <link href="https://jacobsanford.github.io/docker-rtmp-multistream/1.x/contributing/" rel="canonical"/>
 <link href="../developer/testing/" rel="prev"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Contributing to Documentation - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -914,7 +914,7 @@
 <h2 id="adding-images"><span class="enumerate-headings-plugin enumerate-heading-plugin">27.1</span> Adding Images</h2>
 <p>When adding screenshots or diagrams:</p>
 <ol>
-<li><strong>Use descriptive file names</strong>: <code>twitch-dashboard-stream-key.png</code> not <code>screenshot1.png</code></li>
+<li><strong>Use descriptive file names</strong>: for example <code>twitch-dashboard-stream-key.png</code></li>
 <li><strong>Optimize size</strong>: Max 500KB per image; use PNG for screenshots, SVG for diagrams</li>
 <li><strong>Always include alt text</strong>:
    <div class="language-markdown highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>![<span class="nt">Screenshot of Twitch dashboard showing stream key location</span>](<span class="na">../images/services/twitch-dashboard-stream-key.png</span>)
@@ -925,17 +925,17 @@
 <h3 id="terminology"><span class="enumerate-headings-plugin enumerate-heading-plugin">27.2.1</span> Terminology</h3>
 <p>Use consistent terminology and capitalization throughout documentation:</p>
 <ul>
-<li><strong>Docker</strong> (not "docker" or "DOCKER")</li>
-<li><strong>GitHub</strong> (not "github" or "GITHUB")</li>
-<li><strong>docker compose</strong> (not "docker-compose" or "Docker Compose")</li>
-<li><strong>FFmpeg</strong> (not "ffmpeg" or "FFMPEG")</li>
-<li><strong>nginx</strong> (not "Nginx" or "NGINX")</li>
+<li><strong>Docker</strong></li>
+<li><strong>GitHub</strong></li>
+<li><strong>docker compose</strong> (not "docker-compose")</li>
+<li><strong>FFmpeg</strong></li>
+<li><strong>nginx</strong></li>
 <li><strong>stream key</strong> (lowercase in body text)</li>
-<li><strong>environment variable</strong> (not "env var" in formal documentation)</li>
+<li><strong>environment variable</strong></li>
 </ul>
 <h3 id="headings"><span class="enumerate-headings-plugin enumerate-heading-plugin">27.2.2</span> Headings</h3>
 <ul>
-<li>Use Title Case: "Change Relay Settings" not "Change relay settings"</li>
+<li>Use Title Case: "Change Relay Settings"</li>
 <li>Keep headings short and descriptive</li>
 <li>Don't skip heading levels (h2 → h4)</li>
 </ul>
@@ -950,12 +950,12 @@
 </span></code></pre></div>
 <h3 id="links"><span class="enumerate-headings-plugin enumerate-heading-plugin">27.2.4</span> Links</h3>
 <ul>
-<li>Use descriptive link text (not "click here")</li>
+<li>Use link text that names the destination</li>
 <li>Add <code>{target="_blank"}</code> for external links</li>
 <li>Use relative paths for internal links: <code>../services/twitch.md</code></li>
 </ul>
 <h2 id="front-matter"><span class="enumerate-headings-plugin enumerate-heading-plugin">27.3</span> Front Matter</h2>
-<p>All documentation pages should include front matter:</p>
+<p>Include front matter on every documentation page:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nn">---</span>
 </span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Page Title</span>
 </span><span id="__span-3-3"><a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One-sentence summary for search</span>
@@ -1014,7 +1014,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

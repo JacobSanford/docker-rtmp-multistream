@@ -11,10 +11,10 @@
 <link href="../twitch/" rel="prev"/>
 <link href="../archive/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Stream Not Reaching YouTube - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -937,7 +937,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="stream-not-reaching-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.</span> Stream Not Reaching YouTube</h1>
-<p>Troubleshooting issues specific to streaming to YouTube.</p>
+<p>Use this page to fix problems that affect only the YouTube stream.</p>
 <h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.1</span> Common Issues</h2>
 <table>
 <thead>
@@ -979,7 +979,7 @@
 <p>When YouTube is enabled, this line appears:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>YouTube configuration complete, and service enabled.
 </span></code></pre></div>
-<p>If YouTube is not enabled, this line appears instead: <code>YOUTUBE_KEY is not set. Skipping YouTube configuration.</code></p>
+<p>If <code>YOUTUBE_KEY</code> is empty, you see this line instead: <code>YOUTUBE_KEY is not set. Skipping YouTube configuration.</code></p>
 <p><strong>Solution</strong>: If YouTube is missing:
 - Verify <code>YOUTUBE_KEY</code> is set in <code>env/relay.env</code></p>
 <p>Recreate the container so it reads the new value:</p>
@@ -989,7 +989,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"service enabled|Skipping|ERROR"</span>
 </span></code></pre></div>
 <h4 id="wrong-stream-key"><span class="enumerate-headings-plugin enumerate-heading-plugin">20.3.2.2</span> Wrong Stream Key</h4>
-<p>A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.</p>
+<p>The relay accepts any well-formed key and has no way to check it against YouTube, so a wrong key may leave nothing in the log.</p>
 <p><strong>Check</strong>: Confirm the relay can reach YouTube:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>relay<span class="w"> </span>nc<span class="w"> </span>-zv<span class="w"> </span>a.rtmp.youtube.com<span class="w"> </span><span class="m">1935</span>
 </span></code></pre></div>
@@ -1045,7 +1045,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

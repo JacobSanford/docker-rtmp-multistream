@@ -11,10 +11,10 @@
 <link href="../" rel="prev"/>
 <link href="../connection-issues/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>OBS Is Refused: access forbidden by rule - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -876,8 +876,8 @@
 <article class="md-content__inner md-typeset">
 <h1 id="obs-is-refused-access-forbidden-by-rule"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.</span> OBS Is Refused: access forbidden by rule</h1>
 <h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.1</span> Overview</h2>
-<p>The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the <a href="../../techref/environment/#system-variables">PUBLISH_IP_RANGE</a> environment variable.</p>
-<p>If this mask does not include the IP address of the machine you are streaming from, you will see access forbidden errors in the logs and publishing the stream from OBS to your relay will not be accepted.</p>
+<p>By default, the relay accepts Real-Time Messaging Protocol (RTMP) streams from typical local and Docker addresses (172.16.0.0/12,192.168.0.0/16). You can change this range with the <a href="../../techref/environment/#system-variables">PUBLISH_IP_RANGE</a> environment variable.</p>
+<p>If you stream from a machine outside this range, the relay refuses the stream from OBS and logs an <code>access forbidden</code> error.</p>
 <h2 id="symptoms"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.2</span> Symptoms</h2>
 <p>"access forbidden by rule" errors in the relay logs, e.g.:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>relay-1  | 2025/11/05 10:34:08 [error] 95#95: *42 access forbidden by rule, client: 172.22.0.1, server: 0.0.0.0:1935
@@ -908,11 +908,11 @@
 </ol>
 <h2 id="choosing-an-appropriate-publish_ip_range"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4</span> Choosing an Appropriate PUBLISH_IP_RANGE</h2>
 <h3 id="connections-from-other-machines"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.1</span> Connections From: Other Machines</h3>
-<p>Use the address the relay logged as <code>client:</code> in <a href="#solution">Solution</a> step 1, not the address you expect. Choose a range that covers it: <code>/32</code> for that address only, or its subnet, such as <code>192.168.1.0/24</code>.</p>
+<p>Use the address the relay logged as <code>client:</code> in <a href="#solution">Solution</a> step 1. Choose a range that covers it: <code>/32</code> for that address only, or its subnet, such as <code>192.168.1.0/24</code>.</p>
 <h3 id="connections-from-the-same-machine"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.2</span> Connections From: The Same Machine</h3>
 <p>If OBS runs on the same machine as the relay, its connection reaches the relay from the Docker network's gateway address (for example <code>172.25.0.1</code>), not from <code>127.0.0.1</code>. The default range <code>172.16.0.0/12</code> allows it. If you set your own <code>PUBLISH_IP_RANGE</code>, keep <code>172.16.0.0/12</code> in the list.</p>
 <h2 id="example-ranges"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.5</span> Example Ranges</h2>
-<p>Each value keeps <code>172.16.0.0/12</code> so OBS on the relay's own machine can still publish. Drop it only if nothing streams from that machine.</p>
+<p>Each value keeps <code>172.16.0.0/12</code> so OBS on the relay's own machine can still publish. Drop it only if you never stream from that machine.</p>
 <table>
 <thead>
 <tr>
@@ -973,7 +973,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

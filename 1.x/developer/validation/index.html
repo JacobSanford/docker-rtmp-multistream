@@ -11,10 +11,10 @@
 <link href="../adding-services/testing/" rel="prev"/>
 <link href="../testing/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Input Validation Reference - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -1065,7 +1065,7 @@
 <h1 id="input-validation-reference"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.</span> Input Validation Reference</h1>
 <p>This page lists the validation functions in <code>build/scripts/validate_input.sh</code> and the variables each one checks. It is written by hand from that file: update it when you change a validator. For what validation does and does not protect against, see <a href="../../security/">Security</a>.</p>
 <p>The startup scripts in <code>build/scripts/pre-init.d/</code> check every variable you set in <code>env/relay.env</code> against a whitelist or a pattern before writing it into the nginx configuration. Stream keys, <code>TWITCH_ENDPOINT</code> and <code>ARCHIVE_PATH</code> are also escaped for <code>sed</code> with <code>escape_for_sed</code>.</p>
-<p><code>NGINX_CONFD_DIR</code>, <code>NGINX_APP_CONF_FILE</code> and <code>NGINX_RUN_USER</code> come from the base image. They are trusted and not validated.</p>
+<p><code>NGINX_CONFD_DIR</code>, <code>NGINX_APP_CONF_FILE</code> and <code>NGINX_RUN_USER</code> come from the base image. The scripts trust these and skip validation.</p>
 <p>If a value fails validation, its startup script exits with status 1, and <code>build/scripts/run.sh</code> stops the container before nginx starts. The container log names the variable, for example <code>ERROR: TWITCH_KEY contains invalid characters.</code></p>
 <h2 id="variables-and-their-validators"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.1</span> Variables and Their Validators</h2>
 <table>
@@ -1119,15 +1119,15 @@
 </tr>
 </tbody>
 </table>
-<p>The Twitch encoder variables are validated only in non-partner mode. A new service must validate each of its variables the same way: see <a href="../adding-services/overview/">Add a Streaming Service</a>.</p>
+<p><code>90_configure_twitch.sh</code> validates the Twitch encoder variables only in non-partner mode. A new service must validate each of its variables the same way: see <a href="../adding-services/overview/">Add a Streaming Service</a>.</p>
 <h2 id="validation-functions"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2</span> Validation Functions</h2>
-<p>The validation framework is implemented in <code>build/scripts/validate_input.sh</code> and includes:</p>
+<p><code>build/scripts/validate_input.sh</code> defines these functions:</p>
 <h3 id="validate_stream_keykey-name"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.1</span> <code>validate_stream_key(key, name)</code></h3>
 <p>Validates stream keys (Twitch, YouTube) to prevent command injection.</p>
 <p><strong>Allowed characters:</strong> <code>a-z A-Z 0-9 . _ : -</code></p>
 <p><strong>Blocks:</strong>
 - Every character outside the allowed set, including spaces, <code>/</code>, and shell metacharacters such as <code>;|&amp;$`()&lt;&gt;{}[]</code>
-- Newlines and null bytes
+- Newlines
 - More than 200 characters</p>
 <p>An empty key is accepted, and the service is skipped.</p>
 <p><strong>Usage:</strong>
@@ -1143,7 +1143,7 @@
 - <code>..</code> path segments (<code>/tmp/../etc</code> is rejected; <code>/tmp/a..b</code> is accepted)
 - The characters <code>; | &amp; $ ` ( ) { } &lt; &gt;</code>
 - <code>#</code> (starts an nginx comment) and <code>'</code> or <code>"</code> (change how nginx reads the directive)
-- Newlines and null bytes
+- Newlines
 - More than 500 characters</p>
 <p><strong>Not blocked:</strong> <code>[ ] * ? ~</code></p>
 <p>An empty path is accepted, and Archive is skipped.</p>
@@ -1162,7 +1162,7 @@
 <h3 id="validate_numbervalue-name-min-max"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.2.4</span> <code>validate_number(value, name, min, max)</code></h3>
 <p>Validates numeric values with optional range constraints.</p>
 <p><strong>Allowed:</strong> Non-negative integers (<code>0</code> is accepted) of at most 9 digits. No decimals, no signs.</p>
-<p>The 9-digit limit exists because a value too large for the shell's integer tests would otherwise pass the min and max checks.</p>
+<p>Without the 9-digit limit, a huge value could overflow the shell's integer tests and pass the min and max checks.</p>
 <p><strong>Usage:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_FPS</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_FPS"</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">120</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span><span id="__span-3-2"><a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>validate_number<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_HEIGHT</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_HEIGHT"</span><span class="w"> </span><span class="m">144</span><span class="w"> </span><span class="m">4320</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
@@ -1173,7 +1173,7 @@
 <p><strong>Blocks:</strong>
 - Spaces, periods, special characters
 - More than 100 characters</p>
-<p>This checks the characters only, not the value. A misspelled preset such as <code>mediun</code> passes validation and fails only when FFmpeg starts, at the first publish to Twitch.</p>
+<p>This checks the characters, not the spelling: a misspelled preset such as <code>mediun</code> passes validation and fails when FFmpeg starts, at the first publish to Twitch.</p>
 <p><strong>Usage:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>validate_identifier<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_CODEC</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_CODEC"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 </span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>validate_identifier<span class="w"> </span><span class="s2">"</span><span class="nv">$TWITCH_X264_PRESET</span><span class="s2">"</span><span class="w"> </span><span class="s2">"TWITCH_X264_PRESET"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
@@ -1227,12 +1227,12 @@
 <h3 id="configuration-injection"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.2</span> Configuration Injection</h3>
 <p><strong>Risk:</strong> Newlines or control characters injecting malicious config directives</p>
 <p><strong>Mitigation:</strong>
-- Stream keys and paths containing a newline or null byte are rejected
+- Stream keys and paths containing a newline are rejected
 - Every other validator matches the whole value against a single-line pattern or a fixed list</p>
 <p><strong>Example blocked:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="s1">$'abc\ndef'</span><span class="w">  </span><span class="c1"># Rejected (newline)</span>
 </span></code></pre></div></p>
-<p>In <code>env/relay.env</code>, <code>\n</code> is a literal backslash and <code>n</code>, not a newline. A key written that way is rejected because <code>\</code> is outside the allowed characters.</p>
+<p>In <code>env/relay.env</code>, <code>\n</code> is two characters, a backslash and <code>n</code>. A key written that way is rejected because <code>\</code> is outside the allowed characters.</p>
 <h3 id="path-traversal"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.3.3</span> Path Traversal</h3>
 <p><strong>Risk:</strong> Archive paths escaping intended directory structure</p>
 <p><strong>Mitigation:</strong>
@@ -1259,7 +1259,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">TWITCH_KEY</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'a%.0s'</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..201<span class="o">}</span><span class="k">)</span><span class="w">  </span><span class="c1"># Rejected (too long)</span>
 </span></code></pre></div></p>
 <h2 id="testing"><span class="enumerate-headings-plugin enumerate-heading-plugin">25.4</span> Testing</h2>
-<p>All validation functions are tested with test cases covering:
+<p><code>tests/00_validation_tests.sh</code> tests every validation function with cases covering:
 - Valid inputs (alphanumeric, special chars where allowed)
 - Invalid inputs (injection attempts, traversal, length limits)
 - Edge cases (empty, boundaries, special formats)</p>
@@ -1300,7 +1300,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

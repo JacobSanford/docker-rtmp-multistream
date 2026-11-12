@@ -11,10 +11,10 @@
 <link href="../hardware/" rel="prev"/>
 <link href="../quality/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Bandwidth Requirements - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -849,15 +849,15 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="bandwidth-requirements"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Bandwidth Requirements</h1>
-<p>This page shows how to work out the upload bandwidth the relay host needs for the services you enable, and the disk space Archive uses.</p>
+<p>Use this page to work out the upload bandwidth your relay host needs for the services you enable, and the disk space Archive uses.</p>
 <div class="admonition warning">
 <p class="admonition-title">The relay sends one stream per service</p>
-<p>The relay sends a separate copy of your stream to each enabled service at the same time. The relay host's upload must carry the sum of all of them.</p>
+<p>The relay sends a separate copy of your stream to each enabled service at the same time, so the relay host's upload must carry the sum of all of them.</p>
 </div>
 <h2 id="what-counts-as-upload"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> What Counts as Upload</h2>
 <p>Your streaming software sends one stream to the relay. The relay sends one stream to each enabled service.</p>
 <ul>
-<li><strong>Relay on your local network</strong> (the default: <code>PUBLISH_IP_RANGE</code> admits the Docker networks and <code>192.168.0.0/16</code>): the stream from your streaming software to the relay stays on your local network. Only the relay's outgoing streams use your internet upload.</li>
+<li><strong>Relay on your local network</strong>: the stream from your streaming software to the relay stays on your local network, so only the relay's outgoing streams use your internet upload. This is the default setup: <code>PUBLISH_IP_RANGE</code> admits the Docker networks and <code>192.168.0.0/16</code>.</li>
 <li><strong>Relay on a remote host</strong>: your streaming software's stream to the relay also crosses your internet upload, and the relay host's own upload carries the outgoing streams.</li>
 </ul>
 <h2 id="bitrate-per-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Bitrate per Service</h2>
@@ -884,12 +884,12 @@
 </tr>
 <tr>
 <td>Archive</td>
-<td>No network traffic, unless <code>ARCHIVE_PATH</code> is on a network mount</td>
+<td>Writes to local disk. If <code>ARCHIVE_PATH</code> is on a network mount, Archive also sends the source bitrate over that network</td>
 </tr>
 </tbody>
 </table>
-<p><code>TWITCH_HEIGHT</code> does not change the Twitch bitrate. The encoder uses constant bitrate, so the rate depends only on <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> and <code>TWITCH_FPS</code>.</p>
-<p>These figures exclude RTMP and TCP overhead.</p>
+<p>The encoder uses constant bitrate, so the rate depends only on <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> and <code>TWITCH_FPS</code>. See <a href="../quality/#how-the-twitch-settings-interact">How the Twitch Settings Interact</a>.</p>
+<p>These figures cover the stream data only. RTMP and TCP add a small overhead on top.</p>
 <h2 id="example-calculation"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> Example Calculation</h2>
 <p>Source: 6000 kbps video and 160 kbps audio, 6160 kbps in all. YouTube and Twitch (non-partner, default settings) are enabled.</p>
 <ul>
@@ -908,8 +908,8 @@
 </ol>
 <h2 id="reduce-upload"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.6</span> Reduce Upload</h2>
 <ul>
-<li><strong>Lower the source bitrate</strong> in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. It does not change Twitch non-partner mode, which re-encodes to its own bitrate.</li>
-<li><strong>Lower the Twitch non-partner bitrate</strong> with <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_FPS</code>. Lowering <code>TWITCH_HEIGHT</code> does not reduce the bitrate. See <a href="../quality/">Quality Optimization</a>.</li>
+<li><strong>Lower the source bitrate</strong> in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. Twitch non-partner mode re-encodes to its own bitrate, so its upload stays the same.</li>
+<li><strong>Lower the Twitch non-partner bitrate</strong> with <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_FPS</code>. See <a href="../quality/">Quality Optimization</a>.</li>
 <li><strong>Disable a service</strong> by leaving its key empty in <code>env/relay.env</code>.</li>
 </ul>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.7</span> See Also</h2>
@@ -946,7 +946,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

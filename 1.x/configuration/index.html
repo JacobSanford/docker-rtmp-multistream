@@ -11,10 +11,10 @@
 <link href="../quickstart/" rel="prev"/>
 <link href="../restrict-access/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Change Relay Settings - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -801,14 +801,14 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>cp<span class="w"> </span>env/relay.env.example<span class="w"> </span>env/relay.env
 </span></code></pre></div>
 <p>Without it, <code>docker compose</code> stops with <code>env file …/env/relay.env not found</code>.</p>
-<p>The file only needs the values you change. Any variable that is commented out or missing uses the image's default, so a new variable in a later release needs no edit to your file.</p>
+<p>Set only the values you want to change. If you comment out a variable or leave it out, the image's default applies, so a later release can add variables without you editing your file.</p>
 <h2 id="change-a-setting"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.1</span> Change a Setting</h2>
 <ol>
 <li>
 <p>In <code>env/relay.env</code>, set the variable and save the file. For example, to lower the Twitch resolution:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nv">TWITCH_HEIGHT</span><span class="o">=</span><span class="m">540</span>
 </span></code></pre></div>
-<p>Write one <code>NAME=value</code> per line, with no spaces around <code>=</code> and no quotes. A variable that is commented out, or missing from the file, uses its default.</p>
+<p>Write one <code>NAME=value</code> per line, with no spaces around <code>=</code> and no quotes. If you comment out a variable or leave it out, it uses its default.</p>
 </li>
 <li>
 <p>Recreate the container so it reads the new values:</p>
@@ -853,7 +853,7 @@
 </table>
 <p><code>PUBLISH_IP_RANGE</code> controls which addresses may send a stream to the relay; see <a href="../troubleshooting/ip_authentication/">OBS Is Refused</a>. <code>NGINX_ERROR_LOG_LEVEL</code> controls how much the relay logs; see <a href="../troubleshooting/connection-issues/#increase-log-verbosity">Increase Log Verbosity</a>.</p>
 <h2 id="upgrade-from-a-tracked-envrelayenv"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.3</span> Upgrade From a Tracked <code>env/relay.env</code></h2>
-<p>Clones made before <code>env/relay.env.example</code> was added track <code>env/relay.env</code> itself. If <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: env/relay.env</code>, move your file aside, pull, then put it back:</p>
+<p>If you cloned the repository before <code>env/relay.env.example</code> was added, your clone tracks <code>env/relay.env</code> itself. If <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: env/relay.env</code>, move your file aside, pull, then put it back:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>cp<span class="w"> </span>env/relay.env<span class="w"> </span>~/relay.env.mine
 </span><span id="__span-4-2"><a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>git<span class="w"> </span>update-index<span class="w"> </span>--no-skip-worktree<span class="w"> </span>env/relay.env
 </span><span id="__span-4-3"><a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>env/relay.env
@@ -894,7 +894,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

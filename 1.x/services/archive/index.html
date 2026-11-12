@@ -11,10 +11,10 @@
 <link href="../youtube/" rel="prev"/>
 <link href="../../performance/hardware/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Archive Streams to Disk - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -814,7 +814,7 @@
 <article class="md-content__inner md-typeset">
 <h1 id="archive-streams-to-disk"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Archive Streams to Disk</h1>
 <h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Overview</h2>
-<p>The relay can archive streams to disk in real time. Archives are written inside the container to <code>ARCHIVE_PATH</code>; mount a host directory there so the files survive container removal.</p>
+<p>You can archive every incoming stream to disk as it arrives. The relay writes archives to <code>ARCHIVE_PATH</code> inside the container, so mount a host directory there to keep the files after you remove the container.</p>
 <h2 id="enable-archive"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Enable Archive</h2>
 <ol>
 <li>
@@ -846,7 +846,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>relay<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">"archive|error"</span>
 </span></code></pre></div>
 <p>Expected output: <code>Archive configuration complete, and service enabled.</code></p>
-<p>If you see <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code>, the container has stopped: the relay does not run at all, not only archiving. Check that <code>ARCHIVE_PATH</code> matches the container side of the mount in step 2, and that step 1's <code>chown</code> succeeded.</p>
+<p>If you see <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code>, the container has stopped, so Twitch and YouTube are down too. Check that <code>ARCHIVE_PATH</code> matches the container side of the mount in step 2, and that step 1's <code>chown</code> succeeded.</p>
 </li>
 </ol>
 <h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Settings</h2>
@@ -858,7 +858,7 @@
 <p>For example, a stream published as <code>rtmp://&lt;relay&gt;/relay/live</code> on 25 September 2026 at 14:53:40 UTC produces:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>live-1790348020_25092026_145340.flv
 </span></code></pre></div>
-<p>The date and time are in UTC, not your local time zone. Because the date is day-first, sorting by filename does not sort by date across months; sort by the Unix time after the stream name instead, or by modification time (<code>ls -t</code>).</p>
+<p>The date and time are in UTC. To list archives in date order, sort by the Unix time after the stream name, or by modification time (<code>ls -t</code>). Sorting by filename mixes up months, because the date is day-first.</p>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.5</span> See Also</h2>
 <ul>
 <li><a href="../../configuration/">Change Relay Settings</a> - Edit, apply and confirm a setting</li>
@@ -892,7 +892,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

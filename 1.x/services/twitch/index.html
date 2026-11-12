@@ -11,10 +11,10 @@
 <link href="../overview/" rel="prev"/>
 <link href="../youtube/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Stream to Twitch - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -920,7 +920,7 @@
 <article class="md-content__inner md-typeset">
 <h1 id="stream-to-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Stream to Twitch</h1>
 <h2 id="overview"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Overview</h2>
-<p>The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner or not.</p>
+<p>The relay streams to Twitch. How you configure the Twitch service depends on whether you are a Twitch Partner.</p>
 <h2 id="enable-twitch"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Enable Twitch</h2>
 <ol>
 <li>In <code>env/relay.env</code>, set <code>TWITCH_KEY</code> to the stream key provided by Twitch.</li>
@@ -940,9 +940,9 @@
 </li>
 </ol>
 <h2 id="partner-vs-non-partner-streaming"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Partner vs. Non-Partner Streaming</h2>
-<p>Twitch partners with transcoding services should send higher-bitrate streams to take advantage of Twitch's multi-bitrate transcoding. Non-partners should use the relay's built-in transcoding to optimize their streams for Twitch.</p>
+<p>If you are a partner with transcoding, send a higher-bitrate stream to take advantage of Twitch's multi-bitrate transcoding. If you are not a partner, let the relay transcode your stream for Twitch.</p>
 <ul>
-<li><strong>Partner mode</strong> (<code>TWITCH_PARTNER=TRUE</code>) uses the <strong>simple relay pattern</strong>: the relay forwards your stream to Twitch without re-encoding it. Only <code>TWITCH_KEY</code> and <code>TWITCH_ENDPOINT</code> apply; all other Twitch variables are ignored.</li>
+<li><strong>Partner mode</strong> (<code>TWITCH_PARTNER=TRUE</code>) uses the <strong>simple relay pattern</strong>: the relay forwards your stream to Twitch unchanged. Only <code>TWITCH_KEY</code> and <code>TWITCH_ENDPOINT</code> apply; the relay ignores the other Twitch variables.</li>
 <li><strong>Non-partner mode</strong> (the default) uses the <strong>transformer pattern</strong>: the relay re-encodes the stream with FFmpeg before forwarding it, so you can send a high-quality stream from your streaming software while the relay produces one suited to Twitch.</li>
 </ul>
 <h2 id="settings"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> Settings</h2>
@@ -977,7 +977,7 @@
 </tbody>
 </table>
 <h3 id="optimizing-twitch-quality"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.2</span> Optimizing Twitch Quality</h3>
-<p>For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections, and <a href="https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US" target="_blank">Twitch does not reliably transcode streams for non-partners</a>.</p>
+<p>If you are not a partner, your viewers may only be able to watch at the quality you send, because <a href="https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US" target="_blank">Twitch does not reliably transcode streams for non-partners</a>. Viewers on slower connections may not be able to watch a high-bandwidth stream at all.</p>
 <p>Twitch publishes its bitrate and encoder limits in its <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">Broadcasting Guidelines</a>. Check them before raising <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_AUDIO_BITRATE</code> above the defaults.</p>
 <h3 id="recommended-bitrates"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.3</span> Recommended Bitrates</h3>
 <h4 id="twitch_kbits_per_video_frame"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.3.1</span> TWITCH_KBITS_PER_VIDEO_FRAME</h4>
@@ -1080,7 +1080,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

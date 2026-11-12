@@ -11,10 +11,10 @@
 <link href="../restrict-access/" rel="prev"/>
 <link href="../services/overview/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Security - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -859,32 +859,32 @@
 <li><strong>Other machines on the network are not.</strong> They should not be able to send a stream through the relay to your Twitch or YouTube channel.</li>
 <li><strong>Settings can be mistyped.</strong> A bad value should stop the relay at startup rather than produce a broken or unsafe nginx configuration.</li>
 </ul>
-<p>It does not try to hide your stream from viewers on the network, or to protect stream keys from anyone with access to the host.</p>
+<p>It leaves two things to you: hiding your stream from viewers on the network, and protecting stream keys from anyone with access to the host.</p>
 <h2 id="what-is-protected"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3</span> What Is Protected</h2>
 <ul>
 <li><strong>Publishing.</strong> Only addresses in <code>PUBLISH_IP_RANGE</code>, plus <code>127.0.0.1</code>, can send a stream to the relay. Others are refused with <code>access forbidden by rule</code> in the log. The default, <code>172.16.0.0/12,192.168.0.0/16</code>, admits the Docker networks and typical home networks.</li>
-<li><strong>Configuration.</strong> Every variable you set is checked against a whitelist or pattern before it is written into the nginx configuration, so a value cannot inject a shell command or an nginx directive. If a value fails, the container stops before nginx starts and the log names the variable. For each check, see the <a href="../developer/validation/">Input Validation Reference</a>.</li>
+<li><strong>Configuration.</strong> The relay checks every variable you set against a whitelist or pattern before writing it into the nginx configuration, so a value cannot inject a shell command or an nginx directive. If a value fails, the container stops before nginx starts and the log names the variable. For each check, see the <a href="../developer/validation/">Input Validation Reference</a>.</li>
 </ul>
 <h2 id="what-is-not-protected"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4</span> What Is Not Protected</h2>
 <ul>
-<li><strong>Playback is open.</strong> The relay has publish rules only, and no play rules. Anyone who can reach port 1935 can play <code>rtmp://&lt;RELAY_HOST&gt;/relay/&lt;STREAM_NAME&gt;</code>, and the transcoded Twitch stream at <code>/twitch/&lt;STREAM_NAME&gt;</code>. This was checked against a running container: with <code>PUBLISH_IP_RANGE=10.99.0.0/24</code>, a host outside that range was refused as a publisher but could play <code>relay/&lt;STREAM_NAME&gt;</code>.</li>
+<li><strong>Playback is open.</strong> The relay has no play rules. Anyone who can reach port 1935 can play <code>rtmp://&lt;RELAY_HOST&gt;/relay/&lt;STREAM_NAME&gt;</code>, and the transcoded Twitch stream at <code>/twitch/&lt;STREAM_NAME&gt;</code>. This was checked against a running container: with <code>PUBLISH_IP_RANGE=10.99.0.0/24</code>, a host outside that range was refused as a publisher but could play <code>relay/&lt;STREAM_NAME&gt;</code>.</li>
 <li><strong>The port is published on every host interface.</strong> <code>docker-compose.yml</code> maps <code>1935:1935</code>. Docker writes its own iptables rules for published ports, so host firewall tools such as <code>ufw</code> may not block them. To close both gaps, see <a href="../restrict-access/#limit-who-can-watch">Limit Who Can Watch</a>.</li>
 <li><strong><code>127.0.0.1</code> can always publish</strong>, whatever <code>PUBLISH_IP_RANGE</code> is set to.</li>
 <li><strong>The <code>twitch</code> application accepts publishes directly.</strong> Any address in <code>PUBLISH_IP_RANGE</code> can publish to <code>/twitch/&lt;STREAM_NAME&gt;</code> and send a stream to Twitch without going through the transcoder.</li>
 </ul>
 <h2 id="where-stream-keys-live"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5</span> Where Stream Keys Live</h2>
 <ul>
-<li><strong><code>env/relay.env</code></strong>, in plain text. <code>.gitignore</code> excludes it, so git does not commit it; the tracked template is <code>env/relay.env.example</code>, which holds no keys. See <a href="../configuration/">Change Relay Settings</a>.</li>
-<li><strong>The container environment.</strong> Anyone who can run <code>docker inspect</code> on the container can read them. The relay has no support for Docker secrets or <code>*_FILE</code> variables.</li>
+<li><strong><code>env/relay.env</code></strong>, in plain text. <code>.gitignore</code> excludes it, so your keys stay out of git; the tracked template is <code>env/relay.env.example</code>, which holds no keys. See <a href="../configuration/">Change Relay Settings</a>.</li>
+<li><strong>The container environment.</strong> Anyone who can run <code>docker inspect</code> on the container can read them. The relay reads keys only from plain environment variables (no Docker secrets or <code>*_FILE</code> variables).</li>
 <li><strong>The generated nginx config</strong> inside the container, in plain text.</li>
 <li><strong>The container log</strong>, when <code>NGINX_ERROR_LOG_LEVEL</code> is <code>info</code> or more verbose: nginx logs the full push URL, including the key, when it starts relaying. Return to <code>error</code> (the default) after troubleshooting, and remove keys before sharing logs.</li>
 </ul>
 <p>If a key may have leaked, reset it in the service's dashboard.</p>
 <h2 id="running-the-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.6</span> Running the Container</h2>
 <ul>
-<li><strong>Archive path.</strong> The path must be writable by the nginx user. If it is not, the container stops at startup with <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code> Archive writes every stream published to <code>relay</code> at its source bitrate, so a 6000 kbps stream uses about 2.7 GB per hour: watch disk space.</li>
-<li><strong>Read-only filesystem.</strong> A read-only root filesystem breaks startup: the startup scripts rewrite files under <code>NGINX_CONFD_DIR</code> (<code>/etc/nginx/http.d</code>) in place with <code>sed -i</code> and <code>mv</code>.</li>
-<li><strong>Resource limits.</strong> Twitch non-partner mode re-encodes for as long as you stream. Setting a CPU limit on the container keeps it from starving the host. See <a href="../performance/hardware/">CPU Considerations</a>.</li>
+<li><strong>Archive path.</strong> Make the path writable by the nginx user. Otherwise the container stops at startup with <code>ERROR: ARCHIVE_PATH is not writable by the nginx user.</code> Archive writes every stream published to <code>relay</code> at its source bitrate, so a 6000 kbps stream uses about 2.7 GB per hour: watch disk space.</li>
+<li><strong>Read-only filesystem.</strong> Keep the root filesystem writable, because the startup scripts rewrite files under <code>NGINX_CONFD_DIR</code> (<code>/etc/nginx/http.d</code>) in place with <code>sed -i</code> and <code>mv</code>.</li>
+<li><strong>Resource limits.</strong> Twitch non-partner mode re-encodes for as long as you stream. Set a CPU limit on the container so it cannot starve the host. See <a href="../performance/hardware/">CPU Considerations</a>.</li>
 <li><strong>Updates.</strong> To pick up relay and base image fixes, run <code>git pull</code>, then rebuild with <code>docker compose build --pull</code> and restart with <code>docker compose up -d</code>.</li>
 </ul>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.7</span> See Also</h2>
@@ -921,7 +921,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

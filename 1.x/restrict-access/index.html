@@ -11,10 +11,10 @@
 <link href="../configuration/" rel="prev"/>
 <link href="../security/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Restrict Who Can Publish and Watch - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -813,7 +813,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="restrict-who-can-publish-and-watch"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Restrict Who Can Publish and Watch</h1>
-<p>The relay controls who can <strong>publish</strong> (send a stream to it) with <code>PUBLISH_IP_RANGE</code>. It does not control who can <strong>watch</strong>: any machine that can reach port 1935 can play the stream. This page limits both.</p>
+<p>You control who can <strong>publish</strong> (send a stream to the relay) with <code>PUBLISH_IP_RANGE</code>. Any machine that can reach port 1935 can <strong>watch</strong> (play the stream), so you limit watching at the port. This page covers both.</p>
 <h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Before You Begin</h2>
 <ul>
 <li>The relay is set up as in <a href="../quickstart/">Quick Start</a>, and runs with <code>docker compose</code>.</li>
@@ -857,13 +857,13 @@
 </span></code></pre></div>
 </li>
 <li>
-<p>In your streaming software, set the server to the address you bound, for example <code>rtmp://192.168.1.20:1935/relay</code>. A server of <code>localhost</code> or <code>127.0.0.1</code> stops working unless you bound <code>127.0.0.1</code>.</p>
+<p>In your streaming software, set the server to the address you bound, for example <code>rtmp://192.168.1.20:1935/relay</code>. If you used <code>localhost</code> or <code>127.0.0.1</code> as the server, it works only if you bound <code>127.0.0.1</code>.</p>
 </li>
 </ol>
 <p><code>docker-compose.yml</code> is tracked by git, unlike <code>env/relay.env</code>. If a later <code>git pull</code> stops with <code>Your local changes to the following files would be overwritten by merge: docker-compose.yml</code>, save your copy, run <code>git checkout docker-compose.yml</code>, pull again, then put your <code>ports:</code> line back.</p>
 <div class="admonition warning">
 <p class="admonition-title">A host firewall may not block Docker ports</p>
-<p>Docker writes its own iptables rules for published ports, so host firewall tools such as <code>ufw</code> may not block them. Bind the port as above, or block it at a firewall in front of the host.</p>
+<p>Docker writes its own iptables rules for published ports, and these can bypass host firewall tools such as <code>ufw</code>. Bind the port as above, or block it at a firewall in front of the host.</p>
 </div>
 <h2 id="confirm"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> Confirm</h2>
 <p>Start streaming, then run these from a machine that should <strong>not</strong> have access. Replace <code>&lt;RELAY_HOST&gt;</code> with any address of the relay host that this machine can reach, and <code>&lt;STREAM_NAME&gt;</code> with the stream name in your streaming software.</p>
@@ -914,7 +914,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

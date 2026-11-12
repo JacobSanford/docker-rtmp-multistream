@@ -11,10 +11,10 @@
 <link href="../../security/" rel="prev"/>
 <link href="../twitch/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Choose a Streaming Service - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -795,7 +795,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="choose-a-streaming-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> Choose a Streaming Service</h1>
-<p>docker-rtmp-multistream supports multiple streaming destinations with different performance characteristics.</p>
+<p>You can send your stream to several destinations. Each one has different CPU and bandwidth costs.</p>
 <h2 id="supported-services"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Supported Services</h2>
 <table>
 <thead>
@@ -836,7 +836,7 @@
 </tbody>
 </table>
 <p>¹ Twitch pattern depends on <code>TWITCH_PARTNER</code> setting - see <a href="../twitch/#partner-vs-non-partner-streaming">Twitch Configuration</a></p>
-<p>² Archive is not a relay. It records every stream the <code>relay</code> application receives to disk, with no re-encoding. See <a href="../../techref/architecture/#archive-service">Archive Service</a>.</p>
+<p>² Archive records every stream the <code>relay</code> application receives to disk, with no re-encoding. See <a href="../../techref/architecture/#archive-service">Archive Service</a>.</p>
 <h2 id="service-patterns"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Service Patterns</h2>
 <p>Destination services use one of two architectural patterns: <strong>Simple Relay</strong> (direct forwarding) or <strong>Transformer</strong> (FFmpeg re-encoding). Archive is a recorder and uses neither.</p>
 <p>For a detailed comparison of these patterns, see <strong><a href="../../techref/service-patterns/">Service Patterns Reference</a></strong>.</p>
@@ -874,7 +874,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

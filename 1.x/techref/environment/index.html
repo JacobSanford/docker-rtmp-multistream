@@ -11,10 +11,10 @@
 <link href="../service-patterns/" rel="prev"/>
 <link href="../../troubleshooting/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Environment Variables Reference - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -1173,7 +1173,7 @@
 <p><strong>Valid values</strong>:</p>
 <ul>
 <li>
-<p><code>TRUE</code> (or <code>true</code>): <strong>Partner mode</strong> - Simple relay with no transcoding. Stream is forwarded directly to Twitch, preserving full source quality for Twitch's multi-bitrate transcoding services. All transformer-related variables (<code>TWITCH_HEIGHT</code>, <code>TWITCH_FPS</code>, etc.) are ignored in this mode.</p>
+<p><code>TRUE</code> (or <code>true</code>): <strong>Partner mode</strong> - Simple relay. The stream is forwarded to Twitch unchanged, so Twitch's multi-bitrate transcoding receives the full source quality. All transformer-related variables (<code>TWITCH_HEIGHT</code>, <code>TWITCH_FPS</code>, etc.) are ignored in this mode.</p>
 </li>
 <li>
 <p><code>FALSE</code> (or <code>false</code>): <strong>Non-partner mode</strong> (default) - Transformer pattern with FFmpeg re-encoding. Allows full control over output quality, resolution, bitrate, and codec. Useful for bandwidth optimization or streaming to Twitch without partner transcoding.</p>
@@ -1218,7 +1218,7 @@
 </span></code></pre></div></p>
 <p>This sends stereo.</p>
 <h3 id="twitch_codec"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2.5</span> TWITCH_CODEC</h3>
-<p><strong>Description</strong>: Video codec for Twitch encoding. Typically shouldn't be changed.</p>
+<p><strong>Description</strong>: Video codec for Twitch encoding. Keep the default.</p>
 <p><strong>Type</strong>: String</p>
 <p><strong>Default</strong>: <code>libx264</code></p>
 <p><strong>Required</strong>: No</p>
@@ -1227,7 +1227,7 @@
 <p><strong>Example</strong>:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="nv">TWITCH_CODEC</span><span class="o">=</span>libx264
 </span></code></pre></div></p>
-<p><strong>Note</strong>: This value is not checked against a list at startup. An unsupported codec lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.</p>
+<p><strong>Note</strong>: Startup checks only the characters in this value. An unsupported codec lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.</p>
 <h3 id="twitch_endpoint"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2.6</span> TWITCH_ENDPOINT</h3>
 <p><strong>Description</strong>: Twitch ingest server identifier. Choose the server closest to your location.</p>
 <p><strong>Type</strong>: String (server code)</p>
@@ -1330,7 +1330,7 @@
 </span></code></pre></div></p>
 <p><strong>See also</strong>: <a href="../../services/twitch/#optimizing-twitch-quality">Twitch Quality Settings</a></p>
 <h3 id="twitch_height"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2.9</span> TWITCH_HEIGHT</h3>
-<p><strong>Description</strong>: Video height in pixels. Width follows the source aspect ratio, rounded to an even number. A source shorter than <code>TWITCH_HEIGHT</code> is upscaled, which uses bitrate without adding detail; set <code>TWITCH_HEIGHT</code> to your source height or lower.</p>
+<p><strong>Description</strong>: Video height in pixels. Width follows the source aspect ratio, rounded to an even number. Set <code>TWITCH_HEIGHT</code> to your source height or lower: a shorter source is upscaled, which uses bitrate without adding detail.</p>
 <p><strong>Type</strong>: Integer</p>
 <p><strong>Default</strong>: <code>720</code></p>
 <p><strong>Required</strong>: No</p>
@@ -1350,7 +1350,7 @@
 <p><strong>Examples</strong>:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="nv">TWITCH_KBITS_PER_VIDEO_FRAME</span><span class="o">=</span><span class="m">100</span>
 </span></code></pre></div></p>
-<p>At <code>TWITCH_FPS=60</code>, <code>100</code> gives 6000 kbps, <code>75</code> (the default) gives 4500 kbps, and <code>50</code> gives 3000 kbps. <code>TWITCH_HEIGHT</code> does not change the bitrate.</p>
+<p>At <code>TWITCH_FPS=60</code>, <code>100</code> gives 6000 kbps, <code>75</code> (the default) gives 4500 kbps, and <code>50</code> gives 3000 kbps. See <a href="../../performance/quality/#how-the-twitch-settings-interact">How the Twitch Settings Interact</a>.</p>
 <p><strong>See also</strong>: <a href="../../services/twitch/#bitrate-reference-table">Twitch Bitrate Reference</a></p>
 <h3 id="twitch_x264_preset"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2.11</span> TWITCH_X264_PRESET</h3>
 <p><strong>Description</strong>: x264 encoding preset. Controls speed vs quality trade-off.</p>
@@ -1358,7 +1358,7 @@
 <p><strong>Default</strong>: <code>medium</code></p>
 <p><strong>Required</strong>: No</p>
 <p><strong>Used by</strong>: Twitch transformer</p>
-<p><strong>Valid values</strong>: Letters, digits, <code>_</code> and <code>-</code>, up to 100 characters. The value is not checked against the preset list below: a misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives, and Twitch receives nothing.</p>
+<p><strong>Valid values</strong>: Letters, digits, <code>_</code> and <code>-</code>, up to 100 characters. Startup checks only the characters, so a misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives, and Twitch receives nothing.</p>
 <p><strong>Common values</strong> (fastest to slowest):
 - <code>ultrafast</code> - Extremely fast, lowest quality
 - <code>superfast</code> - Very fast, low quality
@@ -1373,7 +1373,7 @@
 <p><strong>Example</strong>:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nv">TWITCH_X264_PRESET</span><span class="o">=</span>veryfast
 </span></code></pre></div></p>
-<p><strong>When to override</strong>: Presets slower than <code>medium</code> offer diminishing returns. Use <code>fast</code> or <code>veryfast</code> if CPU is constrained.</p>
+<p><strong>When to override</strong>: Use <code>fast</code> or <code>veryfast</code> if CPU is constrained. Presets slower than <code>medium</code> give diminishing returns.</p>
 <p><strong>See also</strong>: <a href="https://trac.ffmpeg.org/wiki/Encode/H.264" target="_blank">x264 Encoding Guide</a></p>
 <hr/>
 <h2 id="youtube-variables"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.3</span> YouTube Variables</h2>
@@ -1400,7 +1400,7 @@
 <p><strong>Example</strong>:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nv">ARCHIVE_PATH</span><span class="o">=</span>/archive
 </span></code></pre></div></p>
-<p><strong>Note</strong>: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See <a href="../../services/archive/#enable-archive">Enable Archive</a>.</p>
+<p><strong>Note</strong>: Map the path to a host directory with a Docker volume so archives survive when the container is removed. See <a href="../../services/archive/#enable-archive">Enable Archive</a>.</p>
 <p><strong>See also</strong>: <a href="../../services/archive/">Archive Configuration</a></p>
 <hr/>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> See Also</h2>
@@ -1435,7 +1435,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

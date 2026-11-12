@@ -11,10 +11,10 @@
 <link href="../architecture/" rel="prev"/>
 <link href="../environment/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Service Patterns - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -821,7 +821,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="service-patterns"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Service Patterns</h1>
-<p>This document explains the two primary architectural patterns used in docker-rtmp-multistream for handling RTMP streams to different platforms.</p>
+<p>A service sends the stream to its platform with one of two patterns: Simple Relay or Transformer.</p>
 <h2 id="pattern-comparison"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> Pattern Comparison</h2>
 <p>Choose the appropriate pattern for your service:</p>
 <table>
@@ -840,7 +840,7 @@
 </tr>
 <tr>
 <td><strong>How it works</strong></td>
-<td>Stream forwarded directly without modification</td>
+<td>Forwards the stream unchanged</td>
 <td>Two-stage pipeline with FFmpeg transformation</td>
 </tr>
 <tr>
@@ -862,7 +862,7 @@
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Advanced: Conditional Patterns</p>
-<p>Services can support both patterns based on configuration. The Twitch service implements a conditional pattern: partners use simple relay (<code>TWITCH_PARTNER=TRUE</code>), non-partners use transformer mode. See Twitch implementation for an advanced example.</p>
+<p>A service can switch between patterns based on its configuration. Twitch does this: partners use simple relay (<code>TWITCH_PARTNER=TRUE</code>), non-partners use transformer mode. See Twitch implementation for an advanced example.</p>
 </div>
 <h2 id="implementation-examples"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> Implementation Examples</h2>
 <h3 id="simple-relay-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2.1</span> Simple Relay (YouTube)</h3>
@@ -911,7 +911,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

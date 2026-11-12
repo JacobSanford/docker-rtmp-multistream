@@ -11,10 +11,10 @@
 <link href="../bandwidth/" rel="prev"/>
 <link href="../../techref/architecture/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Quality Optimization - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -857,7 +857,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="quality-optimization"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Quality Optimization</h1>
-<p>This page explains which settings control the quality each service receives, and how to choose them for your content.</p>
+<p>Use this page to find the settings that control the quality each service receives, and to choose them for your content.</p>
 <h2 id="where-quality-is-set"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Where Quality Is Set</h2>
 <ul>
 <li><strong>YouTube, Twitch partner mode (<code>TWITCH_PARTNER=TRUE</code>) and Archive</strong> receive your streaming software's output unchanged. Set resolution, frame rate and bitrate in your streaming software. No relay variable changes them.</li>
@@ -870,7 +870,7 @@
 </span></code></pre></div>
 <p>The encoder holds this rate constant. From that:</p>
 <ul>
-<li><strong><code>TWITCH_HEIGHT</code> does not change the bitrate.</strong> A higher resolution spreads the same bits over more pixels, so each frame gets less detail per pixel.</li>
+<li><strong><code>TWITCH_HEIGHT</code> changes the resolution and leaves the bitrate as it is.</strong> A higher resolution spreads the same bits over more pixels, so each frame gets less detail per pixel.</li>
 <li><strong><code>TWITCH_FPS</code> changes the bitrate.</strong> Halving it with the same <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> halves the bitrate.</li>
 <li><strong>The relay scales to <code>TWITCH_HEIGHT</code> whatever your source is.</strong> With a 720p source, <code>TWITCH_HEIGHT=1080</code> upscales, which adds no detail.</li>
 <li><strong><code>TWITCH_X264_PRESET</code></strong> changes CPU use and how efficiently the bitrate is used, not the bitrate. See <a href="../hardware/#encoder-presets">Encoder Presets</a>.</li>
@@ -881,7 +881,7 @@
 <p>Keep the frame rate high and accept a lower resolution. The defaults do this: <code>TWITCH_HEIGHT=720</code>, <code>TWITCH_FPS=60</code>, <code>TWITCH_KBITS_PER_VIDEO_FRAME=75</code>, for 4500 kbps.</p>
 <h3 id="fine-detail-little-motion"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3.2</span> Fine Detail, Little Motion</h3>
 <p><strong>Examples</strong>: strategy games, puzzle games, art streams, slow-paced content</p>
-<p>Raise the resolution and lower the frame rate. Raise <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> at the same time, or the bitrate falls:</p>
+<p>Raise the resolution and lower the frame rate. A lower frame rate also lowers the bitrate, so raise <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> at the same time:</p>
 <table>
 <thead>
 <tr>
@@ -921,7 +921,7 @@
 <p>Before raising the bitrate above the default, check Twitch's limits in its <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">Broadcasting Guidelines</a>. For more combinations, see the <a href="../../services/twitch/#bitrate-reference-table">Bitrate Reference Table</a>.</p>
 <h2 id="balancing-quality-and-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4</span> Balancing Quality and Resources</h2>
 <ul>
-<li><strong>Upload-constrained</strong>: lower <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_FPS</code>. Lowering <code>TWITCH_HEIGHT</code> alone does not reduce upload. See <a href="../bandwidth/">Bandwidth Requirements</a>.</li>
+<li><strong>Upload-constrained</strong>: lower <code>TWITCH_KBITS_PER_VIDEO_FRAME</code> or <code>TWITCH_FPS</code>. See <a href="../bandwidth/">Bandwidth Requirements</a>.</li>
 <li><strong>CPU-constrained</strong>: use a faster <code>TWITCH_X264_PRESET</code>, or lower <code>TWITCH_HEIGHT</code> or <code>TWITCH_FPS</code>. See <a href="../hardware/">CPU Considerations</a>.</li>
 </ul>
 <h2 id="see-also"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.5</span> See Also</h2>
@@ -958,7 +958,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

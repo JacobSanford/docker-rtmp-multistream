@@ -11,10 +11,10 @@
 <link href="../../performance/quality/" rel="prev"/>
 <link href="../service-patterns/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Architecture - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -1126,7 +1126,7 @@
 <li><strong>Pre-init Script</strong> - <code>build/scripts/pre-init.d/90_configure_&lt;SERVICE&gt;.sh</code></li>
 <li><strong>Environment Variables</strong> - Configures the service and its behavior. Defined in <code>Dockerfile</code> and can be overridden in <code>env/relay.env</code></li>
 </ol>
-<p>Services are enabled/disabled dynamically at container startup based on configuration.</p>
+<p>At container startup, each service is enabled or disabled based on its environment variables.</p>
 <h2 id="stream-flow"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3</span> Stream Flow</h2>
 <h3 id="high-level-flow"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.1</span> High-Level Flow</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>Streaming software (for example OBS Studio)
@@ -1142,10 +1142,10 @@
 </span><span id="__span-0-11"><a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>  (FFmpeg →
 </span><span id="__span-0-12"><a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>   twitch app)  (relay)
 </span></code></pre></div>
-<p>Twitch runs in one of the two modes, never both: <code>TWITCH_PARTNER</code> selects which.</p>
+<p><code>TWITCH_PARTNER</code> selects which of the two modes Twitch runs in.</p>
 <h3 id="detailed-request-flow"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.2</span> Detailed Request Flow</h3>
 <ol>
-<li><strong>Stream Reception</strong>: Your streaming software connects to <code>rtmp://&lt;RELAY_HOST&gt;:1935/relay/&lt;STREAM_NAME&gt;</code>. The relay accepts any stream name. It is not a service stream key: do not put your Twitch or YouTube key here</li>
+<li><strong>Stream Reception</strong>: Your streaming software connects to <code>rtmp://&lt;RELAY_HOST&gt;:1935/relay/&lt;STREAM_NAME&gt;</code>. The relay accepts any stream name. Your Twitch and YouTube keys go in <code>env/relay.env</code></li>
 <li><strong>Application Routing</strong>: The <code>relay</code> application receives the stream</li>
 <li><strong>Authorization</strong>: IP-based authentication checks <code>PUBLISH_IP_RANGE</code></li>
 <li><strong>Service Processing</strong>:</li>
@@ -1157,7 +1157,7 @@
 <p>docker-rtmp-multistream supports two architectural patterns for handling streams: <strong>Simple Relay</strong> and <strong>Transformer</strong>.</p>
 <p>For a complete comparison of these patterns (use cases, pros/cons, and examples), see <strong><a href="../service-patterns/">Service Patterns Reference</a></strong>.</p>
 <h3 id="technical-implementation"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.4.1</span> Technical Implementation</h3>
-<p><strong>Simple Relay</strong> (e.g., YouTube): Single <code>apps/&lt;SERVICE&gt;.conf</code> file, included inside <code>application relay</code>, that pushes the stream directly to the destination without modification.</p>
+<p><strong>Simple Relay</strong> (e.g., YouTube): Single <code>apps/&lt;SERVICE&gt;.conf</code> file, included inside <code>application relay</code>, that pushes the stream unchanged to the destination.</p>
 <p><strong>Transformer</strong> (e.g., Twitch non-partner mode): Two-stage pipeline. <code>transformers/&lt;SERVICE&gt;.conf</code> (FFmpeg) is included inside <code>application relay</code>. <code>apps/&lt;SERVICE&gt;.conf</code> defines a separate application, outside <code>relay</code>, that receives FFmpeg's output and pushes it to the destination.</p>
 <div class="admonition note">
 <p class="admonition-title">Conditional Patterns</p>
@@ -1170,16 +1170,20 @@
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>   env/relay.env when you start it with docker compose (docker-compose.yml
 </span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>   passes it as env_file)
 </span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>2. build/scripts/run.sh runs each pre-init script in alphanumeric order:
-</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>   a. 89_configure_app.sh - validates PUBLISH_IP_RANGE and the log level,
-</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>      fills in app.conf and auth.conf
-</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>   b. 90_configure_*.sh - one per service
-</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>3. Each service script:
-</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>   - Exits 0 without changes if its required variable is empty
-</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>   - Validates its variables, and exits 1 if one is invalid
-</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>   - Uses sed to replace placeholders in its config
-</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>   - Calls enableService.sh to activate the service
-</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>4. If any script exits non-zero, run.sh stops the container
-</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>5. Otherwise nginx starts with the active services
+</span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>   a. 10_configure_nginx.sh (from the base image) - replaces NGINX_CONFD_DIR,
+</span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>      NGINX_RUN_USER and the log file paths in nginx.conf and app.conf
+</span><span id="__span-1-7"><a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>   b. 89_configure_app.sh - validates PUBLISH_IP_RANGE and the log level,
+</span><span id="__span-1-8"><a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>      fills in app.conf and auth.conf
+</span><span id="__span-1-9"><a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>   c. 90_configure_*.sh - one per service
+</span><span id="__span-1-10"><a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>   The base image's other scripts (01_, 50_, 95_, 96_, 99_) log startup
+</span><span id="__span-1-11"><a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>   progress and timing.
+</span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>3. Each service script:
+</span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>   - Exits 0 without changes if its required variable is empty
+</span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>   - Validates its variables, and exits 1 if one is invalid
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>   - Uses sed to replace placeholders in its config
+</span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>   - Calls enableService.sh to activate the service
+</span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>4. If any script exits non-zero, run.sh stops the container
+</span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>5. Otherwise nginx starts with the active services
 </span></code></pre></div>
 <h3 id="configuration-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.2</span> Configuration Files</h3>
 <p><strong>Main Configuration</strong>:
@@ -1201,7 +1205,7 @@
 </span><span id="__span-2-8"><a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="c1"># Twitch (Non-Partner - Transformer Destination)</span>
 </span><span id="__span-2-9"><a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="c1">#include NGINX_CONFD_DIR/apps/twitch.conf;</span>
 </span></code></pre></div>
-<p>At startup, <code>89_configure_app.sh</code> replaces <code>NGINX_CONFD_DIR</code> with its value, <code>/etc/nginx/http.d</code>. <code>90_configure_twitch.sh</code> then runs:</p>
+<p>At startup, the base image's <code>10_configure_nginx.sh</code> replaces <code>NGINX_CONFD_DIR</code> with its value, <code>/etc/nginx/http.d</code>. <code>90_configure_twitch.sh</code> then runs:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>/scripts/enableService.sh<span class="w"> </span>twitch
 </span></code></pre></div>
 <p><code>enableService.sh</code> removes the <code>#</code> from <code>#include &lt;NGINX_CONFD_DIR&gt;/apps/twitch.conf</code>, and from the matching <code>transformers/twitch.conf</code> line if that file exists. Result:</p>
@@ -1226,12 +1230,12 @@
 <h3 id="layered-defaults"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.6.2</span> Layered Defaults</h3>
 <ol>
 <li><strong>Dockerfile</strong> - Defaults for all variables</li>
-<li><strong>env/relay.env</strong> - User overrides, loaded by <code>docker compose</code> through <code>env_file</code> in <code>docker-compose.yml</code>. A plain <code>docker run</code> does not read it unless you pass <code>--env-file env/relay.env</code></li>
+<li><strong>env/relay.env</strong> - User overrides, loaded by <code>docker compose</code> through <code>env_file</code> in <code>docker-compose.yml</code>. A plain <code>docker run</code> reads it only if you pass <code>--env-file env/relay.env</code></li>
 </ol>
 <h2 id="security"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.7</span> Security</h2>
 <p>For publish authorization with <code>PUBLISH_IP_RANGE</code>, input validation, where stream keys end up, and what is not protected, see <a href="../../security/">Security</a>.</p>
 <h2 id="archive-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.8</span> Archive Service</h2>
-<p>The Archive service modifies the main <code>relay</code> application rather than creating a separate app. <code>90_configure_archive.sh</code> deletes <code>record off;</code> from <code>app.conf</code> and enables this include inside <code>application relay</code>:</p>
+<p>The Archive service adds a recorder to the main <code>relay</code> application. <code>90_configure_archive.sh</code> deletes <code>record off;</code> from <code>app.conf</code> and enables this include inside <code>application relay</code>:</p>
 <div class="language-nginx highlight"><pre><span></span><code><span id="__span-8-1"><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">recorder</span><span class="w"> </span><span class="s">all</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-8-2"><a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="kn">record</span><span class="w"> </span><span class="s">all</span><span class="p">;</span>
 </span><span id="__span-8-3"><a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="kn">record_path</span><span class="w"> </span><span class="s">ARCHIVE_PATH</span><span class="p">;</span>
@@ -1276,7 +1280,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

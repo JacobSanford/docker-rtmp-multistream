@@ -11,10 +11,10 @@
 <link href="../configuration/" rel="prev"/>
 <link href="../../validation/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Test a New Service - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -831,7 +831,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="test-a-new-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.</span> Test a New Service</h1>
-<p>This guide adds tests for a new service, continuing the <code>example</code> service from <a href="../overview/">Add a Streaming Service</a>. Replace <code>example</code>, <code>Example</code> and <code>EXAMPLE_</code> with your service's name.</p>
+<p>Follow this guide to add tests for a new service, continuing the <code>example</code> service from <a href="../overview/">Add a Streaming Service</a>. Replace <code>example</code>, <code>Example</code> and <code>EXAMPLE_</code> with your service's name.</p>
 <h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.1</span> Before You Begin</h2>
 <ul>
 <li>
@@ -845,6 +845,7 @@
 </ul>
 <h2 id="add-unit-tests"><span class="enumerate-headings-plugin enumerate-heading-plugin">24.2</span> Add Unit Tests</h2>
 <p>Add these functions to <code>tests/02_unit_tests.sh</code>, before the <code>run_test</code> lines.</p>
+<p>Each test runs <code>89_configure_app.sh</code> before the service script so that <code>NGINX_CONFD_DIR</code> in <code>app.conf</code> gets replaced. The base image's <code>10_configure_nginx.sh</code> normally does this, but <code>--entrypoint sh</code> skips <code>run.sh</code>, so <code>10_</code> never runs.</p>
 <p>The enable test filters out commented lines with <code>grep -Ev '^[[:space:]]*#'</code>. The include lines in <code>app.conf</code> are indented, so <code>grep -v '^#'</code> would let a commented include through and the test would pass for a service that is never enabled.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>test_example_service_enables_with_key<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">  </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--entrypoint<span class="w"> </span>sh<span class="w"> </span>-e<span class="w"> </span><span class="nv">EXAMPLE_KEY</span><span class="o">=</span>test_key<span class="w"> </span>rtmp-multistream:test<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
@@ -931,8 +932,8 @@
 </span><span id="__span-6-6"><a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span>run_validation_test<span class="w"> </span><span class="s2">"validate_example_host"</span><span class="w"> </span><span class="s2">"live.example.com;rm -rf /"</span><span class="w"> </span><span class="s2">"with semicolon"</span><span class="w"> </span><span class="m">1</span>
 </span><span id="__span-6-7"><a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="o">}</span>
 </span></code></pre></div>
-<p>Do not call the validator directly from the test function. The suite runs on the host, where the function does not exist: the call returns 127, and every test that expects a rejection passes without testing anything.</p>
-<p><code>run_validation_test</code> wraps the value in single quotes, so it cannot pass a value that contains <code>'</code>. For that case, pass the value through an environment variable, as <code>test_path_invalid_single_quote</code> does.</p>
+<p>Always call the validator through <code>run_validation_test</code>. The suite runs on the host, where the function is undefined, so a direct call returns 127, and every test that expects a rejection passes without testing anything.</p>
+<p>To test a value that contains <code>'</code>, pass it through an environment variable, as <code>test_path_invalid_single_quote</code> does. <code>run_validation_test</code> wraps the value in single quotes, so it can't carry one.</p>
 <p>Register the tests in the <code>validate_*</code> block near the end of the file:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
 </span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Testing validate_example_host..."</span>
@@ -981,7 +982,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

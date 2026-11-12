@@ -11,10 +11,10 @@
 <link href="../requirements/" rel="prev"/>
 <link href="../configuration/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Quick Start - docker-rtmp-multistream</title>
-<link href="../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -777,7 +777,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="quick-start-relay-obs-to-twitch-and-youtube"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.</span> Quick Start: Relay OBS to Twitch and YouTube</h1>
-<p>This guide runs the relay on one Linux machine (the <em>relay host</em>) and points OBS Studio on your streaming PC at it. The relay receives your stream over the Real-Time Messaging Protocol (RTMP) and forwards it to Twitch and YouTube.</p>
+<p>In this guide you run the relay on one Linux machine (the <em>relay host</em>) and point OBS Studio on your streaming PC at it. The relay receives your stream over the Real-Time Messaging Protocol (RTMP) and forwards it to Twitch and YouTube.</p>
 <p>Before you start, check the <a href="../requirements/">Requirements</a>.</p>
 <table>
 <thead>
@@ -847,7 +847,7 @@
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Security</p>
-<p>The relay has no password or key authentication. It accepts a stream from any address in <code>PUBLISH_IP_RANGE</code>. Keep that list as narrow as your network allows, and never expose port 1935 to the internet.</p>
+<p>The relay checks only the sender's IP address: it accepts a stream from any address in <code>PUBLISH_IP_RANGE</code>, with no password or key. Keep that list as narrow as your network allows, and never expose port 1935 to the internet.</p>
 </div>
 <h2 id="point-obs-at-the-relay"><span class="enumerate-headings-plugin enumerate-heading-plugin">2.2</span> Point OBS at the Relay</h2>
 <ol>
@@ -856,7 +856,7 @@
 <ul>
 <li><strong>Service</strong>: Custom</li>
 <li><strong>Server</strong>: <code>rtmp://&lt;RELAY_IP&gt;:1935/relay</code></li>
-<li><strong>Stream Key</strong>: any name, for example <code>mystream</code>. This is <strong>not</strong> your Twitch or YouTube key; it names the stream on the relay, in its log and in archive file names.</li>
+<li><strong>Stream Key</strong>: any name, for example <code>mystream</code>. It names the stream on the relay, in its log and in archive file names. Your Twitch and YouTube keys go in <code>env/relay.env</code>.</li>
 <li><strong>Use authentication</strong>: unchecked</li>
 </ul>
 </li>
@@ -866,7 +866,7 @@
 <li><strong>Encoder</strong>: a hardware encoder such as NVIDIA NVENC H.264 if you have one, otherwise x264.</li>
 <li><strong>Rate Control</strong>: CBR (constant bitrate).</li>
 <li><strong>Keyframe Interval</strong>: 2 s.</li>
-<li><strong>Bitrate</strong>: the highest your upload sustains. YouTube receives this stream unchanged. For Twitch, the relay re-encodes to 4500 kbps by default; in Twitch partner mode (<code>TWITCH_PARTNER=TRUE</code>) Twitch also receives it unchanged, so keep it within Twitch's <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">Broadcasting Guidelines</a>. See <a href="../performance/bandwidth/">Bandwidth Requirements</a> for the relay host's total upload.</li>
+<li><strong>Bitrate</strong>: the highest your upload sustains. YouTube receives this stream unchanged. For Twitch, the relay re-encodes to 4500 kbps by default. In Twitch partner mode (<code>TWITCH_PARTNER=TRUE</code>) Twitch also receives it unchanged, so keep it within Twitch's <a href="https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US" target="_blank">Broadcasting Guidelines</a>. See <a href="../performance/bandwidth/">Bandwidth Requirements</a> for the relay host's total upload.</li>
 </ul>
 <p>YouTube, and Twitch in partner mode, get exactly what OBS sends, so these settings are what those viewers see.</p>
 </li>
@@ -908,7 +908,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

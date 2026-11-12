@@ -11,10 +11,10 @@
 <link href="../../../troubleshooting/services/archive/" rel="prev"/>
 <link href="../configuration/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Add a Streaming Service - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -929,25 +929,25 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="add-a-streaming-service"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.</span> Add a Streaming Service</h1>
-<p>This guide adds a new streaming destination to the relay. The examples add a service called <code>example</code>, with the variables <code>EXAMPLE_KEY</code> and <code>EXAMPLE_INGEST</code>. Replace these with your service's name.</p>
+<p>Follow this guide to add a new streaming destination to the relay. The examples add a service called <code>example</code>, with the variables <code>EXAMPLE_KEY</code> and <code>EXAMPLE_INGEST</code>. Replace these with your service's name.</p>
 <p>For the exact rules each file must follow, see the <a href="../configuration/">Service Contract Reference</a>.</p>
 <h2 id="before-you-begin"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.1</span> Before You Begin</h2>
 <ul>
 <li>Choose a pattern. <strong>Simple Relay</strong> forwards the stream unchanged. <strong>Transformer</strong> re-encodes it with FFmpeg first. See <a href="../../../techref/service-patterns/">Service Patterns</a>.</li>
 <li>Check the service's ingest protocol. nginx's <code>push</code> sends plain RTMP. If the service accepts only RTMPS, use the Transformer pattern: the image's FFmpeg supports <code>rtmps://</code> output.</li>
-<li>Pick a lowercase service name (<code>example</code>) and an uppercase variable prefix (<code>EXAMPLE_</code>). The name is used for file names and the <code>enableService.sh</code> argument, and they must match exactly.</li>
+<li>Pick a lowercase service name (<code>example</code>) and an uppercase variable prefix (<code>EXAMPLE_</code>). You use the name for the file names and as the <code>enableService.sh</code> argument, so the two must match exactly.</li>
 </ul>
 <h2 id="create-the-config-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2</span> Create the Config Files</h2>
 <p>Placeholders in these files are bare uppercase tokens, which the startup script replaces with <code>sed</code>. Do not wrap them in braces: <code>{EXAMPLE_KEY}</code> becomes <code>{abc123}</code>.</p>
 <h3 id="simple-relay"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.1</span> Simple Relay</h3>
-<p>Create <code>build/conf/nginx/http.d/apps/example.conf</code>. It holds directives only, with no <code>application</code> block, because it is included inside <code>application relay</code>:</p>
+<p>Create <code>build/conf/nginx/http.d/apps/example.conf</code>. Because <code>app.conf</code> includes it inside <code>application relay</code>, it holds directives only (no <code>application</code> block):</p>
 <div class="language-nginx highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">include</span><span class="w"> </span><span class="n">http.d/auth.conf</span>;
 </span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="k">push</span><span class="w"> </span><span class="s">rtmp://EXAMPLE_INGEST/app/EXAMPLE_KEY</span><span class="p">;</span>
 </span></code></pre></div>
 <p>Replace <code>/app/</code> with the path your service's ingest URL uses.</p>
 <h3 id="transformer"><span class="enumerate-headings-plugin enumerate-heading-plugin">22.2.2</span> Transformer</h3>
-<p>Create two files. <code>build/conf/nginx/http.d/transformers/example.conf</code> is included inside <code>application relay</code> and runs FFmpeg for each incoming stream:</p>
+<p>Create two files. <code>app.conf</code> includes <code>build/conf/nginx/http.d/transformers/example.conf</code> inside <code>application relay</code>, where it runs FFmpeg for each incoming stream:</p>
 <div class="language-nginx highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">exec</span><span class="w"> </span><span class="s">ffmpeg</span><span class="w"> </span><span class="s">-i</span><span class="w"> </span><span class="s">rtmp://127.0.0.1/</span><span class="nv">$app/$name</span>
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="s">-c:a</span><span class="w"> </span><span class="s">aac</span><span class="w"> </span><span class="s">-b:a</span><span class="w"> </span><span class="mi">128k</span>
 </span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="s">-c:v</span><span class="w"> </span><span class="s">libx264</span><span class="w"> </span><span class="s">-preset</span><span class="w"> </span><span class="s">veryfast</span>
@@ -1107,7 +1107,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

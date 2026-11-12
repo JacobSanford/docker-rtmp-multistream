@@ -11,10 +11,10 @@
 <link href="../youtube/" rel="prev"/>
 <link href="../../../developer/adding-services/overview/" rel="next"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>Archive Not Recording, Won't Play, or Filling the Disk - docker-rtmp-multistream</title>
-<link href="../../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -973,7 +973,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="archive-not-recording-wont-play-or-filling-the-disk"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.</span> Archive Not Recording, Won't Play, or Filling the Disk</h1>
-<p>Troubleshooting issues specific to local stream archiving.</p>
+<p>Use this page to fix problems with local stream archives.</p>
 <h2 id="common-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.1</span> Common Issues</h2>
 <table>
 <thead>
@@ -1032,7 +1032,7 @@
 </span></code></pre></div>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>ERROR: ARCHIVE_PATH is not writable by the nginx user.
 </span></code></pre></div>
-<p>This error appears both when no host folder is mounted and when the mounted folder is not writable by the container's nginx user (UID 100, GID 101).</p>
+<p>You see this error in two cases: no host folder is mounted, or the container's nginx user (UID 100, GID 101) can't write to the mounted folder.</p>
 <p><strong>Solution</strong>:</p>
 <ol>
 <li>
@@ -1054,7 +1054,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>stream_archive
 </span><span id="__span-7-2"><a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>sudo<span class="w"> </span>chown<span class="w"> </span><span class="m">100</span>:101<span class="w"> </span>stream_archive
 </span></code></pre></div>
-<p>Recordings in this folder are then owned by UID 100, so deleting them from the host requires <code>sudo</code>.</p>
+<p>UID 100 then owns the recordings, so you need <code>sudo</code> to delete them from the host.</p>
 </li>
 <li>
 <p>Recreate the container:</p>
@@ -1083,7 +1083,7 @@
 </span></code></pre></div>
 <h2 id="file-format-issues"><span class="enumerate-headings-plugin enumerate-heading-plugin">21.3</span> File Format Issues</h2>
 <p><strong>Issue</strong>: Archive files won't play or are corrupted</p>
-<p>Archives are always recorded as FLV (Flash Video). Some players and editors refuse FLV files.</p>
+<p>The relay always records archives as FLV (Flash Video), which some players and editors refuse to open.</p>
 <p><strong>Solution</strong>: Convert the archive to MP4 without re-encoding:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a>ffmpeg<span class="w"> </span>-i<span class="w"> </span>&lt;ARCHIVE_FILE&gt;<span class="w"> </span>-c<span class="w"> </span>copy<span class="w"> </span>&lt;OUTPUT_FILE&gt;.mp4
 </span></code></pre></div>
@@ -1133,7 +1133,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>

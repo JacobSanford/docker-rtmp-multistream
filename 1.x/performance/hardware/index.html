@@ -11,10 +11,10 @@
 <link href="../../services/archive/" rel="prev"/>
 <link href="../bandwidth/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.7.7" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.1" name="generator"/>
 <title>CPU Considerations - docker-rtmp-multistream</title>
-<link href="../../assets/stylesheets/main.ec1eaa64.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.fb2fffe2.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -813,7 +813,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="cpu-considerations"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> CPU Considerations</h1>
-<p>This page explains which services use CPU and the settings that change how much Twitch re-encoding uses. It gives no minimum CPU figure: the load depends on your resolution, frame rate, preset and processor. To see the load on your host, run <code>docker stats</code> while you stream.</p>
+<p>This page shows which services use CPU and which settings change how much Twitch re-encoding uses. Your CPU load depends on your resolution, frame rate, preset and processor, so the page gives no minimum figure. To see the load on your host, run <code>docker stats</code> while you stream.</p>
 <h2 id="which-services-use-cpu"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Which Services Use CPU</h2>
 <p>Only Twitch non-partner mode (the default) re-encodes video. It runs FFmpeg with the x264 encoder for as long as you publish, and this is where nearly all of the relay's CPU use comes from.</p>
 <p>These services forward the stream without re-encoding it, and use little CPU:</p>
@@ -836,11 +836,11 @@
 <li><code>0</code> (default): x264 chooses based on the CPU count</li>
 <li><code>N</code> (1 to 64): x264 uses N threads</li>
 </ul>
-<p>Limit threads when the relay shares a host with other CPU-heavy work. Only Twitch non-partner mode encodes; YouTube, Archive and Twitch partner mode use almost no CPU, so there is nothing to balance between services.</p>
+<p>Limit threads when the relay shares a host with other CPU-heavy work. Twitch non-partner mode is the only service that encodes (YouTube, Archive and Twitch partner mode use almost no CPU), so this one setting covers the relay's CPU use.</p>
 <h2 id="encoder-presets"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4</span> Encoder Presets</h2>
 <p><code>TWITCH_X264_PRESET</code> sets the x264 preset. From fastest to slowest, the valid values are:</p>
 <p><code>ultrafast</code>, <code>superfast</code>, <code>veryfast</code>, <code>faster</code>, <code>fast</code>, <code>medium</code> (default), <code>slow</code>, <code>slower</code>, <code>veryslow</code>, <code>placebo</code></p>
-<p>A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset does not lower the bitrate: it compresses less efficiently, and quality at that bitrate drops.</p>
+<p>A faster preset uses less CPU but compresses less efficiently. Because the encoder holds the bitrate constant, a faster preset gives you lower quality at the same bitrate.</p>
 <p>If FFmpeg cannot keep up with your settings, try one preset faster, then lower <code>TWITCH_HEIGHT</code> or <code>TWITCH_FPS</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Preset typos are not caught at startup</p>
@@ -880,7 +880,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
-<script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
 </body>
 </html>
