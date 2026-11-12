@@ -10,7 +10,7 @@ version: 1.x
 
 # Archive Not Recording, Won't Play, or Filling the Disk
 
-Troubleshooting issues specific to local stream archiving.
+Use this page to fix problems with local stream archives.
 
 ## Common Issues
 
@@ -69,7 +69,7 @@ docker compose logs relay | grep "not writable"
 ERROR: ARCHIVE_PATH is not writable by the nginx user.
 ```
 
-This error appears both when no host folder is mounted and when the mounted folder is not writable by the container's nginx user (UID 100, GID 101).
+You see this error in two cases: no host folder is mounted, or the container's nginx user (UID 100, GID 101) can't write to the mounted folder.
 
 **Solution**:
 
@@ -95,7 +95,7 @@ This error appears both when no host folder is mounted and when the mounted fold
     sudo chown 100:101 stream_archive
     ```
 
-    Recordings in this folder are then owned by UID 100, so deleting them from the host requires `sudo`.
+    UID 100 then owns the recordings, so you need `sudo` to delete them from the host.
 
 3. Recreate the container:
 
@@ -138,7 +138,7 @@ ls -l stream_archive
 
 **Issue**: Archive files won't play or are corrupted
 
-Archives are always recorded as FLV (Flash Video). Some players and editors refuse FLV files.
+The relay always records archives as FLV (Flash Video), which some players and editors refuse to open.
 
 **Solution**: Convert the archive to MP4 without re-encoding:
 

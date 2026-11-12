@@ -10,7 +10,7 @@ version: 1.x
 
 # Choose a Streaming Service
 
-docker-rtmp-multistream supports multiple streaming destinations with different performance characteristics.
+You can send your stream to several destinations. Each one has different CPU and bandwidth costs.
 
 ## Supported Services
 

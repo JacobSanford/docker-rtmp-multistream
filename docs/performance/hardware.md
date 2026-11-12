@@ -10,7 +10,7 @@ version: 1.x
 
 # CPU Considerations
 
-This page explains which services use CPU and the settings that change how much Twitch re-encoding uses. It gives no minimum CPU figure: the load depends on your resolution, frame rate, preset and processor. To see the load on your host, run `docker stats` while you stream.
+This page shows which services use CPU and which settings change how much Twitch re-encoding uses. Your CPU load depends on your resolution, frame rate, preset and processor, so the page gives no minimum figure. To see the load on your host, run `docker stats` while you stream.
 
 ## Which Services Use CPU
 
@@ -39,7 +39,7 @@ The `TWITCH_FFMPEG_THREADS` environment variable controls how many threads the l
 - `0` (default): x264 chooses based on the CPU count
 - `N` (1 to 64): x264 uses N threads
 
-Limit threads when the relay shares a host with other CPU-heavy work. Only Twitch non-partner mode encodes; YouTube, Archive and Twitch partner mode use almost no CPU, so there is nothing to balance between services.
+Limit threads when the relay shares a host with other CPU-heavy work. Twitch non-partner mode is the only service that encodes (YouTube, Archive and Twitch partner mode use almost no CPU), so this one setting covers the relay's CPU use.
 
 ## Encoder Presets
 
@@ -47,7 +47,7 @@ Limit threads when the relay shares a host with other CPU-heavy work. Only Twitc
 
 `ultrafast`, `superfast`, `veryfast`, `faster`, `fast`, `medium` (default), `slow`, `slower`, `veryslow`, `placebo`
 
-A faster preset uses less CPU. The encoder runs at a constant bitrate, so a faster preset keeps the same bitrate and compresses less efficiently: quality at that bitrate drops.
+A faster preset uses less CPU but compresses less efficiently. Because the encoder holds the bitrate constant, a faster preset gives you lower quality at the same bitrate.
 
 If FFmpeg cannot keep up with your settings, try one preset faster, then lower `TWITCH_HEIGHT` or `TWITCH_FPS`.
 

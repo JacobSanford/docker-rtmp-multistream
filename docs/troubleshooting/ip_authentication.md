@@ -11,9 +11,9 @@ version: 1.x
 # OBS Is Refused: access forbidden by rule
 
 ## Overview
-The default configuration relays Real-Time Messaging Protocol (RTMP) streams from all typical local and docker IPs (172.16.0.0/12,192.168.0.0/16). This restriction can be modified by setting the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
+By default, the relay accepts Real-Time Messaging Protocol (RTMP) streams from typical local and Docker addresses (172.16.0.0/12,192.168.0.0/16). You can change this range with the [PUBLISH_IP_RANGE](../techref/environment.md#system-variables) environment variable.
 
-If this mask does not include the IP address of the machine you are streaming from, you will see access forbidden errors in the logs and publishing the stream from OBS to your relay will not be accepted.
+If you stream from a machine outside this range, the relay refuses the stream from OBS and logs an `access forbidden` error.
 
 ## Symptoms
 "access forbidden by rule" errors in the relay logs, e.g.:
@@ -61,7 +61,7 @@ If OBS runs on the same machine as the relay, its connection reaches the relay f
 
 ## Example Ranges
 
-Each value keeps `172.16.0.0/12` so OBS on the relay's own machine can still publish. Drop it only if nothing streams from that machine.
+Each value keeps `172.16.0.0/12` so OBS on the relay's own machine can still publish. Drop it only if you never stream from that machine.
 
 | Description                                  | PUBLISH_IP_RANGE Value             |
 |----------------------------------------------|------------------------------------|

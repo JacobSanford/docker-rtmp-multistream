@@ -10,7 +10,7 @@ version: 1.x
 
 # Troubleshooting Guide
 
-Quick diagnostic guide to identify and resolve common issues with docker-rtmp-multistream.
+Use this guide to find and fix common problems with docker-rtmp-multistream.
 
 ## Quick Diagnostics
 
@@ -100,7 +100,7 @@ YouTube configuration complete, and service enabled.
 Archive configuration complete, and service enabled.
 ```
 
-A service that is not configured prints a skip line instead, and the relay keeps running without it:
+If you haven't configured a service, the relay prints a skip line for it and keeps running without it:
 
 ```text
 TWITCH_KEY is not set. Skipping Twitch configuration.

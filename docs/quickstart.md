@@ -10,7 +10,7 @@ version: 1.x
 
 # Quick Start: Relay OBS to Twitch and YouTube
 
-This guide runs the relay on one Linux machine (the *relay host*) and points OBS Studio on your streaming PC at it. The relay receives your stream over the Real-Time Messaging Protocol (RTMP) and forwards it to Twitch and YouTube.
+In this guide you run the relay on one Linux machine (the *relay host*) and point OBS Studio on your streaming PC at it. The relay receives your stream over the Real-Time Messaging Protocol (RTMP) and forwards it to Twitch and YouTube.
 
 Before you start, check the [Requirements](requirements.md).
 
@@ -82,7 +82,7 @@ Before you start, check the [Requirements](requirements.md).
     If you see an `ERROR:` line, the relay has stopped. See [Invalid Environment Value](troubleshooting/connection-issues.md#invalid-environment-value).
 
 !!! warning "Security"
-    The relay has no password or key authentication. It accepts a stream from any address in `PUBLISH_IP_RANGE`. Keep that list as narrow as your network allows, and never expose port 1935 to the internet.
+    The relay checks only the sender's IP address: it accepts a stream from any address in `PUBLISH_IP_RANGE`, with no password or key. Keep that list as narrow as your network allows, and never expose port 1935 to the internet.
 
 ## Point OBS at the Relay
 
@@ -96,7 +96,7 @@ Before you start, check the [Requirements](requirements.md).
     - **Encoder**: a hardware encoder such as NVIDIA NVENC H.264 if you have one, otherwise x264.
     - **Rate Control**: CBR (constant bitrate).
     - **Keyframe Interval**: 2 s.
-    - **Bitrate**: the highest your upload sustains. YouTube receives this stream unchanged. For Twitch, the relay re-encodes to 4500 kbps by default; in Twitch partner mode (`TWITCH_PARTNER=TRUE`) Twitch also receives it unchanged, so keep it within Twitch's [Broadcasting Guidelines](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"}. See [Bandwidth Requirements](performance/bandwidth.md) for the relay host's total upload.
+    - **Bitrate**: the highest your upload sustains. YouTube receives this stream unchanged. For Twitch, the relay re-encodes to 4500 kbps by default. In Twitch partner mode (`TWITCH_PARTNER=TRUE`) Twitch also receives it unchanged, so keep it within Twitch's [Broadcasting Guidelines](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"}. See [Bandwidth Requirements](performance/bandwidth.md) for the relay host's total upload.
 
     YouTube, and Twitch in partner mode, get exactly what OBS sends, so these settings are what those viewers see.
 

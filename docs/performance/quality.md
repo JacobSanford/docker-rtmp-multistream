@@ -10,7 +10,7 @@ version: 1.x
 
 # Quality Optimization
 
-This page explains which settings control the quality each service receives, and how to choose them for your content.
+Use this page to find the settings that control the quality each service receives, and to choose them for your content.
 
 ## Where Quality Is Set
 
@@ -29,7 +29,7 @@ video kbps = TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS
 
 The encoder holds this rate constant. From that:
 
-- **`TWITCH_HEIGHT` does not change the bitrate.** A higher resolution spreads the same bits over more pixels, so each frame gets less detail per pixel.
+- **`TWITCH_HEIGHT` changes the resolution and leaves the bitrate as it is.** A higher resolution spreads the same bits over more pixels, so each frame gets less detail per pixel.
 - **`TWITCH_FPS` changes the bitrate.** Halving it with the same `TWITCH_KBITS_PER_VIDEO_FRAME` halves the bitrate.
 - **The relay scales to `TWITCH_HEIGHT` whatever your source is.** With a 720p source, `TWITCH_HEIGHT=1080` upscales, which adds no detail.
 - **`TWITCH_X264_PRESET`** changes CPU use and how efficiently the bitrate is used, not the bitrate. See [Encoder Presets](hardware.md#encoder-presets).
@@ -46,7 +46,7 @@ Keep the frame rate high and accept a lower resolution. The defaults do this: `T
 
 **Examples**: strategy games, puzzle games, art streams, slow-paced content
 
-Raise the resolution and lower the frame rate. Raise `TWITCH_KBITS_PER_VIDEO_FRAME` at the same time, or the bitrate falls:
+Raise the resolution and lower the frame rate. A lower frame rate also lowers the bitrate, so raise `TWITCH_KBITS_PER_VIDEO_FRAME` at the same time:
 
 | `TWITCH_HEIGHT` | `TWITCH_FPS` | `TWITCH_KBITS_PER_VIDEO_FRAME` | Video bitrate |
 |---|---|---|---|

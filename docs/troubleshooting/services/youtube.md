@@ -10,7 +10,7 @@ version: 1.x
 
 # Stream Not Reaching YouTube
 
-Troubleshooting issues specific to streaming to YouTube.
+Use this page to fix problems that affect only the YouTube stream.
 
 ## Common Issues
 
@@ -50,7 +50,7 @@ When YouTube is enabled, this line appears:
 YouTube configuration complete, and service enabled.
 ```
 
-If YouTube is not enabled, this line appears instead: `YOUTUBE_KEY is not set. Skipping YouTube configuration.`
+If `YOUTUBE_KEY` is empty, you see this line instead: `YOUTUBE_KEY is not set. Skipping YouTube configuration.`
 
 **Solution**: If YouTube is missing:
 - Verify `YOUTUBE_KEY` is set in `env/relay.env`
@@ -69,7 +69,7 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 #### Wrong Stream Key
 
-A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.
+The relay accepts any well-formed key and has no way to check it against YouTube, so a wrong key may leave nothing in the log.
 
 **Check**: Confirm the relay can reach YouTube:
 

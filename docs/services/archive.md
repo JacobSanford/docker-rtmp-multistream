@@ -12,7 +12,7 @@ version: 1.x
 
 ## Overview
 
-The relay can archive streams to disk in real time. Archives are written inside the container to `ARCHIVE_PATH`; mount a host directory there so the files survive container removal.
+You can archive every incoming stream to disk as it arrives. The relay writes archives to `ARCHIVE_PATH` inside the container, so mount a host directory there to keep the files after you remove the container.
 
 ## Enable Archive
 
@@ -72,7 +72,7 @@ For example, a stream published as `rtmp://<relay>/relay/live` on 25 September 2
 live-1790348020_25092026_145340.flv
 ```
 
-The date and time are in UTC. Because the date is day-first, sorting by filename does not sort by date across months; sort by the Unix time after the stream name instead, or by modification time (`ls -t`).
+The date and time are in UTC. To list archives in date order, sort by the Unix time after the stream name, or by modification time (`ls -t`). Sorting by filename mixes up months, because the date is day-first.
 
 ## See Also
 

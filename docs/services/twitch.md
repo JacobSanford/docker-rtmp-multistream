@@ -37,9 +37,9 @@ The relay streams to Twitch. How you configure the Twitch service depends on whe
 
 ## Partner vs. Non-Partner Streaming
 
-Twitch partners with transcoding services should send higher-bitrate streams to take advantage of Twitch's multi-bitrate transcoding. Non-partners should use the relay's built-in transcoding to optimize their streams for Twitch.
+If you are a partner with transcoding, send a higher-bitrate stream to take advantage of Twitch's multi-bitrate transcoding. If you are not a partner, let the relay transcode your stream for Twitch.
 
-- **Partner mode** (`TWITCH_PARTNER=TRUE`) uses the **simple relay pattern**: the relay forwards your stream to Twitch without re-encoding it. Only `TWITCH_KEY` and `TWITCH_ENDPOINT` apply; all other Twitch variables are ignored.
+- **Partner mode** (`TWITCH_PARTNER=TRUE`) uses the **simple relay pattern**: the relay forwards your stream to Twitch unchanged. Only `TWITCH_KEY` and `TWITCH_ENDPOINT` apply; the relay ignores the other Twitch variables.
 - **Non-partner mode** (the default) uses the **transformer pattern**: the relay re-encodes the stream with FFmpeg before forwarding it, so you can send a high-quality stream from your streaming software while the relay produces one suited to Twitch.
 
 ## Settings
@@ -61,7 +61,7 @@ The transformer always applies these settings. No variable changes them.
 
 ### Optimizing Twitch Quality
 
-For non-partners, viewers may only be able to watch your stream at the quality you transmit. High-bandwidth streams may be unwatchable for viewers with slower connections, and [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US){target="_blank"}.
+If you are not a partner, your viewers may only be able to watch at the quality you send, because [Twitch does not reliably transcode streams for non-partners](https://help.twitch.tv/s/article/transcoding-options-faq?language=en_US){target="_blank"}. Viewers on slower connections may not be able to watch a high-bandwidth stream at all.
 
 Twitch publishes its bitrate and encoder limits in its [Broadcasting Guidelines](https://help.twitch.tv/s/article/broadcasting-guidelines?language=en_US){target="_blank"}. Check them before raising `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_AUDIO_BITRATE` above the defaults.
 

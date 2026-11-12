@@ -10,16 +10,16 @@ version: 1.x
 
 # Bandwidth Requirements
 
-This page shows how to work out the upload bandwidth the relay host needs for the services you enable, and the disk space Archive uses.
+Use this page to work out the upload bandwidth your relay host needs for the services you enable, and the disk space Archive uses.
 
 !!! warning "The relay sends one stream per service"
-    The relay sends a separate copy of your stream to each enabled service at the same time. The relay host's upload must carry the sum of all of them.
+    The relay sends a separate copy of your stream to each enabled service at the same time, so the relay host's upload must carry the sum of all of them.
 
 ## What Counts as Upload
 
 Your streaming software sends one stream to the relay. The relay sends one stream to each enabled service.
 
-- **Relay on your local network** (the default: `PUBLISH_IP_RANGE` admits the Docker networks and `192.168.0.0/16`): the stream from your streaming software to the relay stays on your local network. Only the relay's outgoing streams use your internet upload.
+- **Relay on your local network**: the stream from your streaming software to the relay stays on your local network, so only the relay's outgoing streams use your internet upload. This is the default setup: `PUBLISH_IP_RANGE` admits the Docker networks and `192.168.0.0/16`.
 - **Relay on a remote host**: your streaming software's stream to the relay also crosses your internet upload, and the relay host's own upload carries the outgoing streams.
 
 ## Bitrate per Service
@@ -31,11 +31,11 @@ The source bitrate is the video plus audio bitrate set in your streaming softwar
 | YouTube | Source bitrate. The stream is passed through unchanged |
 | Twitch partner mode (`TWITCH_PARTNER=TRUE`) | Source bitrate. The stream is passed through unchanged |
 | Twitch non-partner mode (the default) | `TWITCH_KBITS_PER_VIDEO_FRAME × TWITCH_FPS` kbps of video, plus `TWITCH_AUDIO_BITRATE`. With the defaults, `75 × 60 = 4500` kbps plus `160` kbps: 4660 kbps |
-| Archive | No network traffic, unless `ARCHIVE_PATH` is on a network mount |
+| Archive | Writes to local disk. If `ARCHIVE_PATH` is on a network mount, Archive also sends the source bitrate over that network |
 
 The encoder uses constant bitrate, so the rate depends only on `TWITCH_KBITS_PER_VIDEO_FRAME` and `TWITCH_FPS`. See [How the Twitch Settings Interact](quality.md#how-the-twitch-settings-interact).
 
-These figures exclude RTMP and TCP overhead.
+These figures cover the stream data only. RTMP and TCP add a small overhead on top.
 
 ## Example Calculation
 
@@ -61,7 +61,7 @@ A 6160 kbps source uses about 2.8 GB per hour. A 20000 kbps source uses about 9 
 
 ## Reduce Upload
 
-- **Lower the source bitrate** in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. It does not change Twitch non-partner mode, which re-encodes to its own bitrate.
+- **Lower the source bitrate** in your streaming software. This lowers the bitrate sent to YouTube and to Twitch in partner mode, and the Archive file size. Twitch non-partner mode re-encodes to its own bitrate, so its upload stays the same.
 - **Lower the Twitch non-partner bitrate** with `TWITCH_KBITS_PER_VIDEO_FRAME` or `TWITCH_FPS`. See [Quality Optimization](quality.md).
 - **Disable a service** by leaving its key empty in `env/relay.env`.
 

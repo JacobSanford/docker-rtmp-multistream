@@ -77,7 +77,7 @@ Quick sanity checks that verify the Docker image builds correctly and contains r
 
 #### 2. Unit Tests (`tests/02_unit_tests.sh`)
 Validates service configuration and environment variable handling in isolation:
-- Services remain disabled without keys
+- Services stay disabled when their keys are empty
 - Services enable when keys are provided
 - Environment variables correctly replace placeholders
 - Twitch transformer configuration
@@ -103,7 +103,7 @@ End-to-end tests of actual RTMP streaming functionality:
 
 ## Running Individual Test Suites
 
-You can run individual test suites directly. Each prints a summary and exits non-zero if any of its tests fail. Only `test.sh` and the smoke tests build the `rtmp-multistream:test` image, so build it first:
+You can run each suite on its own. Each prints a summary and exits non-zero if any of its tests fail. `test.sh` and the smoke tests build the `rtmp-multistream:test` image, so before you run another suite on its own, build it:
 
 ```bash
 docker build -t rtmp-multistream:test .
@@ -157,7 +157,7 @@ Passed: <N>
 
 ## Cleanup
 
-Each test removes the containers it starts. When run through `test.sh`, `tests/tmp/` is deleted on exit, even if tests fail. A suite run on its own, or a run you interrupt, can leave `tests/tmp/` and `test-rtmp-*` containers behind:
+Each test removes the containers it starts. If you run the tests through `test.sh`, it deletes `tests/tmp/` on exit, even if tests fail. If you run a suite on its own or interrupt a run, remove any leftover `tests/tmp/` and `test-rtmp-*` containers yourself:
 
 ```bash
 docker ps -a --filter name=test-rtmp- -q | xargs -r docker rm -f

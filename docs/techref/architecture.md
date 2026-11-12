@@ -37,7 +37,7 @@ Each streaming destination (service) consists of modular components:
 3. **Pre-init Script** - `build/scripts/pre-init.d/90_configure_<SERVICE>.sh`
 4. **Environment Variables** - Configures the service and its behavior. Defined in `Dockerfile` and can be overridden in `env/relay.env`
 
-Services are enabled/disabled dynamically at container startup based on configuration.
+At container startup, each service is enabled or disabled based on its environment variables.
 
 ## Stream Flow
 
@@ -78,7 +78,7 @@ For a complete comparison of these patterns (use cases, pros/cons, and examples)
 
 ### Technical Implementation
 
-**Simple Relay** (e.g., YouTube): Single `apps/<SERVICE>.conf` file, included inside `application relay`, that pushes the stream directly to the destination without modification.
+**Simple Relay** (e.g., YouTube): Single `apps/<SERVICE>.conf` file, included inside `application relay`, that pushes the stream unchanged to the destination.
 
 **Transformer** (e.g., Twitch non-partner mode): Two-stage pipeline. `transformers/<SERVICE>.conf` (FFmpeg) is included inside `application relay`. `apps/<SERVICE>.conf` defines a separate application, outside `relay`, that receives FFmpeg's output and pushes it to the destination.
 
@@ -180,7 +180,7 @@ push rtmp://use10.contribute.live-video.net/app/live_123456789_abc;
 ### Layered Defaults
 
 1. **Dockerfile** - Defaults for all variables
-2. **env/relay.env** - User overrides, loaded by `docker compose` through `env_file` in `docker-compose.yml`. A plain `docker run` does not read it unless you pass `--env-file env/relay.env`
+2. **env/relay.env** - User overrides, loaded by `docker compose` through `env_file` in `docker-compose.yml`. A plain `docker run` reads it only if you pass `--env-file env/relay.env`
 
 ## Security
 

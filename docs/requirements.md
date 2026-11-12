@@ -14,7 +14,7 @@ Check each item on the relay host before following the [Quick Start](quickstart.
 
 ## Operating System
 
-Linux is the only supported operating system. The relay may run on macOS or Windows, but that is not tested.
+Linux is the only supported operating system. The relay may also run on macOS or Windows, but those are untested.
 
 ## Software
 

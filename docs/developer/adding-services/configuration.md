@@ -36,7 +36,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 #include NGINX_CONFD_DIR/transformers/<SERVICE>.conf;
 ```
 
-- Write `#include` with no space. `enableService.sh` matches `#include <PATH>;` exactly. With `# include`, with a space, it finds no line to enable and stops the container with `ERROR: No '#include <PATH>;' line in /etc/nginx/http.d/app.conf. Cannot enable <SERVICE>.`
+- Write `#include` with no space. `enableService.sh` matches `#include <PATH>;` exactly. If you write `# include` (with a space), it finds no line to enable and stops the container with `ERROR: No '#include <PATH>;' line in /etc/nginx/http.d/app.conf. Cannot enable <SERVICE>.`
 - Keep the literal token `NGINX_CONFD_DIR`. The base image's `10_configure_nginx.sh` replaces it with `/etc/nginx/http.d` before any `90_` script runs, and `enableService.sh` matches the replaced path. `89_configure_app.sh` replaces it too, so tests that skip the base image's scripts still work: see [Test a Service](testing.md#add-unit-tests).
 - Put each line where the [Files](#files) table says it is included from.
 
@@ -44,7 +44,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 
 - A placeholder is a bare uppercase word, named after its variable: `EXAMPLE_KEY`. `sed` replaces only the word, so braces around it end up in the config.
 - `sed` replaces every occurrence, including inside a longer token. If one token contains another, substitute the longer one first. `90_configure_twitch.sh` substitutes `TWITCH_DOUBLE_FPS` before `TWITCH_FPS` for this reason.
-- Values derived from variables, such as a bitrate, are computed in the startup script and substituted like any other token. See `TWITCH_VIDEO_BITRATE` in `90_configure_twitch.sh`.
+- Compute derived values, such as a bitrate, in the startup script and substitute them like any other token. See `TWITCH_VIDEO_BITRATE` in `90_configure_twitch.sh`.
 - Escape free-form values, such as stream keys, host names and paths, with `escape_for_sed` before substituting them. Whitelisted values, such as numbers and identifiers, need no escaping.
 
 ## Startup Script
@@ -53,7 +53,7 @@ Every `application` block must contain `include http.d/auth.conf;`. An applicati
 
 | Rule | Why |
 |---|---|
-| Name it `90_configure_<SERVICE>.sh`, like the other service scripts | It must sort after the base image's `10_configure_nginx.sh`, which replaces `NGINX_CONFD_DIR` in `app.conf`. Before that, the include marker does not match and `enableService.sh` stops the container |
+| Name it `90_configure_<SERVICE>.sh`, like the other service scripts | It must sort after the base image's `10_configure_nginx.sh`, which replaces `NGINX_CONFD_DIR` in `app.conf`. If it runs earlier, the marker still holds the token, so `enableService.sh` finds no match and stops the container |
 | Start with `set -e` and source `/scripts/validate_input.sh` | Any failing command stops the script |
 | If the required variable is empty, print `<VARIABLE> is not set. Skipping <Service> configuration.` and exit 0 | The service is optional. Docs and tests grep for `is not set` |
 | Validate every variable before using it, and exit 1 on failure | A non-zero exit makes `run.sh` stop the container, so a bad value never reaches nginx |

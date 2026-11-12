@@ -10,7 +10,7 @@ version: 1.x
 
 # Stream Not Reaching Twitch
 
-Troubleshooting issues specific to streaming to Twitch.
+Use this page to fix problems that affect only the Twitch stream.
 
 ## Common Issues
 
@@ -112,7 +112,7 @@ Twitch Partner configuration complete, and service enabled.
 Twitch Non-Partner configuration complete, and service enabled.
 ```
 
-If Twitch is not enabled, this line appears instead: `TWITCH_KEY is not set. Skipping Twitch configuration.`
+If `TWITCH_KEY` is empty, you see this line instead: `TWITCH_KEY is not set. Skipping Twitch configuration.`
 
 **Solution**: If Twitch is missing:
 - Verify `TWITCH_KEY` is set in `env/relay.env`
@@ -131,7 +131,7 @@ docker compose logs relay | grep -E "service enabled|Skipping|ERROR"
 
 #### Wrong Stream Key
 
-A key that is well-formed but wrong is accepted by the relay. The relay cannot tell it is wrong, and the log may show nothing.
+The relay accepts any well-formed key and has no way to check it against Twitch, so a wrong key may leave nothing in the log.
 
 **Check**: Confirm the relay can reach Twitch:
 

@@ -12,9 +12,7 @@ version: 1.x
 
 ## Overview
 
-The relay streams to YouTube using direct pass-through.
-
-The YouTube relay uses a **simple relay pattern** - it forwards your stream directly to YouTube without any re-encoding or modification. This preserves your original stream quality for YouTube's reprocessing.
+The relay forwards your stream to YouTube unchanged, using the **simple relay pattern**. YouTube receives your original quality to reprocess.
 
 ## Enable YouTube
 
@@ -41,9 +39,9 @@ The YouTube relay uses a **simple relay pattern** - it forwards your stream dire
 
 ## A Note on YouTube's Re-encoding
 
-YouTube reprocesses every video it receives, including live streams. This means YouTube applies its own encoding to your stream after receiving it.
+YouTube re-encodes every video it receives, including live streams.
 
-Streams that appear acceptable at lower bitrates on platforms like Twitch will often appear distorted on YouTube after YouTube's re-encoding process. Ensure you send YouTube as high-quality/bitrate of a stream as possible to obtain the best results.
+A low-bitrate stream that looks acceptable on Twitch often looks distorted after YouTube re-encodes it. For the best results, send YouTube the highest quality and bitrate you can.
 
 Refer to the [Quality Optimization Guide](../performance/quality.md) and [Bandwidth Requirements](../performance/bandwidth.md) for:
 

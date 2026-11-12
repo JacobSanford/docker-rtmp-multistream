@@ -109,7 +109,7 @@ TWITCH_KEY=live_123456789_abcdefghijklmnopqrstuvwxyz
 
 **Valid values**:
 
-- `TRUE` (or `true`): **Partner mode** - Simple relay with no transcoding. Stream is forwarded directly to Twitch, preserving full source quality for Twitch's multi-bitrate transcoding services. All transformer-related variables (`TWITCH_HEIGHT`, `TWITCH_FPS`, etc.) are ignored in this mode.
+- `TRUE` (or `true`): **Partner mode** - Simple relay. The stream is forwarded to Twitch unchanged, so Twitch's multi-bitrate transcoding receives the full source quality. All transformer-related variables (`TWITCH_HEIGHT`, `TWITCH_FPS`, etc.) are ignored in this mode.
 
 - `FALSE` (or `false`): **Non-partner mode** (default) - Transformer pattern with FFmpeg re-encoding. Allows full control over output quality, resolution, bitrate, and codec. Useful for bandwidth optimization or streaming to Twitch without partner transcoding.
 
@@ -174,7 +174,7 @@ This sends stereo.
 
 ### TWITCH_CODEC
 
-**Description**: Video codec for Twitch encoding. Typically shouldn't be changed.
+**Description**: Video codec for Twitch encoding. Keep the default.
 
 **Type**: String
 
@@ -191,7 +191,7 @@ This sends stereo.
 TWITCH_CODEC=libx264
 ```
 
-**Note**: This value is not checked against a list at startup. An unsupported codec lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.
+**Note**: Startup checks only the characters in this value. An unsupported codec lets the container start and report Twitch as enabled, then fails when a stream arrives: Twitch receives nothing.
 
 ### TWITCH_ENDPOINT
 
@@ -286,7 +286,7 @@ TWITCH_FPS=30
 
 ### TWITCH_HEIGHT
 
-**Description**: Video height in pixels. Width follows the source aspect ratio, rounded to an even number. A source shorter than `TWITCH_HEIGHT` is upscaled, which uses bitrate without adding detail; set `TWITCH_HEIGHT` to your source height or lower.
+**Description**: Video height in pixels. Width follows the source aspect ratio, rounded to an even number. Set `TWITCH_HEIGHT` to your source height or lower: a shorter source is upscaled, which uses bitrate without adding detail.
 
 **Type**: Integer
 
@@ -340,7 +340,7 @@ At `TWITCH_FPS=60`, `100` gives 6000 kbps, `75` (the default) gives 4500 kbps, a
 
 **Used by**: Twitch transformer
 
-**Valid values**: Letters, digits, `_` and `-`, up to 100 characters. The value is not checked against the preset list below: a misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives, and Twitch receives nothing.
+**Valid values**: Letters, digits, `_` and `-`, up to 100 characters. Startup checks only the characters, so a misspelled preset lets the container start and report Twitch as enabled, then fails when a stream arrives, and Twitch receives nothing.
 
 **Common values** (fastest to slowest):
 - `ultrafast` - Extremely fast, lowest quality
@@ -359,7 +359,7 @@ At `TWITCH_FPS=60`, `100` gives 6000 kbps, `75` (the default) gives 4500 kbps, a
 TWITCH_X264_PRESET=veryfast
 ```
 
-**When to override**: Presets slower than `medium` offer diminishing returns. Use `fast` or `veryfast` if CPU is constrained.
+**When to override**: Use `fast` or `veryfast` if CPU is constrained. Presets slower than `medium` give diminishing returns.
 
 **See also**: [x264 Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264){target="_blank"}
 
@@ -411,7 +411,7 @@ YOUTUBE_KEY=abcd-efgh-ijkl-mnop-qrst
 ARCHIVE_PATH=/archive
 ```
 
-**Note**: Map the path to a host directory with a Docker volume, or archives are lost when the container is removed. See [Enable Archive](../services/archive.md#enable-archive).
+**Note**: Map the path to a host directory with a Docker volume so archives survive when the container is removed. See [Enable Archive](../services/archive.md#enable-archive).
 
 **See also**: [Archive Configuration](../services/archive.md)
 

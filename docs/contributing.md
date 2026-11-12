@@ -68,7 +68,7 @@ rtmp://<relay-ip>:1935/relay
 
 ## Front Matter
 
-All documentation pages should include front matter:
+Include front matter on every documentation page:
 
 ```yaml
 ---

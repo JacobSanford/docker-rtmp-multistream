@@ -10,7 +10,7 @@ version: 1.x
 
 # Add a Streaming Service
 
-This guide adds a new streaming destination to the relay. The examples add a service called `example`, with the variables `EXAMPLE_KEY` and `EXAMPLE_INGEST`. Replace these with your service's name.
+Follow this guide to add a new streaming destination to the relay. The examples add a service called `example`, with the variables `EXAMPLE_KEY` and `EXAMPLE_INGEST`. Replace these with your service's name.
 
 For the exact rules each file must follow, see the [Service Contract Reference](configuration.md).
 
@@ -18,7 +18,7 @@ For the exact rules each file must follow, see the [Service Contract Reference](
 
 - Choose a pattern. **Simple Relay** forwards the stream unchanged. **Transformer** re-encodes it with FFmpeg first. See [Service Patterns](../../techref/service-patterns.md).
 - Check the service's ingest protocol. nginx's `push` sends plain RTMP. If the service accepts only RTMPS, use the Transformer pattern: the image's FFmpeg supports `rtmps://` output.
-- Pick a lowercase service name (`example`) and an uppercase variable prefix (`EXAMPLE_`). The name is used for file names and the `enableService.sh` argument, and they must match exactly.
+- Pick a lowercase service name (`example`) and an uppercase variable prefix (`EXAMPLE_`). You use the name for the file names and as the `enableService.sh` argument, so the two must match exactly.
 
 ## Create the Config Files
 
@@ -26,7 +26,7 @@ Placeholders in these files are bare uppercase tokens, which the startup script 
 
 ### Simple Relay
 
-Create `build/conf/nginx/http.d/apps/example.conf`. It holds directives only, with no `application` block, because it is included inside `application relay`:
+Create `build/conf/nginx/http.d/apps/example.conf`. Because `app.conf` includes it inside `application relay`, it holds directives only (no `application` block):
 
 ```nginx
 include http.d/auth.conf;
@@ -38,7 +38,7 @@ Replace `/app/` with the path your service's ingest URL uses.
 
 ### Transformer
 
-Create two files. `build/conf/nginx/http.d/transformers/example.conf` is included inside `application relay` and runs FFmpeg for each incoming stream:
+Create two files. `app.conf` includes `build/conf/nginx/http.d/transformers/example.conf` inside `application relay`, where it runs FFmpeg for each incoming stream:
 
 ```nginx
 exec ffmpeg -i rtmp://127.0.0.1/$app/$name

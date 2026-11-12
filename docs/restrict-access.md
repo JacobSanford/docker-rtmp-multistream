@@ -10,7 +10,7 @@ version: 1.x
 
 # Restrict Who Can Publish and Watch
 
-The relay controls who can **publish** (send a stream to it) with `PUBLISH_IP_RANGE`. It does not control who can **watch**: any machine that can reach port 1935 can play the stream. This page limits both.
+You control who can **publish** (send a stream to the relay) with `PUBLISH_IP_RANGE`. Any machine that can reach port 1935 can **watch** (play the stream), so you limit watching at the port. This page covers both.
 
 ## Before You Begin
 
@@ -63,12 +63,12 @@ The relay controls who can **publish** (send a stream to it) with `PUBLISH_IP_RA
     docker compose up -d --force-recreate
     ```
 
-3. In your streaming software, set the server to the address you bound, for example `rtmp://192.168.1.20:1935/relay`. A server of `localhost` or `127.0.0.1` stops working unless you bound `127.0.0.1`.
+3. In your streaming software, set the server to the address you bound, for example `rtmp://192.168.1.20:1935/relay`. If you used `localhost` or `127.0.0.1` as the server, it works only if you bound `127.0.0.1`.
 
 `docker-compose.yml` is tracked by git, unlike `env/relay.env`. If a later `git pull` stops with `Your local changes to the following files would be overwritten by merge: docker-compose.yml`, save your copy, run `git checkout docker-compose.yml`, pull again, then put your `ports:` line back.
 
 !!! warning "A host firewall may not block Docker ports"
-    Docker writes its own iptables rules for published ports, so host firewall tools such as `ufw` may not block them. Bind the port as above, or block it at a firewall in front of the host.
+    Docker writes its own iptables rules for published ports, and these can bypass host firewall tools such as `ufw`. Bind the port as above, or block it at a firewall in front of the host.
 
 ## Confirm
 

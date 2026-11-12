@@ -14,7 +14,7 @@ This page lists the validation functions in `build/scripts/validate_input.sh` an
 
 The startup scripts in `build/scripts/pre-init.d/` check every variable you set in `env/relay.env` against a whitelist or a pattern before writing it into the nginx configuration. Stream keys, `TWITCH_ENDPOINT` and `ARCHIVE_PATH` are also escaped for `sed` with `escape_for_sed`.
 
-`NGINX_CONFD_DIR`, `NGINX_APP_CONF_FILE` and `NGINX_RUN_USER` come from the base image. They are trusted and not validated.
+`NGINX_CONFD_DIR`, `NGINX_APP_CONF_FILE` and `NGINX_RUN_USER` come from the base image. The scripts trust these and skip validation.
 
 If a value fails validation, its startup script exits with status 1, and `build/scripts/run.sh` stops the container before nginx starts. The container log names the variable, for example `ERROR: TWITCH_KEY contains invalid characters.`
 
@@ -31,11 +31,11 @@ If a value fails validation, its startup script exits with status 1, and `build/
 | `TWITCH_FPS` (1–120), `TWITCH_HEIGHT` (144–4320), `TWITCH_KBITS_PER_VIDEO_FRAME` (1–1000), `TWITCH_FFMPEG_THREADS` (0–64), `TWITCH_AUDIO_CHANNELS` (1–2) | `validate_number` | `90_configure_twitch.sh` |
 | `TWITCH_AUDIO_BITRATE` | `validate_bitrate` | `90_configure_twitch.sh` |
 
-The Twitch encoder variables are validated only in non-partner mode. A new service must validate each of its variables the same way: see [Add a Streaming Service](adding-services/overview.md).
+`90_configure_twitch.sh` validates the Twitch encoder variables only in non-partner mode. A new service must validate each of its variables the same way: see [Add a Streaming Service](adding-services/overview.md).
 
 ## Validation Functions
 
-The validation framework is implemented in `build/scripts/validate_input.sh` and includes:
+`build/scripts/validate_input.sh` defines these functions:
 
 ### `validate_stream_key(key, name)`
 Validates stream keys (Twitch, YouTube) to prevent command injection.
@@ -97,7 +97,7 @@ Validates numeric values with optional range constraints.
 
 **Allowed:** Non-negative integers (`0` is accepted) of at most 9 digits. No decimals, no signs.
 
-The 9-digit limit exists because a value too large for the shell's integer tests would otherwise pass the min and max checks.
+Without the 9-digit limit, a huge value could overflow the shell's integer tests and pass the min and max checks.
 
 **Usage:**
 ```bash
@@ -114,7 +114,7 @@ Validates alphanumeric identifiers (codecs, presets, endpoints).
 - Spaces, periods, special characters
 - More than 100 characters
 
-This checks only the characters. A misspelled preset such as `mediun` passes validation and fails only when FFmpeg starts, at the first publish to Twitch.
+This checks the characters, not the spelling: a misspelled preset such as `mediun` passes validation and fails when FFmpeg starts, at the first publish to Twitch.
 
 **Usage:**
 ```bash
@@ -242,7 +242,7 @@ TWITCH_KEY=$(printf 'a%.0s' {1..201})  # Rejected (too long)
 
 ## Testing
 
-All validation functions are tested with test cases covering:
+`tests/00_validation_tests.sh` tests every validation function with cases covering:
 - Valid inputs (alphanumeric, special chars where allowed)
 - Invalid inputs (injection attempts, traversal, length limits)
 - Edge cases (empty, boundaries, special formats)

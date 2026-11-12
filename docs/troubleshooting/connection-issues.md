@@ -10,7 +10,7 @@ version: 1.x
 
 # OBS Can't Connect or the Relay Won't Start
 
-Troubleshooting connection problems between OBS and the relay, and container startup issues.
+Use this page when OBS can't connect to the relay or the relay container won't start.
 
 ## Cannot Connect from OBS
 
@@ -222,7 +222,7 @@ When you start streaming, a line like this appears for each destination:
 relay: create push name='<STREAM_NAME>' ... url='a.rtmp.youtube.com/live2/<YOUTUBE_KEY>' ...
 ```
 
-Valid values, least to most verbose: `emerg`, `alert`, `crit`, `error` (default), `warn`, `notice`, `info`. `debug` is also accepted, but this image's nginx gives no more output at `debug` than at `info`.
+Valid values, least to most verbose: `emerg`, `alert`, `crit`, `error` (default), `warn`, `notice`, `info`. `debug` is also accepted, but in this image's nginx it gives the same output as `info`.
 
 ### Check nginx Configuration
 

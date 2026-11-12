@@ -10,7 +10,7 @@ version: 1.x
 
 # Run the Tests
 
-This page describes the test suites and how CI runs them. To add tests for a new service, see [Test a New Service](adding-services/testing.md).
+Use this page to run the test suites locally and to see how CI runs them. To add tests for a new service, see [Test a New Service](adding-services/testing.md).
 
 ## Run All Tests
 
@@ -32,7 +32,7 @@ This page describes the test suites and how CI runs them. To add tests for a new
 
 ## Run One Suite
 
-Only `test.sh` and the smoke tests build the image. Build it before running any other suite on its own:
+`test.sh` and the smoke tests build the image themselves. Before you run any other suite on its own, build the image:
 
 ```bash
 docker build -t rtmp-multistream:test .

@@ -10,7 +10,7 @@ version: 1.x
 
 # Service Patterns
 
-This document explains the two primary architectural patterns used in docker-rtmp-multistream for handling RTMP streams to different platforms.
+A service sends the stream to its platform with one of two patterns: Simple Relay or Transformer.
 
 ## Pattern Comparison
 
@@ -19,13 +19,13 @@ Choose the appropriate pattern for your service:
 |                      | Simple Relay                | Transformer                                      |
 |----------------------|-----------------------------|--------------------------------------------------|
 | **Use for**          | Services that accept streams as-is (e.g., YouTube) | Services requiring specific encoding (e.g., Twitch non-partner mode) |
-| **How it works**     | Stream forwarded directly without modification | Two-stage pipeline with FFmpeg transformation     |
+| **How it works**     | Forwards the stream unchanged | Two-stage pipeline with FFmpeg transformation     |
 | **Pros**             | No decoding or encoding, so little CPU use and the original quality is preserved | Per-service quality control, downscaling for bandwidth limits |
 | **Cons**             | No per-service quality control | Decodes and re-encodes every frame: CPU use scales with `TWITCH_HEIGHT`, `TWITCH_FPS` and `TWITCH_X264_PRESET`. Encoding adds delay before the stream reaches the service. |
 | **Example**          | YouTube service              | Twitch service in non-partner mode (720p60 downscaling) |
 
 !!! tip "Advanced: Conditional Patterns"
-    Services can support both patterns based on configuration. The Twitch service implements a conditional pattern: partners use simple relay (`TWITCH_PARTNER=TRUE`), non-partners use transformer mode. See Twitch implementation for an advanced example.
+    A service can switch between patterns based on its configuration. Twitch does this: partners use simple relay (`TWITCH_PARTNER=TRUE`), non-partners use transformer mode. See Twitch implementation for an advanced example.
 
 ## Implementation Examples
 

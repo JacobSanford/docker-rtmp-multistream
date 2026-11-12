@@ -22,7 +22,7 @@ cp env/relay.env.example env/relay.env
 
 Without it, `docker compose` stops with `env file …/env/relay.env not found`.
 
-The file only needs the values you change. Any variable that is commented out or missing uses the image's default, so a new variable in a later release needs no edit to your file.
+Set only the values you want to change. If you comment out a variable or leave it out, the image's default applies, so a later release can add variables without you editing your file.
 
 ## Change a Setting
 
@@ -32,7 +32,7 @@ The file only needs the values you change. Any variable that is commented out or
     TWITCH_HEIGHT=540
     ```
 
-    Write one `NAME=value` per line, with no spaces around `=` and no quotes. A variable that is commented out, or missing from the file, uses its default.
+    Write one `NAME=value` per line, with no spaces around `=` and no quotes. If you comment out a variable or leave it out, it uses its default.
 
 2. Recreate the container so it reads the new values:
 
@@ -63,7 +63,7 @@ The file only needs the values you change. Any variable that is commented out or
 
 ## Upgrade From a Tracked `env/relay.env`
 
-Clones made before `env/relay.env.example` was added track `env/relay.env` itself. If `git pull` stops with `Your local changes to the following files would be overwritten by merge: env/relay.env`, move your file aside, pull, then put it back:
+If you cloned the repository before `env/relay.env.example` was added, your clone tracks `env/relay.env` itself. If `git pull` stops with `Your local changes to the following files would be overwritten by merge: env/relay.env`, move your file aside, pull, then put it back:
 
 ```bash
 cp env/relay.env ~/relay.env.mine
